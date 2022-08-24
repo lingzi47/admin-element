@@ -1,0 +1,535 @@
+<template>
+  <div class="user">
+    <div class="block-quote">
+      <el-form :inline="true" :model="form" ref="form">
+        <el-col :span="4">
+          <el-form-item label="A级推广员：">{{ arr.a }}</el-form-item>
+        </el-col>
+        <el-col :span="4">
+          <el-form-item label="B级推广员：">{{ arr.b }}</el-form-item>
+        </el-col>
+        <el-col :span="4">
+          <el-form-item label="C级推广员：">{{ arr.c }}</el-form-item>
+        </el-col>
+        <el-col :span="4">
+          <el-form-item label="基础会员">{{ arr.mt }}</el-form-item>
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="普通用户：">{{ arr.pt }}</el-form-item>
+        </el-col>
+        <el-form-item label="用户id" prop="id">
+          <el-input
+            style="width: 180px"
+            v-model="form.id"
+            clearable
+            placeholder="请输入用户id"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="用户名称" prop="username">
+          <el-input
+            style="width: 180px"
+            v-model="form.username"
+            clearable
+            placeholder="请输入用户名称"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="用户身份" prop="member">
+          <el-select
+            style="width: 180px"
+            v-model="form.member"
+            clearable
+            placeholder="请选择用户身份"
+          >
+            <el-option label="普通用户" :value="0"></el-option>
+            <el-option label="MT黑卡" :value="1"></el-option>
+            <el-option label="C级推广员" :value="2"></el-option>
+            <el-option label="B级推广员" :value="3"></el-option>
+            <el-option label="A级推广员" :value="4"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="注册时间" prop="time">
+          <el-date-picker
+            v-model="form.time"
+            type="daterange"
+            value-format="yyyy-MM-dd HH:mm:ss"
+            range-separator="至"
+            start-placeholder="开始日期"
+            end-placeholder="结束日期"
+          >
+          </el-date-picker>
+        </el-form-item>
+        <el-form-item style="float: right">
+          <el-button
+            v-if="checkPermission('usersearch')"
+            type="primary"
+            icon="el-icon-search"
+            @click="searchinfo"
+            >搜索</el-button
+          >
+        </el-form-item>
+      </el-form>
+    </div>
+    <!-- .filter((v) => v.member != 'A级推广员')" -->
+    <page-table
+      ref="dataTable"
+      :data="userList"
+      @changeCurrentPage="changeCurrent"
+      @selection-change="getSelection"
+    >
+      <el-table-column
+        label="序号"
+        align="center"
+        width="80"
+        fixed
+        :resizable="false"
+      >
+        <template slot-scope="scope">
+          <span>{{
+            (page.currentPage - 1) * page.pageSize + scope.$index + 1
+          }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column
+        prop="id"
+        label="id"
+        align="center"
+        width="80"
+        :resizable="false"
+      ></el-table-column>
+      <el-table-column
+        prop="diamonds"
+        label="钻石"
+        align="center"
+        width="80"
+        :resizable="false"
+      ></el-table-column>
+      <el-table-column
+        prop="pk_v"
+        label="pk值等级"
+        align="center"
+        width="80"
+        :resizable="false"
+      ></el-table-column>
+      <el-table-column
+        prop="pk"
+        label="pk值"
+        align="center"
+        width="80"
+        :resizable="false"
+      ></el-table-column>
+      <el-table-column
+        prop="nickname"
+        label="名称"
+        align="center"
+        width="80"
+        :resizable="false"
+      ></el-table-column>
+      <el-table-column
+        prop="head_img"
+        label="头像"
+        align="center"
+        width="100"
+        :resizable="false"
+      >
+        <template slot-scope="scope">
+          <img :src="scope.row.head_img" class="table-img" width="60px" />
+        </template>
+      </el-table-column>
+
+      <el-table-column
+        label="用户上级"
+        align="center"
+        width="80"
+        :resizable="false"
+      >
+        <template slot-scope="scope">
+          <span @click="upuser(scope.row)">{{ scope.row.pid }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column
+        prop="pname"
+        label="上级名称"
+        align="center"
+        width="80"
+        :resizable="false"
+      ></el-table-column>
+      <el-table-column
+        prop="member"
+        label="用户身份"
+        align="center"
+        width="100"
+        :resizable="false"
+      ></el-table-column>
+      <el-table-column
+        prop="created_at"
+        label="注册时间"
+        align="center"
+        width="100"
+        :resizable="false"
+      ></el-table-column>
+
+      <el-table-column
+        label="是否启用"
+        width="80"
+        :resizable="false"
+        align="center"
+      >
+        <template slot-scope="scope">
+          <el-switch
+            v-model="scope.row.status"
+            :active-value="1"
+            :inactive-value="2"
+            active-color="#02538C"
+            inactive-color="#B9B9B9"
+            @change="changeSwitch(scope.row)"
+          />
+        </template>
+      </el-table-column>
+      <el-table-column
+        prop="zisu_lv"
+        label="紫苏等级"
+        align="center"
+        width="80"
+        :resizable="false"
+      ></el-table-column>
+      <el-table-column
+        label="不老莓"
+        width="80"
+        :resizable="false"
+        align="center"
+      >
+        <template slot-scope="scope">
+          <el-switch
+            v-model="scope.row.is_blm"
+            :active-value="1"
+            :inactive-value="2"
+            active-color="#02538C"
+            inactive-color="#B9B9B9"
+            @change="changeBlm(scope.row)"
+          />
+        </template>
+      </el-table-column>
+      <el-table-column
+        label="紫苏分利"
+        width="80"
+        :resizable="false"
+        align="center"
+      >
+        <template slot-scope="scope">
+          <el-switch
+            v-model="scope.row.zisu_fl"
+            :active-value="1"
+            :inactive-value="2"
+            active-color="#02538C"
+            inactive-color="#B9B9B9"
+            @change="changeZisu(scope.row)"
+          />
+        </template>
+      </el-table-column>
+      <el-table-column
+        fixed="right"
+        label="操作"
+        align="center"
+        :resizable="false"
+        v-if="checkPermission(['useredit', 'userdelete'])"
+      >
+        <template slot-scope="scope">
+          <el-link
+            v-if="checkPermission('useredit')"
+            type="primary"
+            style="margin-left: 10px"
+            @click="editData(scope.row)"
+            >信息修改</el-link
+          >
+          <el-link
+            v-if="checkPermission('useredit')"
+            type="warning"
+            style="margin-left: 10px"
+            @click="usertext(scope.row)"
+            >分利信息</el-link
+          >
+          <el-link
+            v-if="checkPermission('useredit')"
+            type="success"
+            style="margin-left: 10px"
+            @click="nextUser(scope.row)"
+            >查看下级</el-link
+          >
+          <el-link
+            v-if="checkPermission('useredit')"
+            type="warning"
+            style="margin-left: 10px"
+            @click="userShow(scope.row)"
+            >用户详情</el-link
+          >
+        </template>
+      </el-table-column>
+    </page-table>
+    <!-- 新增编辑弹窗 -->
+    <edit-data ref="editData" />
+  </div>
+</template>
+
+<script>
+import { appuserList, userZisu, userStart, userBlm } from "@/request/api";
+import { checkPermission } from "@/utils/permissions";
+import { getUserList, deleteUser } from "@/api/user";
+import { getRoles } from "@/api/role";
+import pageTable from "@/components/pageTable.vue";
+import editData from "./components/editData.vue";
+export default {
+  name: "user",
+  components: {
+    pageTable,
+    editData,
+  },
+  data() {
+    return {
+      baseUrl: "http://y6.wjw.cool/",
+      rolesList: [], //角色列表
+      userList: [], // 用户列表
+      arr: [],
+
+      form: {
+        username: "",
+        member: "",
+        time: "",
+        id: "",
+      },
+      page: {
+        //分页信息
+        currentPage: 1, //当前页
+        pageSize: 10, //每页条数
+        total: 0, //总条数
+      },
+      tableSelectList: [], // 多选列表
+    };
+  },
+  watch: {
+    "form.time"(newVal) {
+      if (newVal == null) {
+        this.form.time = [];
+      }
+    },
+  },
+  created() {
+    this.getUserList(); //获取用户列表
+  },
+  mounted() {},
+  computed: {
+    getRole() {
+      return (role) => {
+        return this.rolesList.filter((item) => item.name == role)[0].title;
+      };
+    },
+  },
+  methods: {
+    // row是我从上边函数传下来的数据，可以拿到当前选中的状态值，下边的请求是因为我要传给后端调的接口
+    changeSwitch(row) {
+      //console.log(row.status);
+      //console.log(row.id);
+      //console.log(sessionStorage.getItem("token"));
+      let params = {
+        token: sessionStorage.getItem("token"),
+        status: row.status,
+        id: row.id,
+      };
+      userStart(params).then((res) => {
+        if (res.data.code == 200) {
+          this.$message.success("修改成功");
+          this.getUserList();
+        } else {
+          this.$message.error("修改失败");
+        }
+      });
+    },
+    go() {
+      if (this.arr.length < 1) {
+        //console.log("我不显示");
+        this.$router.go(-1);
+      } else {
+        //console.log("我要的", this.arr.slice(-1));
+        let a = this.arr[this.arr.length - 1];
+        this.cid = a.toString();
+        //console.log(this.cid);
+        this.getUserList();
+        var m = this.arr.slice(0);
+        m.splice(m.length - 1, 1);
+        //console.log(m);
+      }
+      this.arr = m;
+      return m;
+    },
+    changeZisu(row) {
+      //console.log(row.zisu_fl);
+      //console.log(row.id);
+      //console.log(sessionStorage.getItem("token"));
+      let params = {
+        token: sessionStorage.getItem("token"),
+        is_zisu: row.zisu_fl,
+        id: row.id,
+      };
+      userZisu(params).then((res) => {
+        if (res.data.code == 200) {
+          this.$message.success("修改成功");
+          this.getUserList();
+        } else {
+          this.$message.error("修改失败");
+        }
+      });
+    },
+    upuser(row) {
+      console.log(row);
+      console.log(row.pid);
+      this.$router.push({
+        path: "/upuser",
+        query: {
+          id: row.pid,
+        },
+      });
+    },
+    changeBlm(row) {
+      //console.log(row.is_blm);
+      //console.log(row.id);
+      //console.log(sessionStorage.getItem("token"));
+      let params = {
+        token: sessionStorage.getItem("token"),
+        is_blm: row.is_blm,
+        id: row.id,
+      };
+      userBlm(params).then((res) => {
+        if (res.data.code == 200) {
+          this.$message.success("修改成功");
+          this.getUserList();
+        } else {
+          this.$message.error("修改失败");
+        }
+      });
+    },
+    checkPermission,
+    // 切换分页
+    changeCurrent(page, size) {
+      this.page.currentPage = page;
+      this.page.pageSize = size;
+      this.getUserList();
+    },
+    //监听表格多选
+    getSelection(select) {
+      this.tableSelectList = select;
+    },
+    searchinfo() {
+      let token = sessionStorage.getItem("token");
+      this.token = token;
+      let params = {
+        page: 1,
+        limit: this.page.pageSize,
+        token: sessionStorage.getItem("token"),
+        username: this.form.username,
+        id: this.form.id,
+        member: this.form.member,
+        start_time: this.form.time[0],
+        end_time: this.form.time[1],
+      };
+      appuserList(params).then((res) => {
+        //console.log(res.data.data.member_count);
+        this.arr = res.data.data.member_count;
+        this.page.total = res.data.data.total;
+        //console.log(res.data.data.total);
+        //console.log("总条数", this.page.total);
+        // this.page.currentPage = res.data.data.current_page;
+        //console.log(res.data.data.current_page);
+        this.userList = res.data.data.data;
+        this.$refs.dataTable.setPageInfo({
+          total: this.page.total,
+        });
+      });
+    },
+    getUserList() {
+      let token = sessionStorage.getItem("token");
+      this.token = token;
+      let params = {
+        page: this.page.currentPage,
+        limit: this.page.pageSize,
+        token: sessionStorage.getItem("token"),
+        username: this.form.username,
+        id: this.form.id,
+        member: this.form.member,
+        start_time: this.form.time[0],
+        end_time: this.form.time[1],
+      };
+      appuserList(params).then((res) => {
+        //console.log(res.data.data.member_count);
+        this.arr = res.data.data.member_count;
+        this.page.total = res.data.data.total;
+        //console.log(res.data.data.total);
+        //console.log("总条数", this.page.total);
+        // this.page.currentPage = res.data.data.current_page;
+        //console.log(res.data.data.current_page);
+        this.userList = res.data.data.data;
+        this.$refs.dataTable.setPageInfo({
+          total: this.page.total,
+        });
+      });
+    },
+    addData() {
+      // 1:新增，2:编辑
+      this.$refs.addData.show(1, {});
+    },
+    userShow(row) {
+      //console.log(row);
+      this.$router.push({
+        path: "/userShow",
+        query: {
+          id: row.id,
+        },
+      });
+    },
+    usertext(row) {
+      //console.log(row);
+      this.$router.push({
+        path: "/usertext",
+        query: {
+          id: row.id,
+        },
+      });
+    },
+    nextUser(row) {
+      //console.log(row);
+      this.$router.push({
+        path: "/nextUser",
+        query: {
+          id: row.id,
+        },
+      });
+    },
+    editData(row) {
+      //console.log(row);
+      let rowData = row;
+      this.$refs.editData.show(JSON.parse(JSON.stringify(rowData)));
+    },
+    deleteData(type, row) {
+      if ((type == 1 && this.tableSelectList.length == 1) || type == 2) {
+        this.$confirm("是否删除此用户？", "提示", {
+          type: "warning",
+        })
+          .then(async () => {
+            let rowData = type == 1 ? this.tableSelectList[0] : row;
+            let res = await deleteUser({
+              id: rowData.id,
+            });
+            if (res.status == 200) {
+              this.getUserList();
+              this.$message.success("删除成功");
+            }
+          })
+          .catch(() => {});
+      } else {
+        this.$message.warning("请选择一条数据删除");
+      }
+    },
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+</style>

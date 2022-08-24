@@ -1,0 +1,157 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+html,
+body {
+	font-family: 'PingFang SC', "Helvetica Neue", Helvetica, "microsoft yahei", arial, STHeiTi, sans-serif;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+ul,
+li {
+	list-style: none
+}
+
+a {
+	text-decoration: none;
+}
+
+i.iconfont {
+	font-style: normal;
+}
+
+.dis-block,
+.show {
+	display: block !important;
+}
+
+.dis-none,
+.hide {
+	display: none !important;
+}
+
+.f-clear:after {
+	clear: both;
+	display: block;
+	content: "";
+	height: 0;
+	visibility: hidden;
+	font-size: 0;
+}
+
+.cursor {
+	cursor: pointer;
+}
+
+/*垂直水平居中*/
+.flex-center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+/* 超出显示省略号 */
+.font-ellipsis {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.font-ellipsis-2 {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+}
+
+/* 滚动条：滚动条的宽高、滚动条里面小方块、滚动条里面轨道 */
+.scroll::-webkit-scrollbar {
+	width: 6px;
+	height: 1px;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+	border-radius: 6px;
+	-webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+	background: #DDDDDD;
+}
+
+.scroll::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+	border-radius: 6px;
+	background: #FBFBFB;
+}
+
+.block-quote {
+	padding: 20px 20px 0;
+	border: 1px solid #EBEEF5;
+	border-radius: 4px;
+	box-shadow: 0 2px 20px -4px rgba(50, 50, 50, 0.1);
+	margin-bottom: 20px;
+}
+
+/* 对话框样式修改 */
+.el-dialog .el-dialog__header {
+	border-bottom: 1px solid #DCDFE6;
+}
+
+.el-dialog .el-dialog__footer {
+	border-top: 1px solid #DCDFE6;
+}
+
+
+/* 行内表单样式 */
+.el-form--inline:after {
+	clear: both;
+	display: block;
+	content: "";
+}
+
+.el-form--inline .el-form-item {
+	margin-right: 25px !important;
+}
+
+.el-form--inline .el-form-item__label {
+	padding: 0 8px 0 0;
+}
+
+.el-form--inline .el-radio,
+.el-form--inline .el-checkbox {
+	margin-right: 10px;
+}
+
+.el-form--inline .el-radio__label,
+.el-form--inline .el-checkbox__label {
+	padding-left: 5px;
+}
+
+.el-form .el-checkbox-group {
+	height: 40px;
+}
+
+/* 对话框内表单样式 */
+.el-dialog .el-form .el-input,
+.el-dialog .el-form .el-select,
+.el-dialog .el-form .el-date-editor,
+.el-dialog .el-form .el-input-number,
+.el-dialog .el-form .el-cascader {
+	width: 100%;
+}
+
+/* 对话框样式 */
+.el-dialog {
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	margin: 0 !important;
+}
+
+.el-dialog .el-dialog__body {
+	max-height: calc(100vh - 286px);
+	overflow-y: auto;
+}

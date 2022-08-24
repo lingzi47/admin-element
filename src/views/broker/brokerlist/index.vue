@@ -1,0 +1,339 @@
+<template>
+  <div class="user">
+    <div class="block-quote">
+      <el-form :inline="true">
+        <el-form-item label="设备租赁号" prop="name">
+          <el-input
+            style="width: 180px"
+            v-model="name"
+            clearable
+            placeholder="请输入设备租赁号"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="租赁商id" prop="uid">
+          <el-input
+            style="width: 180px"
+            v-model="uid"
+            clearable
+            placeholder="请输入租赁商id"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="推荐人id" prop="use_pid">
+          <el-input
+            style="width: 180px"
+            v-model="use_pid"
+            clearable
+            placeholder="请输入推荐人id"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="推荐人租赁号" prop="pid">
+          <el-input
+            style="width: 180px"
+            v-model="pid"
+            clearable
+            placeholder="请输入推荐人租赁号"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="购买服务" prop="box_type">
+          <el-select
+            v-model="box_type"
+            placeholder="请选择"
+            style="width: 150px"
+          >
+            <el-option label="全部状态" value=""></el-option>
+            <el-option label="终身" value="3"></el-option>
+            <el-option label="三年" value="1"></el-option>
+            <el-option label="五年" value="2"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="租赁号状态" prop="status">
+          <el-select v-model="status" placeholder="请选择" style="width: 150px">
+            <el-option label="全部状态" value=""></el-option>
+            <el-option label="已绑定" value="20"></el-option>
+            <el-option label="排队中" value="10"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="审核状态" prop="status">
+          <el-select
+            v-model="ex_status"
+            placeholder="请选择"
+            style="width: 150px"
+          >
+            <el-option label="全部状态" value=""></el-option>
+            <el-option label="通过" value="2"></el-option>
+            <el-option label="待审核" value="1"></el-option>
+            <el-option label="拒绝" value="3"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="是否真实购买" prop="status">
+          <el-select
+            v-model="device_type"
+            placeholder="请选择"
+            style="width: 150px"
+          >
+            <el-option label="是" value="10"></el-option>
+            <el-option label="否" value="20"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="是否特殊分润" prop="status">
+          <el-select
+            v-model="is_special"
+            placeholder="请选择"
+            style="width: 150px"
+          >
+            <el-option label="否" value="1"></el-option>
+            <el-option label="是" value="2"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item style="float: right">
+          <el-button type="primary" icon="el-icon-search" @click="searchinfo"
+            >搜索</el-button
+          >
+          <el-button type="primary" @click="add">手动添加租赁人</el-button>
+          <!-- <el-button type="primary">导出</el-button> -->
+        </el-form-item>
+      </el-form>
+    </div>
+    <page-table
+      ref="dataTable"
+      :data="userList"
+      @changeCurrentPage="changeCurrent"
+    >
+      <el-table-column label="序号" align="center">
+        <template slot-scope="scope">
+          <span>{{
+            (page.currentPage - 1) * page.pageSize + scope.$index + 1
+          }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column prop="name" label="设备租赁号" align="center">
+      </el-table-column>
+      <el-table-column prop="box_number" label="设备编号" align="center">
+      </el-table-column>
+      <el-table-column label="是否真实购买" align="center">
+        <template slot-scope="scope">
+          <span v-if="scope.row.device_type == 10">是</span>
+          <span v-if="scope.row.device_type == 20">否</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="是否特殊分润" align="center">
+        <template slot-scope="scope">
+          <span v-if="scope.row.is_special == 1">否</span>
+          <span v-if="scope.row.is_special == 2">是</span>
+        </template>
+      </el-table-column>
+      <el-table-column prop="uid" label="租赁商id" align="center">
+      </el-table-column>
+      <el-table-column label="推荐人租赁号" align="center">
+        <template slot-scope="scope">
+          <span v-if="scope.row.pid == null">无</span>
+          <span v-else>{{ scope.row.pid }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column prop="use_pid" label="推荐人" align="center">
+      </el-table-column>
+      <el-table-column label="购买药柜租债服务" align="center">
+        <template slot-scope="scope">
+          <span v-if="scope.row.box_type == 1">三年</span>
+          <span v-if="scope.row.box_type == 2">五年</span>
+          <span v-if="scope.row.box_type == 3">终身</span>
+        </template>
+      </el-table-column>
+      <el-table-column prop="queue" label="队列编号" align="center">
+      </el-table-column>
+
+      <el-table-column label="审核状态" align="center">
+        <template slot-scope="scope">
+          <el-link type="success" v-if="scope.row.ex_status == 2"
+            >已通过</el-link
+          >
+          <el-link type="danger" v-if="scope.row.ex_status == 3"
+            >未通过</el-link
+          >
+          <el-link type="primary" v-if="scope.row.ex_status == 1"
+            >待审核</el-link
+          >
+        </template>
+      </el-table-column>
+
+      <el-table-column label="状态" align="center">
+        <template slot-scope="scope">
+          <el-link type="success" v-if="scope.row.status == 20">已绑定</el-link>
+          <el-link type="danger" v-if="scope.row.status == 10">排队中</el-link>
+        </template>
+      </el-table-column>
+      <el-table-column label="操作" align="center" width="350">
+        <template slot-scope="scope">
+          <el-link
+            type="primary"
+            @click="showtable(scope.row)"
+            style="margin-left: 10px"
+            >查看应急箱</el-link
+          >
+
+          <el-link
+            type="success"
+            style="margin-left: 10px"
+            @click="fenrun(scope.row)"
+            >商务团队信息</el-link
+          >
+
+          <el-link
+            type="warning"
+            style="margin-left: 10px"
+            @click="addup(1, scope.row)"
+            v-if="scope.row.pid == 0 && scope.row.ex_status == 2"
+            >绑定上级</el-link
+          >
+        </template>
+      </el-table-column>
+    </page-table>
+    <!-- 新增编辑弹窗 -->
+    <edit-data ref="editData" />
+    <fen-run ref="fenRun" />
+    <up-set ref="upSet" />
+  </div>
+</template>
+
+<script>
+import { doctorlist, upPid } from "@/request/api";
+import { checkPermission } from "@/utils/permissions";
+import pageTable from "@/components/pageTable.vue";
+import editData from "./components/editData.vue";
+import fenRun from "./components/fenRun.vue";
+import upSet from "./components/upSet.vue";
+export default {
+  name: "user",
+  components: {
+    pageTable,
+    editData,
+    fenRun,
+    upSet,
+  },
+  data() {
+    return {
+      name: "",
+      uid: "",
+      pid: "",
+      use_pid: "",
+      box_type: "",
+      status: "",
+      ex_status: "",
+      is_special: "",
+      device_type: "",
+      buy_time: "",
+      userList: [], // 列表
+
+      page: {
+        //分页信息
+        currentPage: 1, //当前页
+        pageSize: 10, //每页条数
+        total: 0, //总条数
+      },
+    };
+  },
+  watch: {
+    buy_time(newVal) {
+      if (newVal == null) {
+        this.buy_time = [];
+      }
+    },
+  },
+  created() {
+    this.getUserList(); //获取用户列表
+  },
+  mounted() {},
+  computed: {},
+  methods: {
+    add() {
+      this.$refs.editData.show(1, {});
+    },
+    addup(type, row) {
+      let rowData = row;
+      this.$refs.upSet.show(1, JSON.parse(JSON.stringify(rowData)));
+    },
+    setup(type, row) {
+      // console.log(type);
+      let rowData = row;
+      this.$refs.upSet.show(2, JSON.parse(JSON.stringify(rowData)));
+    },
+    fenrun(row) {
+      let rowData = row;
+      this.$refs.fenRun.show(JSON.parse(JSON.stringify(rowData)));
+    },
+    showtable(row) {
+      this.$router.push({
+        path: "/showtable",
+        query: {
+          row: row,
+        },
+      });
+    },
+    checkPermission,
+    // 切换分页
+    changeCurrent(page, size) {
+      this.page.currentPage = page;
+      this.page.pageSize = size;
+      this.getUserList();
+    },
+    searchinfo() {
+      let token = sessionStorage.getItem("token");
+      this.token = token;
+      let params = {
+        page: 1,
+        limit: this.page.pageSize,
+        token: sessionStorage.getItem("token"),
+
+        name: this.name,
+        pid: this.pid,
+        box_type: this.box_type,
+        uid: this.uid,
+        use_pid: this.use_pid,
+
+        status: this.status,
+        ex_status: this.ex_status,
+        is_special: this.is_special,
+        device_type: this.device_type,
+      };
+      doctorlist(params).then((res) => {
+        this.page.total = res.data.count;
+
+        this.userList = res.data.data;
+        this.$refs.dataTable.setPageInfo({
+          total: this.page.total,
+        });
+      });
+    },
+    getUserList() {
+      let token = sessionStorage.getItem("token");
+      this.token = token;
+      let params = {
+        page: this.page.currentPage,
+        limit: this.page.pageSize,
+        token: sessionStorage.getItem("token"),
+        name: this.name,
+        pid: this.pid,
+        box_type: this.box_type,
+        uid: this.uid,
+        use_pid: this.use_pid,
+        status: this.status,
+        ex_status: this.ex_status,
+        is_special: this.is_special,
+
+        device_type: this.device_type,
+      };
+      doctorlist(params).then((res) => {
+        console.log(res.data.data);
+        this.page.total = res.data.count;
+        this.userList = res.data.data;
+        this.$refs.dataTable.setPageInfo({
+          total: this.page.total,
+        });
+      });
+    },
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+</style>

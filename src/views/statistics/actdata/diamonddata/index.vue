@@ -14,7 +14,7 @@
           <el-date-picker
             v-model="form.time"
             type="daterange"
-            value-format="yyyy-MM-dd HH:mm:ss"
+            value-format="yyyy-MM-dd"
             range-separator="至"
             start-placeholder="开始日期"
             end-placeholder="结束日期"
@@ -118,6 +118,19 @@ export default {
     },
   },
   created() {
+    var date = new Date();
+    var s1 =
+      date.getFullYear() +
+      "-" +
+      (date.getMonth() + 1) +
+      "-" +
+      (date.getDate() - 1);
+    var e1 =
+      date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+    let arr = [];
+    arr.push(s1);
+    arr.push(e1);
+    this.form.time = arr; //时间段的数组；第一项表示开始时间，第二项表示结束时间
     this.getUserList(); //获取用户列表
   },
   mounted() {},

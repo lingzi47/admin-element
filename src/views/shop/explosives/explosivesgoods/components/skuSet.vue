@@ -97,13 +97,13 @@
           <el-col :span="12" v-for="(item, index) in list" :key="index">
             <el-form-item :label="item.name" prop="name">
               <el-select
-                v-model="item.skunamearr[index].value"
+                v-model="item.skunamearr.value"
                 value-key="item.skunamearr.id"
                 @change="getChange(index, item, $event)"
               >
                 <el-option
-                  v-for="val in list[index].skunamearr"
-                  :key="val.id"
+                  v-for="(val, k) in list[index].skunamearr"
+                  :key="k"
                   :value="val.id"
                   :label="val.value"
                 />
@@ -193,7 +193,7 @@ export default {
   methods: {
     // 获取打印内容下拉框的选择项,保存到数组
     getChange(index, item, $event) {
-      //console.log("点的第", index, "个下拉框", "id为", $event);
+      console.log("点的第", index, "个下拉框", "id为", $event);
       this.arr[index] = $event;
       //console.log(this.arr);
     },

@@ -55,37 +55,30 @@
       </el-table-column>
       <el-table-column label="图片" width="160" align="center">
         <template slot-scope="scope">
-          <span v-for="item in scope.row.img.split(',')" v-bind:key="item">
-            <el-popover placement="right" title="" trigger="click">
-              <img
-                :src="item"
-                style="
-                  max-height: 400px !important;
-                  max-width: 500px !important;
-                "
-              />
+          <div v-if="scope.row.img">
+            <span v-for="item in scope.row.img.split(',')" v-bind:key="item">
+              <el-popover placement="right" title="" trigger="click">
+                <img
+                  :src="item"
+                  style="
+                    max-height: 400px !important;
+                    max-width: 500px !important;
+                  "
+                />
 
-              <img
-                slot="reference"
-                :src="item"
-                :alt="item"
-                min-width="70"
-                height="70"
-                style="margin-left: 10px"
-              />
-            </el-popover>
-          </span>
+                <img
+                  slot="reference"
+                  :src="item"
+                  :alt="item"
+                  min-width="70"
+                  height="70"
+                  style="margin-left: 10px"
+                />
+              </el-popover>
+            </span>
+          </div>
+          <span v-if="scope.row.img == null">无</span>
         </template>
-
-        <!-- <template slot-scope="scope">
-          <img
-            v-for="(item, index) in scope.row.img"
-            :key="index"
-            :src="scope.row.img"
-            min-width="70"
-            height="70"
-          />
-        </template> -->
       </el-table-column>
       <el-table-column prop="remark" label="申请详情" align="center">
       </el-table-column>
@@ -98,6 +91,7 @@
       <el-table-column label="审核状态" align="center">
         <template slot-scope="scope">
           <el-link type="success" v-if="scope.row.sta == 20">已处理</el-link>
+          <el-link v-if="scope.row.sta == 10">待处理</el-link>
           <el-link type="danger" v-if="scope.row.sta == 30">拒绝</el-link>
           <el-link type="info" v-if="scope.row.sta == 40">已撤销</el-link>
         </template>
@@ -297,6 +291,8 @@ export default {
       };
 
       feedbacklist(params).then((res) => {
+        console.log(res.data.data);
+        console.log(res.data.count);
         this.page.total = res.data.count;
         this.userList = res.data.data;
         this.$refs.dataTable.setPageInfo({

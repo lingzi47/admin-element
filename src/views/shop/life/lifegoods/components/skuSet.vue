@@ -97,13 +97,13 @@
           <el-col :span="12" v-for="(item, index) in list" :key="index">
             <el-form-item :label="item.name" prop="name">
               <el-select
-                v-model="item.skunamearr[index].value"
+                v-model="item.skunamearr.value"
                 value-key="item.skunamearr.id"
                 @change="getChange(index, item, $event)"
               >
                 <el-option
-                  v-for="val in list[index].skunamearr"
-                  :key="val.id"
+                  v-for="(val, k) in list[index].skunamearr"
+                  :key="k"
                   :value="val.id"
                   :label="val.value"
                 />

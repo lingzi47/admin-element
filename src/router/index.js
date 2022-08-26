@@ -1338,7 +1338,6 @@ export const asyncRoutes = [
 							permissions: "version"
 						}
 					},
-
 					{
 						path: "dividends",
 						name: "dividends",
@@ -1348,6 +1347,16 @@ export const asyncRoutes = [
 							permissions: "dividends"
 						}
 					},
+					{
+						path: "banner",
+						name: "banner",
+						component: () => import("@/views/global/appset/banner"),
+						meta: {
+							title: "banner设置",
+							permissions: "banner"
+						}
+					},
+
 
 				]
 			},

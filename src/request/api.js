@@ -613,3 +613,19 @@ export const zslog = (params) => request.post('/admin/box/zslog',
 export const moneylog = (params) => request.post('/admin/box/moneylog',
     params
 )
+//banner列表
+export const bannerlist = (params) => request.post('activity/bannerindex',
+    params
+)
+//添加
+export const banneradd = (params) => request.post('activity/banneradd',
+    params
+)
+//删除
+export const bannerdel = (params) => request.post('/activity/bannerdel',
+    params
+)
+//修改
+export const banneredit = (params) => request.post('/activity/banneredit',
+    params
+)

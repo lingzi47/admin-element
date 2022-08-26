@@ -62,6 +62,9 @@
         <el-form-item label="累计消耗:" style="margin-left: 50px">
           {{ allcut }}</el-form-item
         >
+        <el-form-item label="剩余:" style="margin-left: 50px">
+          {{ alladd - allcut }}</el-form-item
+        >
       </el-form>
     </div>
     <page-table

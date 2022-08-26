@@ -11,7 +11,11 @@
             >{{ is_special }}
           </el-form-item>
         </el-col>
-
+        <el-col :span="24">
+          <el-form-item label="设备号:" prop="remark"
+            >{{ device_num }}
+          </el-form-item>
+        </el-col>
         <el-col :span="24">
           <el-form-item label="备注:" prop="remark">{{ remark }} </el-form-item>
         </el-col>
@@ -92,6 +96,7 @@ export default {
       name: "",
       is_special: "",
       remark: "",
+      device_num: "",
       five: [],
       third: [],
       rules: {
@@ -158,6 +163,8 @@ export default {
         console.log(res.data.data);
         this.five = res.data.data.five;
         this.third = res.data.data.third;
+        this.device_num = res.data.data.res.device_num;
+        console.log(res.data.data.res);
       });
     },
   },

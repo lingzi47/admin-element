@@ -135,6 +135,13 @@
           <span v-else>暂无</span>
         </template>
       </el-table-column>
+      <el-table-column label="租赁人数" align="center">
+        <template slot-scope="scope">
+          <el-link @click="handleClick(scope.row)">{{
+            scope.row.count
+          }}</el-link>
+        </template>
+      </el-table-column>
       <el-table-column prop="position_user" label="渠道商id" align="center">
         <template slot-scope="scope">
           <span v-if="scope.row.position_user">{{
@@ -143,12 +150,7 @@
           <span v-else>暂无</span>
         </template>
       </el-table-column>
-      <el-table-column prop="uid" label="租赁商id" align="center">
-        <template slot-scope="scope">
-          <span v-if="scope.row.uid">{{ scope.row.uid }}</span>
-          <span v-else>暂无</span>
-        </template>
-      </el-table-column>
+
       <el-table-column label="租赁时长" align="center">
         <template slot-scope="scope">
           <el-link type="success" v-if="scope.row.box_type == 2">五年</el-link>
@@ -212,6 +214,33 @@
         </template>
       </el-table-column>
     </page-table>
+    <el-dialog
+      title="账户信息"
+      :visible.sync="dialogVisible"
+      width="600px"
+      :close-on-click-modal="false"
+      @close="close"
+    >
+      <el-table ref="dataTable" :data="List" border>
+        <el-table-column label="序号" align="center">
+          <template slot-scope="scope">
+            <span>{{
+              (page.currentPage - 1) * page.pageSize + scope.$index + 1
+            }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column prop="uid" label="用户id" align="center">
+        </el-table-column>
+
+        <el-table-column prop="phone" label="联系方式" align="center">
+        </el-table-column>
+        <el-table-column prop="share" label="分润占比" align="center">
+        </el-table-column>
+      </el-table>
+      <div slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="submitForm">确认</el-button>
+      </div>
+    </el-dialog>
     <!-- 新增编辑弹窗 -->
     <edit-data ref="editData" />
     <fen-run ref="fenRun" />
@@ -225,6 +254,7 @@ import {
   boxlistindex,
   positiondeletet,
   positiondelete,
+  shareInfo,
 } from "@/request/api";
 import { checkPermission } from "@/utils/permissions";
 import pageTable from "@/components/pageTable.vue";
@@ -245,8 +275,11 @@ export default {
       box_uid: "",
       box_name: "",
       areaArr: [],
+      List: [], // 列表
       number: "",
       value: "",
+      dialogVisible: false,
+      box_name: "",
       value1: "",
       list: [],
       list1: [],
@@ -287,6 +320,30 @@ export default {
   mounted() {},
   computed: {},
   methods: {
+    submitForm() {
+      this.dialogVisible = false;
+    },
+
+    close() {
+      this.dialogVisible = false;
+    },
+    getList() {
+      let params = {
+        token: sessionStorage.getItem("token"),
+        box_name: this.box_name,
+      };
+      shareInfo(params).then((res) => {
+        console.log(res);
+        this.List = res.data.data;
+        console.log(this.List);
+      });
+      this.dialogVisible = true;
+    },
+    handleClick(row) {
+      console.log(row);
+      this.box_name = row.box_name;
+      this.getList();
+    },
     huolist1() {
       //big_name 改2
       let params = {

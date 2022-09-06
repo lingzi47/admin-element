@@ -5,7 +5,7 @@ module.exports = {
 		proxy: {
 			// 和上面自定义的 baseURL 保持一致
 			'/api': {
-				target: 'https://yujian02.xyz/',
+				target: 'https://y4.wjw.cool/',
 				changeOrigin: true, // 是否跨域
 				pathRewrite: {
 					'^/api': '/', //需要rewrite重写的, //本地联调

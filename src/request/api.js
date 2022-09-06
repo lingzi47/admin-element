@@ -325,8 +325,8 @@ export const doctorlist = (params) => request.post('admin/box/usehaveindex',
 export const doctoradd = (params) => request.post('admin/box/usehaveadd',
     params
 )
-//审核
-export const doctorlistex = (params) => request.post('/admin/box/usehavesta',
+//审核 /manybox/stabox 改(/manybox/stabox)
+export const doctorlistex = (params) => request.post('/manybox/stabox ',
     params
 )
 //团队
@@ -627,5 +627,25 @@ export const bannerdel = (params) => request.post('/activity/bannerdel',
 )
 //修改
 export const banneredit = (params) => request.post('/activity/banneredit',
+    params
+)
+//确认收货
+export const conGoods = (params) => request.post('/adminApi/order/conGoods',
+    params
+)
+//新增租赁商
+export const addbox = (params) => request.post('/manybox/addbox',
+    params
+)
+//租赁号获取uid
+export const chooseboxuid = (params) => request.post('/manybox/chooseboxuid',
+    params
+)
+//查看租赁人数/manybox/shareInfo
+export const shareInfo = (params) => request.post('/manybox/shareInfo',
+    params
+)
+//编辑/manybox/shareedit
+export const shareedit = (params) => request.post('manybox/shareedit',
     params
 )

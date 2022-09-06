@@ -5,7 +5,7 @@
       :visible.sync="drawer"
       direction="rtl"
       @closed="close"
-      :size="900"
+      :size="1250"
     >
       <div class="clearflex">
         <el-button type="primary" @click="changeRole">确 定</el-button>

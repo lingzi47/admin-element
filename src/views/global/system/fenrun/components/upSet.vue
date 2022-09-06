@@ -47,7 +47,7 @@
             >
               <el-form-item
                 v-for="(domain, index) in skulist.domains"
-                :label="'设备租赁号' + index"
+                :label="'设备租赁号' + (index + 1)"
                 :key="domain.key"
                 :prop="'domains.' + index + '.value'"
               >

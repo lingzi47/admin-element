@@ -343,6 +343,12 @@
               @click="refund(scope.row)"
               >退款</el-link
             >
+            <el-link
+              type="primary"
+              style="margin-left: 10px"
+              @click="queren(scope.row)"
+              >确认收货</el-link
+            >
           </template>
         </el-table-column>
       </page-table>
@@ -393,6 +399,7 @@
 <script>
 import { checkPermission } from "@/utils/permissions";
 import { shopordercensus, shoporderindex } from "@/api/shop";
+import { conGoods } from "@/request/api";
 import {
   merchant,
   sendGoods,
@@ -456,9 +463,30 @@ export default {
 
   mounted() {},
   methods: {
+    queren(row) {
+      this.$confirm("是否确认收货？", "提示", {
+        type: "warning",
+      })
+        .then(async () => {
+          let params = {
+            token: sessionStorage.getItem("token"),
+            oid: row.id,
+          };
+          conGoods(params).then((res) => {
+            console.log(res.data);
+            if (res.data.code == 200) {
+              this.shoporderlist();
+              this.$message.success("操作成功");
+            } else {
+              this.$message.error(res.data.msg);
+            }
+          });
+        })
+        .catch(() => {});
+    },
     dao() {
       if (this.form.time[1] == undefined) {
-        window.location.href = "https://yujian02.xyz/shopadmin/exportOrder";
+        window.location.href = "https://y4.wjw.cool/shopadmin/exportOrder";
         +"?token=" + this.token;
         "&shop_type=" +
           3 +
@@ -476,7 +504,7 @@ export default {
           this.form.order_status;
         console.log(
           (window.location.href =
-            "https://yujian02.xyz/shopadmin/exportOrder" +
+            "https://y4.wjw.cool/shopadmin/exportOrder" +
             "?token=" +
             this.token +
             "&shop_type=" +
@@ -495,7 +523,7 @@ export default {
             this.form.order_status)
         );
       } else {
-        window.location.href = "https://yujian02.xyz/shopadmin/exportOrder";
+        window.location.href = "https://y4.wjw.cool/shopadmin/exportOrder";
         +"?token=" + this.token;
         "&shop_type=" +
           3 +
@@ -517,7 +545,7 @@ export default {
           this.form.time[0];
         console.log(
           (window.location.href =
-            "https://yujian02.xyz/shopadmin/exportOrder" +
+            "https://y4.wjw.cool/shopadmin/exportOrder" +
             "?token=" +
             this.token +
             "&shop_type=" +

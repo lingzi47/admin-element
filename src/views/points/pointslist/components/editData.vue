@@ -85,6 +85,136 @@
               ></el-input>
             </el-form-item>
           </el-col>
+          <el-col :span="10">
+            <el-form-item label="物业名称">
+              <el-input
+                v-model="property"
+                style="width: 180px"
+                placeholder="请输入物业名称"
+              ></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="10">
+            <el-form-item label="有无其他条款">
+              <el-select
+                v-model="exclude"
+                placeholder="请选择"
+                style="width: 150px"
+              >
+                <el-option label="有" value="有"></el-option>
+                <el-option label="无" value="无"></el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+          <el-col :span="10">
+            <el-form-item label="是否房产准入">
+              <el-select
+                v-model="house"
+                placeholder="请选择"
+                style="width: 150px"
+              >
+                <el-option label="是" value="是"></el-option>
+                <el-option label="否" value="否"></el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+          <el-col :span="10">
+            <el-form-item label="是否医美准入">
+              <el-select
+                v-model="medical"
+                placeholder="请选择"
+                style="width: 150px"
+                @change="change1"
+              >
+                <el-option label="是" value="是"></el-option>
+                <el-option label="否" value="否"></el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+          <el-col :span="10">
+            <el-form-item label="商圈">
+              <el-input
+                v-model="shop"
+                style="width: 180px"
+                placeholder="请输入商圈"
+              ></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="10">
+            <el-form-item label="附近商圈">
+              <el-input
+                v-model="shop_name"
+                style="width: 180px"
+                placeholder="请输入附近商圈"
+              ></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="10">
+            <el-form-item label="是否学区">
+              <el-select
+                v-model="school"
+                placeholder="请选择"
+                style="width: 150px"
+                @change="change1"
+              >
+                <el-option label="是" value="是"></el-option>
+                <el-option label="否" value="否"></el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+          <el-col :span="10">
+            <el-form-item label="建成时间">
+              <el-date-picker
+                style="width: 200px"
+                v-model="build"
+                value-format="yyyy-MM-dd "
+                type="date"
+                placeholder="选择日期"
+              >
+              </el-date-picker>
+            </el-form-item>
+          </el-col>
+          <el-col :span="10">
+            <el-form-item label="楼栋总数">
+              <el-input
+                v-model="house_num"
+                style="width: 180px"
+                placeholder="请输入楼栋总数"
+              ></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="10">
+            <el-form-item label="总户数">
+              <el-input
+                v-model="households"
+                style="width: 180px"
+                placeholder="请输入总户数"
+              ></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="10">
+            <el-form-item label="覆盖人数">
+              <el-input
+                v-model="peopleall"
+                style="width: 180px"
+                placeholder="请输入覆盖人数"
+              ></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="10">
+            <el-form-item label="房价">
+              <el-input
+                v-model="house_price"
+                style="width: 180px"
+                placeholder="请输入房价"
+              ></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="20">
+            <el-form-item label="备注">
+              <el-input v-model="remarks" placeholder="请输入备注"></el-input>
+            </el-form-item>
+          </el-col>
         </el-row>
       </el-form>
 
@@ -104,11 +234,25 @@ export default {
   components: {},
   data() {
     return {
-      id: "",
+      property: "",
+      exclude: "",
+      house: "",
+      medical: "",
+      shop: "",
+      shop_name: "",
+      school: "",
+      build: "",
+      house_num: "",
+      households: "",
+      peopleall: "",
+      house_price: "",
+      remarks: "",
+
       check: false,
       token: "",
       isDisable: false,
       tittle: "",
+      id: "",
       form: {
         value1: "",
         value2: "",
@@ -209,6 +353,19 @@ export default {
         this.tittle = "编辑";
         console.log(row);
         this.id = row.id;
+        this.property = row.property;
+        this.exclude = row.exclude;
+        this.house = row.house;
+        this.medical = row.medical;
+        this.shop = row.shop;
+        this.shop_name = row.shop_name;
+        this.school = row.school;
+        this.build = row.build;
+        this.house_num = row.house_num;
+        this.households = row.households;
+        this.peopleall = row.peopleall;
+        this.house_price = row.house_price;
+        this.remarks = row.remarks;
 
         this.ruleForm.type = row.type;
         this.ruleForm.year = row.due_time;
@@ -248,6 +405,19 @@ export default {
       this.isDisable = false;
       this.check = false;
       this.ruleForm.value1 = "";
+      this.property = "";
+      this.exclude = "";
+      this.house = "";
+      this.medical = "";
+      this.shop = "";
+      this.shop_name = "";
+      this.school = "";
+      this.build = "";
+      this.house_num = "";
+      this.households = "";
+      this.peopleall = "";
+      this.house_price = "";
+      this.remarks = "";
     },
 
     submitForm() {
@@ -266,6 +436,19 @@ export default {
               province: this.province,
               city: this.city,
               area: this.area,
+              property: this.property,
+              exclude: this.exclude,
+              house: this.house,
+              medical: this.medical,
+              shop: this.shop,
+              shop_name: this.shop_name,
+              school: this.school,
+              build: this.build,
+              house_num: this.house_num,
+              households: this.households,
+              peopleal1: this.peopleall,
+              house_price: this.house_price,
+              remarks: this.remarks,
             };
             positionadd(params).then((res) => {
               if (res.data.code == 200) {
@@ -299,6 +482,19 @@ export default {
               city: this.city,
               area: this.area,
               id: this.id,
+              property: this.property,
+              exclude: this.exclude,
+              house: this.house,
+              medical: this.medical,
+              shop: this.shop,
+              shop_name: this.shop_name,
+              school: this.school,
+              build: this.build,
+              house_num: this.house_num,
+              households: this.households,
+              peopleal1: this.peopleall,
+              house_price: this.house_price,
+              remarks: this.remarks,
             };
             positionedit(params).then((res) => {
               if (res.data.code == 200) {
@@ -325,6 +521,6 @@ export default {
 
 <style lang="scss" scoped>
 .xian1 {
-  margin-left: -55px !important;
+  margin-left: -48px !important;
 }
 </style>

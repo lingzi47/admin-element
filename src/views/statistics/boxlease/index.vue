@@ -89,11 +89,13 @@
           label="推荐人设备租赁号"
           align="center"
         ></el-table-column>
-        <el-table-column
-          prop="uid"
-          align="center"
-          label="租赁商ID"
-        ></el-table-column>
+        <el-table-column label="租赁人数" align="center">
+          <template slot-scope="scope">
+            <el-link @click="handleClick(scope.row)">{{
+              scope.row.count
+            }}</el-link>
+          </template>
+        </el-table-column>
         <el-table-column label="租赁服务时长" align="center">
           <template slot-scope="scope">
             <el-link type="success" v-if="scope.row.box_type == 1"
@@ -126,13 +128,48 @@
           align="center"
         ></el-table-column>
       </page-table>
+      <el-dialog
+        title="账户信息"
+        :visible.sync="dialogVisible"
+        width="600px"
+        :close-on-click-modal="false"
+        @close="close"
+      >
+        <el-table ref="dataTable" :data="List" border>
+          <el-table-column label="序号" align="center">
+            <template slot-scope="scope">
+              <span>{{
+                (page.currentPage - 1) * page.pageSize + scope.$index + 1
+              }}</span>
+            </template>
+          </el-table-column>
+          <el-table-column prop="uid" label="用户id" align="center">
+          </el-table-column>
+
+          <el-table-column prop="phone" label="联系方式" align="center">
+          </el-table-column>
+          <el-table-column prop="share" label="分润占比" align="center">
+          </el-table-column>
+
+          <el-table-column label="操作" align="center">
+            <template slot-scope="scope">
+              <el-button type="text" size="small" @click="edit(scope.row)"
+                >编辑</el-button
+              >
+            </template>
+          </el-table-column>
+        </el-table>
+        <div slot="footer" class="dialog-footer">
+          <el-button type="primary" @click="submitForm">确认</el-button>
+        </div>
+      </el-dialog>
     </div>
   </div>
 </template>
 
 <script>
 import { checkPermission } from "@/utils/permissions";
-import { orderall, financeindex } from "@/request/api";
+import { orderall, financeindex, shareInfo } from "@/request/api";
 import pageTable from "@/components/pageTable.vue";
 
 export default {
@@ -143,12 +180,15 @@ export default {
     return {
       uid: "",
       box_pidname: "",
+      dialogVisible: false,
       box_type: "",
       pay_status: "",
+
       allprice: "",
       shoporder: [],
+      box_name: "",
       time: "",
-
+      List: [], // 列表
       page: {
         //分页信息
         currentPage: 1, //当前页
@@ -169,6 +209,30 @@ export default {
   },
   mounted() {},
   methods: {
+    handleClick(row) {
+      console.log(row);
+      this.box_name = row.box_name;
+      this.getList();
+    },
+    getList() {
+      let params = {
+        token: sessionStorage.getItem("token"),
+        box_name: this.box_name,
+      };
+      shareInfo(params).then((res) => {
+        console.log(res);
+        this.List = res.data.data;
+        console.log(this.List);
+      });
+      this.dialogVisible = true;
+    },
+    submitForm() {
+      this.dialogVisible = false;
+    },
+
+    close() {
+      this.dialogVisible = false;
+    },
     checkPermission,
     changeCurrent(page, size) {
       this.page.currentPage = page;

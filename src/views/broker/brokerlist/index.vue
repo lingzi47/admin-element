@@ -116,14 +116,14 @@
           <span v-if="scope.row.device_type == 20">否</span>
         </template>
       </el-table-column>
-      <el-table-column label="是否特殊分润" align="center">
+      <el-table-column label="租赁人数" align="center">
         <template slot-scope="scope">
-          <span v-if="scope.row.is_special == 1">否</span>
-          <span v-if="scope.row.is_special == 2">是</span>
+          <el-link @click="handleClick(scope.row)">{{
+            scope.row.count
+          }}</el-link>
         </template>
       </el-table-column>
-      <el-table-column prop="uid" label="租赁商id" align="center">
-      </el-table-column>
+
       <el-table-column label="推荐人租赁号" align="center">
         <template slot-scope="scope">
           <span v-if="scope.row.pid == null">无</span>
@@ -188,6 +188,90 @@
         </template>
       </el-table-column>
     </page-table>
+    <el-dialog
+      title="账户信息"
+      :visible.sync="dialogVisible"
+      width="600px"
+      :close-on-click-modal="false"
+      @close="close"
+    >
+      <el-table ref="dataTable" :data="List" border>
+        <el-table-column label="序号" align="center">
+          <template slot-scope="scope">
+            <span>{{
+              (page.currentPage - 1) * page.pageSize + scope.$index + 1
+            }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column prop="uid" label="用户id" align="center">
+        </el-table-column>
+
+        <el-table-column prop="phone" label="联系方式" align="center">
+        </el-table-column>
+        <el-table-column prop="share" label="分润占比" align="center">
+        </el-table-column>
+
+        <el-table-column label="操作" align="center">
+          <template slot-scope="scope">
+            <el-button type="text" size="small" @click="edit(scope.row)"
+              >编辑</el-button
+            >
+          </template>
+        </el-table-column>
+      </el-table>
+      <div slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="submitForm">确认</el-button>
+      </div>
+    </el-dialog>
+    <el-dialog
+      title="信息修改"
+      :visible.sync="Visible"
+      width="600px"
+      :close-on-click-modal="false"
+      @close="closee"
+    >
+      <el-form :rules="rules" label-width="auto" :model="Form" ref="Form">
+        <el-row :gutter="24">
+          <el-col :span="24">
+            <el-form-item label="用户id:" prop="uid">
+              <el-input
+                disabled
+                v-model="Form.uid"
+                style="width: 180px"
+                placeholder="请输入"
+              ></el-input>
+            </el-form-item>
+          </el-col>
+
+          <el-col :span="24">
+            <el-form-item label="联系方式:" prop="phone">
+              <el-input
+                v-model="Form.phone"
+                style="width: 180px"
+                placeholder="请输入"
+              ></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="24">
+            <el-form-item label="分润占比:" prop="share">
+              <el-select
+                v-model="Form.share"
+                placeholder="请选择"
+                style="width: 100px"
+              >
+                <el-option label="12.5%" value="12.50"></el-option>
+                <el-option label="25%" value="25.00"></el-option>
+                <el-option label="50%" value="50.00"></el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+        </el-row>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="closee">取 消</el-button>
+        <el-button type="primary" @click="submit">确 定</el-button>
+      </div>
+    </el-dialog>
     <!-- 新增编辑弹窗 -->
     <edit-data ref="editData" />
     <fen-run ref="fenRun" />
@@ -196,7 +280,7 @@
 </template>
 
 <script>
-import { doctorlist, upPid } from "@/request/api";
+import { doctorlist, upPid, shareInfo, shareedit } from "@/request/api";
 import { checkPermission } from "@/utils/permissions";
 import pageTable from "@/components/pageTable.vue";
 import editData from "./components/editData.vue";
@@ -212,23 +296,37 @@ export default {
   },
   data() {
     return {
+      dialogVisible: false,
+      Visible: false,
       name: "",
       uid: "",
       pid: "",
       use_pid: "",
       box_type: "",
+      box_name: "",
       status: "",
       ex_status: "",
       is_special: "",
       device_type: "",
       buy_time: "",
       userList: [], // 列表
-
+      List: [], // 列表
+      Form: {
+        id: "",
+        uid: "",
+        phone: "",
+        share: "",
+      },
       page: {
         //分页信息
         currentPage: 1, //当前页
         pageSize: 10, //每页条数
         total: 0, //总条数
+      },
+      rules: {
+        id: [{ required: true, message: "请输入用户id", trigger: "blur" }],
+        phone: [{ required: true, message: "请输入手机号", trigger: "blur" }],
+        share: [{ required: true, message: "请选择分润占比", trigger: "blur" }],
       },
     };
   },
@@ -245,6 +343,68 @@ export default {
   mounted() {},
   computed: {},
   methods: {
+    submit() {
+      let params = {
+        id: this.Form.id,
+        phone: this.Form.phone,
+        share: this.Form.share,
+        token: sessionStorage.getItem("token"),
+      };
+      shareedit(params).then((res) => {
+        if (res.data.code == 200) {
+          this.$message.success("编辑成功");
+          this.closee();
+          this.dialogVisible = true;
+          this.getList();
+        } else {
+          this.$message.error(res.data.msg);
+          this.closee();
+          this.dialogVisible = true;
+          this.getList();
+        }
+      });
+    },
+    closee() {
+      this.Form.id = "";
+      this.Form.uid = "";
+      this.Form.phone = "";
+      this.Form.share = "";
+      this.Visible = false;
+      this.dialogVisible = true;
+      this.getUserList();
+    },
+    edit(row) {
+      console.log(row);
+      this.Form.id = row.id;
+      this.Form.uid = row.uid;
+      this.Form.phone = row.phone;
+      this.Form.share = row.share;
+      this.Visible = true;
+    },
+    handleClick(row) {
+      console.log(row);
+      this.box_name = row.name;
+      this.getList();
+    },
+    getList() {
+      let params = {
+        token: sessionStorage.getItem("token"),
+        box_name: this.box_name,
+      };
+      shareInfo(params).then((res) => {
+        console.log(res);
+        this.List = res.data.data;
+        console.log(this.List);
+      });
+      this.dialogVisible = true;
+    },
+    submitForm() {
+      this.dialogVisible = false;
+    },
+
+    close() {
+      this.dialogVisible = false;
+    },
     add() {
       this.$refs.editData.show(1, {});
     },
@@ -283,13 +443,11 @@ export default {
         page: 1,
         limit: this.page.pageSize,
         token: sessionStorage.getItem("token"),
-
         name: this.name,
         pid: this.pid,
         box_type: this.box_type,
         uid: this.uid,
         use_pid: this.use_pid,
-
         status: this.status,
         ex_status: this.ex_status,
         is_special: this.is_special,
@@ -297,7 +455,6 @@ export default {
       };
       doctorlist(params).then((res) => {
         this.page.total = res.data.count;
-
         this.userList = res.data.data;
         this.$refs.dataTable.setPageInfo({
           total: this.page.total,

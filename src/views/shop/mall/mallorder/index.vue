@@ -486,7 +486,7 @@ export default {
     },
     dao() {
       if (this.form.time[1] == undefined) {
-        window.location.href = "https://y4.wjw.cool/shopadmin/exportOrder";
+        window.location.href = " https://y4.wjw.cool/shopadmin/exportOrder";
         +"?token=" + this.token;
         "&shop_type=" +
           2 +
@@ -504,7 +504,7 @@ export default {
           this.form.order_status;
         console.log(
           (window.location.href =
-            "https://y4.wjw.cool/shopadmin/exportOrder" +
+            " https://y4.wjw.cool/shopadmin/exportOrder" +
             "?token=" +
             this.token +
             "&shop_type=" +
@@ -523,7 +523,7 @@ export default {
             this.form.order_status)
         );
       } else {
-        window.location.href = "https://y4.wjw.cool/shopadmin/exportOrder";
+        window.location.href = " https://y4.wjw.cool/shopadmin/exportOrder";
         +"?token=" + this.token;
         "&shop_type=" +
           2 +
@@ -545,7 +545,7 @@ export default {
           this.form.time[0];
         console.log(
           (window.location.href =
-            "https://y4.wjw.cool/shopadmin/exportOrder" +
+            " https://y4.wjw.cool/shopadmin/exportOrder" +
             "?token=" +
             this.token +
             "&shop_type=" +

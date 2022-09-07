@@ -330,7 +330,7 @@ export const doctorlistex = (params) => request.post('/manybox/stabox ',
     params
 )
 //团队
-export const usehaveteam = (params) => request.post('admin/box/usehaveteam',
+export const usehaveteam = (params) => request.post('/manybox/newteam',
     params
 )
 //合作机器信息admin/box/read

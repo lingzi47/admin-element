@@ -122,7 +122,7 @@
           <el-form-item label="封面图" prop="goods_img">
             <el-upload
               class="avatar-uploader"
-              action="https://y4.wjw.cool/command/ossUpload?filename=file"
+              action=" https://y4.wjw.cool/command/ossUpload?filename=file"
               :show-file-list="false"
               :on-success="handleAvatarSuccess"
               :before-upload="beforeAvatarUpload"
@@ -138,7 +138,7 @@
         <el-col :span="24">
           <el-form-item label="商品图">
             <el-upload
-              action="https://y4.wjw.cool/command/ossUpload?filename=file"
+              action=" https://y4.wjw.cool/command/ossUpload?filename=file"
               list-type="picture-card"
               class="upload"
               :file-list="fileList"

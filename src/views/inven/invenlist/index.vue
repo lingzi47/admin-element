@@ -207,14 +207,14 @@ export default {
       console.log(this.num);
       console.log(
         (window.location.href =
-          "https://y4.wjw.cool/admin/box/expOfficina" +
+          " https://y4.wjw.cool/admin/box/expOfficina" +
           "?token=" +
           this.token +
           "&number=" +
           this.num)
       );
       window.location.href =
-        "https://y4.wjw.cool/admin/box/expOfficina" +
+        " https://y4.wjw.cool/admin/box/expOfficina" +
         "?token=" +
         this.token +
         "&number=" +

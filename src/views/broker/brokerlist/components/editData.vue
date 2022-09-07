@@ -427,6 +427,8 @@ export default {
                   this.check = false;
                 }
               });
+            } else if (sum <= 100) {
+              this.$message.error("分润占比总和不能小于100%");
             } else {
               this.$message.error("分润占比总和不能超过100%");
             }

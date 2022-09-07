@@ -132,7 +132,7 @@
       </el-table-column>
       <el-table-column prop="use_pid" label="推荐人" align="center">
       </el-table-column>
-      <el-table-column label="购买药柜租债服务" align="center">
+      <el-table-column label="购买药柜租赁服务" align="center">
         <template slot-scope="scope">
           <span v-if="scope.row.box_type == 1">三年</span>
           <span v-if="scope.row.box_type == 2">五年</span>
@@ -262,6 +262,7 @@
                 <el-option label="12.5%" value="12.50"></el-option>
                 <el-option label="25%" value="25.00"></el-option>
                 <el-option label="50%" value="50.00"></el-option>
+                <el-option label="100%" value="100.00"></el-option>
               </el-select>
             </el-form-item>
           </el-col>
@@ -324,8 +325,14 @@ export default {
         total: 0, //总条数
       },
       rules: {
-        id: [{ required: true, message: "请输入用户id", trigger: "blur" }],
-        phone: [{ required: true, message: "请输入手机号", trigger: "blur" }],
+        phone: [
+          { required: true, message: "请输入手机号", trigger: "blur" },
+          {
+            pattern: /^1[3456789]\d{9}$/,
+            message: "手机号格式不正确",
+            trigger: "blur",
+          },
+        ],
         share: [{ required: true, message: "请选择分润占比", trigger: "blur" }],
       },
     };
@@ -371,7 +378,7 @@ export default {
       this.Form.share = "";
       this.Visible = false;
       this.dialogVisible = true;
-      this.getUserList();
+      // this.getUserList();
     },
     edit(row) {
       console.log(row);

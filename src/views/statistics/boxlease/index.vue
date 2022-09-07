@@ -150,14 +150,6 @@
           </el-table-column>
           <el-table-column prop="share" label="分润占比" align="center">
           </el-table-column>
-
-          <el-table-column label="操作" align="center">
-            <template slot-scope="scope">
-              <el-button type="text" size="small" @click="edit(scope.row)"
-                >编辑</el-button
-              >
-            </template>
-          </el-table-column>
         </el-table>
         <div slot="footer" class="dialog-footer">
           <el-button type="primary" @click="submitForm">确认</el-button>

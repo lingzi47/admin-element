@@ -52,7 +52,29 @@
             placeholder="请输入设备租赁号"
           ></el-input>
         </el-form-item>
-        <el-form-item label="时间" prop="time">
+        <!-- <el-form-item label="商圈" prop="box_name">
+          <el-input
+            style="width: 180px"
+            v-model="shop"
+            clearable
+            placeholder="请输入商圈"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="附近商圈" prop="box_name">
+          <el-input
+            style="width: 180px"
+            v-model="shop_name"
+            clearable
+            placeholder="请输入附近商圈"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="是否学区">
+          <el-select v-model="school" placeholder="请选择" style="width: 150px">
+            <el-option label="是" value="是"></el-option>
+            <el-option label="否" value="否"></el-option>
+          </el-select>
+        </el-form-item> -->
+        <el-form-item label="点位创建时间" prop="time">
           <el-date-picker
             v-model="time"
             type="daterange"
@@ -63,6 +85,24 @@
           >
           </el-date-picker>
         </el-form-item>
+        <!-- <el-form-item label="建成时间">
+          <el-date-picker
+            v-model="time1"
+            type="daterange"
+            value-format="yyyy-MM-dd HH:mm:ss"
+            range-separator="至"
+            start-placeholder="开始日期"
+            end-placeholder="结束日期"
+          >
+          </el-date-picker>
+        </el-form-item>
+        <el-form-item label="房价">
+          <el-input
+            v-model="house_price"
+            style="width: 180px"
+            placeholder="请输入房价"
+          ></el-input>
+        </el-form-item> -->
         <el-form-item style="float: right">
           <el-button type="primary" icon="el-icon-search" @click="searchinfo"
             >搜索</el-button
@@ -121,7 +161,12 @@
       </el-table-column>
       <el-table-column prop="position_user" label="渠道商id" align="center">
       </el-table-column>
-      <el-table-column prop="uid" label="租赁商id" align="center">
+      <el-table-column label="租赁人数" align="center">
+        <template slot-scope="scope">
+          <el-link @click="handleClick(scope.row)">{{
+            scope.row.count
+          }}</el-link>
+        </template>
       </el-table-column>
       <el-table-column prop="box_name" label="设备租赁号" align="center">
       </el-table-column>
@@ -200,7 +245,7 @@
 </template>
 
 <script>
-import { positionindex, positiondelete } from "@/request/api";
+import { positionindex, positiondelete, shareInfo } from "@/request/api";
 import { checkPermission } from "@/utils/permissions";
 import pageTable from "@/components/pageTable.vue";
 import { areaListData } from "@/utils/area";
@@ -226,8 +271,14 @@ export default {
         value2: "",
         value3: "",
       },
+      shop: "",
+      shop_name: "",
+      house_price: "",
+      school: "",
       province: "",
       city: "",
+      dialogVisible: false,
+      List: [], // 列表
       type: "",
       sta: "",
       box_name: "",
@@ -257,6 +308,30 @@ export default {
   mounted() {},
   computed: {},
   methods: {
+    handleClick(row) {
+      console.log(row);
+      this.box_name = row.box_name;
+      this.getList();
+    },
+    getList() {
+      let params = {
+        token: sessionStorage.getItem("token"),
+        box_name: this.box_name,
+      };
+      shareInfo(params).then((res) => {
+        console.log(res);
+        this.List = res.data.data;
+        console.log(this.List);
+      });
+      this.dialogVisible = true;
+    },
+    submitForm() {
+      this.dialogVisible = false;
+    },
+
+    close() {
+      this.dialogVisible = false;
+    },
     setData(data) {
       data.map((item) => {
         item["value"] = item.code;

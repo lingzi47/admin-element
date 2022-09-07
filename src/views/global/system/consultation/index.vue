@@ -78,6 +78,7 @@
             </span>
           </div>
           <span v-if="scope.row.img == null">无</span>
+          <span v-if="scope.row.img == ''">无</span>
         </template>
       </el-table-column>
       <el-table-column prop="remark" label="申请详情" align="center">

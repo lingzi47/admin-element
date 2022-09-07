@@ -15,15 +15,22 @@
             <el-form-item label="药房名称:"> {{ big_name }}</el-form-item>
           </el-col>
           <el-col :span="24">
-            <el-form-item label="分润设置"> </el-form-item>
+            <el-form-item label="分润模式"> </el-form-item>
           </el-col>
 
           <el-col>
             <el-form-item>
               <el-radio v-model="radio" label="10" @change="checked"
-                >设备总流水的<el-input
+                >药品总流水 -
+                <el-input
+                  v-model="input3"
+                  style="width: 100px"
+                  :disabled="isDisable1"
+                ></el-input
+                >%税率的
+                <el-input
                   v-model="input"
-                  style="width: 250px; margin-left: 15px"
+                  style="width: 100px; margin-left: 15px"
                   :disabled="isDisable1"
                 ></el-input
                 >%进行分润</el-radio
@@ -33,9 +40,17 @@
                 v-model="radio"
                 label="20"
                 @change="checked"
-                >药品售卖差价的<el-input
+                >药品售价 -
+                <el-input
+                  v-model="input2"
+                  style="width: 100px"
+                  :disabled="isDisable"
+                >
+                </el-input
+                >%税率 - 药品成本的
+                <el-input
                   v-model="input1"
-                  style="width: 250px"
+                  style="width: 100px"
                   :disabled="isDisable"
                 ></el-input
                 >%进行分润</el-radio
@@ -71,6 +86,9 @@ export default {
       total_profit: "",
       input: "",
       input1: "",
+      input3: "",
+      tax: "",
+      input2: "",
       radio: "",
       type: "", //1新增，2编辑
       dialogVisible: false,
@@ -100,11 +118,13 @@ export default {
         this.isDisable1 = false;
         console.log("1解开2不能用");
         this.input1 = "";
+        this.input2 = "";
       } else {
         this.isDisable = false;
         this.isDisable1 = true;
         console.log("2解开1不能用");
         this.input = "";
+        this.input3 = "";
       }
     },
 
@@ -119,11 +139,13 @@ export default {
         if (row.share == 10) {
           this.radio = "10";
           this.input = row.total_profit;
+          this.input3 = row.tax;
           this.isDisable = true;
         } else if (row.share == 20) {
           this.radio = "20";
           this.isDisable1 = true;
           this.input1 = row.total_profit;
+          this.input2 = row.tax;
         } else {
         }
       } else {
@@ -136,15 +158,19 @@ export default {
       this.radio = "";
       this.big_name = "";
       this.total_profit = "";
+      this.tax = "";
       this.input = "";
       this.input1 = "";
+      this.input2 = "";
     },
 
     submitForm() {
       if (this.input1 == "") {
         this.total_profit = this.input;
+        this.tax = this.input3;
       } else {
-        this.total_profit = this.input1;
+        this.total_profit = this.input;
+        this.tax = this.input2;
       }
       if (this.radio == "") {
         this.$message.error("请选择分润模式");
@@ -162,6 +188,7 @@ export default {
         big_name: this.big_name,
         share: this.radio,
         total_profit: this.total_profit,
+        tax: this.tax,
       };
       fenrunset(params).then((res) => {
         if (res.data.code == 200) {

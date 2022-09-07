@@ -124,7 +124,6 @@
                 v-model="medical"
                 placeholder="请选择"
                 style="width: 150px"
-                @change="change1"
               >
                 <el-option label="是" value="是"></el-option>
                 <el-option label="否" value="否"></el-option>
@@ -155,7 +154,6 @@
                 v-model="school"
                 placeholder="请选择"
                 style="width: 150px"
-                @change="change1"
               >
                 <el-option label="是" value="是"></el-option>
                 <el-option label="否" value="否"></el-option>

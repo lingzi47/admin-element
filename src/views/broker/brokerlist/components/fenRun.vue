@@ -16,11 +16,7 @@
         >返回</el-button
       >
 
-      <page-table
-        ref="dataTable"
-        :data="userList"
-        @changeCurrentPage="changeCurrent"
-      >
+      <el-table ref="dataTable" :data="userList" border>
         <el-table-column label="序号" align="center">
           <template slot-scope="scope">
             <span>{{
@@ -29,22 +25,25 @@
           </template>
         </el-table-column>
 
+        <el-table-column prop="box_pid_uid" label="推荐人id" align="center">
+        </el-table-column>
+        <el-table-column prop="box_pid" label="推荐人设备租赁号" align="center">
+        </el-table-column>
         <el-table-column prop="box_id" label="设备租赁号" align="center">
         </el-table-column>
-        <el-table-column prop="uid" label="所属租赁人ID" align="center">
-        </el-table-column>
-        <el-table-column prop="tel" label="租赁人手机号" align="center">
-        </el-table-column>
-        <el-table-column prop="pid" label="推荐人设备租赁号" align="center">
-        </el-table-column>
-        <el-table-column label="操作" align="center">
+
+        <el-table-column label="租赁商id" align="center">
           <template slot-scope="scope">
-            <el-link type="primary" @click="nextUser(scope.row)"
-              >商务团队信息</el-link
+            <el-link
+              v-for="(v, k) in scope.row.userinfo"
+              :key="k"
+              style="margin-left: 10px"
+              @click="nextUser(v, scope.row)"
+              >{{ v }}</el-link
             >
           </template>
         </el-table-column>
-      </page-table>
+      </el-table>
     </el-dialog>
   </div>
 </template>
@@ -60,6 +59,9 @@ export default {
       name: "",
       uid: "",
       arr: [],
+      arr1: [],
+      box_pid_uid: "",
+      pid: "",
       dialogVisible: false,
       page: {
         //分页信息
@@ -81,13 +83,18 @@ export default {
   created() {},
   mounted() {},
   methods: {
-    nextUser(row) {
-      this.name = row.box_id;
-      this.uid = row.pid;
+    nextUser(v, row) {
+      console.log(v);
+      this.box_pid_uid = v;
+      this.box_pid = row.box_id;
       let idarr = [];
-      idarr.push(this.uid);
+      let idarr1 = [];
+      idarr.push(row.box_pid_uid);
+      idarr1.push(row.box_pid);
       this.arr.push(idarr);
+      this.arr1.push(idarr1);
       console.log(this.arr);
+      console.log(this.arr1);
       this.getUserList();
     },
     go() {
@@ -95,24 +102,37 @@ export default {
         console.log("我不显示");
         this.dialogVisible = false;
       } else {
+        //取box_pid_uid
         let a = this.arr[this.arr.length - 1];
-        this.name = a.toString();
+        this.box_pid_uid = a.toString();
+        console.log(this.box_pid_uid);
+        //取box_pid
+        let b = this.arr1[this.arr1.length - 1];
+        this.box_pid = b.toString();
+        console.log(this.box_pid);
+        //请求
         this.getUserList();
+        //  删除最后box_pid_uid
         var m = this.arr.slice(0);
         m.splice(m.length - 1, 1);
+        // 删除最后box_pid
+        var n = this.arr1.slice(0);
+        n.splice(n.length - 1, 1);
       }
       this.arr = m;
-      return m;
+      this.arr1 = n;
     },
     show(row) {
-      console.log(row.id);
+      console.log(row);
       this.dialogVisible = true;
-      this.name = row.name;
-      console.log(this.name);
+      this.box_pid_uid = row.uid;
+      this.box_pid = row.name;
       this.getUserList();
     },
     close() {
       this.dialogVisible = false;
+      this.arr = [];
+      this.arr1 = [];
     },
     changeCurrent(page, size) {
       this.page.currentPage = page;
@@ -124,17 +144,12 @@ export default {
       let token = sessionStorage.getItem("token");
       this.token = token;
       let params = {
-        page: this.page.currentPage,
-        limit: this.page.pageSize,
         token: sessionStorage.getItem("token"),
-        name: this.name,
+        box_pid: this.box_pid,
+        box_pid_uid: this.box_pid_uid,
       };
       usehaveteam(params).then((res) => {
-        this.page.total = res.data.count;
         this.userList = res.data.data;
-        this.$refs.dataTable.setPageInfo({
-          total: this.page.total,
-        });
       });
     },
     showtable() {},

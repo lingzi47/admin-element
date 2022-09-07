@@ -85,8 +85,6 @@
     </page-table>
     <!-- 新增编辑弹窗 -->
     <edit-data ref="editData" />
-    <!-- <fen-run ref="fenRun" /> -->
-    <!-- <up-set ref="upSet" /> -->
   </div>
 </template>
 
@@ -96,15 +94,12 @@ import { checkPermission } from "@/utils/permissions";
 import pageTable from "@/components/pageTable.vue";
 import { areaListData } from "@/utils/area";
 import editData from "./components/editData.vue";
-// import fenRun from "./components/fenRun.vue";
-// import upSet from "./components/upSet.vue";
+
 export default {
   name: "user",
   components: {
     pageTable,
     editData,
-    // fenRun,
-    // upSet,
   },
   data() {
     return {

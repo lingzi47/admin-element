@@ -10,14 +10,7 @@
             placeholder="请输入设备租赁号"
           ></el-input>
         </el-form-item>
-        <el-form-item label="租赁商id" prop="uid">
-          <el-input
-            style="width: 180px"
-            v-model="uid"
-            clearable
-            placeholder="请输入租赁商id"
-          ></el-input>
-        </el-form-item>
+
         <el-form-item label="推荐人id" prop="use_pid">
           <el-input
             style="width: 180px"
@@ -75,22 +68,13 @@
             <el-option label="否" value="20"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="是否特殊分润" prop="status">
-          <el-select
-            v-model="is_special"
-            placeholder="请选择"
-            style="width: 150px"
-          >
-            <el-option label="否" value="1"></el-option>
-            <el-option label="是" value="2"></el-option>
-          </el-select>
-        </el-form-item>
+
         <el-form-item style="float: right">
           <el-button type="primary" icon="el-icon-search" @click="searchinfo"
             >搜索</el-button
           >
           <el-button type="primary" @click="add">手动添加租赁人</el-button>
-          <!-- <el-button type="primary">导出</el-button> -->
+          <el-button @click="dao">导出</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -307,7 +291,7 @@ export default {
       box_name: "",
       status: "",
       ex_status: "",
-      is_special: "",
+
       device_type: "",
       buy_time: "",
       userList: [], // 列表
@@ -350,6 +334,26 @@ export default {
   mounted() {},
   computed: {},
   methods: {
+    dao() {
+      window.location.href =
+        " https://y4.wjw.cool/admin/box/exportList" +
+        "?token=" +
+        this.token +
+        "&name=" +
+        this.name +
+        "&pid=" +
+        this.pid +
+        "&box_type=" +
+        this.box_type +
+        "&use_pid=" +
+        this.use_pid +
+        "&status=" +
+        this.status +
+        "&device_type=" +
+        this.device_type +
+        "&ex_status=" +
+        this.ex_status;
+    },
     submit() {
       let params = {
         id: this.Form.id,
@@ -453,11 +457,11 @@ export default {
         name: this.name,
         pid: this.pid,
         box_type: this.box_type,
-        uid: this.uid,
+
         use_pid: this.use_pid,
         status: this.status,
         ex_status: this.ex_status,
-        is_special: this.is_special,
+
         device_type: this.device_type,
       };
       doctorlist(params).then((res) => {
@@ -478,11 +482,10 @@ export default {
         name: this.name,
         pid: this.pid,
         box_type: this.box_type,
-        uid: this.uid,
+
         use_pid: this.use_pid,
         status: this.status,
         ex_status: this.ex_status,
-        is_special: this.is_special,
 
         device_type: this.device_type,
       };

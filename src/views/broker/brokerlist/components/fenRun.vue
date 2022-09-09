@@ -125,7 +125,7 @@ export default {
     show(row) {
       console.log(row);
       this.dialogVisible = true;
-      this.box_pid_uid = row.uid;
+      // this.box_pid_uid = row.uid;
       this.box_pid = row.name;
       this.getUserList();
     },

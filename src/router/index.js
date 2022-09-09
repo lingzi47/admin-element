@@ -1135,6 +1135,15 @@ export const asyncRoutes = [
 				},
 			},
 			{
+				path: "repList",
+				name: "repList",
+				component: () => import("@/views/statistics/repList"),
+				meta: {
+					title: "商品补货统计",
+					permissions: "repList"
+				},
+			},
+			{
 				path: "goodslease",
 				name: "goodslease",
 				component: () => import("@/views/statistics/goodslease"),

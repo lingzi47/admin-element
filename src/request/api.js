@@ -649,3 +649,7 @@ export const shareInfo = (params) => request.post('/manybox/shareInfo',
 export const shareedit = (params) => request.post('manybox/shareedit',
     params
 )
+//补货统计
+export const repList = (params) => request.post('adminApi/box/boxFinance/repList',
+    params
+)

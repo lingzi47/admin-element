@@ -486,9 +486,11 @@ export default {
     },
     dao() {
       if (this.form.time[1] == undefined) {
-        window.location.href = " https://y4.wjw.cool/shopadmin/exportOrder";
-        +"?token=" + this.token;
-        "&shop_type=" +
+        window.location.href =
+          " https://y4.wjw.cool/shopadmin/exportOrder" +
+          "?token=" +
+          this.token +
+          "&shop_type=" +
           3 +
           "&order_no=" +
           this.form.order_no +
@@ -502,30 +504,12 @@ export default {
           this.form.label +
           "&order_status=" +
           this.form.order_status;
-        console.log(
-          (window.location.href =
-            " https://y4.wjw.cool/shopadmin/exportOrder" +
-            "?token=" +
-            this.token +
-            "&shop_type=" +
-            3 +
-            "&order_no=" +
-            this.form.order_no +
-            "&goods_name=" +
-            this.form.goods_name +
-            "&name=" +
-            this.form.name +
-            "&phone=" +
-            this.form.phone +
-            "&label=" +
-            this.form.label +
-            "&order_status=" +
-            this.form.order_status)
-        );
       } else {
-        window.location.href = " https://y4.wjw.cool/shopadmin/exportOrder";
-        +"?token=" + this.token;
-        "&shop_type=" +
+        window.location.href =
+          " https://y4.wjw.cool/shopadmin/exportOrder" +
+          "?token=" +
+          this.token +
+          "&shop_type=" +
           3 +
           "&order_no=" +
           this.form.order_no +
@@ -543,30 +527,6 @@ export default {
           this.form.time[1] +
           "&pay_time_one=" +
           this.form.time[0];
-        console.log(
-          (window.location.href =
-            " https://y4.wjw.cool/shopadmin/exportOrder" +
-            "?token=" +
-            this.token +
-            "&shop_type=" +
-            3 +
-            "&order_no=" +
-            this.form.order_no +
-            "&goods_name=" +
-            this.form.goods_name +
-            "&name=" +
-            this.form.name +
-            "&phone=" +
-            this.form.phone +
-            "&label=" +
-            this.form.label +
-            "&order_status=" +
-            this.form.order_status +
-            "&pay_time_two=" +
-            this.form.time[1] +
-            "&pay_time_one=" +
-            this.form.time[0])
-        );
       }
     },
     close() {

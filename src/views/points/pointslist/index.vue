@@ -36,14 +36,7 @@
             <el-option label="废弃" value="30"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="租赁商id" prop="box_uid">
-          <el-input
-            style="width: 180px"
-            v-model="box_uid"
-            clearable
-            placeholder="请输入租赁商id"
-          ></el-input>
-        </el-form-item>
+
         <el-form-item label="设备租赁号" prop="box_name">
           <el-input
             style="width: 180px"
@@ -108,6 +101,7 @@
             >搜索</el-button
           >
           <el-button type="primary" @click="add">添加</el-button>
+          <el-button @click="dao">导出</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -237,6 +231,33 @@
         </template>
       </el-table-column>
     </page-table>
+    <el-dialog
+      title="账户信息"
+      :visible.sync="dialogVisible"
+      width="600px"
+      :close-on-click-modal="false"
+      @close="close"
+    >
+      <el-table ref="dataTable" :data="List" border>
+        <el-table-column label="序号" align="center">
+          <template slot-scope="scope">
+            <span>{{
+              (page.currentPage - 1) * page.pageSize + scope.$index + 1
+            }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column prop="uid" label="用户id" align="center">
+        </el-table-column>
+
+        <el-table-column prop="phone" label="联系方式" align="center">
+        </el-table-column>
+        <el-table-column prop="share" label="分润占比" align="center">
+        </el-table-column>
+      </el-table>
+      <div slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="submitForm">确认</el-button>
+      </div>
+    </el-dialog>
     <!-- 新增编辑弹窗 -->
     <edit-data ref="editData" />
     <fen-run ref="fenRun" />
@@ -263,6 +284,7 @@ export default {
   data() {
     return {
       box_uid: "",
+      token: "",
       box_name: "",
       id: "",
       areaArr: [],
@@ -304,10 +326,60 @@ export default {
     this.getUserList(); //获取用户列表
     this.setData(areaListData());
     this.areaArr = areaListData();
+    this.token = sessionStorage.getItem("token");
   },
   mounted() {},
   computed: {},
   methods: {
+    dao() {
+      if (this.time[1] == undefined) {
+        window.location.href =
+          " https://y4.wjw.cool/admin/box/posExport" +
+          "?token=" +
+          this.token +
+          "&box_name=" +
+          this.box_name +
+          "&uid=" +
+          this.box_uid +
+          "&id=" +
+          this.id +
+          "&province=" +
+          this.province +
+          "&type=" +
+          this.type +
+          "&city=" +
+          this.city +
+          "&bind=" +
+          this.sta +
+          "&area=" +
+          this.area;
+      } else {
+        window.location.href =
+          " https://y4.wjw.cool/admin/box/posExport" +
+          "?token=" +
+          this.token +
+          "&box_name=" +
+          this.box_name +
+          "&uid=" +
+          this.box_uid +
+          "&id=" +
+          this.id +
+          "&province=" +
+          this.province +
+          "&type=" +
+          this.type +
+          "&city=" +
+          this.city +
+          "&bind=" +
+          this.sta +
+          "&area=" +
+          this.area +
+          "&time1=" +
+          this.time[0] +
+          "&time2=" +
+          this.time[1];
+      }
+    },
     handleClick(row) {
       console.log(row);
       this.box_name = row.box_name;

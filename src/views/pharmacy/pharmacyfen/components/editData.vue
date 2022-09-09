@@ -15,45 +15,36 @@
             <el-form-item label="药房名称:"> {{ big_name }}</el-form-item>
           </el-col>
           <el-col :span="24">
-            <el-form-item label="分润模式"> </el-form-item>
+            <el-form-item label="收益分润:">
+              <el-input v-model="input" style="width: 80px"></el-input
+              >%</el-form-item
+            >
           </el-col>
-
-          <el-col>
-            <el-form-item>
+          <el-col :span="24">
+            <el-form-item label="分润模式:">
               <el-radio v-model="radio" label="10" @change="checked"
-                >药品总流水 -
+                >总售价 -
                 <el-input
                   v-model="input3"
                   style="width: 100px"
                   :disabled="isDisable1"
                 ></el-input
                 >%税率的
-                <el-input
-                  v-model="input"
-                  style="width: 100px; margin-left: 15px"
-                  :disabled="isDisable1"
-                ></el-input
-                >%进行分润</el-radio
-              >
+              </el-radio>
+              <p style="margin-left: 150px"></p>
               <el-radio
-                style="margin-top: 10px"
+                style="margin-top: 10px; margin-left: 71px"
                 v-model="radio"
                 label="20"
                 @change="checked"
-                >药品售价 -
+                >总售价 -
                 <el-input
                   v-model="input2"
                   style="width: 100px"
                   :disabled="isDisable"
                 >
                 </el-input
-                >%税率 - 药品成本的
-                <el-input
-                  v-model="input1"
-                  style="width: 100px"
-                  :disabled="isDisable"
-                ></el-input
-                >%进行分润</el-radio
+                >%税率的 - 成本</el-radio
               >
             </el-form-item>
           </el-col>
@@ -144,7 +135,7 @@ export default {
         } else if (row.share == 20) {
           this.radio = "20";
           this.isDisable1 = true;
-          this.input1 = row.total_profit;
+          this.input = row.total_profit;
           this.input2 = row.tax;
         } else {
         }
@@ -165,19 +156,22 @@ export default {
     },
 
     submitForm() {
-      if (this.input1 == "") {
-        this.total_profit = this.input;
+      if (this.input2 == "") {
         this.tax = this.input3;
       } else {
-        this.total_profit = this.input;
         this.tax = this.input2;
       }
+      this.total_profit = this.input;
       if (this.radio == "") {
         this.$message.error("请选择分润模式");
         return;
       }
       if (this.total_profit == "") {
         this.$message.error("分润不能为空");
+        return;
+      }
+      if (this.tax == "") {
+        this.$message.error("税率不能为空");
         return;
       }
 

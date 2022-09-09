@@ -3,17 +3,7 @@
     <p>钻石新增统计</p>
     <div class="block-quote">
       <el-form :inline="true">
-        <el-form-item label="注册时间" prop="time">
-          <el-date-picker
-            v-model="time"
-            type="daterange"
-            value-format="yyyy-MM-dd HH:mm:ss"
-            range-separator="至"
-            start-placeholder="开始日期"
-            end-placeholder="结束日期"
-          >
-          </el-date-picker>
-        </el-form-item>
+    
         <el-form-item>
           <el-button
             v-if="checkPermission('usersearch')"

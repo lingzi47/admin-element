@@ -177,13 +177,18 @@
       :close-on-click-modal="false"
       @close="close"
     >
-      <el-form label-width="auto">
+      <el-form
+        label-width="auto"
+        :rules="rules"
+        ref="ruleForm"
+        :model="ruleForm"
+      >
         <el-row :gutter="20">
           <el-col :span="24">
-            <el-form-item label="拒绝理由" prop="member">
+            <el-form-item label="拒绝理由" prop="remark">
               <el-input
                 style="width: 180px"
-                v-model="remark"
+                v-model="ruleForm.remark"
                 clearable
                 placeholder="请输入拒绝理由"
               ></el-input>
@@ -215,7 +220,8 @@ export default {
       rolesList: [], //角色列表
       userList: [], // 用户列表
       arr: [],
-      remark: "",
+      ruleForm: { remark: "" },
+
       uid: "",
       ex_status: "",
       position: "",
@@ -223,6 +229,11 @@ export default {
       dialogVisible: false,
       dialogVisible1: false,
       time: "",
+      rules: {
+        remark: [
+          { required: true, message: "请输入拒绝理由", trigger: "blur" },
+        ],
+      },
       page: {
         //分页信息
         currentPage: 1, //当前页
@@ -278,21 +289,27 @@ export default {
       });
     },
     submitForm1() {
-      let params = {
-        token: sessionStorage.getItem("token"),
-        ex_status: 3,
-        id: this.id,
-        remark: this.remark,
-      };
-      boxWithlistex(params).then((res) => {
-        if (res.data.code == 200) {
-          this.$message.success("操作成功");
+      this.$refs.ruleForm.validate(async (valid) => {
+        if (valid) {
+          let params = {
+            token: sessionStorage.getItem("token"),
+            ex_status: 3,
+            id: this.id,
+            remark: this.ruleForm.remark,
+          };
+          boxWithlistex(params).then((res) => {
+            if (res.data.code == 200) {
+              this.$message.success("操作成功");
+              this.getUserList();
+            }
+          });
+          this.dialogVisible = false;
           this.getUserList();
+          this.dialogVisible1 = false;
+        } else {
+          return false;
         }
       });
-      this.dialogVisible = false;
-      this.getUserList();
-      this.dialogVisible1 = false;
     },
 
     refuse() {

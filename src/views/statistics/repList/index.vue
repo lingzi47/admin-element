@@ -19,7 +19,7 @@
           ></el-input>
         </el-form-item>
 
-        <el-form-item label="药房:">
+        <!-- <el-form-item label="药房:">
           <el-cascader
             v-model="value1"
             :options="areaArr"
@@ -57,7 +57,7 @@
               ></el-option>
             </el-select>
           </el-form-item>
-        </el-form-item>
+        </el-form-item> -->
         <el-form-item label="时间" prop="time">
           <el-date-picker
             v-model="time"
@@ -195,8 +195,8 @@ export default {
 
     this.time = arr; //时间段的数组；第一项表示开始时间，第二项表示结束时间
     this.getUserList(); //获取用户列表
-    this.setData(areaListData());
-    this.areaArr = areaListData();
+    // this.setData(areaListData());
+    // this.areaArr = areaListData();
   },
   mounted() {},
   computed: {},
@@ -204,47 +204,22 @@ export default {
     dao() {
       if (this.time[1] == undefined) {
         window.location.href =
-          " https://y4.wjw.cool/admin/box/posExport" +
+          " https://y4.wjw.cool/adminApi/box/boxFinance/repExport" +
           "?token=" +
           this.token +
-          "&box_name=" +
+          "&goods_name=" +
           this.box_name +
-          "&uid=" +
-          this.box_uid +
-          "&id=" +
-          this.id +
-          "&province=" +
-          this.province +
-          "&type=" +
-          this.type +
-          "&city=" +
-          this.city +
-          "&bind=" +
-          this.sta +
-          "&area=" +
-          this.area;
+          "&device=" +
+          this.number;
       } else {
         window.location.href =
-          " https://y4.wjw.cool/admin/box/posExport" +
+          " https://y4.wjw.cool/adminApi/box/boxFinance/repExport" +
           "?token=" +
           this.token +
-          "&box_name=" +
+          "&goods_name=" +
           this.box_name +
-          "&uid=" +
-          this.box_uid +
-          "&id=" +
-          this.id +
-          "&province=" +
-          this.province +
-          "&type=" +
-          this.type +
-          "&city=" +
-          this.city +
-          "&bind=" +
-          this.sta +
-          "&area=" +
-          this.area +
-          "&time1=" +
+          "&device=" +
+          this.number +
           this.time[0] +
           "&time2=" +
           this.time[1];
@@ -324,10 +299,16 @@ export default {
         device: this.number,
       };
       repList(params).then((res) => {
-        console.log(res);
         this.page.total = res.data.data.total;
+        let list = res.data.data.dataList;
+        console.log(list);
+        // 拿key
+        let arr = [];
+        for (let prop in list) {
+          arr.push(list[prop]);
+        }
 
-        this.userList = res.data.data.dataList;
+        this.userList = arr;
         this.$refs.dataTable.setPageInfo({
           total: this.page.total,
         });
@@ -346,10 +327,16 @@ export default {
         device: this.number,
       };
       repList(params).then((res) => {
-        console.log(res);
         this.page.total = res.data.data.total;
+        let list = res.data.data.dataList;
+        console.log(list);
+        // 拿key
+        let arr = [];
+        for (let prop in list) {
+          arr.push(list[prop]);
+        }
 
-        this.userList = res.data.data.dataList;
+        this.userList = arr;
         this.$refs.dataTable.setPageInfo({
           total: this.page.total,
         });

@@ -19,8 +19,8 @@
               style="width: 150px"
             >
               <el-option label="全部" value=""></el-option>
-              <el-option label="1700" value="1700"></el-option>
               <el-option label="2500" value="2500"></el-option>
+              <el-option label="1700" value="1700"></el-option>
             </el-select>
           </el-form-item>
           <el-form-item label="购买方式" prop="box_type">
@@ -61,6 +61,7 @@
               @click="searchinfo"
               >搜索</el-button
             >
+            <el-button type="primary" @click="add">添加</el-button>
           </el-form-item>
         </el-form>
       </div>
@@ -167,6 +168,7 @@
           </template></el-table-column
         >
       </page-table>
+      <edit-data ref="editData" />
     </div>
   </div>
 </template>
@@ -175,10 +177,12 @@
 import { checkPermission } from "@/utils/permissions";
 import { tuilist, refMoney } from "@/request/api";
 import pageTable from "@/components/pageTable.vue";
+import editData from "./components/editData.vue";
 export default {
   name: "specialorder",
   components: {
     pageTable,
+    editData,
   },
   data() {
     return {
@@ -246,8 +250,9 @@ export default {
       this.page.limit = size;
       this.shoporderlist();
     },
-
-    open(row) {},
+    add() {
+      this.$refs.editData.show(1, {});
+    },
   },
 };
 </script>

@@ -23,13 +23,7 @@
       :data="userList"
       @changeCurrentPage="changeCurrent"
     >
-      <el-table-column
-        label="序号"
-        align="center"
-        width="130"
-        fixed
-        :resizable="false"
-      >
+      <el-table-column label="序号" align="center" fixed :resizable="false">
         <template slot-scope="scope">
           <span>{{ (page.page - 1) * page.limit + scope.$index + 1 }}</span>
         </template>
@@ -135,8 +129,8 @@ export default {
 
       page: {
         //分页信息
-        currentPage: 1, //当前页
-        pageSize: 10, //每页条数
+        page: 1, //当前页
+        limit: 10, //每页条数
         total: 0, //总条数
       },
     };
@@ -197,8 +191,8 @@ export default {
     checkPermission,
     // 切换分页
     changeCurrent(page, size) {
-      this.page.currentPage = page;
-      this.page.pageSize = size;
+      this.page.page = page;
+      this.page.limit = size;
       this.getUserList();
     },
     searchinfo() {

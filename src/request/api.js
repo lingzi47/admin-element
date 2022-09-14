@@ -677,3 +677,7 @@ export const tuilist = (params) => request.post('/manybox/tuilist',
 export const tuiliststa = (params) => request.post('/manybox/tuiliststa',
     params
 )
+//拼单添加/manybox/addtuilist
+export const addtuilist = (params) => request.post('/manybox/addtuilist',
+    params
+)

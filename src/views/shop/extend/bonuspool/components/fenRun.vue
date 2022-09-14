@@ -60,9 +60,8 @@ export default {
     show(row) {
       console.log(row);
       this.dialogVisible = true;
-
       this.id = row.id;
-      this.getUserList();
+      this.getUserList(); 
     },
     close() {
       this.dialogVisible = false;

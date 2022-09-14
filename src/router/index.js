@@ -592,38 +592,57 @@ export const asyncRoutes = [
 					permissions: "extend"
 				},
 				children: [{
-					path: "extendgoods",
-					name: "extendgoods",
-					component: () => import("@/views/shop/extend/extendgoods"),
-					meta: {
-						title: "商品列表",
-						permissions: "extendgoods"
+						path: "extendgoods",
+						name: "extendgoods",
+						component: () => import("@/views/shop/extend/extendgoods"),
+						meta: {
+							title: "商品列表",
+							permissions: "extendgoods"
+						}
+					}, {
+						path: "extendtype",
+						name: "extendtype",
+						component: () => import("@/views/shop/extend/extendtype"),
+						meta: {
+							title: "商城分类",
+							permissions: "extendtype"
+						}
+					}, {
+						path: "extendorder",
+						name: "extendorder",
+						component: () => import("@/views/shop/extend/extendorder"),
+						meta: {
+							title: "商品订单",
+							permissions: "extendorder"
+						}
+					}, {
+						path: "extendrefund",
+						name: "extendrefund",
+						component: () => import("@/views/shop/extend/extendrefund"),
+						meta: {
+							title: "退款订单",
+							permissions: "extendrefund"
+						}
+					},
+					{
+						path: "bonuspool",
+						name: "bonuspool",
+						component: () => import("@/views/shop/extend/bonuspool"),
+						meta: {
+							title: "奖金池",
+							permissions: "bonuspool"
+						}
+					},
+					{
+						path: "spellinglist",
+						name: "spellinglist",
+						component: () => import("@/views/shop/extend/spellinglist"),
+						meta: {
+							title: "拼单列表",
+							permissions: "spellinglist"
+						}
 					}
-				}, {
-					path: "extendtype",
-					name: "extendtype",
-					component: () => import("@/views/shop/extend/extendtype"),
-					meta: {
-						title: "商城分类",
-						permissions: "extendtype"
-					}
-				}, {
-					path: "extendorder",
-					name: "extendorder",
-					component: () => import("@/views/shop/extend/extendorder"),
-					meta: {
-						title: "商品订单",
-						permissions: "extendorder"
-					}
-				}, {
-					path: "extendrefund",
-					name: "extendrefund",
-					component: () => import("@/views/shop/extend/extendrefund"),
-					meta: {
-						title: "退款订单",
-						permissions: "extendrefund"
-					}
-				}]
+				]
 			},
 
 
@@ -812,6 +831,15 @@ export const asyncRoutes = [
 				meta: {
 					title: "手动添加租赁商",
 					permissions: "brokersta"
+				},
+			},
+			{
+				path: "spellsta",
+				name: "spellsta",
+				component: () => import("@/views/examine/spellsta"),
+				meta: {
+					title: "拼单审核",
+					permissions: "spellsta"
 				},
 			},
 			{

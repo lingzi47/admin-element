@@ -239,7 +239,27 @@ export default {
       this.getUserList();
     },
     search() {
-      this.getUserList();
+      let params = {
+        token: sessionStorage.getItem("token"),
+        page: 1,
+        pageSize: this.limit,
+        pay_status: this.pay_status,
+        userId: this.userId,
+        orderStatus: this.orderStatus,
+        orderIsRefund: this.orderIsRefund,
+        deviceCode: this.deviceCode,
+        orderPayStatus: this.orderPayStatus,
+        startTime: this.time[0],
+        endTime: this.time[1],
+        orderPayType: this.orderPayType,
+      };
+      readinfo(params).then((res) => {
+        console.log(res.data.data.data);
+        this.count = res.data.data.data.total;
+        console.log(this.count);
+        this.shoporder = res.data.data.data.dataList;
+        this.allprice = res.data.allprice;
+      });
     },
     getUserList() {
       let params = {
@@ -254,6 +274,7 @@ export default {
         orderPayStatus: this.orderPayStatus,
         startTime: this.time[0],
         endTime: this.time[1],
+        orderPayType: this.orderPayType,
       };
       readinfo(params).then((res) => {
         console.log(res.data.data.data);

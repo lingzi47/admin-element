@@ -18,7 +18,6 @@
             <el-option label="未通过" value="2"></el-option>
           </el-select>
         </el-form-item>
-
         <el-form-item label="时间" prop="time">
           <el-date-picker
             v-model="time"

@@ -653,3 +653,27 @@ export const shareedit = (params) => request.post('manybox/shareedit',
 export const repList = (params) => request.post('adminApi/box/boxFinance/repList',
     params
 )
+//奖金池 列表manybox/boxpool
+export const boxpool = (params) => request.post('manybox/boxpool',
+    params
+)
+//启用
+export const isuse = (params) => request.post('/manybox/isuse',
+    params
+)
+//新增 /manybox/addpool
+export const addpool = (params) => request.post('/manybox/addpool',
+    params
+)
+//详情/manybox/logpool
+export const logpool = (params) => request.post('/manybox/logpool',
+    params
+)
+//拼单 列表 /manybox/tuilist
+export const tuilist = (params) => request.post('/manybox/tuilist',
+    params
+)
+//审核 manybox/tuiliststa
+export const tuiliststa = (params) => request.post('/manybox/tuiliststa',
+    params
+)

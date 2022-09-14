@@ -49,7 +49,7 @@
     </el-dialog>
     <el-dialog
       class="AddDialog"
-      :title="tittle + '级分润编辑'"
+      :title="tittle + '级分润' + til"
       :visible.sync="visable"
       width="800px"
       hegiht="1000px"
@@ -113,6 +113,7 @@ export default {
       dialogVisible: false,
       visable: false,
       tittle: "",
+      til: "",
       goodsForm: {
         number: "",
         profit: "",
@@ -137,6 +138,15 @@ export default {
   },
   created() {},
   mounted() {},
+  watch: {
+    type(newVal) {
+      if (newVal == 2) {
+        this.til = "编辑";
+      } else {
+        this.til = "添加";
+      }
+    },
+  },
   methods: {
     dataedit(row) {
       this.type = 2;
@@ -197,6 +207,7 @@ export default {
           }
         });
       } else {
+        console.log("现在不是编辑");
         this.$refs.goodsForm.validate(async (valid) => {
           if (valid) {
             let params = {
@@ -243,7 +254,7 @@ export default {
       this.$parent.tableshow();
     },
     add() {
-      this.typoe = 1;
+      this.type = 1;
       this.dialogVisible = false;
       this.visable = true;
     },

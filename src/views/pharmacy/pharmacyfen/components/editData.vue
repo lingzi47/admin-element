@@ -48,6 +48,12 @@
               >
             </el-form-item>
           </el-col>
+          <el-col :span="24">
+            <el-form-item label="其他分润:">
+              <el-input v-model="other_profit" style="width: 80px"></el-input
+              >%</el-form-item
+            >
+          </el-col>
         </el-row>
       </el-form>
 
@@ -77,6 +83,7 @@ export default {
       total_profit: "",
       input: "",
       input1: "",
+      other_profit: "",
       input3: "",
       tax: "",
       input2: "",
@@ -126,6 +133,7 @@ export default {
         this.tittle = "编辑";
         console.log(row);
         this.big_name = row.big_name;
+        this.other_profit = row.other_profit;
         this.id = row.id;
         if (row.share == 10) {
           this.radio = "10";
@@ -153,6 +161,7 @@ export default {
       this.input = "";
       this.input1 = "";
       this.input2 = "";
+      this.other_profit = "";
     },
 
     submitForm() {
@@ -174,6 +183,10 @@ export default {
         this.$message.error("税率不能为空");
         return;
       }
+      if (this.other_profit == "") {
+        this.$message.error("其他分润不能为空");
+        return;
+      }
 
       let token = sessionStorage.getItem("token");
       this.token = token;
@@ -183,6 +196,7 @@ export default {
         share: this.radio,
         total_profit: this.total_profit,
         tax: this.tax,
+        other_profit: this.other_profit,
       };
       fenrunset(params).then((res) => {
         if (res.data.code == 200) {

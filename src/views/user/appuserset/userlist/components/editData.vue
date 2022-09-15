@@ -237,7 +237,7 @@ export default {
           this.pk_value_save = "";
           this.diamonds_save = "";
           this.pk_text = "";
-          diamonds_text = "";
+          this.diamonds_text = "";
         } else {
           this.$message(res.data.msg);
           this.$parent.getUserList();
@@ -246,7 +246,7 @@ export default {
           this.diamonds_save = "";
           this.overdue_time = "";
           this.pk_text = "";
-          diamonds_text = "";
+          this.diamonds_text = "";
         }
       });
     },

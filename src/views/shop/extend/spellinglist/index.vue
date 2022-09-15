@@ -232,7 +232,7 @@ export default {
         is_pin: this.is_pin,
         buy_type: this.buy_type,
         price: this.price,
-        page: this.page.page,
+        page: 1,
         limit: this.page.limit,
       };
       tuilist(params).then((res) => {

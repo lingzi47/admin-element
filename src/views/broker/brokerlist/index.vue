@@ -239,6 +239,7 @@
           <el-col :span="24">
             <el-form-item label="分润占比:" prop="share">
               <el-select
+                disabled
                 v-model="Form.share"
                 placeholder="请选择"
                 style="width: 100px"

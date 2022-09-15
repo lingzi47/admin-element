@@ -10,7 +10,6 @@
             placeholder="请输入设备租赁号"
           ></el-input>
         </el-form-item>
-
         <el-form-item label="推荐人id" prop="use_pid">
           <el-input
             style="width: 180px"

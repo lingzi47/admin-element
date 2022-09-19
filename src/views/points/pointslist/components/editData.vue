@@ -72,20 +72,34 @@
               >
             </el-form-item></el-col
           >
-          <el-col :span="24">
-            <el-form-item
-              label="渠道商id:"
-              prop="position_user"
-              v-if="this.ruleForm.type == 20"
-            >
+          <el-col :span="24" v-if="this.ruleForm.type == 20">
+            <el-form-item v-for="(v, k) in list" :key="k">
+              <span> 渠道商{{ k + 1 }}id:</span>
+
               <el-input
-                v-model="ruleForm.position_user"
-                style="width: 180px"
-                placeholder="请输入渠道商id"
+                v-model="v.position_user"
+                style="width: 150px"
+                placeholder="请输入"
               ></el-input>
+
+              <el-button
+                type="primary"
+                style="margin-left: 10px"
+                size="mini"
+                v-if="k == list.length - 1"
+                @click="insert"
+                >+</el-button
+              >
+              <el-button
+                type="danger"
+                size="mini"
+                v-if="k !== 0"
+                @click="remove(k)"
+                >-</el-button
+              >
             </el-form-item>
           </el-col>
-          <el-col :span="10">
+          <el-col :span="15">
             <el-form-item label="物业名称">
               <el-input
                 v-model="property"
@@ -245,7 +259,7 @@ export default {
       peopleall: "",
       house_price: "",
       remarks: "",
-
+      list: [{ position_user: "" }],
       check: false,
       token: "",
       isDisable: false,
@@ -292,6 +306,13 @@ export default {
   },
   mounted() {},
   methods: {
+    insert() {
+      this.user = { position_user: "" };
+      this.list.push(this.user);
+    },
+    remove(index) {
+      this.list.splice(index, 1);
+    },
     setData(data) {
       data.map((item) => {
         item["value"] = item.code;
@@ -368,16 +389,29 @@ export default {
         this.ruleForm.type = row.type;
         this.ruleForm.year = row.due_time;
         this.ruleForm.details = row.details;
-        // this.ruleForm.value1 = "";
+        this.ruleForm.position_user = row.position_user;
+
+        let arr = this.ruleForm.position_user.split(",");
+        console.log(arr);
+        var obj = {};
+        // 将数组转化为对象
+        for (let key in arr) {
+          obj[key] = arr[key];
+        }
+        let newObj = Object.keys(obj).map((val) => ({
+          position_user: obj[val],
+        }));
+        console.log(newObj);
+        this.list = newObj;
         if (row.due_time == "2099-01-01 00:00:00") {
           this.isDisable = true;
           this.ruleForm.year = row.due_time;
-          this.ruleForm.position_user = row.position_user;
+
           this.check = true;
           console.log("被选中");
         } else {
           console.log(111);
-          this.ruleForm.position_user = row.position_user;
+
           this.ruleForm.year = row.due_time;
         }
         let arr1 = [];
@@ -397,7 +431,7 @@ export default {
     close() {
       this.dialogVisible = false;
       this.ruleForm.type = "";
-      this.ruleForm.position_user = "";
+      this.list = [{ position_user: "" }];
       this.ruleForm.year = "";
       this.ruleForm.details = "";
       this.isDisable = false;
@@ -425,8 +459,23 @@ export default {
           if (valid) {
             let token = sessionStorage.getItem("token");
             this.token = token;
+            var that = this;
+            let flag = that.list.every((item) => !!item.position_user);
+            if (!flag) {
+              this.$message.error("渠道商id不能为空");
+              return;
+            }
+            let res = "";
+            for (let i = 0; i < this.list.length; i++) {
+              res += this.list[i].position_user + ",";
+            }
+            if (res.length > 0) {
+              res = res.substr(0, res.length - 1);
+            }
+
+            console.log(res);
             let params = {
-              position_user: this.ruleForm.position_user,
+              position_user: res,
               type: this.ruleForm.type,
               due_time: this.ruleForm.year,
               token: sessionStorage.getItem("token"),
@@ -468,10 +517,25 @@ export default {
       } else {
         this.$refs.ruleForm.validate(async (valid) => {
           if (valid) {
+            var that = this;
+            let flag = that.list.every((item) => !!item.position_user);
+            if (!flag) {
+              this.$message.error("渠道商id不能为空");
+              return;
+            }
+            let res = "";
+            for (let i = 0; i < this.list.length; i++) {
+              res += this.list[i].position_user + ",";
+            }
+            if (res.length > 0) {
+              res = res.substr(0, res.length - 1);
+            }
+
+            console.log(res);
             let token = sessionStorage.getItem("token");
             this.token = token;
             let params = {
-              position_user: this.ruleForm.position_user,
+              position_user: res,
               type: this.ruleForm.type,
               due_time: this.ruleForm.year,
               token: sessionStorage.getItem("token"),

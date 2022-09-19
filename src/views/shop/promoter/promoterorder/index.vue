@@ -217,7 +217,7 @@ export default {
     dao() {
       console.log(this.token);
       console.log(
-        " https://y4.wjw.cool/adminApi/order/export" +
+        "https://y4.wjw.cool/adminApi/order/export" +
           "?token=" +
           this.token +
           "&uid=" +
@@ -226,7 +226,7 @@ export default {
           this.form.nickname
       );
       window.location.href =
-        " https://y4.wjw.cool/adminApi/order/export" +
+        "https://y4.wjw.cool/adminApi/order/export" +
         "?token=" +
         this.token +
         "&uid=" +

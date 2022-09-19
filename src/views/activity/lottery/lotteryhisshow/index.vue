@@ -39,9 +39,9 @@ export default {
   },
   created() {
     this.luckjson = this.$route.query.list;
-    //console.log(this.luckjson);
+    console.log(this.luckjson);
     var jsonObj = JSON.parse(this.luckjson);
-    //console.log(jsonObj);
+    console.log(jsonObj);
     this.list = jsonObj;
   },
   computed: {},

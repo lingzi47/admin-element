@@ -3,13 +3,23 @@
     <p>钻石新增统计</p>
     <div class="block-quote">
       <el-form :inline="true">
-    
+        <el-form-item label="充值时间" prop="time">
+          <el-date-picker
+            v-model="time"
+            type="daterange"
+            value-format="yyyy-MM-dd HH:mm:ss"
+            range-separator="至"
+            start-placeholder="开始日期"
+            end-placeholder="结束日期"
+          >
+          </el-date-picker>
+        </el-form-item>
         <el-form-item>
           <el-button
             v-if="checkPermission('usersearch')"
             type="primary"
             icon="el-icon-search"
-            @click="serch"
+            @click="serch1"
             >查询</el-button
           >
         </el-form-item>
@@ -152,6 +162,31 @@ export default {
       this.getUserList();
     },
     serch() {
+      let token = sessionStorage.getItem("token");
+      this.token = token;
+      let params = {
+        page: 1,
+        limit: this.page.pageSize,
+        token: sessionStorage.getItem("token"),
+        nickname: this.nickname,
+        uid: this.uid,
+
+        s_time: this.time[0],
+        e_time: this.time[1],
+        s_re_time: this.timee[0],
+        e_re_time: this.timee[1],
+      };
+      diamonds(params).then((res) => {
+        this.page.total = res.data.data.total;
+        this.userList = res.data.data.data;
+        this.price = res.data.count.price;
+        this.num = res.data.count.num;
+        this.$refs.dataTable.setPageInfo({
+          total: this.page.total,
+        });
+      });
+    },
+    serch1() {
       let token = sessionStorage.getItem("token");
       this.token = token;
       let params = {

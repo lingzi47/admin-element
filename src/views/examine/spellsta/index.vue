@@ -126,7 +126,7 @@ export default {
       ex_status: "1",
       buy_time: "",
       userList: [], // 列表
-
+      sum: 1,
       page: {
         //分页信息
         page: 1, //当前页
@@ -149,7 +149,6 @@ export default {
   computed: {},
   methods: {
     submitForm() {
-      //console.log("成功");
       let params = {
         token: sessionStorage.getItem("token"),
         sta: 20,
@@ -158,9 +157,11 @@ export default {
       tuiliststa(params).then((res) => {
         if (res.data.code == 200) {
           this.$message.success("操作成功");
-          this.dialogVisible = false;
           this.getUserList();
+        } else {
+          this.$message.error(res.data.msg);
         }
+        this.dialogVisible = false;
       });
     },
 

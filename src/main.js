@@ -25,6 +25,26 @@ import './mock'
 // 	router.push('/login')
 // 	return Promise.reject(error)
 // })
+//全局防抖
+const on = Vue.prototype.$on
+Vue.prototype.$on = function (event, func) {
+	let timer;
+	let flag = true;
+	let newFunc = func
+	if (event == 'click') {
+		newFunc = function () {
+			if (flag) {
+				func.apply(this, arguments)
+				flag = false
+			}
+			clearTimeout(timer)
+			timer = setTimeout(function () {
+				flag = true
+			}, 500)
+		}
+	}
+	on.call(this, event, newFunc)
+}
 new Vue({
 	router,
 	store,

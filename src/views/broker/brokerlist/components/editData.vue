@@ -370,10 +370,12 @@ export default {
             if (!flag) {
               this.$message.error("租赁商id不能为空");
               return;
-            } else if (!flag1) {
+            }
+            if (!flag1) {
               this.$message.error("手机号不能为空");
               return;
-            } else if (!flag2) {
+            }
+            if (!flag2) {
               this.$message.error("分润占比不能为空");
               return;
             }

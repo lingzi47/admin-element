@@ -2,7 +2,7 @@
   <div>
     <el-dialog
       class="AddDialog"
-      title="绑定"
+      :title="this.typeid == 1 ? '绑定' : '修改绑定'"
       :visible.sync="dialogVisible"
       width="800px"
       hegiht="1000px"
@@ -31,13 +31,13 @@
               {{ create_time }}--{{ due_time }}
             </el-form-item>
           </el-col>
-          <el-col :span="10">
+          <el-col :span="24">
             <el-form-item label="点位来源:"> {{ type }}</el-form-item>
           </el-col>
-          <el-col :span="10">
+          <el-col :span="24">
             <el-form-item label="渠道商id:">{{ position_user }} </el-form-item>
           </el-col>
-          <el-col :span="24">
+          <el-col :span="12">
             <el-form-item label="设备编号:" prop="box_number">
               <el-input
                 v-model="goodsForm.box_number"
@@ -46,7 +46,17 @@
               ></el-input>
             </el-form-item>
           </el-col>
-          <el-col :span="10">
+          <el-col :span="12">
+            <el-form-item label="设备租赁号:" prop="box_name">
+              <el-input
+                :disabled="disable"
+                v-model="goodsForm.box_name"
+                style="width: 180px"
+                placeholder="请输入设备租赁号"
+              ></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
             <el-form-item label="绑定设备供货药房:" prop="value1">
               <el-cascader
                 style="width: 250px"
@@ -59,12 +69,12 @@
               ></el-cascader>
             </el-form-item>
           </el-col>
-          <el-col :span="10">
+          <el-col :span="16">
             <el-form-item prop="officina_id">
               <el-select
                 v-model="name"
                 placeholder="请选择药房"
-                style="width: 160px"
+                style="width: 150px"
                 clearable
                 @change="change1"
               >
@@ -78,7 +88,7 @@
               <el-select
                 v-model="goodsForm.officina_id"
                 placeholder="请选择药房"
-                style="width: 160px"
+                style="width: 150px"
                 clearable
               >
                 <el-option
@@ -90,15 +100,57 @@
               </el-select>
             </el-form-item>
           </el-col>
-
           <el-col :span="24">
-            <el-form-item label="设备租赁号:" prop="box_name">
+            <el-form-item label="绑定分润:"></el-form-item>
+          </el-col>
+          <el-col :span="24">
+            <el-form-item
+              label="渠道商:"
+              style="margin-left: -60px"
+            ></el-form-item>
+          </el-col>
+          <el-col
+            v-if="type == '渠道商'"
+            style="margin-left: -50px; margin-top: -61px"
+            :span="24"
+          >
+            <el-form-item v-for="(v, k) in position" :key="k" prop="tel">
+              <span>账号{{ k + 1 }}</span>
+              绑定身份:
               <el-input
-                :disabled="disable"
-                v-model="goodsForm.box_name"
-                style="width: 180px"
-                placeholder="请输入设备租赁号"
+                v-model="v.name"
+                style="width: 80px"
+                placeholder="请输入"
               ></el-input>
+              绑定id:
+              <el-input
+                v-model="v.uid"
+                style="width: 80px"
+                placeholder="请输入"
+              ></el-input>
+
+              分润占比:
+              <el-input
+                v-model="v.value"
+                style="width: 80px"
+                placeholder="请输入"
+              ></el-input
+              >%
+              <el-button
+                type="primary"
+                style="margin-left: 10px"
+                size="mini"
+                v-if="k == position.length - 1"
+                @click="insert"
+                >+</el-button
+              >
+              <el-button
+                type="danger"
+                size="mini"
+                v-if="k !== 0 && typeid == 1"
+                @click="remove(k)"
+                >-</el-button
+              >
             </el-form-item>
           </el-col>
         </el-row>
@@ -144,11 +196,14 @@ export default {
       type: "",
       details: "",
       create_time: "",
+      position: [{ id: "", name: "", uid: "", value: "" }],
+      user: { id: "", uid: "", name: "", value: "" },
       list: [],
       list1: [],
       value1: "",
       typeid: "",
       position_user: "",
+      sum: "",
       type: "", //1新增，2编辑
       dialogVisible: false,
 
@@ -179,6 +234,13 @@ export default {
   },
   mounted() {},
   methods: {
+    insert() {
+      this.user = { id: "", name: "", uid: "", value: "" };
+      this.position.push(this.user);
+    },
+    remove(index) {
+      this.position.splice(index, 1);
+    },
     huolist1() {
       let params = {
         //big_name 改4
@@ -228,7 +290,7 @@ export default {
       });
     },
     show(type, row) {
-      // console.log(type);
+      console.log(type);
       this.typeid = type;
       console.log(row);
       if (row.type == 20) {
@@ -256,10 +318,10 @@ export default {
         this.goodsForm.box_number = row.box_number;
         this.id = row.id;
         this.name = row.big_name;
-        // console.log(row.officina_id);
+        this.position = row.position;
+
         this.goodsForm.officina_id = String(row.officina_id);
-        // console.log(this.goodsForm.officina_id);
-        // console.log(row);
+        this.sum = String(row.total_profit);
         let arr1 = [];
         arr1.push(row.yaoprovince);
         arr1.push(row.yaocity);
@@ -269,6 +331,7 @@ export default {
         this.officinaarea = row.yaoarea;
         console.log(arr1);
         this.value1 = arr1;
+
         let params = {
           token: sessionStorage.getItem("token"),
           province: this.officinaprovince,
@@ -290,6 +353,7 @@ export default {
       this.list = [];
       this.list1 = [];
       this.name = "";
+      this.position = [{ id: "", uid: "", name: "", value: "" }];
     },
     checked() {
       console.log(11);
@@ -301,6 +365,35 @@ export default {
       if (this.typeid == 1) {
         this.$refs.goodsForm.validate(async (valid) => {
           if (valid) {
+            let sum = 0;
+            this.position.forEach((item) => {
+              //遍历prodAllPrice这个字段，并累加
+              sum += Number(item.value);
+            });
+            console.log(sum);
+            if (sum > this.sum) {
+              this.$message.error("分润占比超过最大");
+              return;
+            }
+            var that = this;
+            let flag = that.position.every((item) => !!item.uid);
+            let flag1 = that.position.every((item) => !!item.name);
+            let flag2 = that.position.every((item) => !!item.value);
+            if (!flag) {
+              this.$message.error("绑定id不能为空");
+              return;
+            }
+            if (!flag1) {
+              this.$message.error("绑定身份不能为空");
+              return;
+            }
+            if (!flag2) {
+              this.$message.error("分润占比不能为空");
+              return;
+            }
+            var formdata = this.position;
+            let json = JSON.stringify(formdata);
+            console.log(json);
             let token = sessionStorage.getItem("token");
             this.token = token;
             let params = {
@@ -309,6 +402,7 @@ export default {
               box_number: this.goodsForm.box_number,
               position_id: this.id,
               officina_id: this.goodsForm.officina_id,
+              position: json,
             };
             bind(params).then((res) => {
               if (res.data.code == 200) {
@@ -328,6 +422,35 @@ export default {
       } else {
         this.$refs.goodsForm.validate(async (valid) => {
           if (valid) {
+            let sum = 0;
+            this.position.forEach((item) => {
+              //遍历prodAllPrice这个字段，并累加
+              sum += Number(item.value);
+            });
+            console.log(sum);
+            if (sum > this.sum) {
+              this.$message.error("分润占比超过最大");
+              return;
+            }
+            var that = this;
+            let flag = that.position.every((item) => !!item.uid);
+            let flag1 = that.position.every((item) => !!item.name);
+            let flag2 = that.position.every((item) => !!item.value);
+            if (!flag) {
+              this.$message.error("绑定id不能为空");
+              return;
+            }
+            if (!flag1) {
+              this.$message.error("绑定身份不能为空");
+              return;
+            }
+            if (!flag2) {
+              this.$message.error("分润占比不能为空");
+              return;
+            }
+            var formdata = this.position;
+            let json = JSON.stringify(formdata);
+            console.log(json);
             let token = sessionStorage.getItem("token");
             this.token = token;
             let params = {
@@ -337,6 +460,7 @@ export default {
               position_id: this.id,
               id: this.goodsForm.bind_id,
               officina_id: this.goodsForm.officina_id,
+              position: json,
             };
             bindedit(params).then((res) => {
               if (res.data.code == 200) {

@@ -53,17 +53,14 @@
           <span>{{ scope.row.big_name }}</span>
         </template>
       </el-table-column>
-
       <el-table-column prop="num" label="合作药箱数" align="center">
       </el-table-column>
-
       <el-table-column label="是否设置分润" align="center">
         <template slot-scope="scope">
           <el-link type="danger" v-if="scope.row.share == null">否</el-link>
           <el-link type="success" v-else>是</el-link>
         </template>
       </el-table-column>
-
       <el-table-column label="分润模式" align="center">
         <template slot-scope="scope">
           <el-link v-if="scope.row.share == 10">设备总流水</el-link>
@@ -71,7 +68,6 @@
           <el-link type="danger" v-if="scope.row.share == null">暂无</el-link>
         </template>
       </el-table-column>
-
       <el-table-column label="操作" align="center" width="350">
         <template slot-scope="scope">
           <el-link

@@ -311,6 +311,7 @@ export default {
         this.userList = res.data.data;
         this.$refs.dataTable.setPageInfo({
           total: this.page.total,
+          // page: 1,
         });
       });
     },

@@ -434,13 +434,11 @@ export default {
         //console.log(res.data.data.member_count);
         this.arr = res.data.data.member_count;
         this.page.total = res.data.data.total;
-        //console.log(res.data.data.total);
-        //console.log("总条数", this.page.total);
-        // this.page.currentPage = res.data.data.current_page;
-        //console.log(res.data.data.current_page);
+
         this.userList = res.data.data.data;
         this.$refs.dataTable.setPageInfo({
           total: this.page.total,
+          // page: 1,
         });
       });
     },
@@ -461,6 +459,7 @@ export default {
         //console.log(res.data.data.member_count);
         this.arr = res.data.data.member_count;
         this.page.total = res.data.data.total;
+
         //console.log(res.data.data.total);
         //console.log("总条数", this.page.total);
         // this.page.currentPage = res.data.data.current_page;

@@ -113,7 +113,7 @@ export default {
     },
 
     handleClick(row) {
-      //console.log(row);
+      console.log(row);
       this.$router.push({
         path: "/lotteryhisshow",
         query: {

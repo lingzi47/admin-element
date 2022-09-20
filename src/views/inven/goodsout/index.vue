@@ -2,64 +2,67 @@
   <div class="user">
     <div class="block-quote">
       <el-form :inline="true">
-        <el-form-item label="机器编号" prop="name">
+        <el-form-item label="商品编号" prop="name">
           <el-input
             style="width: 180px"
             v-model="number"
             clearable
-            placeholder="请输入药房名称"
+            placeholder="请输入商品编号"
           ></el-input>
         </el-form-item>
-        <el-form-item label="药房位置">
-          <el-cascader
-            v-model="value"
-            :options="areaArr"
-            :props="{ value: 'name', label: 'name' }"
-            placeholder="请选择省市区"
-            filterable
-            @change="change1"
-          ></el-cascader>
-
-          <el-form-item prop="officina_id">
-            <el-select
-              v-model="name"
-              placeholder="请选择药房"
-              style="width: 160px"
-              clearable
-            >
-              <el-option
-                v-for="item in list"
-                :value="item.big_name"
-                :key="item.big_name"
-                :label="item.big_name"
-              ></el-option>
-            </el-select>
-            <el-select
-              v-model="officina_id"
-              placeholder="请选择药房"
-              style="width: 160px"
-              clearable
-            >
-              <el-option
-                v-for="item in list1"
-                :value="item.id"
-                :key="item.id"
-                :label="item.name"
-              ></el-option>
-            </el-select>
-          </el-form-item>
+        <el-form-item label="商品名称" prop="name">
+          <el-input
+            style="width: 180px"
+            v-model="number"
+            clearable
+            placeholder="请输入商品名称"
+          ></el-input>
         </el-form-item>
-        <el-form-item label="缺货状态" prop="type">
-          <el-select v-model="sta" placeholder="请选择" style="width: 150px">
+        <el-form-item label="出库单号" prop="name">
+          <el-input
+            style="width: 180px"
+            v-model="number"
+            clearable
+            placeholder="请输入出库单号"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="标签" prop="name">
+          <el-input
+            style="width: 180px"
+            v-model="number"
+            clearable
+            placeholder="请输入标签"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="出库状态" prop="status">
+          <el-select
+            v-model="number"
+            placeholder="请选择出库状态"
+            style="width: 150px"
+          >
             <el-option label="全部状态" value=""></el-option>
-            <el-option label="是" value="30"></el-option>
-            <el-option label="否" value="20"></el-option>
+            <el-option label="已通过" value="20"></el-option>
+            <el-option label="待审核" value="10"></el-option>
+            <el-option label="未通过" value="30"></el-option>
           </el-select>
+        </el-form-item>
+        <el-form-item label="审核时间" prop="time">
+          <el-date-picker
+            v-model="time"
+            type="daterange"
+            value-format="yyyy-MM-dd HH:mm:ss"
+            range-separator="至"
+            start-placeholder="开始日期"
+            end-placeholder="结束日期"
+          >
+          </el-date-picker>
         </el-form-item>
         <el-form-item style="float: right">
           <el-button type="primary" icon="el-icon-search" @click="searchinfo"
             >搜索</el-button
           >
+          <el-button type="primary" @click="add">新增</el-button>
+          <el-button type="primary" @click="dao">导出</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -75,33 +78,21 @@
           }}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="number" label="设备编号" align="center">
+      <el-table-column prop="number" label="出库单号" align="center">
       </el-table-column>
-      <el-table-column label="设备位置" align="center">
-        <template slot-scope="scope">
-          <span
-            >{{ scope.row.eprovince }}-{{ scope.row.ecity }}-{{
-              scope.row.earea
-            }}</span
-          >
-        </template>
+      <el-table-column prop="number" label="出库备注" align="center">
+      </el-table-column>
+      <el-table-column prop="number" label="数量" align="center">
+      </el-table-column>
+      <el-table-column prop="number" label="标签" align="center">
+      </el-table-column>
+      <el-table-column prop="number" label="出库状态" align="center">
+      </el-table-column>
+      <el-table-column prop="number" label="备注" align="center">
+      </el-table-column>
+      <el-table-column prop="number" label="审核时间" align="center">
       </el-table-column>
 
-      <el-table-column prop="create_time" label="设备供货药房" align="center">
-        <template slot-scope="scope">
-          <span
-            >{{ scope.row.dprovince }}-{{ scope.row.dcity }}-{{
-              scope.row.darea
-            }}-{{ scope.row.dbig_name }}-{{ scope.row.dname }}</span
-          >
-        </template>
-      </el-table-column>
-      <el-table-column label="是否缺货" align="center">
-        <template slot-scope="scope">
-          <el-link type="success" v-if="scope.row.sta == 20">否</el-link>
-          <el-link type="danger" v-if="scope.row.sta == 30">是</el-link>
-        </template>
-      </el-table-column>
       <el-table-column label="操作" align="center" width="350">
         <template slot-scope="scope">
           <el-link
@@ -110,14 +101,20 @@
             style="margin-left: 10px"
             >查看</el-link
           >
-          <el-link @click="dao(scope.row)" style="margin-left: 10px"
-            >导出</el-link
+          <el-link @click="edit(scope.row)" style="margin-left: 10px"
+            >编辑</el-link
+          >
+          <el-link
+            type="danger"
+            style="margin-left: 10px"
+            @click="deleteData(scope.row)"
+            >删除</el-link
           >
         </template>
       </el-table-column>
     </page-table>
     <!-- 新增编辑弹窗 -->
-
+    <edit-data ref="editData" />
     <up-set ref="upSet" />
   </div>
 </template>
@@ -129,12 +126,14 @@ import pageTable from "@/components/pageTable.vue";
 import { areaListData } from "@/utils/area";
 
 import upSet from "./components/upSet.vue";
+import editData from "./components/editData.vue";
 export default {
   name: "user",
   components: {
     pageTable,
 
     upSet,
+    editData,
   },
   data() {
     return {
@@ -164,55 +163,24 @@ export default {
     };
   },
   watch: {
-    name(newVal) {
-      console.log(newVal);
-      this.huolist1();
+    time(newVal) {
+      if (newVal == null) {
+        this.time = [];
+      }
     },
   },
   created() {
     this.token = sessionStorage.getItem("token");
     this.getUserList(); //获取用户列表
-    this.setData(areaListData());
-    this.areaArr = areaListData();
   },
   mounted() {},
   computed: {},
   methods: {
-    setData(data) {
-      data.map((item) => {
-        item["value"] = item.code;
-        item["label"] = item.name;
-        if (item.children) {
-          this.setData(item.children);
-        }
-      });
-    },
-    huolist1() {
-      //big_name 改5
-      let params = {
-        token: sessionStorage.getItem("token"),
-        big_name: this.name,
-        province: this.province,
-        city: this.city,
-        area: this.area,
-      };
-      officinalist(params).then((res) => {
-        console.log(res.data.data);
-        this.list1 = res.data.data;
-      });
-    },
     dao(row) {
       console.log(row);
       this.num = row.number;
       console.log(this.num);
-      console.log(
-        (window.location.href =
-          "https://y4.wjw.cool/admin/box/expOfficina" +
-          "?token=" +
-          this.token +
-          "&number=" +
-          this.num)
-      );
+
       window.location.href =
         "https://y4.wjw.cool/admin/box/expOfficina" +
         "?token=" +
@@ -220,28 +188,38 @@ export default {
         "&number=" +
         this.num;
     },
-    change1(data) {
-      console.log(data);
-      this.province = data[0];
-      this.city = data[1];
-      this.area = data[2];
-      this.get();
-    },
-    get() {
-      let params = {
-        token: sessionStorage.getItem("token"),
-        province: this.province,
-        city: this.city,
-        area: this.area,
-      };
-      officinalist(params).then((res) => {
-        console.log(res.data.data);
-        this.list = res.data.data;
-      });
-    },
+
     showtable(row) {
       let rowData = row;
       this.$refs.upSet.show(JSON.parse(JSON.stringify(rowData)));
+    },
+    edit(row) {
+      let rowData = row;
+      this.$refs.editData.show(2, JSON.parse(JSON.stringify(rowData)));
+    },
+    add() {
+      this.$refs.editData.show(1, {});
+    },
+    deleteData(row) {
+      console.log(row);
+      this.$confirm("是否删除此信息？", "提示", {
+        type: "warning",
+      })
+        .then(async () => {
+          //console.log(id);
+          let params = {
+            token: sessionStorage.getItem("token"),
+            id: row.id,
+          };
+          delLevel(params).then((res) => {
+            //console.log(res.data);
+            if (res.data.code == 200) {
+              this.tableshow();
+              this.$message.success("删除成功");
+            }
+          });
+        })
+        .catch(() => {});
     },
     checkPermission,
     // 切换分页

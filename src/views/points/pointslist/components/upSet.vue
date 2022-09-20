@@ -90,6 +90,7 @@
                 placeholder="请选择药房"
                 style="width: 150px"
                 clearable
+                @change="chan"
               >
                 <el-option
                   v-for="item in list1"
@@ -264,6 +265,17 @@ export default {
         }
       });
     },
+    chan(id) {
+      console.log(id);
+
+      console.log(this.list1.findIndex((item) => item.id == id));
+      let index = this.list1.findIndex((item) => item.id == id);
+      console.log(index);
+      console.log(this.list1[index]);
+      let obj = this.list1[index];
+      this.sum = String(obj.total_profit);
+      console.log(this.sum);
+    },
     change1(data) {
       console.log(data);
       this.goodsForm.officina_id = "";
@@ -295,6 +307,7 @@ export default {
       console.log(row);
       if (row.type == 20) {
         this.type = "渠道商";
+        this.position = row.position;
       } else {
         this.type = "公司";
       }
@@ -321,7 +334,7 @@ export default {
         this.position = row.position;
 
         this.goodsForm.officina_id = String(row.officina_id);
-        this.sum = String(row.total_profit);
+
         let arr1 = [];
         arr1.push(row.yaoprovince);
         arr1.push(row.yaocity);

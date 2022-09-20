@@ -1506,14 +1506,60 @@ export const asyncRoutes = [
 			permissions: "inven"
 		},
 		children: [{
-			path: "invenlist",
-			name: "invenlist",
-			component: () => import("@/views/inven/invenlist"),
-			meta: {
-				title: "库存管理",
-				permissions: "invenlist"
+				path: "invenlist",
+				name: "invenlist",
+				component: () => import("@/views/inven/invenlist"),
+				meta: {
+					title: "库存管理",
+					permissions: "invenlist"
+				},
 			},
-		}, ],
+			{
+				path: "goodsinvenlist",
+				name: "goodsinvenlist",
+				component: () => import("@/views/inven/goodsinvenlist"),
+				meta: {
+					title: "商品库存",
+					permissions: "goodsinvenlist"
+				},
+			},
+			{
+				path: "goodsstorage",
+				name: "goodsstorage",
+				component: () => import("@/views/inven/goodsstorage"),
+				meta: {
+					title: "商品入库",
+					permissions: "goodsstorage"
+				},
+			},
+			{
+				path: "goodsout",
+				name: "goodsout",
+				component: () => import("@/views/inven/goodsout"),
+				meta: {
+					title: "商品出库",
+					permissions: "goodsout"
+				},
+			},
+			{
+				path: "goodsset",
+				name: "goodsset",
+				component: () => import("@/views/inven/goodsset"),
+				meta: {
+					title: "商品管理",
+					permissions: "goodsset"
+				},
+			},
+			{
+				path: "labelset",
+				name: "labelset",
+				component: () => import("@/views/inven/labelset"),
+				meta: {
+					title: "标签管理",
+					permissions: "labelset"
+				},
+			},
+		],
 	},
 	{
 		path: "/day",

@@ -195,7 +195,6 @@ export default {
         token: sessionStorage.getItem("token"),
         nickname: this.nickname,
         uid: this.uid,
-
         s_time: this.time[0],
         e_time: this.time[1],
         s_re_time: this.timee[0],

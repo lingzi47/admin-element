@@ -507,7 +507,7 @@ export default {
       } else {
         window.location.href =
           "https://y4.wjw.cool/shopadmin/exportOrder" +
-          +"?token=" +
+          "?token=" +
           this.token +
           "&shop_type=" +
           1 +

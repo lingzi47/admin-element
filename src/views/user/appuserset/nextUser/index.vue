@@ -146,6 +146,19 @@
         :resizable="false"
       ></el-table-column>
       <el-table-column
+        label="所属团队"
+        align="center"
+        width="100"
+        :resizable="false"
+      >
+        <template slot-scope="scope">
+          <el-link v-if="scope.row.team == 1">全国</el-link>
+          <el-link v-if="scope.row.team == 2">大连</el-link>
+          <el-link v-if="scope.row.team == 3">大庆</el-link>
+          <el-link type="danger" v-if="scope.row.team == null">暂无</el-link>
+        </template></el-table-column
+      >
+      <el-table-column
         prop="created_at"
         label="注册时间"
         align="center"
@@ -170,7 +183,7 @@
           />
         </template>
       </el-table-column>
-      <el-table-column
+      <!-- <el-table-column
         prop="zisu_lv"
         label="紫苏等级"
         align="center"
@@ -210,7 +223,7 @@
             @change="changeZisu(scope.row)"
           />
         </template>
-      </el-table-column>
+      </el-table-column> -->
       <el-table-column
         fixed="right"
         label="操作"

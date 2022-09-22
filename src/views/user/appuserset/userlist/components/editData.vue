@@ -53,6 +53,21 @@
               </el-form-item></div
           ></el-col>
           <el-col :span="12"
+            ><div class="grid-content bg-purple">
+              <el-form-item label="所属团队" prop="team">
+                <el-select
+                  style="width: 180px"
+                  v-model="team"
+                  clearable
+                  placeholder="请选择所属团队"
+                >
+                  <el-option label="全国" :value="1"></el-option>
+                  <el-option label="大连" :value="2"></el-option>
+                  <el-option label="大庆" :value="3"></el-option>
+                </el-select>
+              </el-form-item></div
+          ></el-col>
+          <el-col :span="12"
             ><div class="grid-content bg-purple-light">
               <el-form-item label="用户上级">
                 <el-input v-model="pid"></el-input
@@ -139,6 +154,7 @@ export default {
       id: "",
       userid: "",
       imageUrl: "",
+      team: "",
       pk_text: "",
       diamonds_text: "",
       token: "",
@@ -156,6 +172,13 @@ export default {
           {
             required: true,
             message: "请选择用户身份",
+            trigger: "blur",
+          },
+        ],
+        team: [
+          {
+            required: true,
+            message: "请选择所属团队",
             trigger: "blur",
           },
         ],
@@ -198,6 +221,7 @@ export default {
         this.diamonds = res.data.data.diamonds;
         this.member = res.data.data.member;
         this.id = res.data.data.id;
+        this.team = res.data.data.team;
         this.overdue_time = res.data.data.overdue_time;
         this.pid = res.data.data.pid;
       });
@@ -227,6 +251,7 @@ export default {
         pk_text: this.pk_text,
         member: this.member,
         pid: this.pid,
+        team: this.team,
         overdue_time: this.overdue_time,
       };
       edituser(params, id).then((res) => {
@@ -235,6 +260,7 @@ export default {
           this.$parent.getUserList();
           this.dialogVisible = false;
           this.pk_value_save = "";
+          this.team = "";
           this.diamonds_save = "";
           this.pk_text = "";
           this.diamonds_text = "";
@@ -244,6 +270,7 @@ export default {
           this.dialogVisible = false;
           this.pk_value_save = "";
           this.diamonds_save = "";
+          this.team = "";
           this.overdue_time = "";
           this.pk_text = "";
           this.diamonds_text = "";

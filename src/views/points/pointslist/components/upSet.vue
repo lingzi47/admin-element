@@ -404,9 +404,9 @@ export default {
               this.$message.error("分润占比不能为空");
               return;
             }
-            var formdata = this.position;
-            let json = JSON.stringify(formdata);
-            console.log(json);
+            // var formdata = this.position;
+            // let json = JSON.stringify(formdata);
+            // console.log(json);
             let token = sessionStorage.getItem("token");
             this.token = token;
             let params = {
@@ -415,7 +415,7 @@ export default {
               box_number: this.goodsForm.box_number,
               position_id: this.id,
               officina_id: this.goodsForm.officina_id,
-              position: json,
+              position: this.position,
             };
             bind(params).then((res) => {
               if (res.data.code == 200) {
@@ -461,9 +461,9 @@ export default {
               this.$message.error("分润占比不能为空");
               return;
             }
-            var formdata = this.position;
-            let json = JSON.stringify(formdata);
-            console.log(json);
+            // var formdata = this.position;
+            // let json = JSON.stringify(formdata);
+            // console.log(json);
             let token = sessionStorage.getItem("token");
             this.token = token;
             let params = {
@@ -473,7 +473,7 @@ export default {
               position_id: this.id,
               id: this.goodsForm.bind_id,
               officina_id: this.goodsForm.officina_id,
-              position: json,
+              position: this.position,
             };
             bindedit(params).then((res) => {
               if (res.data.code == 200) {

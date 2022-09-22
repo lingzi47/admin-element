@@ -111,12 +111,13 @@
                 v-model="item.lease_profit"
                 style="width: 50px"
               ></el-input
-              >% , 渠道商分润比例:<el-input
+              >%
+              <!-- , 渠道商分润比例:<el-input
                 :disabled="true"
                 v-model="item.channel_profit"
                 style="width: 50px"
               ></el-input
-              >%
+              >% -->
             </el-form-item>
           </el-col>
         </el-row>

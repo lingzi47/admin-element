@@ -104,11 +104,12 @@
                 v-model="item.lease_profit"
                 style="width: 80px"
               ></el-input
-              >% , 渠道商分润比例:<el-input
+              >%
+              <!-- , 渠道商分润比例:<el-input
                 v-model="item.channel_profit"
                 style="width: 80px"
               ></el-input
-              >%
+              >% -->
             </el-form-item>
           </el-col>
         </el-row>
@@ -281,7 +282,7 @@ export default {
       console.log(json);
       var that = this;
       let flag = that.list.every((item) => !!item.lease_profit);
-      let flag1 = that.list.every((item) => !!item.channel_profit);
+      // let flag1 = that.list.every((item) => !!item.channel_profit);
       let flag2 = that.list.every((item) => !!item.start_time);
       let flag3 = that.list.every((item) => !!item.end_time);
       if (!flag2) {
@@ -292,9 +293,6 @@ export default {
         return;
       } else if (!flag) {
         this.$message.error("租赁商分润不能为空");
-        return;
-      } else if (!flag1) {
-        this.$message.error("渠道商分润不能为空");
         return;
       } else {
         let token = sessionStorage.getItem("token");

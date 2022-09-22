@@ -341,7 +341,6 @@ export default {
     },
 
     ordercensus() {
-   
       //console.log(this.form.time);
       let token = sessionStorage.getItem("token");
       this.token = token;
@@ -365,7 +364,6 @@ export default {
       });
     },
     getUserList() {
-     
       //console.log(this.form.time);
       let token = sessionStorage.getItem("token");
       this.token = token;

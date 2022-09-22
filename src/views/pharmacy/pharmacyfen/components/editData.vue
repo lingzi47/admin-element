@@ -29,19 +29,7 @@
                   style="width: 100px"
                   :disabled="isDisable1"
                 ></el-input
-                >%税率的-
-                <el-input
-                  v-model="input"
-                  style="width: 100px"
-                  :disabled="isDisable1"
-                ></el-input
-                >%药房分润-
-                <el-input
-                  v-model="input2"
-                  style="width: 100px"
-                  :disabled="isDisable1"
-                ></el-input
-                >%渠道商,进行分润
+                >%税率
               </el-radio>
               <p style="margin-left: 150px"></p>
               <el-radio
@@ -56,26 +44,24 @@
                   :disabled="isDisable"
                 >
                 </el-input
-                >%税率的 - 药品成本-
-                <el-input
-                  v-model="inp2"
-                  style="width: 100px"
-                  :disabled="isDisable"
-                ></el-input
-                >%渠道商,进行分润</el-radio
-              >
+                >%税率的 - 药品成本
+              </el-radio>
             </el-form-item>
           </el-col>
           <el-col :span="4">
             <el-form-item label="收益分配:"></el-form-item
           ></el-col>
           <el-col :span="18">
-            <el-form-item label="公司占比:" style="margin-left: -50px">
-              <el-input v-model="firm" style="width: 80px"></el-input
+            <el-form-item label="渠道商分润:" style="margin-left: -50px">
+              <el-input v-model="total_profit" style="width: 80px"></el-input
               >%</el-form-item
             >
-            <el-form-item label="租赁商占比:" style="margin-left: -50px">
-              <el-input v-model="lessors" style="width: 80px"></el-input
+            <el-form-item
+              label="药房分润:"
+              style="margin-left: -50px"
+              v-if="radio == 10"
+            >
+              <el-input v-model="other_profit" style="width: 80px"></el-input
               >%</el-form-item
             >
           </el-col>
@@ -116,10 +102,8 @@ export default {
       firm: "",
       input: "",
       input1: "",
-      input2: "",
-      inp: "0",
+
       inp1: "",
-      inp2: "",
     };
   },
   created() {},
@@ -145,15 +129,12 @@ export default {
         this.isDisable1 = false;
         console.log("1解开2不能用");
         this.inp1 = "";
-        this.inp2 = "";
-        this.inp = 0;
       } else {
         this.isDisable = false;
         this.isDisable1 = true;
         console.log("2解开1不能用");
-        this.input = "";
+
         this.input1 = "";
-        this.input2 = "";
       }
     },
 
@@ -164,37 +145,19 @@ export default {
         this.tittle = "编辑";
         console.log(row);
         this.big_name = row.big_name;
-        if (row.firm == undefined) {
-          this.firm = "";
-        } else {
-          this.firm = row.firm;
-        }
-        if (row.lessors == undefined) {
-          this.lessors = "";
-        } else {
-          this.lessors = row.lessors;
-        }
-
+        this.total_profit = row.total_profit;
         this.id = row.id;
         if (row.share == 10) {
           this.radio = "10";
-          this.input2 = row.total_profit;
+          this.other_profit = row.other_profit;
           this.input1 = row.tax;
 
-          if (row.other_profit == undefined) {
-            this.input = "";
-            this.inp = 0;
-          } else {
-            this.input = row.other_profit;
-            this.inp = 0;
-          }
           this.isDisable = true;
         } else if (row.share == 20) {
           this.radio = "20";
           this.isDisable1 = true;
-          this.inp2 = row.total_profit;
+
           this.inp1 = row.tax;
-          this.inp = 0;
         } else {
         }
       } else {
@@ -208,42 +171,19 @@ export default {
       this.big_name = "";
       this.total_profit = "";
       this.tax = "";
-      this.input = "";
+      this.other_profit = "";
       this.input1 = "";
-      this.input2 = "";
-      this.inp = 0;
+
       this.inp1 = "";
-      this.inp2 = "";
-      this.firm = "";
-      this.lessors = "";
     },
 
     submitForm() {
-      console.log(this.firm);
-      if (this.firm == "") {
-        this.$message.error("公司占比不能为空");
-        return;
-      }
-      console.log(this.lessors);
-      if (this.lessors == "") {
-        this.$message.error("租赁商不能为空");
-        return;
-      }
       if (this.input1 == "") {
         this.tax = this.inp1;
       } else {
         this.tax = this.input1;
       }
-      if (this.input2 == "") {
-        this.total_profit = this.inp2;
-      } else {
-        this.total_profit = this.input2;
-      }
-      if (this.input == "") {
-        this.other_profit = 0;
-      } else {
-        this.other_profit = this.input;
-      }
+
       if (this.radio == "") {
         this.$message.error("请选择分润模式");
         return;
@@ -256,44 +196,47 @@ export default {
         this.$message.error("税率不能为空");
         return;
       }
-
-      if (this.other_profit === "") {
-        this.$message.error("药房分润不能为空");
-        console.log(this.other_profit);
-        return;
-      }
-      let a = Number(this.lessors) + Number(this.firm);
-      if (a === 100) {
-        let token = sessionStorage.getItem("token");
-        this.token = token;
-        let params = {
-          token: sessionStorage.getItem("token"),
-          big_name: this.big_name,
-          share: this.radio,
-          total_profit: this.total_profit,
-          tax: this.tax,
-          other_profit: this.other_profit,
-          lessors: this.lessors,
-          firm: this.firm,
-        };
-        fenrunset(params).then((res) => {
-          if (res.data.code == 200) {
-            this.$message.success("新增成功");
-            this.$parent.getUserList();
-            this.close();
-            this.isDisable = false;
-          } else {
-            this.$message.error(res.data.msg);
-            this.$parent.getUserList();
-            this.close();
-            this.isDisable = false;
-          }
-        });
-      } else if (a <= 100) {
-        this.$message.error("分润占比总和不能小于100%");
+      if (this.radio == 10) {
+        if (this.other_profit === "") {
+          this.$message.error("药房分润不能为空");
+          console.log(this.other_profit);
+          return;
+        }
       } else {
-        this.$message.error("分润占比总和不能超过100%");
       }
+
+      // let a = Number(this.lessors) + Number(this.firm);
+      // if (a === 100) {
+      let token = sessionStorage.getItem("token");
+      this.token = token;
+      let params = {
+        token: sessionStorage.getItem("token"),
+        big_name: this.big_name,
+        share: this.radio,
+        total_profit: this.total_profit,
+        tax: this.tax,
+        other_profit: this.other_profit,
+        // lessors: this.lessors,
+        // firm: this.firm,
+      };
+      fenrunset(params).then((res) => {
+        if (res.data.code == 200) {
+          this.$message.success("新增成功");
+          this.$parent.getUserList();
+          this.close();
+          this.isDisable = false;
+        } else {
+          this.$message.error(res.data.msg);
+          this.$parent.getUserList();
+          this.close();
+          this.isDisable = false;
+        }
+      });
+      // } else if (a <= 100) {
+      //   this.$message.error("分润占比总和不能小于100%");
+      // } else {
+      //   this.$message.error("分润占比总和不能超过100%");
+      // }
     },
   },
 };

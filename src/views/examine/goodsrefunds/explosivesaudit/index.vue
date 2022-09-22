@@ -177,7 +177,7 @@ export default {
         limit: this.page.limit,
         type: 2,
       });
-      //console.log(res.data.data.data);
+      console.log(res.data.data.data);
       if (res.data.code == 200) {
         this.shoporder = res.data.data.data;
         this.$refs.dataTable.setPageInfo({
@@ -202,9 +202,9 @@ export default {
         token: sessionStorage.getItem("token"),
       };
       refMoney(params).then((res) => {
-        //console.log(res.data.msg);
+        console.log(res.data.msg);
         let msg = res.data.msg;
-        //console.log(res);
+        console.log(res);
         if (res.data.code == 200) {
           this.$message.success("操作成功");
           this.shoporderlist();
@@ -224,9 +224,9 @@ export default {
         token: sessionStorage.getItem("token"),
       };
       refMoney(params).then((res) => {
-        //console.log(res.data.msg);
+        console.log(res.data.msg);
         let msg = res.data.msg;
-        //console.log(res);
+        console.log(res);
         if (res.data.code == 200) {
           this.$message.success("操作成功");
           this.shoporderlist();
@@ -239,8 +239,8 @@ export default {
       this.dialogVisible = false;
     },
     open(row) {
-      //console.log(row);
-      //console.log(row.id);
+      console.log(row);
+      console.log(row.id);
       this.id = row.order_id;
       this.dialogVisible = true;
     },

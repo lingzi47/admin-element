@@ -10,7 +10,6 @@
             placeholder="请输入标签名称"
           ></el-input>
         </el-form-item>
-
         <el-form-item style="float: right">
           <el-button type="primary" icon="el-icon-search" @click="searchinfo"
             >搜索</el-button

@@ -2,35 +2,70 @@
   <div>
     <el-dialog
       class="AddDialog"
-      title="公司分红详情"
+      :title="title"
       :visible.sync="dialogVisible"
       width="800px"
       hegiht="1000px"
       :close-on-click-modal="false"
       @close="close"
     >
-      <page-table
-        ref="dataTable"
-        :data="userList"
-        @changeCurrentPage="changeCurrent"
+      <el-form
+        :model="ruleForm"
+        ref="ruleForm"
+        :rules="rules"
+        label-width="auto"
       >
-        <el-table-column label="序号" align="center">
-          <template slot-scope="scope">
-            <span>{{
-              (page.currentPage - 1) * page.pageSize + scope.$index + 1
-            }}</span>
-          </template>
-        </el-table-column>
+        <el-row :gutter="20">
+          <el-col :span="10">
+            <el-form-item label="合同" prop="goods_img">
+              <el-upload
+                class="avatar-uploader1"
+                action="https://y4.wjw.cool/command/ossUpload?filename=file"
+                :show-file-list="false"
+                :on-success="handleAvatarSuccess"
+                :before-upload="beforeAvatarUpload"
+              >
+                <img v-if="imageUrl" :src="imageUrl" class="avatar1" />
+                <i v-else class="el-icon-plus avatar-uploader-icon1"></i>
+              </el-upload>
+            </el-form-item>
+          </el-col>
+          <el-col :span="10">
+            <el-form-item label="身份证正面" prop="goods_img1"
+              ><el-upload
+                class="avatar-uploader"
+                action="https://y4.wjw.cool/command/ossUpload?filename=file"
+                :show-file-list="false"
+                :on-success="handSuccess"
+                :before-upload="beforeAvatarUpload"
+              >
+                <img v-if="imageUrl1" :src="imageUrl1" class="avatar" />
+                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+              </el-upload>
+            </el-form-item>
+          </el-col>
 
-        <el-table-column prop="u_id" label="id" align="center">
-        </el-table-column>
-        <el-table-column prop="nickname" label="用户名称" align="center">
-        </el-table-column>
-        <el-table-column prop="num" label="收益钻石数量" align="center">
-        </el-table-column>
-        <el-table-column prop="create_time" label="收益时间" align="center">
-        </el-table-column>
-      </page-table>
+          <el-col :span="10">
+            <el-form-item label="身份证反面" prop="goods_img2"
+              ><el-upload
+                class="avatar-uploader"
+                action="https://y4.wjw.cool/command/ossUpload?filename=file"
+                :show-file-list="false"
+                :on-success="handleAvatar"
+                :before-upload="beforeAvatarUpload"
+              >
+                <img v-if="imageUrl2" :src="imageUrl2" class="avatar" />
+                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+              </el-upload>
+            </el-form-item>
+          </el-col>
+        </el-row>
+      </el-form>
+
+      <div slot="footer" class="dialog-footer" v-if="title !== '查看合同'">
+        <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="submitForm">确 定</el-button>
+      </div>
     </el-dialog>
   </div>
 </template>
@@ -44,58 +79,153 @@ export default {
   data() {
     return {
       id: "",
+      title: "",
+      imageUrl: "",
+      imageUrl1: "",
+      imageUrl2: "",
       dialogVisible: false,
-      page: {
-        //分页信息
-        currentPage: 1, //当前页
-        pageSize: 10, //每页条数
-        total: 0, //总条数
+      ruleForm: {
+        goods_img: "",
+        goods_img1: "",
+        goods_img2: "",
       },
-      userList: [], // 列表
+      rules: {
+        goods_img: [
+          { required: true, message: "请上传合同照片", trigger: "blur" },
+        ],
+        goods_img1: [
+          { required: true, message: "请上传身份证正面照片", trigger: "blur" },
+        ],
+        goods_img2: [
+          { required: true, message: "请上传身份证反面照片", trigger: "blur" },
+        ],
+      },
     };
   },
   created() {},
   mounted() {},
   methods: {
-    show(row) {
-      console.log(row);
-      this.dialogVisible = true;
+    submitForm() {
+      this.$refs.ruleForm.validate(async (valid) => {
+        if (valid) {
+          let params = {
+            token: sessionStorage.getItem("token"),
+            uid: this.ruleForm.goods_img,
+            uid: this.ruleForm.goods_img1,
+            uid: this.ruleForm.goods_img2,
+          };
+          addtuilist(params).then((res) => {
+            if (res.data.code == 200) {
+              this.$message.success("新增成功");
+              this.$parent.shoporderlist();
+              this.close();
 
+              this.dialogVisible = false;
+            } else {
+              this.$message.error(res.data.msg);
+              this.$parent.shoporderlist();
+              this.close();
+              this.dialogVisible = false;
+            }
+          });
+        } else {
+          return false;
+        }
+      });
+    },
+    show(type, row) {
+      console.log(type);
+      this.dialogVisible = true;
+      console.log(row);
       this.id = row.id;
-      this.getUserList();
+      if (type == 1) {
+        this.title = "上传合同";
+      } else if (type == 2) {
+        this.title = "修改合同";
+      } else {
+        this.title = "查看合同";
+      }
     },
     close() {
       this.dialogVisible = false;
-      this.userList = [];
+      this.ruleForm.goods_img = "";
+      this.ruleForm.goods_img1 = "";
+      this.ruleForm.goods_img2 = "";
+      this.goods_img = "";
+      this.goods_img1 = "";
+      this.goods_img2 = "";
     },
-    changeCurrent(page, size) {
-      this.page.currentPage = page;
-      this.page.pageSize = size;
-      this.getUserList();
+    handleAvatarSuccess(res, file) {
+      let imgurl = res.data;
+      this.imageUrl = imgurl;
+      this.ruleForm.goods_img = imgurl;
     },
-
-    getUserList() {
-      let token = sessionStorage.getItem("token");
-      this.token = token;
-      let params = {
-        token: sessionStorage.getItem("token"),
-        id: this.id,
-      };
-      logpool(params).then((res) => {
-        this.page.total = res.data.count;
-        this.userList = res.data.data;
-        this.$refs.dataTable.setPageInfo({
-          total: res.data.count,
-        });
-      });
+    handSuccess(res, file) {
+      let imgurl1 = res.data;
+      this.imageUrl1 = imgurl1;
+      this.ruleForm.goods_img1 = imgurl1;
     },
-    showtable() {},
+    handleAvatar(res, file) {
+      let imgurl2 = res.data;
+      this.imageUrl2 = imgurl2;
+      this.ruleForm.goods_img2 = imgurl2;
+    },
+    beforeAvatarUpload(file) {
+      const isLt2M = file.size / 1024 / 1024 < 2;
+      if (!isLt2M) {
+        this.$message.error("上传图片大小不能超过 2MB!");
+      }
+      return isLt2M;
+    },
   },
 };
 </script>
 
 <style>
-.xian {
-  margin-left: -75px !important;
+.avatar-uploader1 .el-upload {
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.avatar-uploader1 .el-upload:hover {
+  border-color: #409eff;
+}
+.avatar-uploader-icon1 {
+  font-size: 28px;
+  color: #8c939d;
+  width: 200px;
+  height: 300px;
+  line-height: 300px;
+  text-align: center;
+}
+.avatar1 {
+  width: 200px;
+  height: 300px;
+  display: block;
+}
+.avatar-uploader .el-upload {
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.avatar-uploader .el-upload:hover {
+  border-color: #409eff;
+}
+.avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 220px;
+  height: 150px;
+  line-height: 150px;
+  text-align: center;
+}
+.avatar {
+  width: 220px;
+  height: 150px;
+  display: block;
 }
 </style>

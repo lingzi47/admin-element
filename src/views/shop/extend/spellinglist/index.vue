@@ -182,8 +182,37 @@
             <el-link type="danger" v-if="scope.row.sta == 30">未通过</el-link>
           </template></el-table-column
         >
+        <el-table-column
+          fixed="right"
+          label="操作"
+          align="center"
+          :resizable="false"
+          width="180px"
+        >
+          <template slot-scope="scope">
+            <el-link
+              type="success"
+              style="margin-left: 10px"
+              @click="fenrun(1, scope.row)"
+              >上传合同</el-link
+            >
+            <el-link
+              type="danger"
+              style="margin-left: 10px"
+              @click="fenrun(2, scope.row)"
+              >修改合同</el-link
+            >
+            <el-link
+              type="primary"
+              style="margin-left: 10px"
+              @click="fenrun(3, scope.row)"
+              >查看合同</el-link
+            >
+          </template>
+        </el-table-column>
       </page-table>
       <edit-data ref="editData" />
+      <fen-run ref="fenRun" />
     </div>
   </div>
 </template>
@@ -193,11 +222,13 @@ import { checkPermission } from "@/utils/permissions";
 import { tuilist, refMoney } from "@/request/api";
 import pageTable from "@/components/pageTable.vue";
 import editData from "./components/editData.vue";
+import fenRun from "./components/fenRun.vue";
 export default {
   name: "specialorder",
   components: {
     pageTable,
     editData,
+    fenRun,
   },
   data() {
     return {
@@ -267,6 +298,10 @@ export default {
     },
     add() {
       this.$refs.editData.show(1, {});
+    },
+    fenrun(type, row) {
+      let rowData = row;
+      this.$refs.fenRun.show(type, JSON.parse(JSON.stringify(rowData)));
     },
   },
 };

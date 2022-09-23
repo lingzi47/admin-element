@@ -16,9 +16,7 @@
       >
         <el-table-column label="序号" align="center">
           <template slot-scope="scope">
-            <span>{{
-              (page.currentPage - 1) * page.pageSize + scope.$index + 1
-            }}</span>
+            <span>{{ (page.page - 1) * page.limit + scope.$index + 1 }}</span>
           </template>
         </el-table-column>
 
@@ -47,8 +45,8 @@ export default {
       dialogVisible: false,
       page: {
         //分页信息
-        currentPage: 1, //当前页
-        pageSize: 10, //每页条数
+        page: 1, //当前页
+        limit: 10, //每页条数
         total: 0, //总条数
       },
       userList: [], // 列表
@@ -68,8 +66,8 @@ export default {
       this.userList = [];
     },
     changeCurrent(page, size) {
-      this.page.currentPage = page;
-      this.page.pageSize = size;
+      this.page.page = page;
+      this.page.limit = size;
       this.getUserList();
     },
 
@@ -79,12 +77,14 @@ export default {
       let params = {
         token: sessionStorage.getItem("token"),
         id: this.id,
+        page: this.page.page,
+        limit: this.page.limit,
       };
       logpool(params).then((res) => {
         this.page.total = res.data.count;
         this.userList = res.data.data;
         this.$refs.dataTable.setPageInfo({
-          total: res.data.count,
+          total: this.page.total,
         });
       });
     },

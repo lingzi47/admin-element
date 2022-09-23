@@ -75,7 +75,7 @@
         :resizable="false"
       >
         <template slot-scope="scope">
-          <span @click="upuser(scope.row)">{{ scope.row.pid }}</span>
+          <el-link @click="upuser(scope.row)">{{ scope.row.pid }} </el-link>
         </template>
       </el-table-column>
       <el-table-column

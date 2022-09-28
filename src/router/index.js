@@ -41,6 +41,8 @@ export const asyncRoutes = [
 				component: () => import("@/views/user/appuserset/nextUser"),
 				meta: {
 					title: "下级列表",
+					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+					isBack: false
 
 				}
 			}, {
@@ -49,6 +51,8 @@ export const asyncRoutes = [
 				component: () => import("@/views/user/appuserset/upuser"),
 				meta: {
 					title: "上级列表",
+					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+					isBack: false
 
 				}
 			}, {
@@ -57,6 +61,8 @@ export const asyncRoutes = [
 				component: () => import("@/views/user/appuserset/usershow"),
 				meta: {
 					title: "用户详情",
+					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+					isBack: false
 
 				}
 			},
@@ -66,6 +72,8 @@ export const asyncRoutes = [
 				component: () => import("@/views/user/appuserset/usertext"),
 				meta: {
 					title: "分利信息",
+					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+					isBack: false
 
 				}
 			}, {
@@ -74,6 +82,8 @@ export const asyncRoutes = [
 				component: () => import("@/views/activity/lottery/lotteryhis"),
 				meta: {
 					title: "抽奖列表详情",
+					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+					isBack: false
 
 				}
 			},
@@ -83,6 +93,8 @@ export const asyncRoutes = [
 				component: () => import("@/views/activity/lottery/lotteryhisshow"),
 				meta: {
 					title: "抽奖列表详情",
+					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+					isBack: false
 
 				}
 			},
@@ -92,6 +104,8 @@ export const asyncRoutes = [
 				component: () => import("@/views/activity/vip/viphis"),
 				meta: {
 					title: "会员赠送历史",
+					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+					isBack: false
 
 				}
 			},
@@ -101,6 +115,8 @@ export const asyncRoutes = [
 				component: () => import("@/views/activity/vouchers/vouhis"),
 				meta: {
 					title: "代金券历史",
+					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+					isBack: false
 				}
 			},
 			{
@@ -109,6 +125,8 @@ export const asyncRoutes = [
 				component: () => import("@/views/global/appset/versionshow"),
 				meta: {
 					title: "版本详情",
+					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+					isBack: false
 
 				},
 			}, {
@@ -117,6 +135,8 @@ export const asyncRoutes = [
 				component: () => import("@/views/activity/diamond/diamondListshow"),
 				meta: {
 					title: "钻石雨领取详情",
+					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+					isBack: false
 
 				},
 			},
@@ -126,7 +146,9 @@ export const asyncRoutes = [
 				component: () => import("@/views/broker/showtable"),
 				meta: {
 					title: "租赁应急箱",
-					permissions: "showtable"
+					permissions: "showtable",
+					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+					isBack: false
 				},
 			},
 			{
@@ -135,7 +157,9 @@ export const asyncRoutes = [
 				component: () => import("@/views/global/system/fenrunadd"),
 				meta: {
 					title: "分润设置",
-					permissions: "fenrunadd"
+					permissions: "fenrunadd",
+					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+					isBack: false
 				},
 			},
 			{
@@ -144,7 +168,9 @@ export const asyncRoutes = [
 				component: () => import("@/views/global/system/fenrunadd"),
 				meta: {
 					title: "分润设置",
-					permissions: "fenrunadd"
+					permissions: "fenrunadd",
+					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+					isBack: false
 				},
 			},
 			{
@@ -153,7 +179,9 @@ export const asyncRoutes = [
 				component: () => import("@/views/global/system/fenrunstadt"),
 				meta: {
 					title: "分润审核",
-					permissions: "fenrunstadt"
+					permissions: "fenrunstadt",
+					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+					isBack: false
 				},
 			},
 			{
@@ -162,7 +190,9 @@ export const asyncRoutes = [
 				component: () => import("@/views/global/system/fenrunshow"),
 				meta: {
 					title: "分润查看",
-					permissions: "fenrunshow"
+					permissions: "fenrunshow",
+					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+					isBack: false
 				},
 			},
 			{
@@ -171,7 +201,9 @@ export const asyncRoutes = [
 				component: () => import("@/views/shop/hisorder/ordershow"),
 				meta: {
 					title: "历史订单查看",
-					permissions: "ordershow"
+					permissions: "ordershow",
+					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+					isBack: false
 				},
 			},
 		],
@@ -185,6 +217,8 @@ export const asyncRoutes = [
 		meta: {
 			title: "首页",
 			icon: "el-icon-s-home",
+			keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+			isBack: false
 		},
 		children: [{
 			path: "/index",
@@ -204,7 +238,9 @@ export const asyncRoutes = [
 		meta: {
 			title: "用户设置",
 			icon: "el-icon-user-solid",
-			permissions: "user"
+			permissions: "user",
+			keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+			isBack: false
 		},
 		children: [{
 				path: "powermanage",
@@ -213,7 +249,9 @@ export const asyncRoutes = [
 				meta: {
 					title: "权限管理",
 
-					permissions: "powermanage"
+					permissions: "powermanage",
+					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+					isBack: false
 				},
 				children: [{
 					path: "powerlist",
@@ -221,7 +259,9 @@ export const asyncRoutes = [
 					component: () => import("@/views/user/powermanage/powerlist"),
 					meta: {
 						title: "权限列表",
-						permissions: "powerlist"
+						permissions: "powerlist",
+						keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+						isBack: false
 					}
 				}, {
 					path: "bguserlist",
@@ -229,7 +269,9 @@ export const asyncRoutes = [
 					component: () => import("@/views/user/powermanage/bguserlist"),
 					meta: {
 						title: "后台角色组",
-						permissions: "bguserlist"
+						permissions: "bguserlist",
+						keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+						isBack: false
 					}
 				}, {
 					path: "business",
@@ -237,7 +279,9 @@ export const asyncRoutes = [
 					component: () => import("@/views/user/powermanage/business"),
 					meta: {
 						title: "商家角色组",
-						permissions: "business"
+						permissions: "business",
+						keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+						isBack: false
 					}
 				}]
 			},
@@ -247,7 +291,9 @@ export const asyncRoutes = [
 				component: () => import("@/views/user/bgaccountset"),
 				meta: {
 					title: "后台账号管理",
-					permissions: "bgaccountset"
+					permissions: "bgaccountset",
+					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+					isBack: false
 				},
 				children: [{
 						path: "bgaccount",
@@ -255,7 +301,9 @@ export const asyncRoutes = [
 						component: () => import("@/views/user/bgaccountset/bgaccount"),
 						meta: {
 							title: "后台账号",
-							permissions: "bgaccount"
+							permissions: "bgaccount",
+							keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+							isBack: false
 						}
 					}, {
 						path: "busaccount",
@@ -263,7 +311,9 @@ export const asyncRoutes = [
 						component: () => import("@/views/user/bgaccountset/busaccount"),
 						meta: {
 							title: "商城商家账号",
-							permissions: "busaccount"
+							permissions: "busaccount",
+							keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+							isBack: false
 						}
 					},
 					{
@@ -272,7 +322,9 @@ export const asyncRoutes = [
 						component: () => import("@/views/user/bgaccountset/lifeaccount"),
 						meta: {
 							title: "生活商家账号",
-							permissions: "lifeaccount"
+							permissions: "lifeaccount",
+							keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+							isBack: false
 						}
 					}
 				]
@@ -282,7 +334,9 @@ export const asyncRoutes = [
 				component: () => import("@/views/user/appuserset"),
 				meta: {
 					title: "app用户管理",
-					permissions: "appuserset"
+					permissions: "appuserset",
+					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+					isBack: false
 				},
 				children: [{
 					path: "userlist",
@@ -291,7 +345,8 @@ export const asyncRoutes = [
 					meta: {
 						title: "用户列表",
 						permissions: "userlist",
-						keepAlive: true // 不需要缓存
+						keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+						isBack: false
 					}
 				}, ]
 			},
@@ -312,7 +367,9 @@ export const asyncRoutes = [
 		meta: {
 			title: "活动管理",
 			icon: "el-icon-present ",
-			permissions: "activity"
+			permissions: "activity",
+			keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+			isBack: false
 		},
 		children: [{
 				path: "lottery",
@@ -320,7 +377,9 @@ export const asyncRoutes = [
 				component: () => import("@/views/activity/lottery"),
 				meta: {
 					title: "抽奖活动",
-					permissions: "lottery"
+					permissions: "lottery",
+					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+					isBack: false
 				},
 				children: [{
 					path: "lotteryList",
@@ -328,7 +387,9 @@ export const asyncRoutes = [
 					component: () => import("@/views/activity/lottery/lotteryList"),
 					meta: {
 						title: "抽奖奖项列表展示",
-						permissions: "lotteryList"
+						permissions: "lotteryList",
+						keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+						isBack: false
 					}
 				}, {
 					path: "lotterySet",
@@ -336,7 +397,9 @@ export const asyncRoutes = [
 					component: () => import("@/views/activity/lottery/lotterySet"),
 					meta: {
 						title: "抽奖奖项及概率设置",
-						permissions: "lotterySet"
+						permissions: "lotterySet",
+						keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+						isBack: false
 					}
 
 				}]
@@ -354,7 +417,9 @@ export const asyncRoutes = [
 					component: () => import("@/views/activity/diamond/diamondList"),
 					meta: {
 						title: "钻石雨释放列表",
-						permissions: "diamondList"
+						permissions: "diamondList",
+						keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+						isBack: false
 					}
 				}]
 			}, {
@@ -363,7 +428,9 @@ export const asyncRoutes = [
 				component: () => import("@/views/activity/vip"),
 				meta: {
 					title: "会员活动",
-					permissions: "vip"
+					permissions: "vip",
+					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+					isBack: false
 				},
 				children: [{
 						path: "vipAdd",
@@ -371,7 +438,9 @@ export const asyncRoutes = [
 						component: () => import("@/views/activity/vip/vipAdd"),
 						meta: {
 							title: "消费送会员",
-							permissions: "vipAdd"
+							permissions: "vipAdd",
+							keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+							isBack: false
 						}
 					},
 					{
@@ -380,7 +449,9 @@ export const asyncRoutes = [
 						component: () => import("@/views/activity/vip/vipList"),
 						meta: {
 							title: "会员赠送",
-							permissions: "vipList"
+							permissions: "vipList",
+							keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+							isBack: false
 						}
 					},
 				]
@@ -399,7 +470,9 @@ export const asyncRoutes = [
 						component: () => import("@/views/activity/vouchers/vouchersList"),
 						meta: {
 							title: "代金券列表",
-							permissions: "vouchersList"
+							permissions: "vouchersList",
+							keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+							isBack: false
 						}
 					},
 					{
@@ -408,7 +481,9 @@ export const asyncRoutes = [
 						component: () => import("@/views/activity/vouchers/vouchersAdd"),
 						meta: {
 							title: "代金券释放列表",
-							permissions: "vouchersAdd"
+							permissions: "vouchersAdd",
+							keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+							isBack: false
 						}
 					},
 					{
@@ -417,7 +492,9 @@ export const asyncRoutes = [
 						component: () => import("@/views/activity/vouchers/vouchersAddlist"),
 						meta: {
 							title: "代金券任务列表",
-							permissions: "vouchersAddlist"
+							permissions: "vouchersAddlist",
+							keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+							isBack: false
 						}
 					},
 				]
@@ -436,7 +513,9 @@ export const asyncRoutes = [
 						component: () => import("@/views/activity/vippk/vippklist"),
 						meta: {
 							title: "推荐用户购买商品送PK值",
-							permissions: "vippklist"
+							permissions: "vippklist",
+							keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+							isBack: false
 						}
 					},
 
@@ -468,7 +547,9 @@ export const asyncRoutes = [
 					component: () => import("@/views/shop/special/specialgoods"),
 					meta: {
 						title: "商品列表",
-						permissions: "goods"
+						permissions: "goods",
+						keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+						isBack: false
 					}
 				}, {
 					path: "specialtype",
@@ -476,7 +557,9 @@ export const asyncRoutes = [
 					component: () => import("@/views/shop/special/specialtype"),
 					meta: {
 						title: "商城分类",
-						permissions: "type"
+						permissions: "type",
+						keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+						isBack: false
 					}
 				}, {
 					path: "specialorder",
@@ -484,7 +567,9 @@ export const asyncRoutes = [
 					component: () => import("@/views/shop/special/specialorder"),
 					meta: {
 						title: "商品订单",
-						permissions: "order"
+						permissions: "order",
+						keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+						isBack: false
 					}
 				}, {
 					path: "specialrefund",
@@ -492,7 +577,9 @@ export const asyncRoutes = [
 					component: () => import("@/views/shop/special/specialrefund"),
 					meta: {
 						title: "退款订单",
-						permissions: "refund"
+						permissions: "refund",
+						keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+						isBack: false
 					}
 				}]
 			},
@@ -511,7 +598,9 @@ export const asyncRoutes = [
 					component: () => import("@/views/shop/mall/mallgoods"),
 					meta: {
 						title: "商品列表",
-						permissions: "mallgoods"
+						permissions: "mallgoods",
+						keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+						isBack: false
 					}
 				}, {
 					path: "malltype",
@@ -519,7 +608,9 @@ export const asyncRoutes = [
 					component: () => import("@/views/shop/mall/malltype"),
 					meta: {
 						title: "商城分类",
-						permissions: "malltype"
+						permissions: "malltype",
+						keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+						isBack: false
 					}
 				}, {
 					path: "mallorder",
@@ -527,7 +618,9 @@ export const asyncRoutes = [
 					component: () => import("@/views/shop/mall/mallorder"),
 					meta: {
 						title: "商品订单",
-						permissions: "mallorder"
+						permissions: "mallorder",
+						keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+						isBack: false
 					}
 				}, {
 					path: "mallrefund",
@@ -535,7 +628,9 @@ export const asyncRoutes = [
 					component: () => import("@/views/shop/mall/mallrefund"),
 					meta: {
 						title: "退款订单",
-						permissions: "mallrefund"
+						permissions: "mallrefund",
+						keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+						isBack: false
 					}
 				}]
 			},
@@ -546,7 +641,9 @@ export const asyncRoutes = [
 				component: () => import("@/views/shop/life"),
 				meta: {
 					title: "遇见生活",
-					permissions: "life"
+					permissions: "life",
+					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+					isBack: false
 				},
 				children: [{
 					path: "lifegoods",
@@ -554,7 +651,9 @@ export const asyncRoutes = [
 					component: () => import("@/views/shop/life/lifegoods"),
 					meta: {
 						title: "商品列表",
-						permissions: "lifegoods"
+						permissions: "lifegoods",
+						keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+						isBack: false
 					}
 				}, {
 					path: "lifetype",
@@ -562,7 +661,9 @@ export const asyncRoutes = [
 					component: () => import("@/views/shop/life/lifetype"),
 					meta: {
 						title: "商城分类",
-						permissions: "lifetype"
+						permissions: "lifetype",
+						keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+						isBack: false
 					}
 				}, {
 					path: "lifeorder",
@@ -570,7 +671,9 @@ export const asyncRoutes = [
 					component: () => import("@/views/shop/life/lifeorder"),
 					meta: {
 						title: "商品订单",
-						permissions: "lifeorder"
+						permissions: "lifeorder",
+						keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+						isBack: false
 					}
 				}, {
 					path: "liferefund",
@@ -578,7 +681,9 @@ export const asyncRoutes = [
 					component: () => import("@/views/shop/life/liferefund"),
 					meta: {
 						title: "退款订单",
-						permissions: "liferefund"
+						permissions: "liferefund",
+						keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+						isBack: false
 					}
 				}]
 			},
@@ -597,7 +702,9 @@ export const asyncRoutes = [
 						component: () => import("@/views/shop/extend/extendgoods"),
 						meta: {
 							title: "商品列表",
-							permissions: "extendgoods"
+							permissions: "extendgoods",
+							keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+							isBack: false
 						}
 					}, {
 						path: "extendtype",
@@ -605,7 +712,9 @@ export const asyncRoutes = [
 						component: () => import("@/views/shop/extend/extendtype"),
 						meta: {
 							title: "商城分类",
-							permissions: "extendtype"
+							permissions: "extendtype",
+							keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+							isBack: false
 						}
 					}, {
 						path: "extendorder",
@@ -613,7 +722,9 @@ export const asyncRoutes = [
 						component: () => import("@/views/shop/extend/extendorder"),
 						meta: {
 							title: "商品订单",
-							permissions: "extendorder"
+							permissions: "extendorder",
+							keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+							isBack: false
 						}
 					}, {
 						path: "extendrefund",
@@ -621,7 +732,9 @@ export const asyncRoutes = [
 						component: () => import("@/views/shop/extend/extendrefund"),
 						meta: {
 							title: "退款订单",
-							permissions: "extendrefund"
+							permissions: "extendrefund",
+							keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+							isBack: false
 						}
 					},
 					{
@@ -630,7 +743,9 @@ export const asyncRoutes = [
 						component: () => import("@/views/shop/extend/bonuspool"),
 						meta: {
 							title: "奖金池",
-							permissions: "bonuspool"
+							permissions: "bonuspool",
+							keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+							isBack: false
 						}
 					},
 					{
@@ -639,7 +754,9 @@ export const asyncRoutes = [
 						component: () => import("@/views/shop/extend/spellinglist"),
 						meta: {
 							title: "拼单列表",
-							permissions: "spellinglist"
+							permissions: "spellinglist",
+							keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+							isBack: false
 						}
 					}
 				]
@@ -661,7 +778,9 @@ export const asyncRoutes = [
 					component: () => import("@/views/shop/explosives/explosivesgoods"),
 					meta: {
 						title: "商品列表",
-						permissions: "explosivesgoods"
+						permissions: "explosivesgoods",
+						keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+						isBack: false
 					}
 				}, {
 					path: "explosivestype",
@@ -669,7 +788,9 @@ export const asyncRoutes = [
 					component: () => import("@/views/shop/explosives/explosivestype"),
 					meta: {
 						title: "商城分类",
-						permissions: "explosivestype"
+						permissions: "explosivestype",
+						keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+						isBack: false
 					}
 				}, {
 					path: "explosivesorder",
@@ -677,7 +798,9 @@ export const asyncRoutes = [
 					component: () => import("@/views/shop/explosives/explosivesorder"),
 					meta: {
 						title: "商品订单",
-						permissions: "explosivesorder"
+						permissions: "explosivesorder",
+						keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+						isBack: false
 					}
 				}, {
 					path: "explosivesrefund",
@@ -685,7 +808,9 @@ export const asyncRoutes = [
 					component: () => import("@/views/shop/explosives/explosivesrefund"),
 					meta: {
 						title: "退款订单",
-						permissions: "explosivesrefund"
+						permissions: "explosivesrefund",
+						keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+						isBack: false
 					}
 				}]
 			},
@@ -695,7 +820,9 @@ export const asyncRoutes = [
 				component: () => import("@/views/shop/promoter"),
 				meta: {
 					title: "推广员",
-					permissions: "promoter"
+					permissions: "promoter",
+					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+					isBack: false
 				},
 				children: [{
 					path: "promoterorder",
@@ -703,7 +830,9 @@ export const asyncRoutes = [
 					component: () => import("@/views/shop/promoter/promoterorder"),
 					meta: {
 						title: "推广员订单",
-						permissions: "promoterorder"
+						permissions: "promoterorder",
+						keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+						isBack: false
 					}
 				}, ]
 			},
@@ -713,7 +842,9 @@ export const asyncRoutes = [
 				component: () => import("@/views/shop/hisorder"),
 				meta: {
 					title: "历史订单",
-					permissions: "hisorder"
+					permissions: "hisorder",
+					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+					isBack: false
 				},
 				children: [{
 					path: "historyorder",
@@ -721,7 +852,9 @@ export const asyncRoutes = [
 					component: () => import("@/views/shop/hisorder/historyorder"),
 					meta: {
 						title: "历史订单",
-						permissions: "historyorder"
+						permissions: "historyorder",
+						keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+						isBack: false
 					}
 				}, ]
 			},
@@ -736,7 +869,9 @@ export const asyncRoutes = [
 		meta: {
 			title: "审核管理",
 			icon: "el-icon-s-management",
-			permissions: "examine"
+			permissions: "examine",
+			keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+			isBack: false
 		},
 		children: [{
 				path: "withdrawals",
@@ -744,7 +879,9 @@ export const asyncRoutes = [
 				component: () => import("@/views/examine/withdrawals"),
 				meta: {
 					title: "提现审核",
-					permissions: "withdrawals"
+					permissions: "withdrawals",
+					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+					isBack: false
 				},
 				children: [{
 					path: "userdrawals",
@@ -752,7 +889,19 @@ export const asyncRoutes = [
 					component: () => import("@/views/examine/withdrawals/userdrawals"),
 					meta: {
 						title: "用户钻石审核",
-						permissions: "userdrawals"
+						permissions: "userdrawals",
+						keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+						isBack: false
+					}
+				}, {
+					path: "webdrawals",
+					name: "webdrawals",
+					component: () => import("@/views/examine/withdrawals/webdrawals"),
+					meta: {
+						title: "外埠市场提现审核",
+						permissions: "webdrawals",
+						keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+						isBack: false
 					}
 				}, {
 					path: "busdrawals",
@@ -760,7 +909,9 @@ export const asyncRoutes = [
 					component: () => import("@/views/examine/withdrawals/busdrawals"),
 					meta: {
 						title: "商家提现审核",
-						permissions: "busdrawals"
+						permissions: "busdrawals",
+						keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+						isBack: false
 					}
 				}, {
 					path: "earnrawals",
@@ -768,7 +919,9 @@ export const asyncRoutes = [
 					component: () => import("@/views/examine/withdrawals/earnrawals"),
 					meta: {
 						title: "收益提现审核",
-						permissions: "earnrawals"
+						permissions: "earnrawals",
+						keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+						isBack: false
 					}
 				}, ]
 			},
@@ -778,7 +931,9 @@ export const asyncRoutes = [
 				component: () => import("@/views/examine/pointaudit"),
 				meta: {
 					title: "点位审核",
-					permissions: "pointaudit"
+					permissions: "pointaudit",
+					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+					isBack: false
 				},
 				children: [{
 					path: "laying",
@@ -786,7 +941,9 @@ export const asyncRoutes = [
 					component: () => import("@/views/examine/pointaudit/laying"),
 					meta: {
 						title: "铺设点位审核",
-						permissions: "laying"
+						permissions: "laying",
+						keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+						isBack: false
 					}
 				}, {
 					path: "bind",
@@ -794,7 +951,9 @@ export const asyncRoutes = [
 					component: () => import("@/views/examine/pointaudit/bind"),
 					meta: {
 						title: "点位绑定审核",
-						permissions: "bind"
+						permissions: "bind",
+						keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+						isBack: false
 					}
 				}, {
 					path: "disuse",
@@ -802,7 +961,9 @@ export const asyncRoutes = [
 					component: () => import("@/views/examine/pointaudit/disuse"),
 					meta: {
 						title: "废弃点位审核",
-						permissions: "disuse"
+						permissions: "disuse",
+						keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+						isBack: false
 					}
 				}, ]
 			},
@@ -812,7 +973,9 @@ export const asyncRoutes = [
 				component: () => import("@/views/examine/projectupsta"),
 				meta: {
 					title: "项目上传审核",
-					permissions: "projectupsta"
+					permissions: "projectupsta",
+					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+					isBack: false
 				},
 			},
 			{
@@ -821,7 +984,9 @@ export const asyncRoutes = [
 				component: () => import("@/views/examine/fenrunsta"),
 				meta: {
 					title: "分润审核",
-					permissions: "fenrunsta"
+					permissions: "fenrunsta",
+					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+					isBack: false
 				},
 			},
 			{
@@ -830,7 +995,9 @@ export const asyncRoutes = [
 				component: () => import("@/views/examine/brokersta"),
 				meta: {
 					title: "手动添加租赁商",
-					permissions: "brokersta"
+					permissions: "brokersta",
+					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+					isBack: false
 				},
 			},
 			{
@@ -839,7 +1006,9 @@ export const asyncRoutes = [
 				component: () => import("@/views/examine/spellsta"),
 				meta: {
 					title: "拼单审核",
-					permissions: "spellsta"
+					permissions: "spellsta",
+					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+					isBack: false
 				},
 			},
 			{
@@ -848,7 +1017,9 @@ export const asyncRoutes = [
 				component: () => import("@/views/examine/pharmacysta"),
 				meta: {
 					title: "药房审核",
-					permissions: "pharmacysta"
+					permissions: "pharmacysta",
+					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+					isBack: false
 				},
 			},
 			{
@@ -857,7 +1028,9 @@ export const asyncRoutes = [
 				component: () => import("@/views/examine/actaudit"),
 				meta: {
 					title: "活动审核",
-					permissions: "actaudit"
+					permissions: "actaudit",
+					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+					isBack: false
 				},
 				children: [{
 						path: "lotterylistadt",
@@ -865,7 +1038,9 @@ export const asyncRoutes = [
 						component: () => import("@/views/examine/actaudit/lotterylistadt"),
 						meta: {
 							title: "抽奖列表审核",
-							permissions: "lotterylistadt"
+							permissions: "lotterylistadt",
+							keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+							isBack: false
 						}
 					}, {
 						path: "releasediamond",
@@ -873,7 +1048,9 @@ export const asyncRoutes = [
 						component: () => import("@/views/examine/actaudit/releasediamond"),
 						meta: {
 							title: "钻石雨手动释放审核",
-							permissions: "releasediamond"
+							permissions: "releasediamond",
+							keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+							isBack: false
 						}
 					},
 					{
@@ -882,7 +1059,9 @@ export const asyncRoutes = [
 						component: () => import("@/views/examine/actaudit/sendmembers"),
 						meta: {
 							title: "消费送会员审核",
-							permissions: "sendmembers"
+							permissions: "sendmembers",
+							keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+							isBack: false
 						}
 					}, {
 						path: "membersset",
@@ -890,7 +1069,9 @@ export const asyncRoutes = [
 						component: () => import("@/views/examine/actaudit/membersset"),
 						meta: {
 							title: "会员赠送审核",
-							permissions: "membersset"
+							permissions: "membersset",
+							keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+							isBack: false
 						}
 					}, {
 						path: "vouchersaddadt",
@@ -898,7 +1079,9 @@ export const asyncRoutes = [
 						component: () => import("@/views/examine/actaudit/vouchersaddadt"),
 						meta: {
 							title: "代金券添加审核",
-							permissions: "vouchersaddadt"
+							permissions: "vouchersaddadt",
+							keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+							isBack: false
 						}
 					}, {
 						path: "voucherrelease",
@@ -906,7 +1089,9 @@ export const asyncRoutes = [
 						component: () => import("@/views/examine/actaudit/voucherrelease"),
 						meta: {
 							title: "代金券释放审核",
-							permissions: "voucherrelease"
+							permissions: "voucherrelease",
+							keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+							isBack: false
 						}
 					}, {
 						path: "vouchermissions",
@@ -914,7 +1099,9 @@ export const asyncRoutes = [
 						component: () => import("@/views/examine/actaudit/vouchermissions"),
 						meta: {
 							title: "代金券任务审核",
-							permissions: "vouchermissions"
+							permissions: "vouchermissions",
+							keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+							isBack: false
 						}
 					},
 					{
@@ -923,7 +1110,9 @@ export const asyncRoutes = [
 						component: () => import("@/views/examine/actaudit/sendpk"),
 						meta: {
 							title: "推荐购买送pk值审核",
-							permissions: "sendpk"
+							permissions: "sendpk",
+							keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+							isBack: false
 						}
 					},
 				]
@@ -935,7 +1124,9 @@ export const asyncRoutes = [
 				component: () => import("@/views/examine/special"),
 				meta: {
 					title: "商品上架审核",
-					permissions: "special"
+					permissions: "special",
+					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+					isBack: false
 				},
 				children: [{
 						path: "foreseegoodsadt",
@@ -943,7 +1134,9 @@ export const asyncRoutes = [
 						component: () => import("@/views/examine/special/foreseegoodsadt"),
 						meta: {
 							title: "预见专区商品",
-							permissions: "foreseegoodsadt"
+							permissions: "foreseegoodsadt",
+							keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+							isBack: false
 						}
 					},
 					{
@@ -952,7 +1145,9 @@ export const asyncRoutes = [
 						component: () => import("@/views/examine/special/meetgoodsadt"),
 						meta: {
 							title: "预见商城商品",
-							permissions: "meetgoodsadt"
+							permissions: "meetgoodsadt",
+							keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+							isBack: false
 						}
 					}, {
 						path: "lifegoodsadt",
@@ -960,7 +1155,9 @@ export const asyncRoutes = [
 						component: () => import("@/views/examine/special/lifegoodsadt"),
 						meta: {
 							title: "预见生活商品",
-							permissions: "lifegoodsadt"
+							permissions: "lifegoodsadt",
+							keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+							isBack: false
 						}
 					}, {
 						path: "popularizeadt",
@@ -968,7 +1165,9 @@ export const asyncRoutes = [
 						component: () => import("@/views/examine/special/popularizeadt"),
 						meta: {
 							title: "推广专区商品",
-							permissions: "popularizeadt"
+							permissions: "popularizeadt",
+							keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+							isBack: false
 						}
 					}, {
 						path: "explosivesadt",
@@ -976,7 +1175,9 @@ export const asyncRoutes = [
 						component: () => import("@/views/examine/special/explosivesadt"),
 						meta: {
 							title: "爆款商品",
-							permissions: "explosivesadt"
+							permissions: "explosivesadt",
+							keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+							isBack: false
 						}
 					}
 				]
@@ -987,7 +1188,9 @@ export const asyncRoutes = [
 				component: () => import("@/views/examine/appsetaudit"),
 				meta: {
 					title: "app设置审核",
-					permissions: "appsetaudit"
+					permissions: "appsetaudit",
+					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+					isBack: false
 				},
 				children: [{
 						path: "versionaudit",
@@ -995,7 +1198,9 @@ export const asyncRoutes = [
 						component: () => import("@/views/examine/appsetaudit/versionaudit"),
 						meta: {
 							title: "版本审核",
-							permissions: "versionaudit"
+							permissions: "versionaudit",
+							keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+							isBack: false
 						}
 					}, {
 						path: "banneraudit",
@@ -1003,7 +1208,9 @@ export const asyncRoutes = [
 						component: () => import("@/views/examine/appsetaudit/banneraudit"),
 						meta: {
 							title: "banner审核",
-							permissions: "banneraudit"
+							permissions: "banneraudit",
+							keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+							isBack: false
 						}
 					},
 					{
@@ -1012,7 +1219,9 @@ export const asyncRoutes = [
 						component: () => import("@/views/examine/appsetaudit/dividendsaudit"),
 						meta: {
 							title: "分利信息审核",
-							permissions: "dividendsaudit"
+							permissions: "dividendsaudit",
+							keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+							isBack: false
 						}
 					},
 				]
@@ -1023,7 +1232,9 @@ export const asyncRoutes = [
 				component: () => import("@/views/examine/goodsrefunds"),
 				meta: {
 					title: "商品订单退款审核",
-					permissions: "goodsrefunds"
+					permissions: "goodsrefunds",
+					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+					isBack: false
 				},
 				children: [{
 						path: "foreseeaudit",
@@ -1031,7 +1242,9 @@ export const asyncRoutes = [
 						component: () => import("@/views/examine/goodsrefunds/foreseeaudit"),
 						meta: {
 							title: "预见专区订单退款",
-							permissions: "foreseeaudit"
+							permissions: "foreseeaudit",
+							keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+							isBack: false
 						}
 					}, {
 						path: "meetaudit",
@@ -1039,7 +1252,9 @@ export const asyncRoutes = [
 						component: () => import("@/views/examine/goodsrefunds/meetaudit"),
 						meta: {
 							title: "遇见商城订单退款",
-							permissions: "meetaudit"
+							permissions: "meetaudit",
+							keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+							isBack: false
 						}
 					},
 					{
@@ -1048,7 +1263,9 @@ export const asyncRoutes = [
 						component: () => import("@/views/examine/goodsrefunds/lifeaudit"),
 						meta: {
 							title: "遇见生活订单退款",
-							permissions: "lifeaudit"
+							permissions: "lifeaudit",
+							keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+							isBack: false
 						}
 					},
 
@@ -1058,7 +1275,9 @@ export const asyncRoutes = [
 						component: () => import("@/views/examine/goodsrefunds/popularizeaudit"),
 						meta: {
 							title: "推广专区订单退款",
-							permissions: "popularizeaudit"
+							permissions: "popularizeaudit",
+							keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+							isBack: false
 						}
 					},
 					{
@@ -1067,7 +1286,9 @@ export const asyncRoutes = [
 						component: () => import("@/views/examine/goodsrefunds/explosivesaudit"),
 						meta: {
 							title: "爆品商品订单退款",
-							permissions: "explosivesaudit"
+							permissions: "explosivesaudit",
+							keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+							isBack: false
 						}
 					},
 				]
@@ -1081,7 +1302,9 @@ export const asyncRoutes = [
 		meta: {
 			title: "财务统计",
 			icon: "el-icon-s-finance",
-			permissions: "finance"
+			permissions: "finance",
+			keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+			isBack: false
 		},
 		children: [{
 			path: "foresee",
@@ -1089,7 +1312,9 @@ export const asyncRoutes = [
 			component: () => import("@/views/finance/foresee"),
 			meta: {
 				title: "预见专区",
-				permissions: "foresee"
+				permissions: "foresee",
+				keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+				isBack: false
 			},
 		}, {
 			path: "meet",
@@ -1097,7 +1322,9 @@ export const asyncRoutes = [
 			component: () => import("@/views/finance/meet"),
 			meta: {
 				title: "预见商城",
-				permissions: "meet"
+				permissions: "meet",
+				keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+				isBack: false
 			},
 		}, {
 			path: "life",
@@ -1105,7 +1332,9 @@ export const asyncRoutes = [
 			component: () => import("@/views/finance/life"),
 			meta: {
 				title: "预见生活",
-				permissions: "life"
+				permissions: "life",
+				keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+				isBack: false
 			},
 		}, {
 			path: "popular",
@@ -1113,7 +1342,9 @@ export const asyncRoutes = [
 			component: () => import("@/views/finance/popular"),
 			meta: {
 				title: "推广专区",
-				permissions: "popular"
+				permissions: "popular",
+				keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+				isBack: false
 			},
 		}],
 	},
@@ -1124,7 +1355,9 @@ export const asyncRoutes = [
 		meta: {
 			title: "数据统计",
 			icon: "el-icon-s-home",
-			permissions: "statistics"
+			permissions: "statistics",
+			keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+			isBack: false
 		},
 		children: [{
 				path: "actdata",
@@ -1133,7 +1366,9 @@ export const asyncRoutes = [
 				meta: {
 					title: "抽奖活动",
 
-					permissions: "actdata"
+					permissions: "actdata",
+					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+					isBack: false
 				},
 				children: [{
 					path: "lotterydata",
@@ -1141,7 +1376,9 @@ export const asyncRoutes = [
 					component: () => import("@/views/statistics/actdata/lotterydata"),
 					meta: {
 						title: "抽奖活动数据统计",
-						permissions: "lotterydata"
+						permissions: "lotterydata",
+						keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+						isBack: false
 					}
 				}, {
 					path: "diamonddata",
@@ -1149,7 +1386,9 @@ export const asyncRoutes = [
 					component: () => import("@/views/statistics/actdata/diamonddata"),
 					meta: {
 						title: "钻石雨数据统计",
-						permissions: "diamonddata"
+						permissions: "diamonddata",
+						keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+						isBack: false
 					}
 				}, ]
 			},
@@ -1159,7 +1398,9 @@ export const asyncRoutes = [
 				component: () => import("@/views/statistics/vouchersdata"),
 				meta: {
 					title: "代金券数据统计",
-					permissions: "vouchersdata"
+					permissions: "vouchersdata",
+					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+					isBack: false
 				},
 			},
 			{
@@ -1168,7 +1409,9 @@ export const asyncRoutes = [
 				component: () => import("@/views/statistics/repList"),
 				meta: {
 					title: "商品补货统计",
-					permissions: "repList"
+					permissions: "repList",
+					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+					isBack: false
 				},
 			},
 			{
@@ -1177,7 +1420,9 @@ export const asyncRoutes = [
 				component: () => import("@/views/statistics/goodslease"),
 				meta: {
 					title: "商品订单统计",
-					permissions: "goodslease"
+					permissions: "goodslease",
+					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+					isBack: false
 				},
 			},
 			{
@@ -1186,7 +1431,9 @@ export const asyncRoutes = [
 				component: () => import("@/views/statistics/boxlease"),
 				meta: {
 					title: "租赁订单统计",
-					permissions: "boxlease"
+					permissions: "boxlease",
+					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+					isBack: false
 				},
 			},
 			{
@@ -1195,7 +1442,9 @@ export const asyncRoutes = [
 				component: () => import("@/views/statistics/vipdata"),
 				meta: {
 					title: "会员数据统计",
-					permissions: "vipdata"
+					permissions: "vipdata",
+					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+					isBack: false
 				},
 			},
 			{
@@ -1204,7 +1453,9 @@ export const asyncRoutes = [
 				component: () => import("@/views/statistics/diamondpaydata"),
 				meta: {
 					title: "钻石充值数据统计",
-					permissions: "diamondpaydata"
+					permissions: "diamondpaydata",
+					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+					isBack: false
 				},
 			},
 
@@ -1214,7 +1465,9 @@ export const asyncRoutes = [
 				component: () => import("@/views/statistics/newcomerdata"),
 				meta: {
 					title: "新人红包数据统计",
-					permissions: "newcomerdata"
+					permissions: "newcomerdata",
+					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+					isBack: false
 				},
 			},
 			{
@@ -1223,7 +1476,9 @@ export const asyncRoutes = [
 				component: () => import("@/views/statistics/popularizetj"),
 				meta: {
 					title: "推广员统计",
-					permissions: "popularizetj"
+					permissions: "popularizetj",
+					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+					isBack: false
 				},
 			},
 
@@ -1233,7 +1488,9 @@ export const asyncRoutes = [
 				component: () => import("@/views/statistics/userdatas"),
 				meta: {
 					title: "用户数据统计",
-					permissions: "userdatas"
+					permissions: "userdatas",
+					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+					isBack: false
 				},
 				children: [{
 						path: "userdata",
@@ -1241,7 +1498,9 @@ export const asyncRoutes = [
 						component: () => import("@/views/statistics/userdatas/userdata"),
 						meta: {
 							title: "用户数据统计",
-							permissions: "userdata"
+							permissions: "userdata",
+							keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+							isBack: false
 						}
 					},
 					{
@@ -1250,7 +1509,9 @@ export const asyncRoutes = [
 						component: () => import("@/views/statistics/userdatas/silentuserdata"),
 						meta: {
 							title: "沉默用户数据统计",
-							permissions: "silentuserdata"
+							permissions: "silentuserdata",
+							keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+							isBack: false
 						}
 					},
 					{
@@ -1259,7 +1520,9 @@ export const asyncRoutes = [
 						component: () => import("@/views/statistics/userdatas/userpaydata"),
 						meta: {
 							title: "用户付费数据统计",
-							permissions: "userpaydata"
+							permissions: "userpaydata",
+							keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+							isBack: false
 						}
 					},
 					{
@@ -1268,7 +1531,9 @@ export const asyncRoutes = [
 						component: () => import("@/views/statistics/userdatas/useractdata"),
 						meta: {
 							title: "用户行为分析统计",
-							permissions: "useractdata"
+							permissions: "useractdata",
+							keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+							isBack: false
 						}
 					},
 				]
@@ -1282,7 +1547,9 @@ export const asyncRoutes = [
 		meta: {
 			title: "全局设置",
 			icon: "el-icon-s-tools",
-			permissions: "global"
+			permissions: "global",
+			keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+			isBack: false
 		},
 		children: [{
 				path: "system",
@@ -1291,7 +1558,9 @@ export const asyncRoutes = [
 				meta: {
 					title: "系统设置",
 
-					permissions: "system"
+					permissions: "system",
+					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+					isBack: false
 				},
 				children: [{
 						path: "weixin",
@@ -1299,7 +1568,9 @@ export const asyncRoutes = [
 						component: () => import("@/views/global/system/weixin"),
 						meta: {
 							title: "微信配置",
-							permissions: "weixin"
+							permissions: "weixin",
+							keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+							isBack: false
 						}
 					}, {
 						path: "ali",
@@ -1307,7 +1578,9 @@ export const asyncRoutes = [
 						component: () => import("@/views/global/system/ali"),
 						meta: {
 							title: "阿里账户设置",
-							permissions: "ali"
+							permissions: "ali",
+							keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+							isBack: false
 						}
 					},
 					{
@@ -1316,7 +1589,9 @@ export const asyncRoutes = [
 						component: () => import("@/views/global/system/courier"),
 						meta: {
 							title: "快递100",
-							permissions: "courier"
+							permissions: "courier",
+							keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+							isBack: false
 						}
 					},
 					{
@@ -1325,7 +1600,9 @@ export const asyncRoutes = [
 						component: () => import("@/views/global/system/consultation"),
 						meta: {
 							title: "前端用户咨询反馈",
-							permissions: "consultation"
+							permissions: "consultation",
+							keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+							isBack: false
 						}
 					},
 					{
@@ -1334,7 +1611,9 @@ export const asyncRoutes = [
 						component: () => import("@/views/global/system/projectup"),
 						meta: {
 							title: "应急箱项目上传",
-							permissions: "projectup"
+							permissions: "projectup",
+							keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+							isBack: false
 						}
 					},
 					{
@@ -1343,7 +1622,9 @@ export const asyncRoutes = [
 						component: () => import("@/views/global/system/fenrun"),
 						meta: {
 							title: "推广分润设置",
-							permissions: "fenrun"
+							permissions: "fenrun",
+							keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+							isBack: false
 						}
 					},
 					{
@@ -1352,7 +1633,9 @@ export const asyncRoutes = [
 						component: () => import("@/views/global/system/goodspay"),
 						meta: {
 							title: "补货申请",
-							permissions: "goodspay"
+							permissions: "goodspay",
+							keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+							isBack: false
 						}
 					},
 				]
@@ -1364,7 +1647,9 @@ export const asyncRoutes = [
 				component: () => import("@/views/global/appset"),
 				meta: {
 					title: "app设置",
-					permissions: "appset"
+					permissions: "appset",
+					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+					isBack: false
 				},
 				children: [{
 						path: "version",
@@ -1372,7 +1657,9 @@ export const asyncRoutes = [
 						component: () => import("@/views/global/appset/version"),
 						meta: {
 							title: "版本设置",
-							permissions: "version"
+							permissions: "version",
+							keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+							isBack: false
 						}
 					},
 					{
@@ -1381,7 +1668,9 @@ export const asyncRoutes = [
 						component: () => import("@/views/global/appset/dividends"),
 						meta: {
 							title: "分利信息",
-							permissions: "dividends"
+							permissions: "dividends",
+							keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+							isBack: false
 						}
 					},
 					{
@@ -1390,7 +1679,9 @@ export const asyncRoutes = [
 						component: () => import("@/views/global/appset/banner"),
 						meta: {
 							title: "banner设置",
-							permissions: "banner"
+							permissions: "banner",
+							keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+							isBack: false
 						}
 					},
 
@@ -1407,7 +1698,9 @@ export const asyncRoutes = [
 		meta: {
 			title: "租赁商管理",
 			icon: "el-icon-s-finance",
-			permissions: "broker"
+			permissions: "broker",
+			keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+			isBack: false
 		},
 		children: [{
 			path: "brokerlist",
@@ -1415,7 +1708,9 @@ export const asyncRoutes = [
 			component: () => import("@/views/broker/brokerlist"),
 			meta: {
 				title: "租赁商列表",
-				permissions: "brokerlist"
+				permissions: "brokerlist",
+				keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+				isBack: false
 			},
 		}, ],
 	},
@@ -1426,7 +1721,9 @@ export const asyncRoutes = [
 		meta: {
 			title: "铺设点位管理",
 			icon: "el-icon-s-finance",
-			permissions: "points"
+			permissions: "points",
+			keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+			isBack: false
 		},
 		children: [{
 				path: "pointslist",
@@ -1434,7 +1731,9 @@ export const asyncRoutes = [
 				component: () => import("@/views/points/pointslist"),
 				meta: {
 					title: "点位列表",
-					permissions: "pointslist"
+					permissions: "pointslist",
+					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+					isBack: false
 				},
 			},
 			{
@@ -1443,7 +1742,9 @@ export const asyncRoutes = [
 				component: () => import("@/views/points/pointslistpay"),
 				meta: {
 					title: "点位申请列表",
-					permissions: "pointslistpay"
+					permissions: "pointslistpay",
+					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+					isBack: false
 				},
 			},
 		],
@@ -1455,7 +1756,9 @@ export const asyncRoutes = [
 		meta: {
 			title: "应急箱管理",
 			icon: "el-icon-s-finance",
-			permissions: "emergency"
+			permissions: "emergency",
+			keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+			isBack: false
 		},
 		children: [{
 			path: "emergencylist",
@@ -1463,7 +1766,9 @@ export const asyncRoutes = [
 			component: () => import("@/views/emergency/emergencylist"),
 			meta: {
 				title: "应急箱列表",
-				permissions: "emergencylist"
+				permissions: "emergencylist",
+				keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+				isBack: false
 			},
 		}, ],
 	},
@@ -1474,7 +1779,9 @@ export const asyncRoutes = [
 		meta: {
 			title: "药房管理",
 			icon: "el-icon-s-finance",
-			permissions: "pharmacy"
+			permissions: "pharmacy",
+			keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+			isBack: false
 		},
 		children: [{
 				path: "pharmacylist",
@@ -1482,7 +1789,9 @@ export const asyncRoutes = [
 				component: () => import("@/views/pharmacy/pharmacylist"),
 				meta: {
 					title: "药房列表",
-					permissions: "pharmacylist"
+					permissions: "pharmacylist",
+					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+					isBack: false
 				},
 			},
 			{
@@ -1491,7 +1800,9 @@ export const asyncRoutes = [
 				component: () => import("@/views/pharmacy/pharmacyfen"),
 				meta: {
 					title: "药房分润",
-					permissions: "pharmacyfen"
+					permissions: "pharmacyfen",
+					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+					isBack: false
 				},
 			},
 		],
@@ -1503,7 +1814,9 @@ export const asyncRoutes = [
 		meta: {
 			title: "库存管理",
 			icon: "el-icon-s-finance",
-			permissions: "inven"
+			permissions: "inven",
+			keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+			isBack: false
 		},
 		children: [{
 				path: "invenlist",
@@ -1511,7 +1824,9 @@ export const asyncRoutes = [
 				component: () => import("@/views/inven/invenlist"),
 				meta: {
 					title: "库存管理",
-					permissions: "invenlist"
+					permissions: "invenlist",
+					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+					isBack: false
 				},
 			},
 			{
@@ -1520,7 +1835,9 @@ export const asyncRoutes = [
 				component: () => import("@/views/inven/goodsinvenlist"),
 				meta: {
 					title: "商品库存",
-					permissions: "goodsinvenlist"
+					permissions: "goodsinvenlist",
+					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+					isBack: false
 				},
 			},
 			{
@@ -1529,7 +1846,9 @@ export const asyncRoutes = [
 				component: () => import("@/views/inven/goodsstorage"),
 				meta: {
 					title: "商品入库",
-					permissions: "goodsstorage"
+					permissions: "goodsstorage",
+					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+					isBack: false
 				},
 			},
 			{
@@ -1538,7 +1857,9 @@ export const asyncRoutes = [
 				component: () => import("@/views/inven/goodsout"),
 				meta: {
 					title: "商品出库",
-					permissions: "goodsout"
+					permissions: "goodsout",
+					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+					isBack: false
 				},
 			},
 			{
@@ -1547,7 +1868,9 @@ export const asyncRoutes = [
 				component: () => import("@/views/inven/goodsset"),
 				meta: {
 					title: "商品管理",
-					permissions: "goodsset"
+					permissions: "goodsset",
+					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+					isBack: false
 				},
 			},
 			{
@@ -1556,10 +1879,58 @@ export const asyncRoutes = [
 				component: () => import("@/views/inven/labelset"),
 				meta: {
 					title: "标签管理",
-					permissions: "labelset"
+					permissions: "labelset",
+					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+					isBack: false
 				},
 			},
 		],
+	},
+	{
+		path: "/guangao",
+		name: "guangao",
+		component: Layout,
+		meta: {
+			title: "广告投放",
+			icon: "el-icon-s-finance",
+			permissions: "guangao",
+			keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+			isBack: false
+		},
+		children: [{
+			path: "guangaox",
+			name: "guangaox",
+			component: () => import("@/views/guangao/guangaox"),
+			meta: {
+				title: "广告线下投放",
+				permissions: "guangaox",
+				keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+				isBack: false
+			},
+		}, ],
+	},
+	{
+		path: "/dingdan",
+		name: "dingdan",
+		component: Layout,
+		meta: {
+			title: "虚拟订单",
+			icon: "el-icon-s-finance",
+			permissions: "dingdan",
+			keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+			isBack: false
+		},
+		children: [{
+			path: "dingdanx",
+			name: "dingdanx",
+			component: () => import("@/views/dingdan/dingdanx"),
+			meta: {
+				title: "虚拟订单",
+				permissions: "dingdanx",
+				keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+				isBack: false
+			},
+		}, ],
 	},
 	{
 		path: "/day",
@@ -1568,7 +1939,9 @@ export const asyncRoutes = [
 		meta: {
 			title: "操作日志",
 			icon: "el-icon-s-finance",
-			permissions: "day"
+			permissions: "day",
+			keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+			isBack: false
 		},
 		children: [{
 			path: "daylist",
@@ -1576,7 +1949,9 @@ export const asyncRoutes = [
 			component: () => import("@/views/day/daylist"),
 			meta: {
 				title: "日志",
-				permissions: "daylist"
+				permissions: "daylist",
+				keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+				isBack: false
 			},
 		}, ],
 	},

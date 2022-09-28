@@ -21,7 +21,6 @@
             filterable
             @change="change1"
           ></el-cascader>
-
           <el-form-item prop="officina_id">
             <el-select
               v-model="name"
@@ -107,7 +106,9 @@
           <span
             >{{ scope.row.dprovince }}-{{ scope.row.dcity }}-{{
               scope.row.darea
-            }}--{{ scope.row.dbigname }}--{{ scope.row.dname }}</span
+            }}--{{ scope.row.ddetails }}--{{ scope.row.dbigname }}--{{
+              scope.row.dname
+            }}</span
           >
         </template></el-table-column
       >

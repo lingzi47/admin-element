@@ -90,7 +90,7 @@ export default {
       this.getUserList();
     },
     go() {
-      this.$router.go(-1);
+      this.$router.back();
     },
     getUserList() {
       //console.log(this.form.time);

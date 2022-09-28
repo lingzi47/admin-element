@@ -86,7 +86,7 @@ export default {
   computed: {},
   methods: {
     go() {
-      this.$router.go(-1);
+      this.$router.back();
     },
 
     checkPermission,

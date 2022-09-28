@@ -267,14 +267,13 @@ export default {
     },
     chan(id) {
       console.log(id);
-
       console.log(this.list1.findIndex((item) => item.id == id));
       let index = this.list1.findIndex((item) => item.id == id);
       console.log(index);
       console.log(this.list1[index]);
       let obj = this.list1[index];
       this.sum = String(obj.total_profit);
-      console.log(this.sum);
+      // console.log(this.sum);
     },
     change1(data) {
       console.log(data);
@@ -305,6 +304,8 @@ export default {
       console.log(type);
       this.typeid = type;
       console.log(row);
+      console.log(row.total_profit);
+
       if (row.type == 20) {
         this.type = "渠道商";
         this.position = row.position;
@@ -334,6 +335,7 @@ export default {
         this.position = row.position;
 
         this.goodsForm.officina_id = String(row.officina_id);
+        this.sum = String(row.total_profit);
 
         let arr1 = [];
         arr1.push(row.yaoprovince);
@@ -372,7 +374,7 @@ export default {
       console.log(11);
     },
     go() {
-      this.$router.go(-1);
+      this.$router.back();
     },
     submitForm() {
       if (this.typeid == 1) {
@@ -441,6 +443,7 @@ export default {
               sum += Number(item.value);
             });
             console.log(sum);
+            console.log(this.sum);
             if (sum > this.sum) {
               this.$message.error("分润占比超过最大");
               return;

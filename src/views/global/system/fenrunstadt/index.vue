@@ -133,7 +133,7 @@ export default {
       exOperation(params).then((res) => {
         if (res.status == 200) {
           this.$message.success("提交成功！");
-          this.$router.go(-1);
+          this.$router.back();
         }
       });
     },
@@ -146,7 +146,7 @@ export default {
       exOperation(params).then((res) => {
         if (res.status == 200) {
           this.$message.success("提交成功！");
-          this.$router.go(-1);
+          this.$router.back();
         }
       });
     },

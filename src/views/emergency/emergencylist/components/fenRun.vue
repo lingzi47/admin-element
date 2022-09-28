@@ -16,12 +16,12 @@
           </el-col>
           <el-col :span="24">
             <el-form-item label="设备供货药房:"
-              >{{ shen }}-{{ shi }}-{{ qu }}-{{ details }}
+              >{{ province }}-{{ city }}-{{ area }}-{{ big_name }}-{{ name }}
             </el-form-item>
           </el-col>
           <el-col :span="24">
             <el-form-item label="设备位置:"
-              >{{ province }}-{{ city }}-{{ area }}-{{ big_name }}-{{ name }}
+              >{{ shen }}-{{ shi }}-{{ qu }}-{{ details }}
             </el-form-item>
           </el-col>
           <el-col :span="24">

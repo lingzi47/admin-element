@@ -4,7 +4,7 @@
       class="AddDialog"
       title="订单详情"
       :visible.sync="dialogVisible"
-      width="1200px"
+      width="1800px"
       hegiht="1000px"
       :close-on-click-modal="false"
       @close="close"
@@ -105,6 +105,17 @@
           label="订单编号"
           align="center"
         ></el-table-column>
+
+        <el-table-column
+          prop="box_name"
+          label="设备编号"
+          align="center"
+        ></el-table-column>
+        <el-table-column
+          prop="zls_id"
+          label="租赁商id"
+          align="center"
+        ></el-table-column>
         <el-table-column
           prop="productName"
           label="商品名称"
@@ -129,7 +140,21 @@
             >
           </template>
         </el-table-column>
-
+        <el-table-column
+          prop="yf_price"
+          label="药房收益"
+          align="center"
+        ></el-table-column>
+        <el-table-column
+          prop="user_price"
+          label="租赁商收益"
+          align="center"
+        ></el-table-column>
+        <el-table-column
+          prop="cost_price"
+          label="渠道商收益"
+          align="center"
+        ></el-table-column>
         <el-table-column label="付款方式" align="center">
           <template slot-scope="scope">
             <el-link v-if="scope.row.orderPayType == 0">未知</el-link>

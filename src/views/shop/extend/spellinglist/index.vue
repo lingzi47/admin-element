@@ -20,7 +20,9 @@
             >
               <el-option label="全部" value=""></el-option>
               <el-option label="2500" value="2500"></el-option>
+              <el-option label="1875" value="1875"></el-option>
               <el-option label="1700" value="1700"></el-option>
+              <el-option label="1580" value="1580"></el-option>
             </el-select>
           </el-form-item>
           <el-form-item label="购买方式" prop="box_type">

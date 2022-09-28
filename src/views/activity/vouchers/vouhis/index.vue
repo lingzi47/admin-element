@@ -84,7 +84,7 @@ export default {
   computed: {},
   methods: {
     go() {
-      this.$router.go(-1);
+      this.$router.back();
     },
     // row是我从上边函数传下来的数据，可以拿到当前选中的状态值，下边的请求是因为我要传给后端调的接口
     open() {

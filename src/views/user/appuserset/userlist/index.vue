@@ -359,7 +359,7 @@ export default {
     go() {
       if (this.arr.length < 1) {
         //console.log("我不显示");
-        this.$router.go(-1);
+        this.$router.back();
       } else {
         //console.log("我要的", this.arr.slice(-1));
         let a = this.arr[this.arr.length - 1];

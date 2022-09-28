@@ -194,7 +194,7 @@ export default {
       setid: "",
       sev_id: "",
       phone: "",
-
+      name: "",
       position_user: "",
       box_name: "",
       box_uid: "",
@@ -263,7 +263,7 @@ export default {
         token: sessionStorage.getItem("token"),
         sta: 20,
         id: this.id,
-        box_name: this.box_name,
+        box_name: this.name,
       };
       bindsta(params).then((res) => {
         if (res.data.code == 200) {
@@ -279,7 +279,7 @@ export default {
         token: sessionStorage.getItem("token"),
         sta: 30,
         id: this.id,
-        box_name: this.box_name,
+        box_name: this.name,
       };
       bindsta(params).then((res) => {
         if (res.data.code == 200) {
@@ -298,7 +298,7 @@ export default {
       this.dialogVisible = true;
       console.log(row);
       this.id = row.bind_id;
-      this.box_name = row.box_name;
+      this.name = row.box_name;
     },
     checkPermission,
     // 切换分页

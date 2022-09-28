@@ -681,3 +681,61 @@ export const tuiliststa = (params) => request.post('/manybox/tuiliststa',
 export const addtuilist = (params) => request.post('/manybox/addtuilist',
     params
 )
+//adminApi/box/boxStock/tagList
+export const tagList = (params) => request.post('/adminApi/box/boxStock/tagList ',
+    params
+)
+//adminApi/box/boxStock/goodsList 
+export const goodsList = (params) => request.post('/adminApi/box/boxStock/goodsList ',
+    params
+)
+//adminApi/box/boxStock/goodsAdd
+export const goodsAdd = (params) => request.post('/adminApi/box/boxStock/goodsAdd ',
+    params
+)
+//adminApi/box/boxStock/goodsSave
+export const goodsSave = (params) => request.post('/adminApi/box/boxStock/goodsSave ',
+    params
+)
+//adminApi/box/boxStock/goodsDel
+export const goodsDel = (params) => request.post('/adminApi/box/boxStock/goodsDel ',
+    params
+)
+//adminApi/box/boxStock/goodsExp
+export const goodsExp = (params) => request.post('/adminApi/box/boxStock/goodsExp ',
+    params
+)
+//web市场 /manybox/paylist
+export const manyboxpaylist = (params) => request.post('/manybox/paylist',
+    params
+)
+///manybox/payliststa
+export const payliststa = (params) => request.post('/manybox/payliststa',
+    params
+)
+//广告
+export const fakelist = (params) => request.post('adminApi/box/fake/list ',
+    params
+)
+//删除
+export const fakedel = (params) => request.post('adminApi/box/fake/del ',
+    params
+)
+//添加
+export const fakecreate = (params) => request.post('adminApi/box/fake/create ',
+    params
+)
+//虚拟订单
+export const xunilist = (params) => request.post('/manybox/unrealOrder',
+    params
+)
+
+//虚拟获取商品
+export const xunnigoods = (params) => request.post('manybox/unrealOrdergoods ',
+    params
+)
+
+//虚拟添加
+export const xunniadd = (params) => request.post('/manybox/unrealOrderAdd',
+    params
+)

@@ -2,13 +2,31 @@
   <div class="user">
     <div class="block-quote">
       <el-form :inline="true">
-        <el-form-item label="标签名称" prop="name">
+        <el-form-item label="商品名称" prop="name">
           <el-input
             style="width: 180px"
-            v-model="number"
+            v-model="goods_name"
             clearable
-            placeholder="请输入标签名称"
+            placeholder="请输入商品名称"
           ></el-input>
+        </el-form-item>
+        <el-form-item label="商品编号" prop="name">
+          <el-input
+            style="width: 180px"
+            v-model="id"
+            clearable
+            placeholder="请输入商品编号"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="标签" prop="name">
+          <el-select v-model="name" placeholder="请选择标签">
+            <el-option
+              v-for="item in list"
+              :value="item.id"
+              :key="item.id"
+              :label="item.name"
+            ></el-option>
+          </el-select>
         </el-form-item>
 
         <el-form-item style="float: right">
@@ -32,17 +50,23 @@
           }}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="number" label="标签名称" align="center">
+      <el-table-column prop="goods_name" label="商品名称" align="center">
       </el-table-column>
-      <el-table-column prop="number" label="联系人" align="center">
+      <el-table-column prop="id" label="产品编号" align="center">
       </el-table-column>
-      <el-table-column prop="number" label="联系方式" align="center">
+      <el-table-column prop="type" label="品类" align="center">
       </el-table-column>
-      <el-table-column prop="number" label="地址" align="center">
+      <el-table-column prop="buy_price" label="销售价" align="center">
       </el-table-column>
-      <el-table-column prop="number" label="创建时间" align="center">
+      <el-table-column prop="price" label="成本价" align="center">
       </el-table-column>
-      <el-table-column prop="number" label="备注" align="center">
+      <el-table-column prop="number" label="仓库库存" align="center">
+      </el-table-column>
+      <el-table-column prop="all_price" label="库存总价" align="center">
+      </el-table-column>
+      <el-table-column prop="name" label="标签" align="center">
+      </el-table-column>
+      <el-table-column prop="remark" label="备注" align="center">
       </el-table-column>
       <el-table-column label="操作" align="center" width="350">
         <template slot-scope="scope">
@@ -68,7 +92,7 @@
 </template>
 
 <script>
-import { boxgoodslist, officinalist } from "@/request/api";
+import { goodsList, tagList, goodsDel } from "@/request/api";
 import { checkPermission } from "@/utils/permissions";
 import pageTable from "@/components/pageTable.vue";
 import { areaListData } from "@/utils/area";
@@ -82,23 +106,13 @@ export default {
   },
   data() {
     return {
-      officina_id: "",
-      province: "",
-      type: "",
-      city: "",
-      number: "",
+      goods_name: "",
+      id: "",
+      tag_id: "",
       name: "",
-      token: "",
-      phone: "",
-      officina_id: "",
-      num: "",
-      sta: "",
-      value: "",
-      area: "",
       userList: [], // 列表
-      list: [], // 列表
-      list1: [],
-      time: "",
+      list: [],
+
       page: {
         //分页信息
         currentPage: 1, //当前页
@@ -111,6 +125,7 @@ export default {
   created() {
     this.token = sessionStorage.getItem("token");
     this.getUserList(); //获取用户列表
+    this.getlist();
   },
   mounted() {},
   computed: {},
@@ -124,11 +139,15 @@ export default {
       console.log(this.num);
 
       window.location.href =
-        "https://y4.wjw.cool/admin/box/expOfficina" +
+        "https://y4.wjw.cool/adminApi/box/boxStock/goodsExp" +
         "?token=" +
         this.token +
-        "&number=" +
-        this.num;
+        "&goods_name=" +
+        this.goods_name +
+        "&tag_id=" +
+        this.name +
+        "&id=" +
+        this.id;
     },
 
     showtable(row) {
@@ -146,11 +165,14 @@ export default {
             token: sessionStorage.getItem("token"),
             id: row.id,
           };
-          delLevel(params).then((res) => {
+          goodsDel(params).then((res) => {
             //console.log(res.data);
             if (res.data.code == 200) {
-              this.tableshow();
               this.$message.success("删除成功");
+              this.getUserList();
+            } else {
+              this.$message.error(res.data.msg);
+              this.getUserList();
             }
           });
         })
@@ -170,16 +192,26 @@ export default {
         page: 1,
         limit: this.page.pageSize,
         token: sessionStorage.getItem("token"),
-        number: this.number,
-        officina_id: this.officina_id,
-        sta: this.sta,
+        goods_name: this.goods_name,
+        id: this.id,
+        tag_id: this.name,
       };
-      boxgoodslist(params).then((res) => {
-        this.page.total = res.data.count;
-        this.userList = res.data.data;
+      goodsList(params).then((res) => {
+        this.page.total = res.data.data.total;
+        this.userList = res.data.data.data;
         this.$refs.dataTable.setPageInfo({
           total: this.page.total,
         });
+      });
+    },
+    getlist() {
+      let params = {
+        token: sessionStorage.getItem("token"),
+      };
+      tagList(params).then((res) => {
+        console.log(res);
+        this.list = res.data.data;
+        console.log(this.list);
       });
     },
     getUserList() {
@@ -189,10 +221,13 @@ export default {
         page: this.page.currentPage,
         limit: this.page.pageSize,
         token: sessionStorage.getItem("token"),
+        goods_name: this.goods_name,
+        id: this.id,
+        tag_id: this.name,
       };
-      boxgoodslist(params).then((res) => {
-        this.page.total = res.data.count;
-        this.userList = res.data.data;
+      goodsList(params).then((res) => {
+        this.page.total = res.data.data.total;
+        this.userList = res.data.data.data;
         this.$refs.dataTable.setPageInfo({
           total: this.page.total,
         });

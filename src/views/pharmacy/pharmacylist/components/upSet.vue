@@ -33,7 +33,11 @@
           </el-col>
         </el-row>
       </el-form>
-      <el-table ref="dataTable" :data="userList">
+      <page-table
+        ref="dataTable"
+        :data="userList"
+        @changeCurrentPage="changeCurrent"
+      >
         <el-table-column label="序号" align="center">
           <template slot-scope="scope">
             <span>{{
@@ -53,7 +57,7 @@
             >
           </template>
         </el-table-column>
-      </el-table>
+      </page-table>
     </el-dialog>
   </div>
 </template>
@@ -135,9 +139,9 @@ export default {
       boxread(params).then((res) => {
         this.page.total = res.data.count;
         this.userList = res.data.data;
-        // this.$refs.dataTable.setPageInfo({
-        //   total: this.page.total,
-        // });
+        this.$refs.dataTable.setPageInfo({
+          total: this.page.total,
+        });
       });
     },
     showtable() {},

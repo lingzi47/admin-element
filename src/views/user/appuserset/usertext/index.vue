@@ -58,6 +58,19 @@
     </div>
     <div style="margin-left: 500px">
       <el-form :inline="true" style="margin-top: 20px">
+        <el-form-item label="7月11日前:"></el-form-item>
+        <el-form-item label="累计获得:"> {{ alladd }}</el-form-item>
+        <el-form-item label="累计消耗:" style="margin-left: 50px">
+          {{ allcut }}</el-form-item
+        >
+        <el-form-item label="剩余:" style="margin-left: 50px">
+          {{ alladd - allcut }}</el-form-item
+        >
+      </el-form>
+    </div>
+    <div style="margin-left: 500px">
+      <el-form :inline="true">
+        <el-form-item label="7月11日后:"></el-form-item>
         <el-form-item label="累计获得:"> {{ alladd }}</el-form-item>
         <el-form-item label="累计消耗:" style="margin-left: 50px">
           {{ allcut }}</el-form-item

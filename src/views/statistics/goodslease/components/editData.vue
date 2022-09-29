@@ -78,7 +78,7 @@
             <el-date-picker
               v-model="time"
               type="daterange"
-              value-format="yyyy-MM-dd "
+              value-format="yyyy-MM-dd"
               range-separator="至"
               start-placeholder="开始日期"
               end-placeholder="结束日期"
@@ -240,17 +240,25 @@ export default {
   },
   created() {
     var date = new Date();
-    var s1 =
-      date.getFullYear() +
-      "-" +
-      (date.getMonth() + 1) +
-      "-" +
-      (date.getDate() - 1);
-    var e1 =
-      date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+    // console.log(date);
+    var y = date.getFullYear();
+    var m = date.getMonth() + 1;
+    m = m < 10 ? "0" + m : m;
+    var d = date.getDate();
+    d = d < 10 ? "0" + d : d;
+    var s1 = y + "-" + m + "-" + d;
+    // console.log(s1, "s1");
+    var y1 = date.getFullYear();
+    var m1 = date.getMonth() + 1;
+    m1 = m1 < 10 ? "0" + m1 : m1;
+    var d1 = date.getDate() - 1;
+    d1 = d1 < 10 ? "0" + d1 : d1;
+    var e1 = y1 + "-" + m1 + "-" + d1;
+    // console.log(e1, "e1");
     let arr = [];
-    arr.push(s1);
     arr.push(e1);
+    arr.push(s1);
+
     this.time = arr; //时间段的数组；第一项表示开始时间，第二项表示结束时间
   },
   mounted() {},

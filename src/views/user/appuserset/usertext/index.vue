@@ -58,19 +58,19 @@
     </div>
     <div style="margin-left: 500px">
       <el-form :inline="true" style="margin-top: 20px">
-        <el-form-item label="7月11日前:"></el-form-item>
-        <el-form-item label="累计获得:"> {{ alladd }}</el-form-item>
+        <el-form-item label="老系统:"></el-form-item>
+        <el-form-item label="累计获得:"> {{ oldadd }}</el-form-item>
         <el-form-item label="累计消耗:" style="margin-left: 50px">
-          {{ allcut }}</el-form-item
+          {{ oldcut }}</el-form-item
         >
         <el-form-item label="剩余:" style="margin-left: 50px">
-          {{ alladd - allcut }}</el-form-item
+          {{ oldadd - oldcut }}</el-form-item
         >
       </el-form>
     </div>
     <div style="margin-left: 500px">
       <el-form :inline="true">
-        <el-form-item label="7月11日后:"></el-form-item>
+        <el-form-item label="新系统:"></el-form-item>
         <el-form-item label="累计获得:"> {{ alladd }}</el-form-item>
         <el-form-item label="累计消耗:" style="margin-left: 50px">
           {{ allcut }}</el-form-item
@@ -165,6 +165,8 @@ export default {
       id: "",
       alladd: "",
       allcut: "",
+      oldcut: "",
+      oldadd: "",
       form: {
         low_num: "",
         high_num: "",
@@ -228,6 +230,8 @@ export default {
         this.userList = res.data.data.data;
         this.alladd = res.data.data.num.alladd;
         this.allcut = res.data.data.num.allcut;
+        this.oldadd = res.data.data.oldnum.oldadd;
+        this.oldcut = res.data.data.oldnum.oldcut;
         this.$refs.dataTable.setPageInfo({
           total: this.page.total,
         });
@@ -254,7 +258,8 @@ export default {
         this.page.total = res.data.data.total;
         this.alladd = res.data.data.num.alladd;
         this.allcut = res.data.data.num.allcut;
-
+        this.oldadd = res.data.data.oldnum.oldadd;
+        this.oldcut = res.data.data.oldnum.oldcut;
         this.userList = res.data.data.data;
         this.$refs.dataTable.setPageInfo({
           total: this.page.total,

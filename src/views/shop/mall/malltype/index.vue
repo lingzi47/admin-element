@@ -154,7 +154,6 @@ export default {
       // 1:新增，2:编辑，3:分类新增
       this.$refs.addoreditData.show(3, JSON.parse(JSON.stringify(row)));
     },
-
     editData(type, row) {
       if ((type == 1 && this.tableSelectList.length == 1) || type == 2) {
         let rowData = type == 1 ? this.tableSelectList[0] : row;

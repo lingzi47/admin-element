@@ -22,11 +22,7 @@
           </el-form-item>
 
           <el-form-item style="float: right">
-            <el-button
-              v-if="checkPermission('operationsearch')"
-              type="primary"
-              icon="el-icon-search"
-              @click="searchinfo"
+            <el-button type="primary" icon="el-icon-search" @click="searchinfo"
               >搜索</el-button
             >
           </el-form-item>
@@ -205,9 +201,9 @@ export default {
       //console.log(res.data.data.data);
       if (res.data.code == 200) {
         this.shoporder = res.data.data.data;
-        this.$refs.dataTable.setPageInfo({
-          total: res.data.data.total,
-        });
+        // this.$refs.dataTable.setPageInfo({
+        //   total: res.data.data.total,
+        // });
       }
     },
     async searchinfo() {
@@ -220,12 +216,12 @@ export default {
         page: 1,
         limit: this.page.limit,
       });
-      //console.log(res.data.data.data);
+
       if (res.data.code == 200) {
         this.shoporder = res.data.data.data;
-        this.$refs.dataTable.setPageInfo({
-          total: res.data.data.total,
-        });
+        // this.$refs.dataTable.setPageInfo({
+        //   total: res.data.data.total,
+        // });
       }
     },
     checkPermission,

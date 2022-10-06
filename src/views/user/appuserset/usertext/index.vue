@@ -56,27 +56,50 @@
         </el-form-item>
       </el-form>
     </div>
-    <div style="margin-left: 500px">
-      <el-form :inline="true" style="margin-top: 20px">
-        <el-form-item label="老系统:"></el-form-item>
-        <el-form-item label="累计获得:"> {{ oldadd }}</el-form-item>
-        <el-form-item label="累计消耗:" style="margin-left: 50px">
+    <div style="margin-left: 200px">
+      <el-form :inline="true">
+        <el-form-item style="margin-left: 150px">
+          <span style="color: red; font-size: 16px">老系统:</span>
+        </el-form-item>
+        <el-form-item>
+          <span style="font-size: 15px">累计获得:</span>
+          {{ oldadd }}</el-form-item
+        >
+        <el-form-item style="margin-left: 50px">
+          <span style="font-size: 15px">累计消耗:</span>
           {{ oldcut }}</el-form-item
         >
-        <el-form-item label="剩余:" style="margin-left: 50px">
+        <el-form-item style="margin-left: 50px">
+          <span style="font-size: 15px">剩余:</span>
           {{ oldadd - oldcut }}</el-form-item
+        >
+        <el-form-item style="margin-left: 150px">
+          <span style="color: red; font-size: 16px">新系统:</span>
+        </el-form-item>
+        <el-form-item>
+          <span style="font-size: 15px">累计获得:</span>
+          {{ alladd }}</el-form-item
+        >
+        <el-form-item style="margin-left: 50px"
+          ><span style="font-size: 15px">累计消耗:</span>
+          {{ allcut }}</el-form-item
+        >
+        <el-form-item style="margin-left: 50px"
+          ><span style="font-size: 15px">剩余:</span>
+          {{ alladd - allcut }}</el-form-item
         >
       </el-form>
     </div>
-    <div style="margin-left: 500px">
+
+    <div style="margin-left: 700px; margin-top: -15px">
       <el-form :inline="true">
-        <el-form-item label="新系统:"></el-form-item>
-        <el-form-item label="累计获得:"> {{ alladd }}</el-form-item>
-        <el-form-item label="累计消耗:" style="margin-left: 50px">
-          {{ allcut }}</el-form-item
+        <el-form-item
+          ><span style="font-size: 15px">最后提现时间:</span
+          >{{ time }}</el-form-item
         >
-        <el-form-item label="剩余:" style="margin-left: 50px">
-          {{ alladd - allcut }}</el-form-item
+        <el-form-item
+          ><span style="font-size: 15px">剩余钻石:</span
+          >{{ have_zs }}</el-form-item
         >
       </el-form>
     </div>
@@ -167,6 +190,8 @@ export default {
       allcut: "",
       oldcut: "",
       oldadd: "",
+      time: "",
+      have_zs: "",
       form: {
         low_num: "",
         high_num: "",
@@ -228,6 +253,8 @@ export default {
         this.arr = res.data.data.member_count;
         this.page.total = res.data.data.total;
         this.userList = res.data.data.data;
+        this.time = res.data.data.lastInfo.created_at;
+        this.have_zs = res.data.data.lastInfo.have_zs;
         this.alladd = res.data.data.num.alladd;
         this.allcut = res.data.data.num.allcut;
         this.oldadd = res.data.data.oldnum.oldadd;
@@ -258,6 +285,8 @@ export default {
         this.page.total = res.data.data.total;
         this.alladd = res.data.data.num.alladd;
         this.allcut = res.data.data.num.allcut;
+        this.time = res.data.data.lastInfo.created_at;
+        this.have_zs = res.data.data.lastInfo.have_zs;
         this.oldadd = res.data.data.oldnum.oldadd;
         this.oldcut = res.data.data.oldnum.oldcut;
         this.userList = res.data.data.data;

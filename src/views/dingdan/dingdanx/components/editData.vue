@@ -17,13 +17,13 @@
       >
         <el-row :gutter="15">
           <el-col :span="24">
-            <el-form-item label="商品名称" prop="id">
+            <el-form-item label="商品名称" prop="name">
               <el-select
-                v-model="ruleForm.id"
+                v-model="ruleForm.name"
                 clearable
                 style="width: 230px"
                 filterable
-                placeholder="请选择推荐人id"
+                placeholder="请选择商品名称"
                 @change="change"
               >
                 <el-option
@@ -82,11 +82,11 @@ export default {
       price: "",
       dialogVisible: false,
       ruleForm: {
-        id: "",
+        name: "",
         orderDeviceCode: "",
       },
       rules: {
-        id: [{ required: true, message: "请选择商品名称", trigger: "blur" }],
+        name: [{ required: true, message: "请选择商品名称", trigger: "blur" }],
         orderDeviceCode: [
           { required: true, message: "请输入设备编号", trigger: "blur" },
         ],
@@ -103,8 +103,8 @@ export default {
       console.log(data);
       this.buy_price = data.buy_price;
       this.price = data.price;
-      this.name = data.goods_name;
-      console.log(this.name);
+      this.ruleForm.name = data.goods_name;
+      console.log(this.ruleForm.name);
     },
     show() {
       this.dialogVisible = true;
@@ -115,7 +115,7 @@ export default {
       this.dialogVisible = false;
       this.price = "";
       this.buy_price = "";
-      this.ruleForm.id = "";
+      this.ruleForm.name = "";
       this.ruleForm.orderDeviceCode = "";
     },
     getlist() {
@@ -133,7 +133,7 @@ export default {
           let params = {
             token: sessionStorage.getItem("token"),
             orderDeviceCode: this.ruleForm.orderDeviceCode,
-            productName: this.name,
+            productName: this.ruleForm.name,
             productCostPrice: this.price,
             orderMoneyPaid: this.buy_price,
             orderCreateTime: new Date(+new Date() + 8 * 3600 * 1000)

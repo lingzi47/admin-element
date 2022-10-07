@@ -105,10 +105,9 @@
           label="订单编号"
           align="center"
         ></el-table-column>
-
         <el-table-column
           prop="box_name"
-          label="设备编号"
+          label="设备租赁号"
           align="center"
         ></el-table-column>
         <el-table-column
@@ -135,7 +134,10 @@
           <template slot-scope="scope">
             <span>
               {{
-                scope.row.productSalePrice - scope.row.productCostPrice
+                (
+                  Number(scope.row.productSalePrice) -
+                  Number(scope.row.productCostPrice)
+                ).toFixed(2)
               }}</span
             >
           </template>
@@ -198,6 +200,7 @@
 <script>
 import { readinfo, financeindex } from "@/request/api";
 import pageTable from "@/components/pageTable.vue";
+import * as math from "mathjs";
 import axios from "axios";
 export default {
   name: "AddDialog",
@@ -230,7 +233,9 @@ export default {
   // computed: {
   //   timeDefault() {},
   // },
-  mounted() {},
+  mounted() {
+    console.log("处理结果", this.printFn(1.1 * 100));
+  },
   watch: {
     time(newVal) {
       if (newVal == null) {
@@ -263,6 +268,10 @@ export default {
   },
   mounted() {},
   methods: {
+    printFn(value) {
+      const precision = 14;
+      return Number(math.format(value, precision));
+    },
     handleSizeChange(val) {
       console.log(`每页 ${val} 条`);
     },
@@ -270,6 +279,23 @@ export default {
       this.page = val;
       this.limit = size;
       this.getUserList();
+    },
+    numSub(arg1, arg2) {
+      let r1, r2, m;
+      let precision; // 精度
+      try {
+        r1 = arg1.toString().split(".")[1].length; // 获取arg1小数位的长度
+      } catch (e) {
+        r1 = 0;
+      }
+      try {
+        r2 = arg2.toString().split(".")[1].length; // 获取arg2小数位的长度
+      } catch (e) {
+        r2 = 0;
+      }
+      m = Math.pow(10, Math.max(r1, r2));
+      precision = r1 > r2 ? r1 : r2; // 获取精度，
+      return ((arg1 * m - arg2 * m) / m).toFixed(precision);
     },
     search() {
       let params = {

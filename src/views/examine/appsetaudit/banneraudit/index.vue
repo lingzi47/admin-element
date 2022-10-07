@@ -18,7 +18,6 @@
       </el-table-column>
       <el-table-column prop="people" label="跳转界面" align="center">
       </el-table-column>
-
       <el-table-column label="操作" width="193" align="center">
         <template slot-scope="scope">
           <el-button @click="set(scope.row)" type="text" size="small"

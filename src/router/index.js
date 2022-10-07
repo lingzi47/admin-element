@@ -1910,6 +1910,29 @@ export const asyncRoutes = [
 		}, ],
 	},
 	{
+		path: "/message",
+		name: "message",
+		component: Layout,
+		meta: {
+			title: "消息推送",
+			icon: "el-icon-s-finance",
+			permissions: "message",
+			keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+			isBack: false
+		},
+		children: [{
+			path: "pushmessage",
+			name: "pushmessage",
+			component: () => import("@/views/message/pushmessage"),
+			meta: {
+				title: "消息推送",
+				permissions: "pushmessage",
+				keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+				isBack: false
+			},
+		}, ],
+	},
+	{
 		path: "/dingdan",
 		name: "dingdan",
 		component: Layout,

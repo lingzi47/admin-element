@@ -83,6 +83,8 @@
       </el-table-column>
       <el-table-column prop="uid" label="提现人id" align="center">
       </el-table-column>
+      <el-table-column prop="username" label="用户名" align="center">
+      </el-table-column>
       <el-table-column prop="position" label="用户身份" align="center">
         <template slot-scope="scope">
           <el-link v-if="scope.row.position == 1">药柜租赁商</el-link>

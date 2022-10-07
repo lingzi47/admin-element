@@ -97,7 +97,7 @@
           <span
             >{{ scope.row.eprovince }}-{{ scope.row.ecity }}-{{
               scope.row.earea
-            }}</span
+            }}--{{ scope.row.edetails }}</span
           >
         </template>
       </el-table-column>

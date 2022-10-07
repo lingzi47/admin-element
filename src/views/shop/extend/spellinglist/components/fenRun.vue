@@ -20,7 +20,7 @@
             <el-form-item label="合同" prop="goods_img">
               <el-upload
                 class="avatar-uploader1"
-                action="https://yujian02.xyz/command/ossUpload?filename=file"
+                action="https://y4.wjw.cool/command/ossUpload?filename=file"
                 :show-file-list="false"
                 :on-success="handleAvatarSuccess"
                 :before-upload="beforeAvatarUpload"
@@ -34,7 +34,7 @@
             <el-form-item label="身份证正面" prop="goods_img1"
               ><el-upload
                 class="avatar-uploader"
-                action="https://yujian02.xyz/command/ossUpload?filename=file"
+                action="https://y4.wjw.cool/command/ossUpload?filename=file"
                 :show-file-list="false"
                 :on-success="handSuccess"
                 :before-upload="beforeAvatarUpload"
@@ -49,7 +49,7 @@
             <el-form-item label="身份证反面" prop="goods_img2"
               ><el-upload
                 class="avatar-uploader"
-                action="https://yujian02.xyz/command/ossUpload?filename=file"
+                action="https://y4.wjw.cool/command/ossUpload?filename=file"
                 :show-file-list="false"
                 :on-success="handleAvatar"
                 :before-upload="beforeAvatarUpload"

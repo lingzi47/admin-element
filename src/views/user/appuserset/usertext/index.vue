@@ -249,7 +249,7 @@ export default {
         time2: this.form.time[1],
       };
       shareMoney(params).then((res) => {
-        console.log(res);
+        console.log(res.data.data.data);
         this.arr = res.data.data.member_count;
         this.page.total = res.data.data.total;
         this.userList = res.data.data.data;
@@ -285,11 +285,12 @@ export default {
         this.page.total = res.data.data.total;
         this.alladd = res.data.data.num.alladd;
         this.allcut = res.data.data.num.allcut;
+        this.userList = res.data.data.data;
         this.time = res.data.data.lastInfo.created_at;
         this.have_zs = res.data.data.lastInfo.have_zs;
         this.oldadd = res.data.data.oldnum.oldadd;
         this.oldcut = res.data.data.oldnum.oldcut;
-        this.userList = res.data.data.data;
+
         this.$refs.dataTable.setPageInfo({
           total: this.page.total,
         });

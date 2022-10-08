@@ -6,7 +6,8 @@ import store from './store'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(ElementUI);
-
+import NProgress from 'nprogress' // Progress 进度条
+import 'nprogress/nprogress.css'
 import './permission'
 import './utils/index'
 import './assets/iconfont/iconfont.css'
@@ -32,15 +33,28 @@ Vue.prototype.$on = function (event, func) {
 	let flag = true;
 	let newFunc = func
 	if (event == 'click') {
+
 		newFunc = function () {
 			if (flag) {
 				func.apply(this, arguments)
 				flag = false
+				const loading = this.$loading({
+					lock: true,
+					text: 'Loading',
+					spinner: 'el-icon-loading',
+					background: 'rgba(0, 0, 0, 0.7)'
+				});
+				setTimeout(() => {
+					loading.close();
+				}, 150)
 			}
+
+
 			clearTimeout(timer)
 			timer = setTimeout(function () {
 				flag = true
-			}, 500)
+
+			}, 1000)
 		}
 	}
 	on.call(this, event, newFunc)

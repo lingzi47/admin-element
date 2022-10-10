@@ -1023,6 +1023,17 @@ export const asyncRoutes = [
 				},
 			},
 			{
+				path: "messagesta",
+				name: "messagesta",
+				component: () => import("@/views/examine/messagesta"),
+				meta: {
+					title: "站内信息审核",
+					permissions: "messagesta",
+					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+					isBack: false
+				},
+			},
+			{
 				path: "actaudit",
 				name: "actaudit",
 				component: () => import("@/views/examine/actaudit"),

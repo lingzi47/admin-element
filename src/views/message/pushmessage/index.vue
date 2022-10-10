@@ -89,7 +89,7 @@
 </template>
 
 <script>
-import { fakelist, fakedel } from "@/request/api";
+import { newsindex } from "@/request/api";
 import { checkPermission } from "@/utils/permissions";
 import pageTable from "@/components/pageTable.vue";
 import { areaListData } from "@/utils/area";
@@ -105,32 +105,7 @@ export default {
     return {
       dialogVisible: false,
       details: "",
-      userList: [
-        {
-          id: 1,
-          content: "这个文本溢出用省略号代替",
-          user_type: "1",
-          sta: "10",
-          sta_time: "2022-10:07:13:33",
-          create_time: "2022-10:06:13:33",
-        },
-        {
-          id: 1,
-          content: "点击在原有的表格显示全部",
-          user_type: "1",
-          sta: "20",
-          sta_time: "2022-10:07:13:33",
-          create_time: "2022-10:06:13:33",
-        },
-        {
-          id: 1,
-          content: "123",
-          user_type: "1",
-          sta: "30",
-          sta_time: "2022-10:07:13:33",
-          create_time: "2022-10:06:13:33",
-        },
-      ], // 列表
+      userList: [], // 列表
       time: "",
       page: {
         //分页信息
@@ -152,7 +127,7 @@ export default {
 
   watch: {},
   created() {
-    // this.getUserList(); //获取用户列表
+    this.getUserList(); //获取用户列表
   },
   mounted() {},
   computed: {},
@@ -184,9 +159,9 @@ export default {
         limit: this.page.pageSize,
         token: sessionStorage.getItem("token"),
       };
-      fakelist(params).then((res) => {
-        this.page.total = res.data.data.total;
-        this.userList = res.data.data.data;
+      newsindex(params).then((res) => {
+        this.page.total = res.data.count;
+        this.userList = res.data.data;
         this.$refs.dataTable.setPageInfo({
           total: this.page.total,
         });

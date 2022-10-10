@@ -56,7 +56,7 @@
 </template>
 
 <script>
-import { fakecreate } from "@/request/api";
+import { newsadd } from "@/request/api";
 import { areaListData } from "@/utils/area";
 export default {
   name: "AddDialog",
@@ -73,7 +73,7 @@ export default {
       rules: {
         content: [{ required: true, message: "请输入内容", trigger: "blur" }],
         user_type: [
-          { required: true, message: "请选择点位来源", trigger: "blur" },
+          { required: true, message: "请选择推送对象", trigger: "blur" },
         ],
       },
     };
@@ -86,13 +86,11 @@ export default {
       this.dialogVisible = true;
       this.tittle = "添加";
     },
-
     close() {
       this.dialogVisible = false;
       this.ruleForm.user_type = "";
       this.ruleForm.content = "";
     },
-
     submitForm() {
       this.$refs.ruleForm.validate(async (valid) => {
         if (valid) {
@@ -101,7 +99,7 @@ export default {
             user_type: this.ruleForm.user_type,
             content: this.ruleForm.content,
           };
-          fakecreate(params).then((res) => {
+          newsadd(params).then((res) => {
             if (res.data.code == 200) {
               this.$message.success("新增成功");
               this.$parent.getUserList();

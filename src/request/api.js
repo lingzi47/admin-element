@@ -739,3 +739,15 @@ export const xunnigoods = (params) => request.post('manybox/unrealOrdergoods ',
 export const xunniadd = (params) => request.post('/manybox/unrealOrderAdd',
     params
 )
+//站内信息/activity/newsindex
+export const newsindex = (params) => request.post('/activity/newsindex',
+    params
+)
+//添加/activity/newsadd
+export const newsadd = (params) => request.post('/activity/newsadd',
+    params
+)
+//审核
+export const newssta = (params) => request.post('/activity/newssta',
+    params
+)

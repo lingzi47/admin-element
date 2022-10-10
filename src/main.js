@@ -38,15 +38,15 @@ Vue.prototype.$on = function (event, func) {
 			if (flag) {
 				func.apply(this, arguments)
 				flag = false
-				const loading = this.$loading({
-					lock: true,
-					text: 'Loading',
-					spinner: 'el-icon-loading',
-					background: 'rgba(0, 0, 0, 0.7)'
-				});
-				setTimeout(() => {
-					loading.close();
-				}, 150)
+				// 	const loading = this.$loading({
+				// 		lock: true,
+				// 		text: 'Loading',
+				// 		spinner: 'el-icon-loading',
+				// 		background: 'rgba(0, 0, 0, 0.7)'
+				// 	});
+				// 	setTimeout(() => {
+				// 		loading.close();
+				// 	}, 150)
 			}
 
 

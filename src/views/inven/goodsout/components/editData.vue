@@ -14,36 +14,49 @@
           <el-button type="primary" @click="add">新增</el-button>
         </el-form-item>
       </el-form>
-      <page-table
-        ref="dataTable"
-        :data="userList"
-        @changeCurrentPage="changeCurrent"
-      >
+      <el-table ref="dataTable" :data="userList" border>
         <el-table-column label="序号" align="center">
           <template slot-scope="scope">
-            <span>{{
-              (page.currentPage - 1) * page.pageSize + scope.$index + 1
-            }}</span>
+            <span>{{ (currentPage - 1) * pageSize + scope.$index + 1 }}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="number" label="产品名称" align="center">
+        <el-table-column prop="id" label="商品编号" align="center">
         </el-table-column>
-        <el-table-column prop="number" label="产品编号" align="center">
+        <el-table-column prop="goods_name" label="商品名称" align="center">
         </el-table-column>
-        <el-table-column prop="number" label="成本价" align="center">
+
+        <el-table-column prop="price" label="成本价" align="center">
         </el-table-column>
-        <el-table-column prop="number" label="入库数" align="center">
+        <el-table-column prop="num" label="入库数" align="center">
+          <template slot-scope="scope">
+            <el-input
+              v-model="scope.row.num"
+              @change="onInputChange(scope.row)"
+            >
+            </el-input>
+          </template>
         </el-table-column>
-        <el-table-column prop="number" label="成本总价" align="center">
+        <el-table-column prop="sum_price" label="成本总价" align="center">
         </el-table-column>
-        <el-table-column prop="number" label="标签" align="center">
+        <el-table-column prop="name" label="标签" align="center">
         </el-table-column>
         <el-table-column label="操作" align="center">
           <template slot-scope="scope">
             <el-link type="danger" @click="deleteData(scope.row)">删除</el-link>
           </template>
         </el-table-column>
-      </page-table>
+      </el-table>
+      <!-- <el-pagination
+        style="margin-left: 350px; margin-top: 20px"
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="currentPage"
+        :page-sizes="[10, 15, 20, 50, 100]"
+        :page-size="10"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="total"
+      >
+      </el-pagination> -->
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible = false">取 消</el-button>
         <el-button type="primary" @click="submitForm">确 定</el-button>
@@ -59,50 +72,74 @@
       @close="closee"
     >
       <el-form label-width="auto">
-        <el-form-item style="float: right">
-          <el-button type="primary" @click="add">新增</el-button>
-        </el-form-item>
+        <el-form :inline="true">
+          <el-form-item label="商品编号" prop="name">
+            <el-input
+              style="width: 150px"
+              v-model="gid"
+              clearable
+              placeholder="请输入商品编号"
+            ></el-input>
+          </el-form-item>
+          <el-form-item label="商品名称" prop="name">
+            <el-input
+              style="width: 290px"
+              v-model="goods_name"
+              clearable
+              placeholder="请输入商品名称"
+            ></el-input>
+          </el-form-item>
+          <el-form-item style="float: right">
+            <el-button type="primary" icon="el-icon-search" @click="searchinfo"
+              >搜索</el-button
+            >
+          </el-form-item>
+        </el-form>
       </el-form>
       <page-table
         ref="dataTable"
-        :data="userList"
-        @changeCurrentPage="changeCurrent"
+        :data="list"
+        @changeCurrentPage="changeCurrent1"
       >
         <el-table-column label="序号" align="center">
           <template slot-scope="scope">
-            <span>{{
-              (page.currentPage - 1) * page.pageSize + scope.$index + 1
-            }}</span>
+            <span>{{ (page1.Page - 1) * page1.Size + scope.$index + 1 }}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="number" label="产品名称" align="center">
+        <el-table-column prop="goods_id" label="商品编号" align="center">
         </el-table-column>
-        <el-table-column prop="number" label="产品编号" align="center">
+        <el-table-column prop="goods_name" label="商品名称" align="center">
         </el-table-column>
-        <el-table-column prop="number" label="成本价" align="center">
+        <el-table-column prop="name" label="标签" align="center">
         </el-table-column>
-        <el-table-column prop="number" label="入库数" align="center">
-        </el-table-column>
-        <el-table-column prop="number" label="成本总价" align="center">
-        </el-table-column>
-        <el-table-column prop="number" label="标签" align="center">
+        <el-table-column prop="price" label="成本价" align="center">
         </el-table-column>
         <el-table-column label="操作" align="center">
           <template slot-scope="scope">
-            <el-link type="danger" @click="deleteData(scope.row)">删除</el-link>
+            <el-link type="danger" v-if="scope.row.status == 1">已出库</el-link>
+            <el-link type="success" v-else @click="chu(scope.row)"
+              >出库</el-link
+            >
           </template>
         </el-table-column>
       </page-table>
       <div slot="footer" class="dialog-footer">
         <el-button @click="isDisable = false">取 消</el-button>
-        <el-button type="primary" @click="submitForm">确 定</el-button>
+        <el-button type="primary" @click="submitForm1">确 定</el-button>
       </div>
     </el-dialog>
   </div>
 </template>
 
 <script>
-import { pharmacyadd, pharmacyedit, goodsedit } from "@/request/api";
+import {
+  subOrder,
+  infoList,
+  infoDel,
+  choGoList,
+  creOrderInfo,
+  saveNum,
+} from "@/request/api";
 import { checkPermission } from "@/utils/permissions";
 import pageTable from "@/components/pageTable.vue";
 
@@ -114,13 +151,114 @@ export default {
       dialogVisible: false,
       isDisable: false,
       userList: [],
+      goods_name: "",
+      gid: "",
+      list: [],
+      zhuid: "",
+      //分页信息
+      currentPage: 1, //当前页
+      pageSize: 10, //每页条数
+      total: 0, //总条数
+
+      page1: {
+        //分页信息
+        Page: 1, //当前页
+        Size: 10, //每页条数
+        count: 0, //总条数
+      },
     };
   },
+
   created() {},
   mounted() {},
   methods: {
+    searchinfo() {
+      let token = sessionStorage.getItem("token");
+      this.token = token;
+      let params = {
+        page: 1,
+        limit: this.page1.Size,
+        token: sessionStorage.getItem("token"),
+        type: 2,
+        gid: this.gid,
+        goods_name: this.goods_name,
+      };
+      choGoList(params).then((res) => {
+        this.page1.count = res.data.data.total;
+        this.list = res.data.data.data;
+        this.$refs.dataTable.setPageInfo({
+          total: this.page1.count,
+        });
+      });
+    },
+    checkPermission,
+    // 切换分页
+    changeCurrent1(page, size) {
+      this.page1.Page = page;
+      this.page1.Size = size;
+      this.getlist();
+    },
     add() {
       this.isDisable = true;
+      this.getlist();
+    },
+    getlist() {
+      let params = {
+        page: this.page1.Page,
+        limit: this.page1.Size,
+        token: sessionStorage.getItem("token"),
+        type: 2,
+        oid: this.zhuid,
+      };
+      choGoList(params).then((res) => {
+        console.log(res.data.data.data);
+        this.page1.count = res.data.data.total;
+        this.list = res.data.data.data;
+        this.$refs.dataTable.setPageInfo({
+          total: this.page1.count,
+        });
+      });
+    },
+    chu(row) {
+      console.log(row);
+      this.$confirm("是否出库？", "提示", {
+        type: "warning",
+      })
+        .then(async () => {
+          //console.log(id);
+          let params = {
+            token: sessionStorage.getItem("token"),
+            gid: row.goods_id,
+            type: 2,
+            oid: this.zhuid,
+          };
+          creOrderInfo(params).then((res) => {
+            if (res.data.code == 200) {
+              this.$message.success("成功");
+            } else {
+              this.$message.dannger(res.data.msg);
+            }
+            this.getlist();
+          });
+        })
+        .catch(() => {});
+    },
+    onInputChange(row) {
+      console.log(row.num);
+      let params = {
+        token: sessionStorage.getItem("token"),
+        type: 2,
+        id: row.i_id,
+        num: row.num,
+      };
+      saveNum(params).then((res) => {
+        if (res.data.code == 200) {
+          this.$message.success("修改成功");
+        } else {
+          this.$message.dannger(res.data.msg);
+        }
+        this.getUserList();
+      });
     },
     show(type, row) {
       this.dialogVisible = true;
@@ -128,51 +266,85 @@ export default {
       this.type = type;
       if (this.type == 2) {
         console.log(row);
-        this.id = row.id;
+        this.zhuid = row.id;
+        console.log(row.id, "外层主键id");
       } else {
-        this.tittle = "添加";
       }
-    },
-    checkPermission,
-    // 切换分页
-    changeCurrent(page, size) {
-      this.page.currentPage = page;
-      this.page.pageSize = size;
       this.getUserList();
     },
+    // handleSizeChange(val) {
+    //   console.log(`每页 ${val} 条`);
+    //   this.pageSize = val;
+    //   this.getUserList();
+    // },
+    // handleCurrentChange(val) {
+    //   this.currentPage = val;
+    //   this.getUserList();
+    // },
     getUserList() {
-      let token = sessionStorage.getItem("token");
-      this.token = token;
       let params = {
-        page: this.page.currentPage,
-        limit: this.page.pageSize,
+        // page: this.currentPage,
+        // limit: this.pageSize,
         token: sessionStorage.getItem("token"),
+        type: 2,
+        id: this.zhuid,
       };
-      boxgoodslist(params).then((res) => {
-        this.page.total = res.data.count;
+      infoList(params).then((res) => {
+        // console.log(res.data.data.total);
+        // this.total = res.data.data.total;
         this.userList = res.data.data;
-        this.$refs.dataTable.setPageInfo({
-          total: this.page.total,
-        });
       });
+    },
+    deleteData(row) {
+      console.log(row);
+      this.$confirm("是否删除此信息？", "提示", {
+        type: "warning",
+      })
+        .then(async () => {
+          //console.log(id);
+          let params = {
+            token: sessionStorage.getItem("token"),
+            id: row.i_id,
+            type: 2,
+          };
+          infoDel(params).then((res) => {
+            //console.log(res.data);
+            if (res.data.code == 200) {
+              this.$message.success("删除成功");
+            } else {
+              this.$message.dannger(res.data.msg);
+            }
+            this.getUserList();
+          });
+        })
+        .catch(() => {});
     },
     close() {
       this.dialogVisible = false;
-
       this.isDisable = false;
+      this.zhuid = "";
     },
     closee() {
       this.dialogVisible = true;
-
       this.isDisable = false;
+      this.getUserList();
     },
-
+    submitForm1() {
+      this.dialogVisible = true;
+      this.isDisable = false;
+      this.getUserList();
+    },
     submitForm() {
       if (this.type == 1) {
+        console.log(this.userList);
+        var ids = this.userList.map((i) => i.i_id).toString();
+        console.log(ids);
         let params = {
           token: sessionStorage.getItem("token"),
+          id: ids,
+          type: 2,
         };
-        pharmacyadd(params).then((res) => {
+        subOrder(params).then((res) => {
           if (res.data.code == 200) {
             this.$message.success("新增成功");
             this.$parent.getUserList();
@@ -186,10 +358,17 @@ export default {
           }
         });
       } else {
+        console.log(this.userList);
+        var ids = this.userList.map((i) => i.i_id).toString();
+        console.log(ids);
+        console.log("修改id", this.zhuid);
         let params = {
           token: sessionStorage.getItem("token"),
+          oid: this.zhuid,
+          id: ids,
+          type: 2,
         };
-        pharmacyedit(params).then((res) => {
+        subOrder(params).then((res) => {
           if (res.data.code == 200) {
             this.$message.success("编辑成功");
             this.$parent.getUserList();

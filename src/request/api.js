@@ -751,3 +751,70 @@ export const newsadd = (params) => request.post('/activity/newsadd',
 export const newssta = (params) => request.post('/activity/newssta',
     params
 )
+//出入库展示列表
+export const orderList = (params) => request.post('/adminApi/box/boxStock/orderList',
+    params
+)
+//删除/adminApi/box/boxStock/orderDel
+export const orderDel = (params) => request.post('/adminApi/box/boxStock/orderDel',
+    params
+)
+
+//新增列表
+export const infoList = (params) => request.post('/adminApi/box/boxStock/infoList',
+    params
+)
+//新增删除 /adminApi/box/boxStock/infoDel
+export const infoDel = (params) => request.post('/adminApi/box/boxStock/infoDel',
+    params
+)
+
+//出库操作/adminApi/box/boxStock/creOrderInfo
+export const creOrderInfo = (params) => request.post('/adminApi/box/boxStock/creOrderInfo',
+    params
+)
+// 新增出库列表增加/adminApi/box/boxStock/subOrder
+export const subOrder = (params) => request.post('/adminApi/box/boxStock/subOrder',
+    params
+)
+//修改出入库数/adminApi/box/boxStock/saveNum
+export const saveNum = (params) => request.post('/adminApi/box/boxStock/saveNum',
+    params
+)
+//选择商品/adminApi/box/boxStock/choGoList
+export const choGoList = (params) => request.post('/adminApi/box/boxStock/choGoList',
+    params
+)
+// 修改备注 adminApi/box/boxStock/savRemark
+export const savRemark = (params) => request.post('/adminApi/box/boxStock/savRemark',
+    params
+)
+
+
+
+
+
+
+
+
+
+//商品库存列表/adminApi/box/boxStock/goodsWare
+export const goodsWare = (params) => request.post('/adminApi/box/boxStock/goodsWare',
+    params
+)
+//标签列表 adminApi/box/boxStock/listTag
+export const listTag = (params) => request.post('/adminApi/box/boxStock/listTag',
+    params
+)
+//创建 /adminApi/box/boxStock/creTag
+export const creTag = (params) => request.post('/adminApi/box/boxStock/creTag',
+    params
+)
+//修改/adminApi/box/boxStock/savTag
+export const savTag = (params) => request.post('/adminApi/box/boxStock/savTag',
+    params
+)
+//删除/adminApi/box/boxStock/delTag
+export const delTag = (params) => request.post('/adminApi/box/boxStock/delTag',
+    params
+)

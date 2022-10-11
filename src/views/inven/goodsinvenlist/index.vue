@@ -4,8 +4,8 @@
       <el-form :inline="true">
         <el-form-item label="商品名称" prop="name">
           <el-input
-            style="width: 180px"
-            v-model="number"
+            style="width: 250px"
+            v-model="goods_name"
             clearable
             placeholder="请输入商品名称"
           ></el-input>
@@ -13,7 +13,7 @@
         <el-form-item label="商品编号" prop="name">
           <el-input
             style="width: 180px"
-            v-model="number"
+            v-model="id"
             clearable
             placeholder="请输入商品编号"
           ></el-input>
@@ -21,7 +21,7 @@
         <el-form-item label="标签" prop="name">
           <el-input
             style="width: 180px"
-            v-model="number"
+            v-model="name"
             clearable
             placeholder="请输入"
           ></el-input>
@@ -52,26 +52,24 @@
           }}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="number" label="商品编号" align="center">
+      <el-table-column prop="id" label="商品编号" align="center">
       </el-table-column>
-      <el-table-column prop="number" label="商品名称" align="center">
+      <el-table-column prop="goods_name" label="商品名称" align="center">
       </el-table-column>
       <el-table-column prop="number" label="仓库库存" align="center">
       </el-table-column>
-      <el-table-column prop="number" label="总库存" align="center">
+      <el-table-column prop="price" label="进货单价" align="center">
       </el-table-column>
-      <el-table-column prop="number" label="进货单价" align="center">
+      <el-table-column prop="all_price" label="进货总价" align="center">
       </el-table-column>
-      <el-table-column prop="number" label="进货总价" align="center">
-      </el-table-column>
-      <el-table-column prop="number" label="供应商" align="center">
+      <el-table-column prop="name" label="供应商" align="center">
       </el-table-column>
     </page-table>
   </div>
 </template>
 
 <script>
-import { boxgoodslist, officinalist } from "@/request/api";
+import { goodsWare } from "@/request/api";
 import { checkPermission } from "@/utils/permissions";
 import pageTable from "@/components/pageTable.vue";
 
@@ -83,7 +81,10 @@ export default {
   data() {
     return {
       userList: [], // 列表
-      number: "",
+      name: "",
+      id: "",
+      goods_name: "",
+
       page: {
         //分页信息
         currentPage: 1, //当前页
@@ -123,13 +124,13 @@ export default {
         page: 1,
         limit: this.page.pageSize,
         token: sessionStorage.getItem("token"),
-        number: this.number,
-        officina_id: this.officina_id,
-        sta: this.sta,
+        tag_name: this.name,
+        goods_name: this.goods_name,
+        gid: this.id,
       };
-      boxgoodslist(params).then((res) => {
-        this.page.total = res.data.count;
-        this.userList = res.data.data;
+      goodsWare(params).then((res) => {
+        this.page.total = res.data.data.total;
+        this.userList = res.data.data.data;
         this.$refs.dataTable.setPageInfo({
           total: this.page.total,
         });
@@ -142,10 +143,13 @@ export default {
         page: this.page.currentPage,
         limit: this.page.pageSize,
         token: sessionStorage.getItem("token"),
+        tag_name: this.name,
+        goods_name: this.goods_name,
+        gid: this.id,
       };
-      boxgoodslist(params).then((res) => {
-        this.page.total = res.data.count;
-        this.userList = res.data.data;
+      goodsWare(params).then((res) => {
+        this.page.total = res.data.data.total;
+        this.userList = res.data.data.data;
         this.$refs.dataTable.setPageInfo({
           total: this.page.total,
         });

@@ -5,7 +5,7 @@
         <el-form-item label="商品编号" prop="name">
           <el-input
             style="width: 180px"
-            v-model="number"
+            v-model="gid"
             clearable
             placeholder="请输入商品编号"
           ></el-input>
@@ -13,56 +13,46 @@
         <el-form-item label="商品名称" prop="name">
           <el-input
             style="width: 180px"
-            v-model="number"
+            v-model="goods_name"
             clearable
             placeholder="请输入商品名称"
           ></el-input>
         </el-form-item>
-        <el-form-item label="出库单号" prop="name">
+        <el-form-item label="入库单号" prop="name">
           <el-input
-            style="width: 180px"
-            v-model="number"
+            style="width: 310px"
+            v-model="order_no"
             clearable
-            placeholder="请输入出库单号"
+            placeholder="请输入入库单号"
           ></el-input>
         </el-form-item>
         <el-form-item label="标签" prop="name">
           <el-input
             style="width: 180px"
-            v-model="number"
+            v-model="tag_name"
             clearable
             placeholder="请输入标签"
           ></el-input>
         </el-form-item>
-        <el-form-item label="出库状态" prop="status">
+        <el-form-item label="入库状态" prop="status">
           <el-select
-            v-model="number"
-            placeholder="请选择出库状态"
+            v-model="status"
+            placeholder="请选择入库状态"
             style="width: 150px"
           >
             <el-option label="全部状态" value=""></el-option>
-            <el-option label="已通过" value="20"></el-option>
-            <el-option label="待审核" value="10"></el-option>
-            <el-option label="未通过" value="30"></el-option>
+            <el-option label="通过" value="2"></el-option>
+            <el-option label="待审核" value="1"></el-option>
+            <el-option label="拒绝" value="3"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="审核时间" prop="time">
-          <el-date-picker
-            v-model="time"
-            type="daterange"
-            value-format="yyyy-MM-dd HH:mm:ss"
-            range-separator="至"
-            start-placeholder="开始日期"
-            end-placeholder="结束日期"
-          >
-          </el-date-picker>
-        </el-form-item>
+
         <el-form-item style="float: right">
           <el-button type="primary" icon="el-icon-search" @click="searchinfo"
             >搜索</el-button
           >
           <el-button type="primary" @click="add">新增</el-button>
-          <el-button type="primary" @click="dao">导出</el-button>
+          <el-button type="danger" @click="del">删除</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -70,7 +60,14 @@
       ref="dataTable"
       :data="userList"
       @changeCurrentPage="changeCurrent"
+      @selection-change="getSelection"
     >
+      <el-table-column
+        type="selection"
+        fixed
+        width="40"
+        :resizable="false"
+      ></el-table-column>
       <el-table-column label="序号" align="center">
         <template slot-scope="scope">
           <span>{{
@@ -78,29 +75,37 @@
           }}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="number" label="出库单号" align="center">
+      <el-table-column
+        prop="number_no"
+        width="310px"
+        label="入库单号"
+        align="center"
+      >
       </el-table-column>
-      <el-table-column prop="number" label="出库备注" align="center">
+      <el-table-column prop="remark" label="入库备注" align="center">
+        <template slot-scope="scope">
+          <el-input
+            v-model="scope.row.remark"
+            @change="onInputChange(scope.row)"
+          >
+          </el-input>
+        </template>
       </el-table-column>
-      <el-table-column prop="number" label="数量" align="center">
+
+      <el-table-column prop="status" label="入库状态" align="center">
+        <template slot-scope="scope">
+          <el-link type="warning" v-if="scope.row.status == 1">待审核</el-link>
+          <el-link type="success" v-if="scope.row.status == 2">通过</el-link>
+          <el-link type="danger" v-if="scope.row.status == 3">拒绝</el-link>
+        </template>
       </el-table-column>
-      <el-table-column prop="number" label="标签" align="center">
+      <el-table-column prop="remark_sta" label="备注" align="center">
       </el-table-column>
-      <el-table-column prop="number" label="出库状态" align="center">
-      </el-table-column>
-      <el-table-column prop="number" label="备注" align="center">
-      </el-table-column>
-      <el-table-column prop="number" label="审核时间" align="center">
+      <el-table-column prop="time_sta" label="审核时间" align="center">
       </el-table-column>
 
       <el-table-column label="操作" align="center" width="350">
         <template slot-scope="scope">
-          <el-link
-            type="primary"
-            @click="showtable(scope.row)"
-            style="margin-left: 10px"
-            >查看</el-link
-          >
           <el-link @click="edit(scope.row)" style="margin-left: 10px"
             >编辑</el-link
           >
@@ -120,7 +125,7 @@
 </template>
 
 <script>
-import { boxgoodslist, officinalist } from "@/request/api";
+import { orderList, orderDel, savRemark } from "@/request/api";
 import { checkPermission } from "@/utils/permissions";
 import pageTable from "@/components/pageTable.vue";
 import { areaListData } from "@/utils/area";
@@ -137,23 +142,15 @@ export default {
   },
   data() {
     return {
-      officina_id: "",
-      province: "",
-      type: "",
-      city: "",
-      number: "",
-      name: "",
-      token: "",
-      phone: "",
-      officina_id: "",
-      num: "",
-      sta: "",
-      value: "",
-      area: "",
+      gid: "",
+      goods_name: "",
+      order_no: "",
+      tag_name: "",
+      status: "",
       userList: [], // 列表
-      list: [], // 列表
-      list1: [],
-      time: "",
+
+      tableSelectList: [],
+
       page: {
         //分页信息
         currentPage: 1, //当前页
@@ -162,13 +159,7 @@ export default {
       },
     };
   },
-  watch: {
-    time(newVal) {
-      if (newVal == null) {
-        this.time = [];
-      }
-    },
-  },
+
   created() {
     this.token = sessionStorage.getItem("token");
     this.getUserList(); //获取用户列表
@@ -176,6 +167,52 @@ export default {
   mounted() {},
   computed: {},
   methods: {
+    onInputChange(row) {
+      console.log(row.remark);
+      let params = {
+        token: sessionStorage.getItem("token"),
+        type: 1,
+        id: row.id,
+        remark: row.remark,
+      };
+      savRemark(params).then((res) => {
+        if (res.data.code == 200) {
+          this.$message.success("修改成功");
+        } else {
+          this.$message.dannger(res.data.msg);
+        }
+        this.getUserList();
+      });
+    },
+    getSelection(select) {
+      this.tableSelectList = select;
+      var ids = this.tableSelectList.map((i) => i.id).toString();
+      console.log(ids);
+    },
+    del() {
+      var ids = this.tableSelectList.map((i) => i.id).toString();
+      console.log(ids);
+      this.$confirm("是否删这些信息(多删)？", "提示", {
+        type: "warning",
+      })
+        .then(async () => {
+          //console.log(id);
+          let params = {
+            token: sessionStorage.getItem("token"),
+            id: ids,
+          };
+          orderDel(params).then((res) => {
+            //console.log(res.data);
+            if (res.data.code == 200) {
+              this.$message.success("删除成功");
+            } else {
+              this.$message.dannger(res.data.msg);
+            }
+            this.getUserList();
+          });
+        })
+        .catch(() => {});
+    },
     dao(row) {
       console.log(row);
       this.num = row.number;
@@ -211,12 +248,14 @@ export default {
             token: sessionStorage.getItem("token"),
             id: row.id,
           };
-          delLevel(params).then((res) => {
+          orderDel(params).then((res) => {
             //console.log(res.data);
             if (res.data.code == 200) {
-              this.tableshow();
               this.$message.success("删除成功");
+            } else {
+              this.$message.dannger(res.data.msg);
             }
+            this.getUserList();
           });
         })
         .catch(() => {});
@@ -235,13 +274,16 @@ export default {
         page: 1,
         limit: this.page.pageSize,
         token: sessionStorage.getItem("token"),
-        number: this.number,
-        officina_id: this.officina_id,
-        sta: this.sta,
+        type: 1,
+        gid: this.gid,
+        goods_name: this.goods_name,
+        order_no: this.order_no,
+        tag_name: this.tag_name,
+        status: this.status,
       };
-      boxgoodslist(params).then((res) => {
-        this.page.total = res.data.count;
-        this.userList = res.data.data;
+      orderList(params).then((res) => {
+        this.page.total = res.data.data.total;
+        this.userList = res.data.data.data;
         this.$refs.dataTable.setPageInfo({
           total: this.page.total,
         });
@@ -254,10 +296,16 @@ export default {
         page: this.page.currentPage,
         limit: this.page.pageSize,
         token: sessionStorage.getItem("token"),
+        type: 1,
+        gid: this.gid,
+        goods_name: this.goods_name,
+        order_no: this.order_no,
+        tag_name: this.tag_name,
+        status: this.status,
       };
-      boxgoodslist(params).then((res) => {
-        this.page.total = res.data.count;
-        this.userList = res.data.data;
+      orderList(params).then((res) => {
+        this.page.total = res.data.data.total;
+        this.userList = res.data.data.data;
         this.$refs.dataTable.setPageInfo({
           total: this.page.total,
         });

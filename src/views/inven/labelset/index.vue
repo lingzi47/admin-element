@@ -5,11 +5,12 @@
         <el-form-item label="标签名称" prop="name">
           <el-input
             style="width: 180px"
-            v-model="number"
+            v-model="goods_name"
             clearable
             placeholder="请输入标签名称"
           ></el-input>
         </el-form-item>
+
         <el-form-item style="float: right">
           <el-button type="primary" icon="el-icon-search" @click="searchinfo"
             >搜索</el-button
@@ -31,17 +32,17 @@
           }}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="number" label="标签名称" align="center">
+      <el-table-column prop="name" label="标签名称" align="center">
       </el-table-column>
-      <el-table-column prop="number" label="联系人" align="center">
+      <el-table-column prop="contacts" label="联系人" align="center">
       </el-table-column>
-      <el-table-column prop="number" label="联系方式" align="center">
+      <el-table-column prop="phone" label="联系方式" align="center">
       </el-table-column>
-      <el-table-column prop="number" label="地址" align="center">
+      <el-table-column prop="address" label="地址" align="center">
       </el-table-column>
-      <el-table-column prop="number" label="创建时间" align="center">
+      <el-table-column prop="created_at" label="创建时间" align="center">
       </el-table-column>
-      <el-table-column prop="number" label="备注" align="center">
+      <el-table-column prop="remark" label="备注" align="center">
       </el-table-column>
       <el-table-column label="操作" align="center" width="350">
         <template slot-scope="scope">
@@ -67,7 +68,7 @@
 </template>
 
 <script>
-import { boxgoodslist, officinalist } from "@/request/api";
+import { listTag, delTag } from "@/request/api";
 import { checkPermission } from "@/utils/permissions";
 import pageTable from "@/components/pageTable.vue";
 import { areaListData } from "@/utils/area";
@@ -81,23 +82,13 @@ export default {
   },
   data() {
     return {
-      officina_id: "",
-      province: "",
-      type: "",
-      city: "",
-      number: "",
+      goods_name: "",
+      id: "",
+      tag_id: "",
       name: "",
-      token: "",
-      phone: "",
-      officina_id: "",
-      num: "",
-      sta: "",
-      value: "",
-      area: "",
       userList: [], // 列表
-      list: [], // 列表
-      list1: [],
-      time: "",
+      list: [],
+
       page: {
         //分页信息
         currentPage: 1, //当前页
@@ -123,11 +114,15 @@ export default {
       console.log(this.num);
 
       window.location.href =
-        "https://y4.wjw.cool/admin/box/expOfficina" +
+        "https://y4.wjw.cool/adminApi/box/boxStock/goodsExp" +
         "?token=" +
         this.token +
-        "&number=" +
-        this.num;
+        "&goods_name=" +
+        this.goods_name +
+        "&tag_id=" +
+        this.name +
+        "&id=" +
+        this.id;
     },
 
     showtable(row) {
@@ -145,11 +140,14 @@ export default {
             token: sessionStorage.getItem("token"),
             id: row.id,
           };
-          delLevel(params).then((res) => {
+          delTag(params).then((res) => {
             //console.log(res.data);
             if (res.data.code == 200) {
-              this.tableshow();
               this.$message.success("删除成功");
+              this.getUserList();
+            } else {
+              this.$message.error(res.data.msg);
+              this.getUserList();
             }
           });
         })
@@ -169,18 +167,17 @@ export default {
         page: 1,
         limit: this.page.pageSize,
         token: sessionStorage.getItem("token"),
-        number: this.number,
-        officina_id: this.officina_id,
-        sta: this.sta,
+        tag_name: this.goods_name,
       };
-      boxgoodslist(params).then((res) => {
-        this.page.total = res.data.count;
-        this.userList = res.data.data;
+      listTag(params).then((res) => {
+        this.page.total = res.data.data.total;
+        this.userList = res.data.data.data;
         this.$refs.dataTable.setPageInfo({
           total: this.page.total,
         });
       });
     },
+
     getUserList() {
       let token = sessionStorage.getItem("token");
       this.token = token;
@@ -188,10 +185,11 @@ export default {
         page: this.page.currentPage,
         limit: this.page.pageSize,
         token: sessionStorage.getItem("token"),
+        name: this.goods_name,
       };
-      boxgoodslist(params).then((res) => {
-        this.page.total = res.data.count;
-        this.userList = res.data.data;
+      listTag(params).then((res) => {
+        this.page.total = res.data.data.total;
+        this.userList = res.data.data.data;
         this.$refs.dataTable.setPageInfo({
           total: this.page.total,
         });

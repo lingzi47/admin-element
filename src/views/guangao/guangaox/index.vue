@@ -11,7 +11,9 @@
       ref="dataTable"
       :data="userList"
       @changeCurrentPage="changeCurrent"
+   
     >
+     
       <el-table-column label="序号" align="center">
         <template slot-scope="scope">
           <span>{{
@@ -110,6 +112,7 @@ export default {
   mounted() {},
   computed: {},
   methods: {
+
     editData() {
       this.$refs.editData.show();
     },

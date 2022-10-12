@@ -487,7 +487,7 @@ export default {
     dao() {
       if (this.form.time[1] == undefined) {
         window.location.href =
-          "https://y4.wjw.cool/shopadmin/exportOrder" +
+          "https://yujian02.xyz/shopadmin/exportOrder" +
           "?token=" +
           this.token +
           "&shop_type=" +
@@ -506,7 +506,7 @@ export default {
           this.form.order_status;
       } else {
         window.location.href =
-          "https://y4.wjw.cool/shopadmin/exportOrder" +
+          "https://yujian02.xyz/shopadmin/exportOrder" +
           "?token=" +
           this.token +
           "&shop_type=" +

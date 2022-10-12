@@ -194,18 +194,21 @@
           <template slot-scope="scope">
             <el-link
               type="success"
+              v-if="scope.row.hetong == 2"
               style="margin-left: 10px"
               @click="fenrun(1, scope.row)"
               >上传合同</el-link
             >
             <el-link
               type="danger"
+              v-if="scope.row.hetong == 1"
               style="margin-left: 10px"
               @click="fenrun(2, scope.row)"
               >修改合同</el-link
             >
             <el-link
               type="primary"
+              v-if="scope.row.hetong == 1"
               style="margin-left: 10px"
               @click="fenrun(3, scope.row)"
               >查看合同</el-link

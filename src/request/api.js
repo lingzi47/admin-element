@@ -818,3 +818,17 @@ export const savTag = (params) => request.post('/adminApi/box/boxStock/savTag',
 export const delTag = (params) => request.post('/adminApi/box/boxStock/delTag',
     params
 )
+//合同 查看/manybox/agreeRead
+export const agreeRead = (params) => request.post('/manybox/agreeRead',
+    params
+)
+
+//合同编辑 /manybox/agreeEdit
+export const agreeEdit = (params) => request.post('/manybox/agreeEdit',
+    params
+)
+
+//合同新增 /manybox/agreeAdd
+export const agreeAdd = (params) => request.post('/manybox/agreeAdd',
+    params
+)

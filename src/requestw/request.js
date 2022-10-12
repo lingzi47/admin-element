@@ -3,7 +3,7 @@ let baseURL = '/api';
 // console.log(baseURL);
 // 配置axios
 const instance = axios.create({
-    baseURL: 'https://y4.wjw.cool/',
+    baseURL: 'https://yujian02.xyz/',
     timeout: 5000
 })
 

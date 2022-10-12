@@ -20,42 +20,13 @@
             <el-form-item label="合同" prop="goods_img">
               <el-upload
                 class="avatar-uploader1"
-                action="https://y4.wjw.cool/command/ossUpload?filename=file"
+                action="https://yujian02.xyz/command/ossUpload?filename=file"
                 :show-file-list="false"
                 :on-success="handleAvatarSuccess"
                 :before-upload="beforeAvatarUpload"
               >
                 <img v-if="imageUrl" :src="imageUrl" class="avatar1" />
                 <i v-else class="el-icon-plus avatar-uploader-icon1"></i>
-              </el-upload>
-            </el-form-item>
-          </el-col>
-          <el-col :span="10">
-            <el-form-item label="身份证正面" prop="goods_img1"
-              ><el-upload
-                class="avatar-uploader"
-                action="https://y4.wjw.cool/command/ossUpload?filename=file"
-                :show-file-list="false"
-                :on-success="handSuccess"
-                :before-upload="beforeAvatarUpload"
-              >
-                <img v-if="imageUrl1" :src="imageUrl1" class="avatar" />
-                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-              </el-upload>
-            </el-form-item>
-          </el-col>
-
-          <el-col :span="10">
-            <el-form-item label="身份证反面" prop="goods_img2"
-              ><el-upload
-                class="avatar-uploader"
-                action="https://y4.wjw.cool/command/ossUpload?filename=file"
-                :show-file-list="false"
-                :on-success="handleAvatar"
-                :before-upload="beforeAvatarUpload"
-              >
-                <img v-if="imageUrl2" :src="imageUrl2" class="avatar" />
-                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
               </el-upload>
             </el-form-item>
           </el-col>
@@ -71,7 +42,7 @@
 </template>
 
 <script>
-import { logpool, goodseditshow, goodsedit } from "@/request/api";
+import { agreeRead, agreeEdit, agreeAdd } from "@/request/api";
 import pageTable from "@/components/pageTable.vue";
 export default {
   name: "AddDialog",
@@ -81,23 +52,14 @@ export default {
       id: "",
       title: "",
       imageUrl: "",
-      imageUrl1: "",
-      imageUrl2: "",
+
       dialogVisible: false,
       ruleForm: {
         goods_img: "",
-        goods_img1: "",
-        goods_img2: "",
       },
       rules: {
         goods_img: [
           { required: true, message: "请上传合同照片", trigger: "blur" },
-        ],
-        goods_img1: [
-          { required: true, message: "请上传身份证正面照片", trigger: "blur" },
-        ],
-        goods_img2: [
-          { required: true, message: "请上传身份证反面照片", trigger: "blur" },
         ],
       },
     };
@@ -108,26 +70,48 @@ export default {
     submitForm() {
       this.$refs.ruleForm.validate(async (valid) => {
         if (valid) {
-          let params = {
-            token: sessionStorage.getItem("token"),
-            uid: this.ruleForm.goods_img,
-            uid: this.ruleForm.goods_img1,
-            uid: this.ruleForm.goods_img2,
-          };
-          addtuilist(params).then((res) => {
-            if (res.data.code == 200) {
-              this.$message.success("新增成功");
-              this.$parent.shoporderlist();
-              this.close();
+          if (this.title == "上传合同") {
+            console.log("上传");
+            let params = {
+              token: sessionStorage.getItem("token"),
+              img: this.ruleForm.goods_img,
+              list_id: this.id,
+            };
+            agreeAdd(params).then((res) => {
+              if (res.data.code == 200) {
+                this.$message.success("上传成功");
+                this.$parent.shoporderlist();
+                this.close();
 
-              this.dialogVisible = false;
-            } else {
-              this.$message.error(res.data.msg);
-              this.$parent.shoporderlist();
-              this.close();
-              this.dialogVisible = false;
-            }
-          });
+                this.dialogVisible = false;
+              } else {
+                this.$message.error(res.data.msg);
+                this.$parent.shoporderlist();
+                this.close();
+                this.dialogVisible = false;
+              }
+            });
+          } else {
+            let params = {
+              token: sessionStorage.getItem("token"),
+              img: this.ruleForm.goods_img,
+              list_id: this.id,
+            };
+            agreeEdit(params).then((res) => {
+              if (res.data.code == 200) {
+                this.$message.success("修改成功");
+                this.$parent.shoporderlist();
+                this.close();
+
+                this.dialogVisible = false;
+              } else {
+                this.$message.error(res.data.msg);
+                this.$parent.shoporderlist();
+                this.close();
+                this.dialogVisible = false;
+              }
+            });
+          }
         } else {
           return false;
         }
@@ -142,34 +126,34 @@ export default {
         this.title = "上传合同";
       } else if (type == 2) {
         this.title = "修改合同";
+        this.huo();
       } else {
         this.title = "查看合同";
+        this.huo();
       }
+    },
+    huo() {
+      let params = {
+        token: sessionStorage.getItem("token"),
+        list_id: this.id,
+      };
+      agreeRead(params).then((res) => {
+        console.log(res.data.data);
+        this.ruleForm.goods_img = res.data.data.img;
+        this.imageUrl = res.data.data.img;
+      });
     },
     close() {
       this.dialogVisible = false;
       this.ruleForm.goods_img = "";
-      this.ruleForm.goods_img1 = "";
-      this.ruleForm.goods_img2 = "";
-      this.goods_img = "";
-      this.goods_img1 = "";
-      this.goods_img2 = "";
+      this.imageUrl = "";
     },
     handleAvatarSuccess(res, file) {
       let imgurl = res.data;
       this.imageUrl = imgurl;
       this.ruleForm.goods_img = imgurl;
     },
-    handSuccess(res, file) {
-      let imgurl1 = res.data;
-      this.imageUrl1 = imgurl1;
-      this.ruleForm.goods_img1 = imgurl1;
-    },
-    handleAvatar(res, file) {
-      let imgurl2 = res.data;
-      this.imageUrl2 = imgurl2;
-      this.ruleForm.goods_img2 = imgurl2;
-    },
+
     beforeAvatarUpload(file) {
       const isLt2M = file.size / 1024 / 1024 < 2;
       if (!isLt2M) {

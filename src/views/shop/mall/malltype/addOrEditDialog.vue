@@ -42,7 +42,7 @@
             <el-form-item label="图标" prop="description">
               <el-upload
                 class="avatar-uploader"
-                action="https://y4.wjw.cool/command/ossUpload?filename=file"
+                action="https://yujian02.xyz/command/ossUpload?filename=file"
                 :show-file-list="false"
                 :on-success="handleAvatarSuccess"
                 :before-upload="beforeAvatarUpload"

@@ -96,12 +96,12 @@
           >
         </template>
       </el-table-column>
-      <el-table-column label="是否缺货" align="center">
+      <!-- <el-table-column label="是否缺货" align="center">
         <template slot-scope="scope">
           <el-link type="success" v-if="scope.row.sta == 20">否</el-link>
           <el-link type="danger" v-if="scope.row.sta == 30">是</el-link>
         </template>
-      </el-table-column>
+      </el-table-column> -->
       <el-table-column label="操作" align="center" width="350">
         <template slot-scope="scope">
           <el-link
@@ -207,14 +207,14 @@ export default {
       console.log(this.num);
       console.log(
         (window.location.href =
-          "https://y4.wjw.cool/admin/box/expOfficina" +
+          "https://yujian02.xyz/admin/box/expOfficina" +
           "?token=" +
           this.token +
           "&number=" +
           this.num)
       );
       window.location.href =
-        "https://y4.wjw.cool/admin/box/expOfficina" +
+        "https://yujian02.xyz/admin/box/expOfficina" +
         "?token=" +
         this.token +
         "&number=" +

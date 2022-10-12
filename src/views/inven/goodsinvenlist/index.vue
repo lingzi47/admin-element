@@ -103,7 +103,7 @@ export default {
   methods: {
     dao(row) {
       window.location.href =
-        "https://y4.wjw.cool/admin/box/expOfficina" +
+        "https://yujian02.xyz/admin/box/expOfficina" +
         "?token=" +
         this.token +
         "&number=" +

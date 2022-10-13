@@ -827,8 +827,19 @@ export const agreeRead = (params) => request.post('/manybox/agreeRead',
 export const agreeEdit = (params) => request.post('/manybox/agreeEdit',
     params
 )
-
 //合同新增 /manybox/agreeAdd
 export const agreeAdd = (params) => request.post('/manybox/agreeAdd',
+    params
+)
+//出库审核列表
+export const exList = (params) => request.post('/adminApi/box/boxStock/exList',
+    params
+)
+//审核 操作 adminApi/box/boxStock/exStatus  id  status remark_sta
+export const exStatus = (params) => request.post('/adminApi/box/boxStock/exStatus',
+    params
+)
+//用户收益/manybox/boxWithInfo
+export const boxWithInfo = (params) => request.post('/manybox/boxWithInfo',
     params
 )

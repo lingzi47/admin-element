@@ -55,6 +55,17 @@
               <el-option label="未拼成" value="20"></el-option>
             </el-select>
           </el-form-item>
+          <el-form-item label="时间" prop="time">
+            <el-date-picker
+              v-model="time"
+              type="daterange"
+              value-format="yyyy-MM-dd"
+              range-separator="至"
+              start-placeholder="开始日期"
+              end-placeholder="结束日期"
+            >
+            </el-date-picker>
+          </el-form-item>
           <el-form-item style="float: right">
             <el-button
               v-if="checkPermission('operationsearch')"
@@ -64,6 +75,7 @@
               >搜索</el-button
             >
             <el-button type="primary" @click="add">添加</el-button>
+            <el-button @click="dao">导出</el-button>
           </el-form-item>
         </el-form>
       </div>
@@ -241,6 +253,7 @@ export default {
       buy_type: "",
       is_pin: "",
       sta: "",
+      time: "",
       id: "",
       price: "",
       page: {
@@ -251,11 +264,56 @@ export default {
       },
     };
   },
+  watch: {
+    time(newVal) {
+      if (newVal == null) {
+        this.time = [];
+      }
+    },
+  },
   created() {
     this.shoporderlist();
   },
   mounted() {},
   methods: {
+    dao() {
+      this.token = sessionStorage.getItem("token");
+      if (this.time[1] == undefined) {
+        window.location.href =
+          "https://y4.wjw.cool/manybox/tuilistexport" +
+          "?token=" +
+          this.token +
+          "&price=" +
+          this.price +
+          "&id=" +
+          this.id +
+          "&buy_type=" +
+          this.buy_type +
+          "&sta=" +
+          this.sta +
+          "&is_pin=" +
+          this.is_pin;
+      } else {
+        window.location.href =
+          "https://y4.wjw.cool/manybox/tuilistexport" +
+          "?token=" +
+          this.token +
+          "&price=" +
+          this.price +
+          "&id=" +
+          this.id +
+          "&buy_type=" +
+          this.buy_type +
+          "&sta=" +
+          this.sta +
+          "&is_pin=" +
+          this.is_pin +
+          "&time1=" +
+          this.time[0] +
+          "&time2=" +
+          this.time[1];
+      }
+    },
     shoporderlist() {
       let params = {
         token: sessionStorage.getItem("token"),
@@ -266,6 +324,8 @@ export default {
         price: this.price,
         page: this.page.page,
         limit: this.page.limit,
+        time1: this.time[0],
+        time2: this.time[1],
       };
       tuilist(params).then((res) => {
         this.shoporder = res.data.data;
@@ -285,6 +345,8 @@ export default {
         price: this.price,
         page: 1,
         limit: this.page.limit,
+        time1: this.time[0],
+        time2: this.time[1],
       };
       tuilist(params).then((res) => {
         this.shoporder = res.data.data;

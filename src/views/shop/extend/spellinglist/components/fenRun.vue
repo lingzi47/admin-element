@@ -17,10 +17,14 @@
       >
         <el-row :gutter="20">
           <el-col :span="10">
-            <el-form-item label="合同" prop="goods_img">
+            <el-form-item
+              label="合同"
+              prop="goods_img"
+              v-if="title !== '查看合同'"
+            >
               <el-upload
                 class="avatar-uploader1"
-                action="https://yujian02.xyz/command/ossUpload?filename=file"
+                action="https://y4.wjw.cool/command/ossUpload?filename=file"
                 :show-file-list="false"
                 :on-success="handleAvatarSuccess"
                 :before-upload="beforeAvatarUpload"
@@ -28,6 +32,11 @@
                 <img v-if="imageUrl" :src="imageUrl" class="avatar1" />
                 <i v-else class="el-icon-plus avatar-uploader-icon1"></i>
               </el-upload>
+            </el-form-item>
+          </el-col>
+          <el-col :span="10" v-if="title == '查看合同'">
+            <el-form-item label="合同" prop="goods_img">
+              <img v-if="imageUrl" :src="imageUrl" style="img" />
             </el-form-item>
           </el-col>
         </el-row>
@@ -211,5 +220,8 @@ export default {
   width: 220px;
   height: 150px;
   display: block;
+}
+.img {
+  width: 100%;
 }
 </style>

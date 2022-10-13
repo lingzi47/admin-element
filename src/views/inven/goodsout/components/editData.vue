@@ -27,7 +27,9 @@
 
         <el-table-column prop="price" label="成本价" align="center">
         </el-table-column>
-        <el-table-column prop="num" label="入库数" align="center">
+        <el-table-column prop="number" label="库存数" align="center">
+        </el-table-column>
+        <el-table-column prop="num" label="出库数" align="center">
           <template slot-scope="scope">
             <el-input
               v-model="scope.row.num"
@@ -109,6 +111,8 @@
         <el-table-column prop="goods_id" label="商品编号" align="center">
         </el-table-column>
         <el-table-column prop="goods_name" label="商品名称" align="center">
+        </el-table-column>
+        <el-table-column prop="number" label="当前库存" align="center">
         </el-table-column>
         <el-table-column prop="name" label="标签" align="center">
         </el-table-column>

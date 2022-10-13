@@ -145,6 +145,18 @@
         @changeCurrentPage="changeCurrent"
       >
         <el-table-column
+          prop="user_id"
+          label="用户ID"
+          align="center"
+          :resizable="false"
+        ></el-table-column>
+        <el-table-column
+          prop="user_name"
+          label="用户名"
+          align="center"
+          :resizable="false"
+        ></el-table-column>
+        <el-table-column
           prop="buy_user"
           label="收件人"
           align="center"
@@ -487,7 +499,7 @@ export default {
     dao() {
       if (this.form.time[1] == undefined) {
         window.location.href =
-          "https://yujian02.xyz/shopadmin/exportOrder" +
+          "https://y4.wjw.cool/shopadmin/exportOrder" +
           "?token=" +
           this.token +
           "&shop_type=" +
@@ -506,7 +518,7 @@ export default {
           this.form.order_status;
       } else {
         window.location.href =
-          "https://yujian02.xyz/shopadmin/exportOrder" +
+          "https://y4.wjw.cool/shopadmin/exportOrder" +
           "?token=" +
           this.token +
           "&shop_type=" +

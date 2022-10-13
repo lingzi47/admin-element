@@ -11,9 +11,7 @@
       ref="dataTable"
       :data="userList"
       @changeCurrentPage="changeCurrent"
-   
     >
-     
       <el-table-column label="序号" align="center">
         <template slot-scope="scope">
           <span>{{
@@ -34,7 +32,7 @@
           <el-link v-else>宋氏集团</el-link>
         </template>
       </el-table-column>
-      <el-table-column prop="created_at" label="投放开始" align="center">
+      <el-table-column prop="start_time" label="投放开始" align="center">
       </el-table-column>
       <el-table-column prop="end_time" label="投放结束" align="center">
       </el-table-column>
@@ -112,7 +110,6 @@ export default {
   mounted() {},
   computed: {},
   methods: {
-
     editData() {
       this.$refs.editData.show();
     },

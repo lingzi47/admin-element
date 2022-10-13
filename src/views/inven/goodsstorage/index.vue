@@ -106,7 +106,10 @@
 
       <el-table-column label="操作" align="center" width="350">
         <template slot-scope="scope">
-          <el-link @click="edit(scope.row)" style="margin-left: 10px"
+          <el-link
+            @click="edit(scope.row)"
+            style="margin-left: 10px"
+            v-if="scope.row.status != 2"
             >编辑</el-link
           >
           <el-link
@@ -219,7 +222,7 @@ export default {
       console.log(this.num);
 
       window.location.href =
-        "https://yujian02.xyz/admin/box/expOfficina" +
+        "https://y4.wjw.cool/admin/box/expOfficina" +
         "?token=" +
         this.token +
         "&number=" +

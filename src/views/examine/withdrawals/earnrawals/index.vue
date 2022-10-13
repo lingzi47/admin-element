@@ -12,7 +12,7 @@
         </el-form-item>
         <el-form-item label="持卡人手机号" prop="member">
           <el-input
-            style="width: 180px"
+            style="width: 170px"
             v-model="tel"
             clearable
             placeholder="请输入持卡人手机号"
@@ -22,19 +22,20 @@
           <el-select
             v-model="position"
             placeholder="请选择"
-            style="width: 150px"
+            style="width: 140px"
           >
             <el-option label="全部" value=""></el-option>
 
             <el-option label="租赁商" value="1"></el-option>
             <el-option label="渠道商" value="2"></el-option>
+            <el-option label="合作渠道租赁商" value="3"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="处理状态" prop="member">
           <el-select
             v-model="ex_status"
             placeholder="请选择"
-            style="width: 150px"
+            style="width: 140px"
           >
             <el-option label="全部状态" value=""></el-option>
             <el-option label="待审核" value="1"></el-option>
@@ -55,13 +56,8 @@
           </el-date-picker>
         </el-form-item>
         <el-form-item style="float: right">
-          <el-button
-            v-if="checkPermission('usersearch')"
-            type="primary"
-            icon="el-icon-search"
-            @click="searchinfo"
-            >搜索</el-button
-          >
+          <el-button type="primary" @click="searchinfo">搜索</el-button>
+          <el-button @click="dao">导出</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -84,10 +80,18 @@
       <el-table-column prop="uid" label="提现人id" align="center">
       </el-table-column>
       <el-table-column prop="username" label="用户名" align="center">
+        <template slot-scope="scope">
+          <el-link @click="upuser(scope.row)" v-if="scope.row.is_red == 0">{{
+            scope.row.username
+          }}</el-link>
+          <el-link type="danger" @click="upuser(scope.row)" v-else>{{
+            scope.row.username
+          }}</el-link>
+        </template>
       </el-table-column>
       <el-table-column prop="position" label="用户身份" align="center">
         <template slot-scope="scope">
-          <el-link v-if="scope.row.position == 1">药柜租赁商</el-link>
+          <el-link v-if="scope.row.position == 1">租赁商</el-link>
           <el-link v-if="scope.row.position == 2">渠道商</el-link>
           <el-link v-if="scope.row.position == 3">合作渠道租赁商</el-link>
         </template>
@@ -258,6 +262,40 @@ export default {
   mounted() {},
   computed: {},
   methods: {
+    dao() {
+      this.token = sessionStorage.getItem("token");
+      if (this.time[1] == undefined) {
+        window.location.href =
+          "https://y4.wjw.cool/adminApi/box/boxWith/listexport" +
+          "?token=" +
+          this.token +
+          "&uid=" +
+          this.uid +
+          "&ex_status=" +
+          this.ex_status +
+          "&tel=" +
+          this.tel +
+          "&position=" +
+          this.position;
+      } else {
+        window.location.href =
+          "https://y4.wjw.cool/adminApi/box/boxWith/listexport" +
+          "?token=" +
+          this.token +
+          "&uid=" +
+          this.uid +
+          "&ex_status=" +
+          this.ex_status +
+          "&tel=" +
+          this.tel +
+          "&position=" +
+          this.position +
+          "&s_time=" +
+          this.time[0] +
+          "&e_time=" +
+          this.time[1];
+      }
+    },
     submitForm() {
       //console.log("成功");
       let params = {
@@ -282,9 +320,9 @@ export default {
     },
     upuser(row) {
       console.log(row);
-      console.log(row.uid);
+      // console.log(row.uid);
       this.$router.push({
-        path: "/upuser",
+        path: "/userlit",
         query: {
           id: row.uid,
         },

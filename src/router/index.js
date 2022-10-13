@@ -56,6 +56,16 @@ export const asyncRoutes = [
 
 				}
 			}, {
+				path: "/userlit",
+				name: "userlit",
+				component: () => import("@/views/examine/withdrawals/userlit"),
+				meta: {
+					title: "用户收益",
+					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+					isBack: false
+
+				}
+			}, {
 				path: "/userShow",
 				name: "userShow",
 				component: () => import("@/views/user/appuserset/usershow"),
@@ -966,6 +976,38 @@ export const asyncRoutes = [
 						isBack: false
 					}
 				}, ]
+			},
+			{
+				path: "invensta",
+				name: "invensta",
+				component: () => import("@/views/examine/invensta"),
+				meta: {
+					title: "商品库存审核",
+					permissions: "invensta",
+					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+					isBack: false
+				},
+				children: [{
+					path: "storagesta",
+					name: "storagesta",
+					component: () => import("@/views/examine/invensta/storagesta"),
+					meta: {
+						title: "入库审核",
+						permissions: "storagesta",
+						keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+						isBack: false
+					}
+				}, {
+					path: "goodsoutsta",
+					name: "goodsoutsta",
+					component: () => import("@/views/examine/invensta/goodsoutsta"),
+					meta: {
+						title: "出库审核",
+						permissions: "goodsoutsta",
+						keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+						isBack: false
+					}
+				}]
 			},
 			{
 				path: "projectupsta",

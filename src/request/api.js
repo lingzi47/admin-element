@@ -144,7 +144,10 @@ export const userBlm = (params) => request.post('/adminApi/mobileUser/isBlm',
 export const userZisu = (params) => request.post('/adminApi/mobileUser/ziSu',
     params,
 )
-
+//pk之明细
+export const pklog = (params) => request.post('/adminApi/pklog',
+    params,
+)
 
 //活动 
 //消费送会员
@@ -251,6 +254,23 @@ export const releDetails = (params) => request.post('/adminApi/examine/rain/rele
 )
 //审核
 export const releExamine = (params) => request.post('/adminApi/examine/rain/releExamine',
+    params
+)
+
+//租赁商钻石雨
+export const zlsreleaselist = (params) => request.post('/adminApi/examine/rainzls/releaselist',
+    params
+)
+//添加
+export const zlsreleaseadd = (params) => request.post('/adminApi/examine/rainzls/releaseadd',
+    params
+)
+//详情
+export const zlsreleDetails = (params) => request.post('/adminApi/examine/rainzls/releDetails',
+    params
+)
+//审核
+export const zlsreleExamine = (params) => request.post('/adminApi/examine/rainzls/releExamine',
     params
 )
 //物流
@@ -725,17 +745,17 @@ export const fakedel = (params) => request.post('adminApi/box/fake/del ',
 export const fakecreate = (params) => request.post('adminApi/box/fake/create ',
     params
 )
-//虚拟订单
+//dummy订单
 export const xunilist = (params) => request.post('/manybox/unrealOrder',
     params
 )
 
-//虚拟获取商品
+//dummy获取商品
 export const xunnigoods = (params) => request.post('manybox/unrealOrdergoods ',
     params
 )
 
-//虚拟添加
+//dummy添加
 export const xunniadd = (params) => request.post('/manybox/unrealOrderAdd',
     params
 )

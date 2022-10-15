@@ -207,6 +207,12 @@
             @click="userShow(scope.row)"
             >用户详情</el-link
           >
+          <el-link
+            v-if="checkPermission('useredit')"
+            style="margin-left: 10px"
+            @click="pkshow(scope.row)"
+            >pk值详情</el-link
+          >
         </template>
       </el-table-column>
     </page-table>
@@ -294,6 +300,14 @@ export default {
       //console.log(row);
       this.$router.push({
         path: "/usertext",
+        query: {
+          id: row.id,
+        },
+      });
+    },
+    pkshow(row) {
+      this.$router.push({
+        path: "/pkshow",
         query: {
           id: row.id,
         },

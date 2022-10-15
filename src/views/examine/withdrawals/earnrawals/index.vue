@@ -278,6 +278,23 @@ export default {
           "&position=" +
           this.position;
       } else {
+        console.log(
+          "https://y4.wjw.cool/adminApi/box/boxWith/listexport" +
+            "?token=" +
+            this.token +
+            "&uid=" +
+            this.uid +
+            "&ex_status=" +
+            this.ex_status +
+            "&tel=" +
+            this.tel +
+            "&position=" +
+            this.position +
+            "&s_time=" +
+            this.time[0] +
+            "&e_time=" +
+            this.time[1]
+        );
         window.location.href =
           "https://y4.wjw.cool/adminApi/box/boxWith/listexport" +
           "?token=" +

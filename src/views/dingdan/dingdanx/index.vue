@@ -22,8 +22,11 @@
             placeholder="请输入设备编号"
           ></el-input>
         </el-form-item>
-        <el-form-item label="合计金额" style="margin-left: 20px"
-          >{{ price }}
+        <el-form-item label="成本价格 :" style="margin-left: 20px"
+          >{{ cost_price }}元
+        </el-form-item>
+        <el-form-item label="合计金额 :" style="margin-left: 20px"
+          >{{ price }}元
         </el-form-item>
         <el-form-item label="订单总数" style="margin-left: 40px"
           >{{ number }}
@@ -85,6 +88,7 @@ export default {
       userList: [], // 列表
       time: "",
       price: "",
+      cost_price: "",
       number: "",
       orderDeviceCode: "",
       page: {
@@ -156,6 +160,7 @@ export default {
         this.userList = res.data.data;
         this.number = res.data.info.number;
         this.price = res.data.info.price;
+        this.cost_price = res.data.info.cost_price;
         this.$refs.dataTable.setPageInfo({
           total: this.page.total,
         });
@@ -177,6 +182,7 @@ export default {
         this.userList = res.data.data;
         this.number = res.data.info.number;
         this.price = res.data.info.price;
+        this.cost_price = res.data.info.cost_price;
         this.$refs.dataTable.setPageInfo({
           total: this.page.total,
         });

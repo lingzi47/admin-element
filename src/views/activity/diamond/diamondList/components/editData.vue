@@ -23,7 +23,7 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="虚拟钻石池：" prop="xn_money">
+            <el-form-item label="dummy钻石池：" prop="xn_money">
               <el-input
                 v-model="ruleForm.xn_money"
                 placeholder="请输入钻石数量"
@@ -39,7 +39,7 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="虚拟参与人数：" prop="xn_people">
+            <el-form-item label="dummy参与人数：" prop="xn_people">
               <el-input
                 v-model="ruleForm.xn_people"
                 placeholder="请输入参与人数："
@@ -47,7 +47,7 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="封面图:">
+            <el-form-item label="封面图:" prop="image">
               <el-upload
                 class="avatar-uploader"
                 action="https://y4.wjw.cool/command/ossUpload?filename=file"
@@ -107,16 +107,17 @@ export default {
         release_peo: "",
         type: "10",
         time: "",
+        image: "",
       },
       img: "",
       rules: {
         money: [{ required: true, message: "请输入钻石池", trigger: "blur" }],
         // xn_money: [
-        //   { required: true, message: "请输入虚拟钻石池", trigger: "blur" },
+        //   { required: true, message: "请输入dummy钻石池", trigger: "blur" },
         // ],
         people: [{ required: true, message: "请输入人数", trigger: "blur" }],
         // xn_people: [
-        //   { required: true, message: "请输入虚拟人数", trigger: "blur" },
+        //   { required: true, message: "请输入dummy人数", trigger: "blur" },
         // ],
         image: [{ required: true, message: "请选择封面图", trigger: "blur" }],
         time: [{ required: true, message: "请选择时间", trigger: "blur" }],
@@ -149,12 +150,21 @@ export default {
       console.log(res);
       let imgurl = res.data;
       this.imageUrl = imgurl;
+      this.ruleForm.image = imgurl;
     },
     show() {
       this.dialogVisible = true;
     },
     close() {
       this.dialogVisible = false;
+      // this.ruleForm.money = "";
+      // this.ruleForm.xn_money = "";
+      // this.ruleForm.people = "";
+      // this.ruleForm.xn_people = "";
+      // this.imageUrl = "";
+      // this.ruleForm.time = "";
+      // this.ruleForm.release_peo = "";
+      // this.ruleForm.image = "";
     },
     submitForm() {
       this.$refs.ruleForm.validate(async (valid) => {
@@ -168,7 +178,7 @@ export default {
             type: this.ruleForm.type,
             due_time: this.ruleForm.time,
             release_peo: this.ruleForm.release_peo,
-            banner: this.imageUrl,
+            banner: this.ruleForm.image,
           };
           releaseadd(params).then((res) => {
             if (res.status == 200) {

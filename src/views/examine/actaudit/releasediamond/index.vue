@@ -21,11 +21,11 @@
       </el-table-column>
       <el-table-column prop="people" label="参与人数" align="center">
       </el-table-column>
-      <el-table-column prop="xn_people" label="虚拟参与人数" align="center">
+      <el-table-column prop="xn_people" label="dummy参与人数" align="center">
       </el-table-column>
       <el-table-column prop="money" label="钻石数" align="center">
       </el-table-column>
-      <el-table-column prop="xn_money" label="虚拟钻石数" align="center">
+      <el-table-column prop="xn_money" label="dummy钻石数" align="center">
       </el-table-column>
       <el-table-column prop="due_time" label="截止时间" align="center">
       </el-table-column>

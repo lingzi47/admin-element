@@ -52,7 +52,7 @@
       </el-table-column>
       <el-table-column prop="goods_name" label="商品名称" align="center">
       </el-table-column>
-      <el-table-column prop="id" label="产品编号" align="center">
+      <el-table-column prop="id" label="商品编号" align="center">
       </el-table-column>
       <el-table-column prop="type" label="品类" align="center">
       </el-table-column>

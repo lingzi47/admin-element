@@ -47,6 +47,14 @@
             <el-option label="A级推广员" :value="4"></el-option>
           </el-select>
         </el-form-item>
+        <el-form-item label="收款用户" prop="id">
+          <el-input
+            style="width: 180px"
+            v-model="form.openid_app"
+            clearable
+            placeholder="请输入收款用户"
+          ></el-input>
+        </el-form-item>
         <el-form-item label="注册时间" prop="time">
           <el-date-picker
             v-model="form.time"
@@ -275,6 +283,12 @@
             @click="userShow(scope.row)"
             >用户详情</el-link
           >
+          <el-link
+            v-if="checkPermission('useredit')"
+            style="margin-left: 10px"
+            @click="pkshow(scope.row)"
+            >pk值详情</el-link
+          >
         </template>
       </el-table-column>
     </page-table>
@@ -307,6 +321,7 @@ export default {
         username: "",
         member: "",
         time: "",
+        openid_app: "",
         id: "",
       },
       page: {
@@ -442,6 +457,7 @@ export default {
         member: this.form.member,
         start_time: this.form.time[0],
         end_time: this.form.time[1],
+        openid_app: this.form.openid_app,
       };
       appuserList(params).then((res) => {
         //console.log(res.data.data.member_count);
@@ -467,6 +483,7 @@ export default {
         member: this.form.member,
         start_time: this.form.time[0],
         end_time: this.form.time[1],
+        openid_app: this.form.openid_app,
       };
       appuserList(params).then((res) => {
         //console.log(res.data.data.member_count);
@@ -491,6 +508,14 @@ export default {
       //console.log(row);
       this.$router.push({
         path: "/userShow",
+        query: {
+          id: row.id,
+        },
+      });
+    },
+    pkshow(row) {
+      this.$router.push({
+        path: "/pkshow",
         query: {
           id: row.id,
         },

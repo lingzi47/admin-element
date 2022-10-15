@@ -60,6 +60,7 @@
                   :value="item.id"
                   :key="item.id"
                   :label="item.name"
+                  @change="change"
                 ></el-option>
               </el-select>
             </el-form-item>
@@ -105,6 +106,7 @@ export default {
         goods_name: "",
         price: "",
         type: "",
+        id: "",
         remark: "",
         name: "",
         buy_price: "",
@@ -123,11 +125,15 @@ export default {
       },
     };
   },
+  watch: {},
   created() {
     this.getlist();
   },
   mounted() {},
   methods: {
+    change(data) {
+      console.log(data);
+    },
     getlist() {
       let params = {
         token: sessionStorage.getItem("token"),
@@ -148,7 +154,7 @@ export default {
         this.id = row.id;
         this.ruleForm.remark = row.remark;
         this.ruleForm.type = row.type;
-        this.ruleForm.name = row.name;
+        this.ruleForm.name = row.tag_id;
         this.ruleForm.price = row.price;
         this.ruleForm.buy_price = row.buy_price;
         this.ruleForm.goods_name = row.goods_name;
@@ -164,6 +170,7 @@ export default {
       this.ruleForm.price = "";
       this.ruleForm.buy_price = "";
       this.ruleForm.name = "";
+
       this.ruleForm.goods_name = "";
     },
 

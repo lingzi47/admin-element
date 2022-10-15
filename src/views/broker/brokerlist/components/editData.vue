@@ -380,7 +380,7 @@ export default {
               return;
             }
 
-            //定义
+            //定义 w
             let sum = 0;
             this.list.forEach((item) => {
               //遍历prodAllPrice这个字段，并累加

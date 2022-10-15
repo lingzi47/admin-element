@@ -121,7 +121,10 @@
         <el-table-column label="操作" align="center">
           <template slot-scope="scope">
             <el-link type="danger" v-if="scope.row.status == 1">已出库</el-link>
-            <el-link type="success" v-else @click="chu(scope.row)"
+            <el-link
+              type="success"
+              v-if="scope.row.status != 1 && scope.row.number != 0"
+              @click="chu(scope.row)"
               >出库</el-link
             >
           </template>
@@ -249,20 +252,26 @@ export default {
     },
     onInputChange(row) {
       console.log(row.num);
-      let params = {
-        token: sessionStorage.getItem("token"),
-        type: 2,
-        id: row.i_id,
-        num: row.num,
-      };
-      saveNum(params).then((res) => {
-        if (res.data.code == 200) {
-          this.$message.success("修改成功");
-        } else {
-          this.$message.dannger(res.data.msg);
-        }
-        this.getUserList();
-      });
+      if (row.num > row.number) {
+        this.$message.error("出库数量不能大于当前库存");
+        row.num = "";
+        return;
+      } else {
+        let params = {
+          token: sessionStorage.getItem("token"),
+          type: 2,
+          id: row.i_id,
+          num: row.num,
+        };
+        saveNum(params).then((res) => {
+          if (res.data.code == 200) {
+            this.$message.success("修改成功");
+          } else {
+            this.$message.dannger(res.data.msg);
+          }
+          this.getUserList();
+        });
+      }
     },
     show(type, row) {
       this.dialogVisible = true;
@@ -339,52 +348,66 @@ export default {
       this.getUserList();
     },
     submitForm() {
-      if (this.type == 1) {
-        console.log(this.userList);
-        var ids = this.userList.map((i) => i.i_id).toString();
-        console.log(ids);
-        let params = {
-          token: sessionStorage.getItem("token"),
-          id: ids,
-          type: 2,
-        };
-        subOrder(params).then((res) => {
-          if (res.data.code == 200) {
-            this.$message.success("新增成功");
-            this.$parent.getUserList();
-            this.close();
-            this.isDisable = false;
-          } else {
-            this.$message.error(res.data.msg);
-            this.$parent.getUserList();
-            this.close();
-            this.isDisable = false;
-          }
-        });
+      console.log(11);
+      console.log(this.userList);
+      if (this.userList == "") {
+        this.$message.error("没有商品无法操作");
+        return;
       } else {
-        console.log(this.userList);
-        var ids = this.userList.map((i) => i.i_id).toString();
-        console.log(ids);
-        console.log("修改id", this.zhuid);
-        let params = {
-          token: sessionStorage.getItem("token"),
-          oid: this.zhuid,
-          id: ids,
-          type: 2,
-        };
-        subOrder(params).then((res) => {
-          if (res.data.code == 200) {
-            this.$message.success("编辑成功");
-            this.$parent.getUserList();
-            this.close();
-            this.isDisable = false;
+        var that = this;
+        let flag = that.userList.every((item) => !!item.num);
+        if (flag == 0) {
+          this.$message.error("数目不能为空");
+          return;
+        } else {
+          if (this.type == 1) {
+            console.log(this.userList);
+            var ids = this.userList.map((i) => i.i_id).toString();
+            console.log(ids);
+            let params = {
+              token: sessionStorage.getItem("token"),
+              id: ids,
+              type: 2,
+            };
+            subOrder(params).then((res) => {
+              if (res.data.code == 200) {
+                this.$message.success("新增成功");
+                this.$parent.getUserList();
+                this.close();
+                this.isDisable = false;
+              } else {
+                this.$message.error(res.data.msg);
+                this.$parent.getUserList();
+                this.close();
+                this.isDisable = false;
+              }
+            });
           } else {
-            this.$message.error(res.data.msg);
-            this.$parent.getUserList();
-            this.close();
-            this.isDisable = false;
+            console.log(this.userList);
+            var ids = this.userList.map((i) => i.i_id).toString();
+            console.log(ids);
+            console.log("修改id", this.zhuid);
+            let params = {
+              token: sessionStorage.getItem("token"),
+              oid: this.zhuid,
+              id: ids,
+              type: 2,
+            };
+            subOrder(params).then((res) => {
+              if (res.data.code == 200) {
+                this.$message.success("编辑成功");
+                this.$parent.getUserList();
+                this.close();
+                this.isDisable = false;
+              } else {
+                this.$message.error(res.data.msg);
+                this.$parent.getUserList();
+                this.close();
+                this.isDisable = false;
+              }
+            });
           }
-        });
+        }
       }
     },
   },

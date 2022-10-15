@@ -87,6 +87,16 @@ export const asyncRoutes = [
 
 				}
 			}, {
+				path: "/pkshow",
+				name: "pkshow",
+				component: () => import("@/views/user/appuserset/pkshow"),
+				meta: {
+					title: "pk值详情",
+					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+					isBack: false
+
+				}
+			}, {
 				path: "/lotteryhis",
 				name: "lotteryhis",
 				component: () => import("@/views/activity/lottery/lotteryhis"),
@@ -145,6 +155,17 @@ export const asyncRoutes = [
 				component: () => import("@/views/activity/diamond/diamondListshow"),
 				meta: {
 					title: "钻石雨领取详情",
+					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+					isBack: false
+
+				},
+			},
+			{
+				path: "zlsdiamondshow",
+				name: "zlsdiamondshow",
+				component: () => import("@/views/activity/diamond/zlsdiamondshow"),
+				meta: {
+					title: "租赁商钻石雨领取详情",
 					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
 					isBack: false
 
@@ -422,16 +443,28 @@ export const asyncRoutes = [
 					permissions: "bgaccountset"
 				},
 				children: [{
-					path: "diamondList",
-					name: "diamondList",
-					component: () => import("@/views/activity/diamond/diamondList"),
-					meta: {
-						title: "钻石雨释放列表",
-						permissions: "diamondList",
-						keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
-						isBack: false
+						path: "diamondList",
+						name: "diamondList",
+						component: () => import("@/views/activity/diamond/diamondList"),
+						meta: {
+							title: "钻石雨释放列表",
+							permissions: "diamondList",
+							keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+							isBack: false
+						}
+					},
+					{
+						path: "zlsdiamondList",
+						name: "zlsdiamondList",
+						component: () => import("@/views/activity/diamond/zlsdiamondList"),
+						meta: {
+							title: "租赁商钻石雨",
+							permissions: "zlsdiamondList",
+							keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+							isBack: false
+						}
 					}
-				}]
+				]
 			}, {
 				path: "vip",
 				name: "vip",
@@ -1102,6 +1135,16 @@ export const asyncRoutes = [
 						meta: {
 							title: "钻石雨手动释放审核",
 							permissions: "releasediamond",
+							keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+							isBack: false
+						}
+					}, {
+						path: "zlsreleasediamond",
+						name: "zlsreleasediamond",
+						component: () => import("@/views/examine/actaudit/zlsreleasediamond"),
+						meta: {
+							title: "租赁商钻石雨审核",
+							permissions: "zlsreleasediamond",
 							keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
 							isBack: false
 						}
@@ -1990,7 +2033,7 @@ export const asyncRoutes = [
 		name: "dingdan",
 		component: Layout,
 		meta: {
-			title: "虚拟订单",
+			title: "药箱订单",
 			icon: "el-icon-s-finance",
 			permissions: "dingdan",
 			keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
@@ -2001,7 +2044,7 @@ export const asyncRoutes = [
 			name: "dingdanx",
 			component: () => import("@/views/dingdan/dingdanx"),
 			meta: {
-				title: "虚拟订单",
+				title: "药箱订单",
 				permissions: "dingdanx",
 				keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
 				isBack: false

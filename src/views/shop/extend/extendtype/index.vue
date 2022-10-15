@@ -175,7 +175,7 @@ export default {
             let res = await shopTypeisshow({
               id: row.id,
               is_show: type,
-              shop_type: 1,
+              shop_type: 4,
               token: sessionStorage.getItem("token"),
             });
             if (res.status == 200) {
@@ -196,7 +196,7 @@ export default {
             let rowData = type == 1 ? this.tableSelectList[0] : row;
             let res = await shopTypedel({
               id: rowData.id,
-              shop_type: 1,
+              shop_type: 4,
               token: sessionStorage.getItem("token"),
             });
             if (res.status == 200) {

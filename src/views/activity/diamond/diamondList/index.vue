@@ -51,12 +51,13 @@
             @click="searchinfo"
             >搜索</el-button
           >
+          <el-button type="primary" @click="open()" style="margin-bottom: 10px"
+            >手动释放</el-button
+          >
         </el-form-item>
       </el-form>
     </div>
-    <el-button type="primary" @click="open()" style="margin-bottom: 10px"
-      >手动释放</el-button
-    >
+
     <page-table
       ref="dataTable"
       :data="userList"
@@ -78,43 +79,31 @@
       </el-table-column>
       <el-table-column prop="people" label="参与人数" align="center">
       </el-table-column>
-      <el-table-column prop="xn_people" label="虚拟参与人数" align="center">
+      <el-table-column prop="xn_people" label="dummy参与人数" align="center">
       </el-table-column>
       <el-table-column prop="money" label="钻石数" align="center">
       </el-table-column>
-      <el-table-column prop="xn_money" label="虚拟钻石数" align="center">
+      <el-table-column prop="xn_money" label="dummy钻石数" align="center">
       </el-table-column>
       <el-table-column prop="due_time" label="截止时间" align="center">
       </el-table-column>
       <el-table-column label="释放状态" align="center">
         <template slot-scope="scope">
-          <el-tag
-            type="warning"
-            effect="dark"
-            v-if="scope.row.release_sta == 10"
-            >未开启
-          </el-tag>
-          <el-tag
-            type="success"
-            effect="dark"
-            v-if="scope.row.release_sta == 20"
-            >已开启</el-tag
+          <el-link type="success" v-if="scope.row.release_sta == 20"
+            >已开启</el-link
+          >
+          <el-link type="danger" v-if="scope.row.release_sta == 10"
+            >未开启</el-link
           >
         </template>
       </el-table-column>
       <el-table-column label="释放方式" align="center">
         <template slot-scope="scope">
-          <el-tag
-            type="warning"
-            effect="dark"
-            v-if="scope.row.release_type == 10"
-            >手动释放
-          </el-tag>
-          <el-tag
-            type="success"
-            effect="dark"
-            v-if="scope.row.release_type == 20"
-            >系统释放</el-tag
+          <el-link type="warning" v-if="scope.row.release_type == 10"
+            >手动释放</el-link
+          >
+          <el-link type="success" v-if="scope.row.release_type == 20"
+            >系统释放</el-link
           >
         </template>
       </el-table-column>
@@ -126,15 +115,9 @@
       </el-table-column>
       <el-table-column label="审核状态" align="center">
         <template slot-scope="scope">
-          <el-tag type="warning" effect="dark" v-if="scope.row.sta == 10"
-            >待审核
-          </el-tag>
-          <el-tag type="success" effect="dark" v-if="scope.row.sta == 20"
-            >已通过</el-tag
-          >
-          <el-tag type="danger" effect="dark" v-if="scope.row.sta == 30"
-            >已拒绝</el-tag
-          >
+          <el-link type="warning" v-if="scope.row.sta == 10">待审核</el-link>
+          <el-link type="success" v-if="scope.row.sta == 20">通过</el-link>
+          <el-link type="danger" v-if="scope.row.sta == 30">拒绝</el-link>
         </template>
       </el-table-column>
       <el-table-column label="操作" width="193" align="center">
@@ -142,9 +125,9 @@
           <el-button @click="handleClick(scope.row)" type="text" size="small"
             >查看</el-button
           >
-          <el-button @click="dao(scope.row)" type="text" size="small"
+          <!-- <el-button @click="dao(scope.row)" type="text" size="small"
             >导出</el-button
-          >
+          > -->
         </template>
       </el-table-column>
     </page-table>
@@ -199,7 +182,6 @@ export default {
   mounted() {},
   computed: {},
   methods: {
-    // row是我从上边函数传下来的数据，可以拿到当前选中的状态值，下边的请求是因为我要传给后端调的接口
     open() {
       this.$refs.editData.show();
     },
@@ -231,13 +213,10 @@ export default {
         time2: this.time[1],
       };
       releaselist(params).then((res) => {
-        //console.log(res.data.data.member_count);
-        this.arr = res.data.data.member_count;
         this.page.total = res.data.data.total;
-        //console.log(res.data.data.total);
-        //console.log("总条数", this.page.total);
+
         this.page.currentPage = res.data.data.current_page;
-        //console.log(res.data.data.current_page);
+
         this.userList = res.data.data.data;
         this.$refs.dataTable.setPageInfo({
           total: this.page.total,
@@ -245,12 +224,6 @@ export default {
       });
     },
     getUserList() {
-      if (this.time === null) {
-        let time = "";
-        this.time == time;
-        //console.log(this.form.time);
-      }
-      //console.log(this.form.time);
       let token = sessionStorage.getItem("token");
       this.token = token;
       let params = {
@@ -264,23 +237,17 @@ export default {
         time2: this.time[1],
       };
       releaselist(params).then((res) => {
-        //console.log(res.data.data.member_count);
-        this.arr = res.data.data.member_count;
         this.page.total = res.data.data.total;
-        //console.log(res.data.data.total);
-        //console.log("总条数", this.page.total);
+
         this.page.currentPage = res.data.data.current_page;
-        //console.log(res.data.data.current_page);
+
         this.userList = res.data.data.data;
         this.$refs.dataTable.setPageInfo({
           total: this.page.total,
         });
       });
     },
-    addData() {
-      // 1:新增，2:编辑
-      this.$refs.addData.show(1, {});
-    },
+
     handleClick(row) {
       //console.log(row);
       this.$router.push({
@@ -289,42 +256,6 @@ export default {
           id: row.id,
         },
       });
-    },
-    nextUser(row) {
-      //console.log(row);
-      this.$router.push({
-        path: "/nextUser",
-        query: {
-          id: row.id,
-        },
-      });
-    },
-    editData(row) {
-      //console.log(row);
-      let rowData = row;
-      this.$refs.editData.show(JSON.parse(JSON.stringify(rowData)));
-    },
-    deleteData(type, row) {
-      if ((type == 1 && this.tableSelectList.length == 1) || type == 2) {
-        this.$confirm("是否删除此用户？", "提示", {
-          type: "warning",
-        })
-          .then(async () => {
-            let rowData = type == 1 ? this.tableSelectList[0] : row;
-            let res = await deleteUser({
-              id: rowData.id,
-            });
-            if (res.status == 200) {
-              this.getUserList();
-              this.$message.success("删除成功");
-            } else {
-              this.$message.error(res.data.msg);
-            }
-          })
-          .catch(() => {});
-      } else {
-        this.$message.warning("请选择一条数据删除");
-      }
     },
   },
 };

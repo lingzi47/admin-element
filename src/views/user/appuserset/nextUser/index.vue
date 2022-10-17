@@ -457,9 +457,6 @@ export default {
       this.tableSelectList = select;
     },
     changeBlm(row) {
-      //console.log(row.is_blm);
-      //console.log(row.id);
-      //console.log(sessionStorage.getItem("token"));
       let params = {
         token: sessionStorage.getItem("token"),
         is_blm: row.is_blm,
@@ -475,7 +472,6 @@ export default {
       });
     },
     getUserList() {
-      //console.log(this.cid);
       let token = sessionStorage.getItem("token");
       this.token = token;
       let params = {
@@ -491,12 +487,8 @@ export default {
         openid_app: this.form.openid_app,
       };
       appuserList(params).then((res) => {
-        //console.log(res.data.data);
         this.page.total = res.data.data.total;
-        //console.log(res.data.data.total);
-        //console.log("总条数", this.page.total);
         this.page.currentPage = res.data.data.current_page;
-        //console.log(res.data.data.current_page);
         this.userList = res.data.data.data;
         this.$refs.dataTable.setPageInfo({
           total: this.page.total,

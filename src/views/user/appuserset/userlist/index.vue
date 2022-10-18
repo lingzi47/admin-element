@@ -178,6 +178,7 @@
           <el-link v-if="scope.row.team == 1">全国</el-link>
           <el-link v-if="scope.row.team == 2">大连</el-link>
           <el-link v-if="scope.row.team == 3">大庆</el-link>
+          <el-link v-if="scope.row.team == 4">北京</el-link>
           <el-link type="danger" v-if="scope.row.team == null">暂无</el-link>
         </template></el-table-column
       >

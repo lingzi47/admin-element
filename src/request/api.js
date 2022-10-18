@@ -745,6 +745,10 @@ export const fakedel = (params) => request.post('adminApi/box/fake/del ',
 export const fakecreate = (params) => request.post('adminApi/box/fake/create ',
     params
 )
+//编辑
+export const fakeedit = (params) => request.post('adminApi/box/fake/edit',
+    params
+)
 //dummy订单
 export const xunilist = (params) => request.post('/manybox/unrealOrder',
     params

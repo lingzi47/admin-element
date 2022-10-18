@@ -19,6 +19,8 @@
               style="width: 150px"
             >
               <el-option label="全部" value=""></el-option>
+              <el-option label="3750" value="3750"></el-option>
+              <el-option label="2950" value="2950"></el-option>
               <el-option label="2500" value="2500"></el-option>
               <el-option label="1875" value="1875"></el-option>
               <el-option label="1700" value="1700"></el-option>
@@ -127,6 +129,7 @@
             <el-link v-if="scope.row.box_team == 1">全国</el-link>
             <el-link v-if="scope.row.box_team == 2">大连</el-link>
             <el-link v-if="scope.row.box_team == 3">大庆</el-link>
+            <el-link v-if="scope.row.box_team == 4">北京</el-link>
             <el-link type="danger" v-if="scope.row.box_team == null"
               >暂无</el-link
             >

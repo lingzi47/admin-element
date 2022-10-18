@@ -121,6 +121,8 @@
           >
         </template>
       </el-table-column>
+      <el-table-column prop="ex_time" label="审核时间" align="center">
+      </el-table-column>
       <el-table-column label="驳回理由" prop="remark" align="center">
       </el-table-column>
       <el-table-column label="操作" width="193" align="center">

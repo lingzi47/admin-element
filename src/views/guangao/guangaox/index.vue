@@ -49,6 +49,13 @@
         <template slot-scope="scope">
           <el-link
             v-if="checkPermission('userdelete')"
+            type="warning"
+            style="margin-left: 10px"
+            @click="edit(scope.row)"
+            >编辑</el-link
+          >
+          <el-link
+            v-if="checkPermission('userdelete')"
             type="danger"
             style="margin-left: 10px"
             @click="deleteData(scope.row)"
@@ -59,6 +66,7 @@
     </page-table>
     <!-- 新增编辑弹窗 -->
     <edit-data ref="editData" />
+    <edit-fen ref="editFen" />
   </div>
 </template>
 
@@ -68,12 +76,14 @@ import { checkPermission } from "@/utils/permissions";
 import pageTable from "@/components/pageTable.vue";
 import { areaListData } from "@/utils/area";
 import editData from "./components/editData.vue";
+import editFen from "./components/editFen.vue";
 
 export default {
   name: "user",
   components: {
     pageTable,
     editData,
+    editFen,
   },
   data() {
     return {
@@ -112,6 +122,10 @@ export default {
   methods: {
     editData() {
       this.$refs.editData.show();
+    },
+    edit(row) {
+      let rowData = row;
+      this.$refs.editFen.show(JSON.parse(JSON.stringify(rowData)));
     },
     deleteData(row) {
       //console.log(row);

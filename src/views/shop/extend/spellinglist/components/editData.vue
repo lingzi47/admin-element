@@ -23,10 +23,27 @@
                 placeholder="请选择"
                 style="width: 150px"
               >
+                <el-option label="3750" value="3750"></el-option>
+                <el-option label="2950" value="2950"></el-option>
                 <el-option label="2500" value="2500"></el-option>
                 <el-option label="1875" value="1875"></el-option>
                 <el-option label="1700" value="1700"></el-option>
                 <el-option label="1580" value="1580"></el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+          <el-col :span="15">
+            <!-- 1=全国 2=大连 3=大庆 4=北京 -->
+            <el-form-item label="区域选择" prop="box_team">
+              <el-select
+                v-model="ruleForm.box_team"
+                placeholder="请选择"
+                style="width: 150px"
+              >
+                <el-option label="全国" value="1"></el-option>
+                <el-option label="大连" value="2"></el-option>
+                <el-option label="大庆" value="3"></el-option>
+                <el-option label="北京" value="4"></el-option>
               </el-select>
             </el-form-item>
           </el-col>
@@ -79,9 +96,11 @@ export default {
         uid: "",
         phone: "",
         price: "",
+        box_team: "",
       },
       rules: {
         price: [{ required: true, message: "请选择购买价格", trigger: "blur" }],
+        box_team: [{ required: true, message: "请选择地区", trigger: "blur" }],
         uid: [{ required: true, message: "请输入绑定id", trigger: "blur" }],
 
         phone: [
@@ -107,6 +126,7 @@ export default {
       this.ruleForm.phone = "";
       this.ruleForm.uid = "";
       this.ruleForm.price = "";
+      this.ruleForm.box_team = "";
     },
 
     submitForm() {
@@ -117,6 +137,7 @@ export default {
             uid: this.ruleForm.uid,
             phone: this.ruleForm.phone,
             price: this.ruleForm.price,
+            box_team: this.ruleForm.box_team,
           };
           addtuilist(params).then((res) => {
             if (res.data.code == 200) {

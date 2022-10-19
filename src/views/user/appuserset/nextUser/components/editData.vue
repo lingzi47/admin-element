@@ -64,10 +64,11 @@
                   <el-option label="全国" :value="1"></el-option>
                   <el-option label="大连" :value="2"></el-option>
                   <el-option label="大庆" :value="3"></el-option>
-                  <el-option label="北京" :value="4"></el-option>
+                  <!-- <el-option label="北京" :value="4"></el-option> -->
                 </el-select>
-              </el-form-item></div
-          ></el-col>
+              </el-form-item>
+            </div></el-col
+          >
           <el-col :span="12"
             ><div class="grid-content bg-purple-light">
               <el-form-item label="用户上级">

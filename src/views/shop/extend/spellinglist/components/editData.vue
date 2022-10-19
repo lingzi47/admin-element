@@ -33,7 +33,6 @@
             </el-form-item>
           </el-col>
           <el-col :span="15">
-            <!-- 1=全国 2=大连 3=大庆 4=北京 -->
             <el-form-item label="区域选择" prop="box_team">
               <el-select
                 v-model="ruleForm.box_team"

@@ -146,14 +146,14 @@ export default {
     },
     close() {
       this.dialogVisible = false;
-      this.ruleForm.money = "";
-      this.ruleForm.xn_money = "";
-      this.ruleForm.people = "";
-      this.ruleForm.fu = "";
-      this.imageUrl = "";
-      this.ruleForm.time = "";
-      this.ruleForm.release_peo = "";
-      this.ruleForm.image = "";
+      // this.ruleForm.money = "";
+      // this.ruleForm.xn_money = "";
+      // this.ruleForm.people = "";
+      // this.ruleForm.fu = "";
+      // this.imageUrl = "";
+      // this.ruleForm.time = "";
+      // this.ruleForm.release_peo = "";
+      // this.ruleForm.image = "";
     },
     submitForm() {
       this.$refs.ruleForm.validate(async (valid) => {

@@ -121,7 +121,7 @@
         ></el-table-column>
         <el-table-column
           fixed
-          label="所属团队"
+          label="购买区域"
           align="center"
           :resizable="false"
         >

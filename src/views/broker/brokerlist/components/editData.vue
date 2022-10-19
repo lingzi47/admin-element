@@ -28,6 +28,21 @@
               </el-select>
             </el-form-item>
           </el-col>
+          <el-col :span="20">
+            <!-- 1=全国 2=大连 3=大庆 4=北京 -->
+            <el-form-item label="区域选择" prop="box_team">
+              <el-select
+                v-model="ruleForm.box_team"
+                placeholder="请选择"
+                style="width: 150px"
+              >
+                <el-option label="全国" value="1"></el-option>
+                <el-option label="大连" value="2"></el-option>
+                <el-option label="大庆" value="3"></el-option>
+                <el-option label="北京" value="4"></el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
           <el-col :span="8">
             <el-form-item label="推荐人设备租赁号" prop="pid">
               <el-input
@@ -226,12 +241,14 @@ export default {
         box_type: "",
         device_type: "",
         pid: "",
+        box_team: "",
       },
       rules: {
         type: [{ required: true, message: "请选择购买类型", trigger: "blur" }],
         use_pid: [
           { required: true, message: "请选择推荐人id", trigger: "blur" },
         ],
+        box_team: [{ required: true, message: "请选择地区", trigger: "blur" }],
         uid: [
           { required: true, message: "请输入租赁人用户id", trigger: "blur" },
         ],
@@ -296,6 +313,7 @@ export default {
       this.ruleForm.pid = "";
       this.ruleForm.use_pid = "";
       this.ruleForm.tel = "";
+      this.ruleForm.box_team = "";
       this.ruleForm.box_type = "";
       this.list = [
         { uid: "", tel: "", bl: "" },
@@ -338,6 +356,7 @@ export default {
               pid: this.ruleForm.pid,
               use_pid: this.ruleForm.use_pid,
               device_type: this.ruleForm.device_type,
+              box_team: this.ruleForm.box_team,
               str: this.ruleForm.uid
                 .concat(",")
                 .concat(this.ruleForm.tel)
@@ -411,6 +430,7 @@ export default {
                 pid: this.ruleForm.pid,
                 use_pid: this.ruleForm.use_pid,
                 device_type: this.ruleForm.device_type,
+                box_team: this.ruleForm.box_team,
                 str: str,
               };
               addbox(params).then((res) => {

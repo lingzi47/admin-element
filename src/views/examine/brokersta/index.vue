@@ -10,7 +10,6 @@
             placeholder="请输入租赁人id"
           ></el-input>
         </el-form-item>
-
         <el-form-item label="推荐人租赁号" prop="pid">
           <el-input
             style="width: 180px"
@@ -36,7 +35,6 @@
           <el-button type="primary" icon="el-icon-search" @click="searchinfo"
             >搜索</el-button
           >
-          <!-- <el-button type="primary" @click="add">手动添加租赁人</el-button> -->
           <!-- <el-button type="primary">导出</el-button> -->
         </el-form-item>
       </el-form>
@@ -78,7 +76,17 @@
           <span v-if="scope.row.box_type == 3">终身</span>
         </template>
       </el-table-column>
-
+      <el-table-column label="购买区域" align="center" :resizable="false">
+        <template slot-scope="scope">
+          <el-link v-if="scope.row.box_team == 1">全国</el-link>
+          <el-link v-if="scope.row.box_team == 2">大连</el-link>
+          <el-link v-if="scope.row.box_team == 3">大庆</el-link>
+          <el-link v-if="scope.row.box_team == 4">北京</el-link>
+          <el-link type="danger" v-if="scope.row.box_team == null"
+            >暂无</el-link
+          >
+        </template></el-table-column
+      >
       <el-table-column label="审核状态" align="center">
         <template slot-scope="scope">
           <el-link type="success" v-if="scope.row.ex_status == 2"

@@ -13,6 +13,33 @@
           >
           </el-date-picker>
         </el-form-item>
+        <el-form-item label="pk值区间:" prop="id">
+          <el-input
+            style="width: 90px"
+            clearable
+            v-model="low_num"
+            placeholder="请输入"
+          ></el-input
+          >--
+          <el-input
+            style="width: 90px"
+            clearable
+            v-model="high_num"
+            placeholder="请输入"
+          ></el-input>
+        </el-form-item>
+
+        <el-form-item label="加减" prop="member">
+          <el-select
+            style="width: 180px"
+            v-model="type"
+            clearable
+            placeholder="请选择加减"
+          >
+            <el-option label="加" :value="1"></el-option>
+            <el-option label="减" :value="2"></el-option>
+          </el-select>
+        </el-form-item>
         <el-form-item style="float: right">
           <el-button type="primary" icon="el-icon-search" @click="searchinfo"
             >搜索</el-button
@@ -90,7 +117,9 @@ export default {
     return {
       userList: [], // 用户列表
       id: "",
-
+      low_num: "",
+      high_num: "",
+      type: "",
       time: "",
       page: {
         //分页信息
@@ -132,6 +161,9 @@ export default {
         uid: this.id,
         time1: this.time[0],
         time2: this.time[1],
+        low_num: this.low_num,
+        high_num: this.high_num,
+        type: this.type,
       };
       pklog(params).then((res) => {
         this.page.total = res.data.count;
@@ -151,6 +183,9 @@ export default {
         token: sessionStorage.getItem("token"),
         time1: this.time[0],
         time2: this.time[1],
+        low_num: this.low_num,
+        high_num: this.high_num,
+        type: this.type,
       };
       pklog(params).then((res) => {
         this.page.total = res.data.count;

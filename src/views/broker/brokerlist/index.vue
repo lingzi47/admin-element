@@ -38,6 +38,7 @@
             <el-option label="五年" value="2"></el-option>
           </el-select>
         </el-form-item>
+
         <el-form-item label="租赁号状态" prop="status">
           <el-select v-model="status" placeholder="请选择" style="width: 150px">
             <el-option label="全部状态" value=""></el-option>
@@ -122,6 +123,17 @@
           <span v-if="scope.row.box_type == 3">终身</span>
         </template>
       </el-table-column>
+      <el-table-column label="购买区域" align="ce nter" :resizable="false">
+        <template slot-scope="scope">
+          <el-link v-if="scope.row.box_team == 1">全国</el-link>
+          <el-link v-if="scope.row.box_team == 2">大连</el-link>
+          <el-link v-if="scope.row.box_team == 3">大庆</el-link>
+          <el-link v-if="scope.row.box_team == 4">北京</el-link>
+          <el-link type="danger" v-if="scope.row.box_team == null"
+            >暂无</el-link
+          >
+        </template></el-table-column
+      >
       <el-table-column prop="queue" label="队列编号" align="center">
       </el-table-column>
 

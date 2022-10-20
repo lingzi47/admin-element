@@ -3,7 +3,7 @@ module.exports = {
 	lintOnSave: false,
 	devServer: {
 		proxy: {
-			// 本地备份
+			// 本地备份  
 			// 和上面自定义的 baseURL 保持一致
 			'/api': {
 				target: 'https://y4.wjw.cool/',

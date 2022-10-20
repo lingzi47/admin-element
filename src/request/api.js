@@ -438,6 +438,10 @@ export const luckAll = (params) => request.post('activity/luckAll',
 export const rainCount = (params) => request.post('/adminApi/statis/data/rainCount',
     params
 )
+//租赁商钻石雨
+export const zlsrainCount = (params) => request.post('adminApi/statis/data/zlsRainCount',
+    params
+)
 //会员
 export const memCount = (params) => request.post('/adminApi/statis/data/memCount',
     params

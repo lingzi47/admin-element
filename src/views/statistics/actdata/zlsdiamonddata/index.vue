@@ -31,7 +31,7 @@
       </el-form>
     </div>
 
-    <el-table ref="dataTable" :data="userList">
+    <el-table ref="dataTable" :data="userList" border>
       <el-table-column prop="name" label="名称" align="center">
       </el-table-column>
       <el-table-column prop="count" label="释放数量" align="center">
@@ -84,7 +84,7 @@
 </template>
 
 <script>
-import { rainCount, userZisu, userStart, userBlm } from "@/request/api";
+import { zlsrainCount } from "@/request/api";
 import pageTable from "@/components/pageTable.vue";
 
 export default {
@@ -165,7 +165,7 @@ export default {
         s_time: this.form.time[0],
         e_time: this.form.time[1],
       };
-      rainCount(params).then((res) => {
+      zlsrainCount(params).then((res) => {
         console.log(res.data);
         this.all_num = res.data.all_data.all_num;
         this.all_sum = res.data.all_data.all_sum;

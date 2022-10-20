@@ -31,20 +31,20 @@
       </el-form>
     </div>
 
-    <el-table ref="dataTable" :data="userList">
+    <el-table ref="dataTable" :data="userList" border>
       <el-table-column prop="name" label="名称" align="center">
       </el-table-column>
       <el-table-column prop="count" label="释放数量" align="center">
       </el-table-column>
       <el-table-column prop="sum" label="释放钻石数" align="center">
       </el-table-column>
-      <el-table-column label="操作" width="193" align="center">
+      <!-- <el-table-column label="操作" width="193" align="center">
         <template slot-scope="scope">
           <el-button @click="set(scope.row)" type="text" size="small"
             >查看详情</el-button
           >
         </template>
-      </el-table-column>
+      </el-table-column> -->
     </el-table>
     <el-dialog
       class="AddDialog"

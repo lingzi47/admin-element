@@ -2,6 +2,28 @@
   <div class="user">
     <div class="block-quote">
       <el-form :inline="true" ref="form">
+        <!-- 在投设备数
+投放金额
+租赁商收益
+渠道商收益 
+物业收益
+管理收益 -->
+        <el-form-item label="在线设备数 :"> {{ count }}</el-form-item>
+        <el-form-item label="投放金额 :" style="margin-left: 30px">
+          {{ all_price }}</el-form-item
+        >
+        <el-form-item label="租赁商收益 :" style="margin-left: 30px">
+          {{ zls_price }}</el-form-item
+        >
+        <el-form-item label="渠道商收益 :" style="margin-left: 30px">
+          {{ qds_price }}</el-form-item
+        >
+        <el-form-item label="物业收益 :" style="margin-left: 30px">
+          {{ gl_price }}</el-form-item
+        >
+        <el-form-item label="管理收益 :" style="margin-left: 30px">
+          {{ wy_price }}</el-form-item
+        >
         <el-form-item style="float: right">
           <el-button type="primary" @click="editData">添加</el-button>
         </el-form-item>
@@ -87,6 +109,12 @@ export default {
   },
   data() {
     return {
+      count: "",
+      all_price: "",
+      zls_price: "",
+      qds_price: "",
+      gl_price: "",
+      wy_price: "",
       box_uid: "",
       box_name: "",
       share: "",
@@ -168,6 +196,12 @@ export default {
       fakelist(params).then((res) => {
         this.page.total = res.data.data.total;
         this.userList = res.data.data.data;
+        this.count = res.data.title_data.count;
+        this.all_price = res.data.title_data.all_price;
+        this.zls_price = res.data.title_data.zls_price;
+        this.qds_price = res.data.title_data.qds_price;
+        this.gl_price = res.data.title_data.gl_price;
+        this.wy_price = res.data.title_data.wy_price;
         this.$refs.dataTable.setPageInfo({
           total: this.page.total,
         });

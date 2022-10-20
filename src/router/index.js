@@ -1467,26 +1467,38 @@ export const asyncRoutes = [
 					isBack: false
 				},
 				children: [{
-					path: "lotterydata",
-					name: "lotterydata",
-					component: () => import("@/views/statistics/actdata/lotterydata"),
-					meta: {
-						title: "抽奖活动数据统计",
-						permissions: "lotterydata",
-						keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
-						isBack: false
-					}
-				}, {
-					path: "diamonddata",
-					name: "diamonddata",
-					component: () => import("@/views/statistics/actdata/diamonddata"),
-					meta: {
-						title: "钻石雨数据统计",
-						permissions: "diamonddata",
-						keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
-						isBack: false
-					}
-				}, ]
+						path: "lotterydata",
+						name: "lotterydata",
+						component: () => import("@/views/statistics/actdata/lotterydata"),
+						meta: {
+							title: "抽奖活动数据统计",
+							permissions: "lotterydata",
+							keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+							isBack: false
+						}
+					}, {
+						path: "diamonddata",
+						name: "diamonddata",
+						component: () => import("@/views/statistics/actdata/diamonddata"),
+						meta: {
+							title: "钻石雨数据统计",
+							permissions: "diamonddata",
+							keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+							isBack: false
+						}
+					},
+					{
+						path: "zlsdiamonddata",
+						name: "zlsdiamonddata",
+						component: () => import("@/views/statistics/actdata/zlsdiamonddata"),
+						meta: {
+							title: "租赁商钻石雨统计",
+							permissions: "zlsdiamonddata",
+							keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+							isBack: false
+						}
+					},
+				]
 			},
 			{
 				path: "vouchersdata",

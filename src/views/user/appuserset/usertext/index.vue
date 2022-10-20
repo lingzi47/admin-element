@@ -253,7 +253,7 @@ export default {
         this.arr = res.data.data.member_count;
         this.page.total = res.data.data.total;
         this.userList = res.data.data.data;
-        this.time = res.data.data.lastInfo.created_at;
+        this.time = res.data.data.lastInfo.ex_time;
         this.have_zs = res.data.data.lastInfo.have_zs;
         this.alladd = res.data.data.num.alladd;
         this.allcut = res.data.data.num.allcut;

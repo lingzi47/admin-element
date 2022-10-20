@@ -123,7 +123,7 @@
     <page-table
       ref="dataTable1"
       :data="list1"
-      @changeCurrentPage="changeCurrent"
+      @changeCurrentPage="changeCurrent1"
     >
       <el-table-column label="序号" align="center">
         <template slot-scope="scope">
@@ -279,7 +279,7 @@ export default {
     },
     checkPermission,
     // 切换分页
-    changeCurrent(page, size) {
+    changeCurrent1(page, size) {
       this.page1.currentPage1 = page;
       this.page1.pageSize1 = size;
       this.getUserList1();
@@ -304,8 +304,8 @@ export default {
     },
     getUserList1() {
       let params = {
-        page: this.page.currentPage,
-        limit: this.page.pageSize,
+        page: this.page1.currentPage1,
+        limit: this.page1.pageSize1,
         token: sessionStorage.getItem("token"),
         name: this.name,
         type: this.type,

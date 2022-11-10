@@ -25,10 +25,18 @@
     <el-table :data="third" border style="width: 80%">
       <el-table-column
         prop="level"
-        label="用户等级"
-        width="100px"
+        label="分润等级"
+        width="150px"
         align="center"
       >
+        <template slot-scope="scope">
+          <el-link v-if="scope.row.level == 'A'">A</el-link>
+          <el-link v-if="scope.row.level == 'B'">B</el-link>
+          <el-link v-if="scope.row.level == 'C'">C</el-link>
+          <el-link v-if="scope.row.level == 'D'">部门销售费用</el-link>
+          <el-link v-if="scope.row.level == 'E'">部门销售费用</el-link>
+          <el-link v-if="scope.row.level == 'F'">部门销售费用</el-link>
+        </template>
       </el-table-column>
       <el-table-column prop="details" label="三年分润" align="center">
       </el-table-column>
@@ -53,10 +61,18 @@
     <el-table :data="five" border style="width: 80%">
       <el-table-column
         prop="level"
-        label="用户等级"
-        width="100px"
+        label="分润等级"
+        width="150px"
         align="center"
       >
+        <template slot-scope="scope">
+          <el-link v-if="scope.row.level == 'A'">A</el-link>
+          <el-link v-if="scope.row.level == 'B'">B</el-link>
+          <el-link v-if="scope.row.level == 'C'">C</el-link>
+          <el-link v-if="scope.row.level == 'D'">部门销售费用</el-link>
+          <el-link v-if="scope.row.level == 'E'">部门销售费用</el-link>
+          <el-link v-if="scope.row.level == 'F'">部门销售费用</el-link>
+        </template>
       </el-table-column>
       <el-table-column prop="details" label="五年分润" align="center">
       </el-table-column>

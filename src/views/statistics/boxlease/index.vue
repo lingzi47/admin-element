@@ -202,7 +202,6 @@ export default {
   mounted() {},
   methods: {
     handleClick(row) {
-      console.log(row);
       this.box_name = row.box_name;
       this.getList();
     },
@@ -212,9 +211,7 @@ export default {
         box_name: this.box_name,
       };
       shareInfo(params).then((res) => {
-        console.log(res);
         this.List = res.data.data;
-        console.log(this.List);
       });
       this.dialogVisible = true;
     },
@@ -255,7 +252,6 @@ export default {
       });
     },
     getUserList() {
-      //console.log(this.form.time);
       let token = sessionStorage.getItem("token");
       this.token = token;
       let params = {
@@ -270,7 +266,6 @@ export default {
         time2: this.time[1],
       };
       orderall(params).then((res) => {
-        //console.log(res.data.data);
         this.page.total = res.data.count;
         this.shoporder = res.data.data;
         this.allprice = res.data.allprice;

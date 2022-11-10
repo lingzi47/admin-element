@@ -8,6 +8,7 @@
             <el-option label="全国" value="1"></el-option>
             <el-option label="大连" value="2"></el-option>
             <el-option label="大庆" value="3"></el-option>
+            <el-option label="本溪" value="5"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="处理状态" prop="member">
@@ -77,12 +78,13 @@
       </el-table-column>
       <el-table-column prop="buy_price" label="购买价格" align="center">
       </el-table-column>
-      <el-table-column label="所属团队" align="center">
+      <el-table-column label="购买区域" align="center">
         <template slot-scope="scope">
           <el-link v-if="scope.row.team == 1">全国</el-link>
           <el-link v-if="scope.row.team == 2">大连</el-link>
           <el-link v-if="scope.row.team == 3">大庆</el-link>
           <el-link v-if="scope.row.team == 4">北京</el-link>
+          <el-link v-if="scope.row.team == 5">本溪</el-link>
           <el-link type="danger" v-if="scope.row.team == null">暂无</el-link>
         </template></el-table-column
       >
@@ -100,7 +102,6 @@
         align="center"
       >
       </el-table-column>
-
       <el-table-column
         prop="team_bank"
         label="团队负责人卡号"
@@ -115,11 +116,10 @@
         align="center"
       >
       </el-table-column>
-      <el-table-column prop="commission" label="返利金额" align="center">
+      <el-table-column prop="commission" label="奖金" align="center">
       </el-table-column>
       <el-table-column prop="buy_time" label="购买时间" align="center">
       </el-table-column>
-
       <el-table-column label="状态" align="center">
         <template slot-scope="scope">
           <span v-if="scope.row.sta == 20">已通过</span>

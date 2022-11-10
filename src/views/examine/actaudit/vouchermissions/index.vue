@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { coupontaskstalist, coupontasksta } from "@/requestw/api";
+import { coupontaskstalist, coupontasksta } from "@/request/api";
 
 export default {
   components: {},

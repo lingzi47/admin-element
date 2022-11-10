@@ -214,7 +214,6 @@ export default {
     },
     onSubmit() {
       //点击确定
-      //console.log(JSON.parse(JSON.stringify(this.form)));
     },
     resetForm() {
       //重置表单

@@ -49,6 +49,13 @@
         <template slot-scope="scope">
           <el-link
             type="success"
+            style="margin-left: 10px"
+            @click="showtable(scope.row)"
+            >查看</el-link
+          >
+          <el-link
+            type="success"
+            style="margin-left: 10px"
             @click="set(scope.row)"
             v-if="scope.row.status == 1"
             >处理</el-link
@@ -102,6 +109,7 @@
         <el-button type="primary" @click="submitForm1">确定</el-button>
       </div>
     </el-dialog>
+    <up-set ref="upSet" />
   </div>
 </template>
 
@@ -110,10 +118,11 @@ import { exList, exStatus } from "@/request/api";
 import { checkPermission } from "@/utils/permissions";
 
 import pageTable from "@/components/pageTable.vue";
-
+import upSet from "./components/upSet.vue";
 export default {
   components: {
     pageTable,
+    upSet,
   },
   data() {
     return {
@@ -162,6 +171,12 @@ export default {
           this.getUserList();
         }
       });
+    },
+
+    showtable(row) {
+      console.log(row);
+      let rowData = row;
+      this.$refs.upSet.show(JSON.parse(JSON.stringify(rowData)));
     },
     submitForm1() {
       let params = {

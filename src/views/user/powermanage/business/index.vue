@@ -102,7 +102,6 @@ export default {
       this.getRolesList();
     },
     getRolesList() {
-      //console.log(sessionStorage);
       let token = sessionStorage.getItem("token");
       this.token = token;
       let params = {
@@ -112,14 +111,9 @@ export default {
         token: sessionStorage.getItem("token"),
       };
       bguserGroup(params).then((res) => {
-        //console.log(res.data.data);
         this.page.total = res.data.data.total;
-        //console.log(res.data.data.total);
-        //console.log("总条数", this.page.total);
         this.page.currentPage = res.data.data.current_page;
-        //console.log(res.data.data.current_page);
         this.userList = res.data.data.data;
-        //console.log(this.userList);
         this.$refs.dataTable.setPageInfo({
           total: this.page.total,
         });
@@ -147,12 +141,10 @@ export default {
       })
         .then(async () => {
           let id = row.id;
-          //console.log(id);
           let params = {
             token: sessionStorage.getItem("token"),
           };
           delGroup(params, id).then((res) => {
-            //console.log(res.data);
             if (res.data.code == 200) {
               this.$message.success("删除成功");
               this.getRolesList();
@@ -165,7 +157,6 @@ export default {
         .catch(() => {});
     },
     setPermissions(row) {
-      //console.log(row);
       this.$refs.setRloe.show(row);
     },
   },

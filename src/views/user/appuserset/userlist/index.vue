@@ -179,6 +179,7 @@
           <el-link v-if="scope.row.team == 2">大连</el-link>
           <el-link v-if="scope.row.team == 3">大庆</el-link>
           <el-link v-if="scope.row.team == 4">北京</el-link>
+          <el-link v-if="scope.row.team == 5">本溪</el-link>
           <el-link type="danger" v-if="scope.row.team == null">暂无</el-link>
         </template></el-table-column
       >
@@ -355,9 +356,6 @@ export default {
   methods: {
     // row是我从上边函数传下来的数据，可以拿到当前选中的状态值，下边的请求是因为我要传给后端调的接口
     changeSwitch(row) {
-      //console.log(row.status);
-      //console.log(row.id);
-      //console.log(sessionStorage.getItem("token"));
       let params = {
         token: sessionStorage.getItem("token"),
         status: row.status,
@@ -374,25 +372,18 @@ export default {
     },
     go() {
       if (this.arr.length < 1) {
-        //console.log("我不显示");
         this.$router.back();
       } else {
-        //console.log("我要的", this.arr.slice(-1));
         let a = this.arr[this.arr.length - 1];
         this.cid = a.toString();
-        //console.log(this.cid);
         this.getUserList();
         var m = this.arr.slice(0);
         m.splice(m.length - 1, 1);
-        //console.log(m);
       }
       this.arr = m;
       return m;
     },
     changeZisu(row) {
-      //console.log(row.zisu_fl);
-      //console.log(row.id);
-      //console.log(sessionStorage.getItem("token"));
       let params = {
         token: sessionStorage.getItem("token"),
         is_zisu: row.zisu_fl,
@@ -408,8 +399,6 @@ export default {
       });
     },
     upuser(row) {
-      console.log(row);
-      console.log(row.pid);
       this.$router.push({
         path: "/upuser",
         query: {
@@ -418,9 +407,6 @@ export default {
       });
     },
     changeBlm(row) {
-      //console.log(row.is_blm);
-      //console.log(row.id);
-      //console.log(sessionStorage.getItem("token"));
       let params = {
         token: sessionStorage.getItem("token"),
         is_blm: row.is_blm,
@@ -461,14 +447,12 @@ export default {
         openid_app: this.form.openid_app,
       };
       appuserList(params).then((res) => {
-        //console.log(res.data.data.member_count);
         this.arr = res.data.data.member_count;
         this.page.total = res.data.data.total;
 
         this.userList = res.data.data.data;
         this.$refs.dataTable.setPageInfo({
           total: this.page.total,
-          // page: 1,
         });
       });
     },
@@ -487,14 +471,8 @@ export default {
         openid_app: this.form.openid_app,
       };
       appuserList(params).then((res) => {
-        //console.log(res.data.data.member_count);
         this.arr = res.data.data.member_count;
         this.page.total = res.data.data.total;
-
-        //console.log(res.data.data.total);
-        //console.log("总条数", this.page.total);
-        // this.page.currentPage = res.data.data.current_page;
-        //console.log(res.data.data.current_page);
         this.userList = res.data.data.data;
         this.$refs.dataTable.setPageInfo({
           total: this.page.total,
@@ -506,7 +484,6 @@ export default {
       this.$refs.addData.show(1, {});
     },
     userShow(row) {
-      //console.log(row);
       this.$router.push({
         path: "/userShow",
         query: {
@@ -523,7 +500,6 @@ export default {
       });
     },
     usertext(row) {
-      //console.log(row);
       this.$router.push({
         path: "/usertext",
         query: {
@@ -532,7 +508,6 @@ export default {
       });
     },
     nextUser(row) {
-      //console.log(row);
       this.$router.push({
         path: "/nextUser",
         query: {
@@ -541,7 +516,6 @@ export default {
       });
     },
     editData(row) {
-      //console.log(row);
       let rowData = row;
       this.$refs.editData.show(JSON.parse(JSON.stringify(rowData)));
     },

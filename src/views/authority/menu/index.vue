@@ -133,7 +133,6 @@ export default {
       let res = await getMenu(this.form);
       if (res.status == 200) {
         this.menuList = res.data;
-        //console.log(this.menuList);
       }
     },
     async getLevelMenu() {
@@ -148,7 +147,6 @@ export default {
       let res = await getMenu(this.form);
       if (res.status == 200) {
         this.menuList = res.data;
-        //console.log(this.menuList);
       }
     },
     async getLevelMenu() {

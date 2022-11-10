@@ -168,27 +168,23 @@ export default {
       }
     },
     name(newVal) {
-      console.log(newVal);
       this.huolist1();
     },
   },
   created() {
     var date = new Date();
-    // console.log(date);
     var y = date.getFullYear();
     var m = date.getMonth() + 1;
     m = m < 10 ? "0" + m : m;
     var d = date.getDate();
     d = d < 10 ? "0" + d : d;
     var s1 = y + "-" + m + "-" + d;
-    // console.log(s1, "s1");
     var y1 = date.getFullYear();
     var m1 = date.getMonth() + 1;
     m1 = m1 < 10 ? "0" + m1 : m1;
     var d1 = date.getDate() - 1;
     d1 = d1 < 10 ? "0" + d1 : d1;
     var e1 = y1 + "-" + m1 + "-" + d1;
-    // console.log(e1, "e1");
     let arr = [];
     arr.push(e1);
     arr.push(s1);
@@ -204,7 +200,7 @@ export default {
     dao() {
       if (this.time[1] == undefined) {
         window.location.href =
-          "https://y4.wjw.cool/adminApi/box/boxFinance/repExport" +
+          "https://yujian02.xyz/adminApi/box/boxFinance/repExport" +
           "?token=" +
           this.token +
           "&goods_name=" +
@@ -213,7 +209,7 @@ export default {
           this.number;
       } else {
         window.location.href =
-          "https://y4.wjw.cool/adminApi/box/boxFinance/repExport" +
+          "https://yujian02.xyz/adminApi/box/boxFinance/repExport" +
           "?token=" +
           this.token +
           "&goods_name=" +
@@ -235,7 +231,6 @@ export default {
         area: this.area,
       };
       officinalist(params).then((res) => {
-        console.log(res.data.data);
         this.list1 = res.data.data;
       });
     },
@@ -250,13 +245,11 @@ export default {
       });
     },
     change(data) {
-      console.log(data);
       this.eprovince = data[0];
       this.ecity = data[1];
       this.earea = data[2];
     },
     change1(data) {
-      console.log(data);
       this.province = data[0];
       this.city = data[1];
       this.area = data[2];
@@ -270,7 +263,6 @@ export default {
         area: this.area,
       };
       officinalist(params).then((res) => {
-        console.log(res.data.data);
         this.list = res.data.data;
       });
     },
@@ -301,7 +293,6 @@ export default {
       repList(params).then((res) => {
         this.page.total = res.data.data.total;
         let list = res.data.data.dataList;
-        console.log(list);
         // 拿key
         let arr = [];
         for (let prop in list) {
@@ -329,7 +320,6 @@ export default {
       repList(params).then((res) => {
         this.page.total = res.data.data.total;
         let list = res.data.data.dataList;
-        console.log(list);
         // 拿key
         let arr = [];
         for (let prop in list) {

@@ -114,7 +114,6 @@ export default {
         type: 1,
       };
       paylist(params).then((res) => {
-        //console.log(res.data.data.data);
         this.userList = res.data.data.data;
         this.page.total = res.data.data.total;
         this.$refs.dataTable.setPageInfo({
@@ -130,8 +129,6 @@ export default {
       })
         .then(async () => {
           let id = row.id;
-          //console.log(row.id);
-          //console.log(id);
           let params = {
             token: sessionStorage.getItem("token"),
             id: id,

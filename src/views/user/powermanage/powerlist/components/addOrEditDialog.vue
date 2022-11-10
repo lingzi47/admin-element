@@ -130,7 +130,7 @@ export default {
     };
   },
   created: function () {
-    //console.log(this.type);
+ 
 
     this.getUserEdit();
   },
@@ -159,9 +159,9 @@ export default {
           token: sessionStorage.getItem("token"),
         };
         menuShow(params, id).then((res) => {
-          console.log(res);
+
           this.pid = res.data.data.pid;
-          //console.log(this.pid);
+      
           this.ruleForm = {
             id: "",
             route: "",
@@ -178,12 +178,12 @@ export default {
         let id = this.ruleForm.id;
         this.id = id; //当前id
         this.pid = this.ruleForm.pid;
-        console.log(this.pid);
+   
         let params = {
           token: sessionStorage.getItem("token"),
         };
         menuShow(params, id).then((res) => {
-          //console.log(res.data.data);
+     
           this.ruleForm = res.data.data;
         });
       }
@@ -198,7 +198,7 @@ export default {
       this.$refs.ruleForm.validate(async (valid) => {
         if (valid) {
           if (this.type == 1) {
-            console.log("一级添加", this.type);
+   
             let token = sessionStorage.getItem("token");
             this.token = token;
             let params = {
@@ -221,8 +221,7 @@ export default {
               }
             });
           } else if (this.type == 3) {
-            //console.log(this.pid);
-            console.log("二级添加", this.type);
+    
             let token = sessionStorage.getItem("token");
             this.token = token;
             let params = {
@@ -242,7 +241,7 @@ export default {
               }
             });
           } else {
-            console.log("修改", this.type);
+    
             let token = sessionStorage.getItem("token");
             this.token = token;
             let id = this.id;

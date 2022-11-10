@@ -94,7 +94,7 @@
 </template>
 
 <script>
-import { couponlist } from "@/requestw/api";
+import { couponlist } from "@/request/api";
 import { checkPermission } from "@/utils/permissions";
 
 import pageTable from "@/components/pageTable.vue";
@@ -128,10 +128,7 @@ export default {
       sta: 20,
     };
     couponlist(params).then((res) => {
-      console.log(res.data.data);
-
       this.list = res.data.data;
-      console.log(this.list);
     });
     this.getUserList(); //获取用户列表
   },
@@ -161,10 +158,7 @@ export default {
         price: this.price,
       };
       couponlist(params).then((res) => {
-        //console.log(res.data.data);
-
         this.page.total = res.data.count;
-
         this.userList = res.data.data;
         this.$refs.dataTable.setPageInfo({
           total: this.page.total,
@@ -172,7 +166,6 @@ export default {
       });
     },
     getUserList() {
-      //console.log(this.form.time);
       let token = sessionStorage.getItem("token");
       this.token = token;
       let params = {
@@ -184,10 +177,7 @@ export default {
         price: this.price,
       };
       couponlist(params).then((res) => {
-        //console.log(res.data.data);
-
         this.page.total = res.data.count;
-
         this.userList = res.data.data;
         this.$refs.dataTable.setPageInfo({
           total: this.page.total,
@@ -199,7 +189,6 @@ export default {
       this.$refs.addData.show(1, {});
     },
     userShow(row) {
-      //console.log(row);
       this.$router.push({
         path: "/userShow",
         query: {
@@ -208,7 +197,6 @@ export default {
       });
     },
     nextUser(row) {
-      //console.log(row);
       this.$router.push({
         path: "/nextUser",
         query: {
@@ -217,7 +205,6 @@ export default {
       });
     },
     editData(row) {
-      //console.log(row);
       let rowData = row;
       this.$refs.editData.show(JSON.parse(JSON.stringify(rowData)));
     },

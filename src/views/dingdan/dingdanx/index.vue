@@ -34,6 +34,7 @@
         <el-form-item style="float: right">
           <el-button type="primary" @click="search">搜索</el-button>
           <el-button type="primary" @click="editData">添加</el-button>
+          <el-button @click="dao">导出</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -114,6 +115,27 @@ export default {
   methods: {
     editData() {
       this.$refs.editData.show();
+    },
+    dao() {
+      if (this.time[1] == undefined) {
+        window.location.href =
+          "https://yujian02.xyz/manybox/unrealOrderExp" +
+          "?token=" +
+          this.token +
+          "&orderDeviceCode=" +
+          this.orderDeviceCode;
+      } else {
+        window.location.href =
+          "https://yujian02.xyz/manybox/unrealOrderExp" +
+          "?token=" +
+          this.token +
+          "&orderDeviceCode=" +
+          this.orderDeviceCode +
+          "&time1=" +
+          this.time[0] +
+          "&time2=" +
+          this.time[1];
+      }
     },
     deleteData(row) {
       //console.log(row);

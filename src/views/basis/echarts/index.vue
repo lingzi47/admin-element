@@ -62,10 +62,8 @@ export default {
     async getechartsData() {
       let res = await getechartsData();
       if (res.status == 200) {
-        //console.log(JSON.parse(JSON.stringify(res.data)));
         let data = res.data;
         this.sales = res.data;
-        //console.log(this.sales);
         let month = [];
         let subject = [];
         let mSalesVolume = [[], [], [], []];

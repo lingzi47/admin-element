@@ -66,7 +66,7 @@
 </template>
 
 <script>
-import { couponadd, appuserShow } from "@/requestw/api";
+import { couponadd, appuserShow } from "@/request/api";
 export default {
   name: "AddDialog",
   components: {},
@@ -99,9 +99,7 @@ export default {
       dialogVisible: false,
     };
   },
-  created: function () {
-    //console.log(this.type);
-  },
+  created: function () {},
 
   mounted: function () {},
   methods: {

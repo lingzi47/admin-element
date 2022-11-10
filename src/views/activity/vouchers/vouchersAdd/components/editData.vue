@@ -57,7 +57,7 @@
 </template>
 
 <script>
-import { couponlist, couponset } from "@/requestw/api";
+import { couponlist, couponset } from "@/request/api";
 export default {
   name: "AddDialog",
   components: {},
@@ -91,10 +91,7 @@ export default {
       sta: 20,
     };
     couponlist(params).then((res) => {
-      console.log(res.data.data);
-
       this.list = res.data.data;
-      console.log(this.list);
     });
   },
   mounted: function () {},
@@ -110,7 +107,6 @@ export default {
       let imgurl = res.file;
       this.imageUrl = URL.createObjectURL(file.raw);
       this.img = "http://y1.wjw.cool/" + imgurl;
-      //console.log(this.img);
     },
     show() {
       this.dialogVisible = true;

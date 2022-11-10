@@ -14,7 +14,7 @@
               <el-form-item label="封面图" prop="goods_img">
                 <el-upload
                   class="avatar-uploader"
-                  action="https://y4.wjw.cool/command/ossUpload?filename=file"
+                  action="https://yujian02.xyz/command/ossUpload?filename=file"
                   :show-file-list="false"
                   :on-success="handleAvatarSuccess"
                   :before-upload="beforeAvatarUpload"
@@ -64,6 +64,7 @@
                   <el-option label="全国" :value="1"></el-option>
                   <el-option label="大连" :value="2"></el-option>
                   <el-option label="大庆" :value="3"></el-option>
+                  <el-option label="本溪" :value="5"></el-option>
                 </el-select>
               </el-form-item></div
           ></el-col>
@@ -185,9 +186,7 @@ export default {
       },
     };
   },
-  created: function () {
-    //console.log(this.type);
-  },
+  created: function () {},
   mounted: function () {},
   methods: {
     //获取修改的信息
@@ -199,24 +198,18 @@ export default {
       return isLt2M;
     },
     handleAvatarSuccess(res, file) {
-      //console.log(file);
-      //console.log(res);
       let imgurl = res.data;
       this.imageUrl = imgurl;
     },
     show(row) {
-      //console.log(row);
       this.dialogVisible = true;
-      //console.log(row.id);
       let id = row.id;
-      console.log(row);
       this.imageUrl = row.head_img;
       this.userid = row.id;
       let params = {
         token: sessionStorage.getItem("token"),
       };
       appuserShow(params, id).then((res) => {
-        //console.log(res.data.data);
         this.pk_value = res.data.data.pk_value;
         this.diamonds = res.data.data.diamonds;
         this.member = res.data.data.member;
@@ -230,7 +223,6 @@ export default {
       this.dialogVisible = false;
     },
     submitForm() {
-      //console.log(id);
       if (this.member == 1) {
         if (this.overdue_time == "") {
           this.$message.error("请选择会员到期时间");
@@ -262,8 +254,8 @@ export default {
           this.pk_value_save = "";
           this.team = "";
           this.diamonds_save = "";
-          this.pk_text = "";
-          this.diamonds_text = "";
+          // this.pk_text = "";
+          // this.diamonds_text = "";
         } else {
           this.$message(res.data.msg);
           this.$parent.getUserList();
@@ -272,8 +264,8 @@ export default {
           this.diamonds_save = "";
           this.team = "";
           this.overdue_time = "";
-          this.pk_text = "";
-          this.diamonds_text = "";
+          // this.pk_text = "";
+          // this.diamonds_text = "";
         }
       });
     },

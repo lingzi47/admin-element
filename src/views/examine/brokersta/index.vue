@@ -82,11 +82,14 @@
           <el-link v-if="scope.row.box_team == 2">大连</el-link>
           <el-link v-if="scope.row.box_team == 3">大庆</el-link>
           <el-link v-if="scope.row.box_team == 4">北京</el-link>
+          <el-link v-if="scope.row.box_team == 5">本溪</el-link>
           <el-link type="danger" v-if="scope.row.box_team == null"
             >暂无</el-link
           >
         </template></el-table-column
       >
+      <el-table-column prop="remark" label="备注" align="center">
+      </el-table-column>
       <el-table-column label="审核状态" align="center">
         <template slot-scope="scope">
           <el-link type="success" v-if="scope.row.ex_status == 2"

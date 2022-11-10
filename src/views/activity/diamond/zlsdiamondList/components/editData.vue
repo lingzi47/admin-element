@@ -36,7 +36,7 @@
             <el-form-item label="封面图:" prop="image">
               <el-upload
                 class="avatar-uploader"
-                action="https://y4.wjw.cool/command/ossUpload?filename=file"
+                action="https://yujian02.xyz/command/ossUpload?filename=file"
                 :show-file-list="false"
                 :on-success="handleAvatarSuccess"
                 :before-upload="beforeAvatarUpload"
@@ -136,7 +136,6 @@ export default {
       return isLt2M;
     },
     handleAvatarSuccess(res, file) {
-      console.log(res);
       let imgurl = res.data;
       this.imageUrl = imgurl;
       this.ruleForm.image = imgurl;

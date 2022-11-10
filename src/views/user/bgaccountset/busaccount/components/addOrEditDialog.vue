@@ -155,7 +155,6 @@ export default {
   },
   created: function () {
     this.getRolesList(); //获取角色
-    //console.log(this.type);
     if (this.type == 2) {
       this.getUserEdit();
     }
@@ -168,12 +167,10 @@ export default {
     getRolesList() {
       let token = sessionStorage.getItem("token");
       this.token = token;
-      //console.log(this.token);
       let params = {
         token: sessionStorage.getItem("token"),
       };
       userRoles(params).then((res) => {
-        //console.log(res.data.data);
         this.rolesList = res.data.data;
       });
     },
@@ -182,14 +179,12 @@ export default {
       this.dialogVisible = true;
       if (type == 2) {
         this.ruleForm = row;
-        //console.log(this.ruleForm.id);
         let id = this.ruleForm.id;
         this.id = id;
         let params = {
           token: sessionStorage.getItem("token"),
         };
         editShow(params, id).then((res) => {
-          //console.log(res.data.data);
           this.ruleForm = res.data.data;
           this.ruleForm.role_name = res.data.data.rid;
         });

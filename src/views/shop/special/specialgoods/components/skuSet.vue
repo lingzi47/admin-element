@@ -193,9 +193,7 @@ export default {
   methods: {
     // 获取打印内容下拉框的选择项,保存到数组
     getChange(index, item, $event) {
-      //console.log("点的第", index, "个下拉框", "id为", $event);
       this.arr[index] = $event;
-      //console.log(this.arr);
     },
 
     checkPermission,
@@ -213,9 +211,7 @@ export default {
     },
     editData(type, row) {
       this.type = 2;
-      //console.log(row);
       this.goodsForm = row;
-      //console.log(row);
       this.goodsForm.id = row.id;
       this.dialogVisible1 = true;
     },
@@ -225,9 +221,7 @@ export default {
         token: sessionStorage.getItem("token"),
       });
       if (res.status == 200) {
-        //console.log(res.data.data);
         this.list = res.data.data;
-        //console.log(this.list.skunamearr);
       }
     },
     //商品列表
@@ -237,12 +231,7 @@ export default {
         token: sessionStorage.getItem("token"),
       });
       if (res.status == 200) {
-        //console.log("sku列表", res.data);
-        // this.page.total = res.count;
         this.goodsList = res.data.data;
-        // this.$refs.dataTable.setPageInfo({
-        //   total: res.count,
-        // });
       }
     },
 
@@ -252,7 +241,6 @@ export default {
         type: "warning",
       })
         .then(async () => {
-          //console.log(row.id);
           let res = await skudel({
             id: row.id,
             token: sessionStorage.getItem("token"),
@@ -281,7 +269,6 @@ export default {
     },
     async submitForm1() {
       if (this.type == 2) {
-        // let permission = authority.join(",");
         let res = await skuedit({
           sku_id: this.arr.join(","),
           goods_id: this.id,
@@ -289,7 +276,6 @@ export default {
           id: this.goodsForm.id,
           rebater: this.goodsForm.rebater,
           count: this.goodsForm.count,
-
           token: sessionStorage.getItem("token"),
         });
         if (res.data.code == 200) {
@@ -314,27 +300,6 @@ export default {
       this.$parent.shopList();
       this.close1();
     },
-    // submitForm() {
-    //   this.ruleForm.validate(async (valid) => {
-    //     if (valid) {
-    //       let token = sessionStorage.getItem("token");
-    //       this.token = token;
-    //       let res = await skuadd({
-    //         full_price: this.goodsForm.full_price,
-    //         multiple: this.goodsForm.multiple,
-    //         id: this.id,
-    //       });
-
-    //       if (res.data.code == 200) {
-    //         this.$message.success("操作成功");
-    //         this.shopList();
-    //
-    //       }
-    //     }
-    //     this.$parent.shopList();
-    //     this.close();
-    //   });
-    // },
   },
 };
 </script>

@@ -38,6 +38,20 @@
               <el-option label="后台购买" value="20"></el-option>
             </el-select>
           </el-form-item>
+          <el-form-item label="购买区域" prop="box_type">
+            <el-select
+              v-model="box_team"
+              placeholder="请选择"
+              style="width: 150px"
+            >
+              <el-option label="全部" value=""></el-option>
+              <el-option label="全国" value="1"></el-option>
+              <el-option label="大连" value="2"></el-option>
+              <el-option label="大庆" value="3"></el-option>
+              <el-option label="北京" value="4"></el-option>
+              <el-option label="本溪" value="5"></el-option>
+            </el-select>
+          </el-form-item>
           <el-form-item label="审核状态" prop="box_type">
             <el-select v-model="sta" placeholder="请选择" style="width: 150px">
               <el-option label="全部" value=""></el-option>
@@ -121,6 +135,22 @@
         ></el-table-column>
         <el-table-column
           fixed
+          label="所属团队"
+          align="center"
+          :resizable="false"
+        >
+          <template slot-scope="scope">
+            <el-link v-if="scope.row.user_team == 1">全国</el-link>
+            <el-link v-if="scope.row.user_team == 2">大连</el-link>
+            <el-link v-if="scope.row.user_team == 3">大庆</el-link>
+            <el-link v-if="scope.row.user_team == 5">本溪</el-link>
+            <el-link type="danger" v-if="scope.row.user_team == null"
+              >暂无</el-link
+            >
+          </template></el-table-column
+        >
+        <el-table-column
+          fixed
           label="购买区域"
           align="center"
           :resizable="false"
@@ -130,6 +160,7 @@
             <el-link v-if="scope.row.box_team == 2">大连</el-link>
             <el-link v-if="scope.row.box_team == 3">大庆</el-link>
             <el-link v-if="scope.row.box_team == 4">北京</el-link>
+            <el-link v-if="scope.row.box_team == 5">本溪</el-link>
             <el-link type="danger" v-if="scope.row.box_team == null"
               >暂无</el-link
             >
@@ -256,6 +287,7 @@ export default {
       buy_type: "",
       is_pin: "",
       sta: "",
+      box_team: "",
       time: "",
       id: "",
       price: "",
@@ -283,22 +315,7 @@ export default {
       this.token = sessionStorage.getItem("token");
       if (this.time[1] == undefined) {
         window.location.href =
-          "https://y4.wjw.cool/manybox/tuilistexport" +
-          "?token=" +
-          this.token +
-          "&price=" +
-          this.price +
-          "&id=" +
-          this.id +
-          "&buy_type=" +
-          this.buy_type +
-          "&sta=" +
-          this.sta +
-          "&is_pin=" +
-          this.is_pin;
-      } else {
-        window.location.href =
-          "https://y4.wjw.cool/manybox/tuilistexport" +
+          "https://yujian02.xyz/manybox/tuilistexport" +
           "?token=" +
           this.token +
           "&price=" +
@@ -311,6 +328,25 @@ export default {
           this.sta +
           "&is_pin=" +
           this.is_pin +
+          "&box_team=" +
+          this.box_team;
+      } else {
+        window.location.href =
+          "https://yujian02.xyz/manybox/tuilistexport" +
+          "?token=" +
+          this.token +
+          "&price=" +
+          this.price +
+          "&id=" +
+          this.id +
+          "&buy_type=" +
+          this.buy_type +
+          "&sta=" +
+          this.sta +
+          "&is_pin=" +
+          this.is_pin +
+          "&box_team=" +
+          this.box_team +
           "&time1=" +
           this.time[0] +
           "&time2=" +
@@ -324,6 +360,7 @@ export default {
         sta: this.sta,
         is_pin: this.is_pin,
         buy_type: this.buy_type,
+        box_team: this.box_team,
         price: this.price,
         page: this.page.page,
         limit: this.page.limit,
@@ -345,6 +382,8 @@ export default {
         sta: this.sta,
         is_pin: this.is_pin,
         buy_type: this.buy_type,
+        box_team: this.box_team,
+
         price: this.price,
         page: 1,
         limit: this.page.limit,

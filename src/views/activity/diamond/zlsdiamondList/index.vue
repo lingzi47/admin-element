@@ -87,7 +87,7 @@
         </template>
       </el-table-column>
 
-      <el-table-column prop="create_time" label="释放时间" align="center">
+      <el-table-column prop="release_time" label="释放时间" align="center">
       </el-table-column>
       <el-table-column prop="sta_time" label="审核时间" align="center">
       </el-table-column>
@@ -223,7 +223,6 @@ export default {
     },
 
     handleClick(row) {
-      //console.log(row);
       this.$router.push({
         path: "/zlsdiamondshow",
         query: {

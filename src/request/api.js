@@ -429,6 +429,77 @@ export const bindindex = (params) => request.post('/admin/box/bindindex',
 export const bindsta = (params) => request.post('/admin/box/bindsta',
     params
 )
+//活动 
+//抽奖添加
+export const luckadd = (params) => request.post('/activity/luckadd',
+    params,
+)
+//抽奖列表
+export const lucklist = (params) => request.post('/activity/lucklist',
+    params
+)
+//抽奖历史列表
+export const luckhislist = (params) => request.post('/activity/luckindex',
+    params
+)
+//抽奖审核
+export const lucksta = (params) => request.post('/activity/lucksta',
+    params
+)
+//代金券列表
+export const couponlist = (params) => request.post('/activity/couponlist',
+    params)
+//新增
+export const couponadd = (params) => request.post('/activity/couponadd',
+    params
+)
+//代金券审核列表
+export const luckstalist = (params) => request.post('/activity/luckstalist',
+    params
+)
+//审核
+export const couponsta = (params) => request.post('/activity/couponsta',
+    params
+)
+//代金券释放列表
+export const couponsetindex = (params) => request.post('/activity/couponsetindex',
+    params
+)
+//代金券释放
+export const couponset = (params) => request.post('/activity/couponset',
+    params
+)
+//代金券释放审核
+export const couponsetsta = (params) => request.post('/activity/couponsetsta',
+    params
+)
+//代金券任务列表
+export const coupontaskindex = (params) => request.post('/activity/coupontaskindex',
+    params
+)
+//代金券任务添加
+export const coupontaskadd = (params) => request.post('/activity/coupontaskadd',
+    params
+)
+//代金券任务历史
+export const coupontasklist = (params) => request.post('/activity/coupontasklist',
+    params
+)
+//代金券任务审核
+export const coupontaskstalist = (params) => request.post('/activity/coupontaskstalist',
+    params
+)
+//代金券任务审核
+export const coupontasksta = (params) => request.post('/activity/coupontasksta',
+    params
+)
+//财务
+export const financeInfo = (params) => request.post('/shopadmin/financeInfo',
+    params
+)
+export const financeindex = (params) => request.post('/shopadmin/financeindex',
+    params
+)
 //数据统计
 //抽奖
 export const luckAll = (params) => request.post('activity/luckAll',
@@ -817,15 +888,6 @@ export const choGoList = (params) => request.post('/adminApi/box/boxStock/choGoL
 export const savRemark = (params) => request.post('/adminApi/box/boxStock/savRemark',
     params
 )
-
-
-
-
-
-
-
-
-
 //商品库存列表/adminApi/box/boxStock/goodsWare
 export const goodsWare = (params) => request.post('/adminApi/box/boxStock/goodsWare',
     params
@@ -869,5 +931,33 @@ export const exStatus = (params) => request.post('/adminApi/box/boxStock/exStatu
 )
 //用户收益/manybox/boxWithInfo
 export const boxWithInfo = (params) => request.post('/manybox/boxWithInfo',
+    params
+)
+//用户购买区域/admin/box/teamchoose
+export const teamchoose = (params) => request.post('/admin/box/teamchoose',
+    params
+)
+//adminApi/box/boxStock/stockInfo
+export const stockInfo = (params) => request.post('/adminApi/box/boxStock/stockInfo',
+    params
+)
+///manybox/bonuslist
+export const bonuslist = (params) => request.post('/manybox/bonuslist',
+    params
+)
+//评论列表
+export const dislist = (params) => request.post('/shopadmin/dislist',
+    params
+)
+//添加评论
+export const disadd = (params) => request.post('/shopadmin/disadd',
+    params
+)
+//删除评论
+export const disdel = (params) => request.post('/shopadmin/disdel',
+    params
+)
+//修改评论
+export const disupdate = (params) => request.post('/shopadmin/disupdate',
     params
 )

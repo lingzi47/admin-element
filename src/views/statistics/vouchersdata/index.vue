@@ -175,13 +175,9 @@ export default {
   mounted() {},
   computed: {},
   methods: {
-    submitForm() {
-      //console.log("成功");
-    },
+    submitForm() {},
 
-    refuse() {
-      //console.log("拒绝");
-    },
+    refuse() {},
 
     checkPermission,
     // 切换分页
@@ -196,7 +192,6 @@ export default {
     },
     searchinfo() {},
     getUserList() {
-      //console.log(this.form.time);
       let token = sessionStorage.getItem("token");
       this.token = token;
       let params = {
@@ -206,13 +201,10 @@ export default {
         e_time: this.form.time[1],
       };
       daicoup(params).then((res) => {
-        console.log(res.data);
-
         this.userList = res.data.data;
       });
     },
     getList() {
-      //console.log(this.form.time);
       let token = sessionStorage.getItem("token");
       this.token = token;
       let params = {
@@ -222,8 +214,6 @@ export default {
         e_use_time: this.form.timee[1],
       };
       daicoup(params).then((res) => {
-        console.log(res.data);
-
         this.List = res.data.data;
       });
     },

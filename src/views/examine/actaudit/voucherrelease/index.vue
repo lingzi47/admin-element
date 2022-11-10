@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import { couponsetindex, couponsetsta } from "@/requestw/api";
+import { couponsetindex, couponsetsta } from "@/request/api";
 import { checkPermission } from "@/utils/permissions";
 
 import pageTable from "@/components/pageTable.vue";

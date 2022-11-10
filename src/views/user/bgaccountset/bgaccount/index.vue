@@ -172,7 +172,6 @@ export default {
         token: sessionStorage.getItem("token"),
       };
       userRoles(params).then((res) => {
-        //console.log(res.data.data);
         this.rolesList = res.data.data;
       });
     },
@@ -187,12 +186,8 @@ export default {
         role: this.form.roles,
       };
       bguserList(params).then((res) => {
-        //console.log(res.data.data);
         this.page.total = res.data.data.total;
-        //console.log(res.data.data.total);
-        //console.log("总条数", this.page.total);
         this.page.currentPage = res.data.data.current_page;
-        //console.log(res.data.data.current_page);
         this.userList = res.data.data.data;
         this.$refs.dataTable.setPageInfo({
           total: this.page.total,
@@ -201,8 +196,6 @@ export default {
     },
     //获取用户列表
     getUserList() {
-      //console.log(sessionStorage);
-
       let params = {
         u_type: 1,
         page: this.page.currentPage,
@@ -213,12 +206,8 @@ export default {
         role: this.form.roles,
       };
       bguserList(params).then((res) => {
-        //console.log(res.data.data);
         this.page.total = res.data.data.total;
-        //console.log(res.data.data.total);
-        //console.log("总条数", this.page.total);
         this.page.currentPage = res.data.data.current_page;
-        //console.log(res.data.data.current_page);
         this.userList = res.data.data.data;
         this.$refs.dataTable.setPageInfo({
           total: this.page.total,
@@ -244,12 +233,10 @@ export default {
       })
         .then(async () => {
           let id = row.id;
-          //console.log(id);
           let params = {
             token: sessionStorage.getItem("token"),
           };
           delUser(params, id).then((res) => {
-            //console.log(res.data);
             if (res.data.code == 200) {
               this.getUserList();
               this.$message.success("删除成功");

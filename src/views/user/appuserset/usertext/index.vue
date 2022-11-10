@@ -144,7 +144,7 @@
       </el-table-column>
       <el-table-column
         prop="num"
-        label="分利钻石"
+        label="钻石"
         align="center"
         :resizable="false"
       ></el-table-column>
@@ -216,7 +216,6 @@ export default {
   },
   created() {
     this.id = this.$route.query.id;
-    console.log(this.id);
     this.getUserList(); //获取用户列表
   },
   mounted() {},
@@ -249,7 +248,6 @@ export default {
         time2: this.form.time[1],
       };
       shareMoney(params).then((res) => {
-        console.log(res.data.data.data);
         this.arr = res.data.data.member_count;
         this.page.total = res.data.data.total;
         this.userList = res.data.data.data;
@@ -280,13 +278,12 @@ export default {
         time2: this.form.time[1],
       };
       shareMoney(params).then((res) => {
-        console.log(res);
         this.arr = res.data.data.member_count;
         this.page.total = res.data.data.total;
         this.alladd = res.data.data.num.alladd;
         this.allcut = res.data.data.num.allcut;
         this.userList = res.data.data.data;
-        this.time = res.data.data.lastInfo.created_at;
+        this.time = res.data.data.lastInfo.ex_time;
         this.have_zs = res.data.data.lastInfo.have_zs;
         this.oldadd = res.data.data.oldnum.oldadd;
         this.oldcut = res.data.data.oldnum.oldcut;

@@ -169,18 +169,15 @@ export default {
     getRolesList() {
       let token = sessionStorage.getItem("token");
       this.token = token;
-      //console.log(this.token);
       let params = {
         u_type: 2,
         token: sessionStorage.getItem("token"),
       };
       userRoles(params).then((res) => {
-        //console.log(res.data.data);
         this.rolesList = res.data.data;
       });
     },
     searchinfo() {
-      //console.log(sessionStorage);
       let token = sessionStorage.getItem("token");
       this.token = token;
       let params = {
@@ -246,12 +243,10 @@ export default {
       })
         .then(async () => {
           let id = row.id;
-          //console.log(id);
           let params = {
             token: sessionStorage.getItem("token"),
           };
           delUser(params, id).then((res) => {
-            //console.log(res.data);
             if (res.data.code == 200) {
               this.getUserList();
               this.$message.success("删除成功");

@@ -218,7 +218,6 @@ export default {
       if (type == 2) {
         row.sex = row.sex + "";
         this.ruleForm = row;
-        //console.log(this.ruleForm);
       } else {
         this.ruleForm = {
           id: "",

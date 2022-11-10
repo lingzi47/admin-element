@@ -92,9 +92,7 @@ export default {
       dialogVisible: false,
     };
   },
-  created: function () {
-    //console.log(this.type);
-  },
+  created: function () {},
   mounted: function () {},
   methods: {
     show() {
@@ -104,8 +102,6 @@ export default {
       this.dialogVisible = false;
     },
     submitForm() {
-      //console.log(this.ruleForm.time);
-
       this.$refs.ruleForm.validate(async (valid) => {
         if (valid) {
           let params = {

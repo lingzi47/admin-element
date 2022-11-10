@@ -119,21 +119,18 @@ export default {
   },
   created() {
     var date = new Date();
-    // console.log(date);
     var y = date.getFullYear();
     var m = date.getMonth() + 1;
     m = m < 10 ? "0" + m : m;
     var d = date.getDate();
     d = d < 10 ? "0" + d : d;
     var s1 = y + "-" + m + "-" + d;
-    // console.log(s1, "s1");
     var y1 = date.getFullYear();
     var m1 = date.getMonth() + 1;
     m1 = m1 < 10 ? "0" + m1 : m1;
     var d1 = date.getDate() - 1;
     d1 = d1 < 10 ? "0" + d1 : d1;
     var e1 = y1 + "-" + m1 + "-" + d1;
-    // console.log(e1, "e1");
     let arr = [];
     arr.push(e1);
     arr.push(s1);
@@ -150,7 +147,6 @@ export default {
       this.getList();
     },
     set(row) {
-      console.log(row);
       this.dialogVisible = true;
     },
     close() {
@@ -166,7 +162,6 @@ export default {
         e_time: this.form.time[1],
       };
       zlsrainCount(params).then((res) => {
-        console.log(res.data);
         this.all_num = res.data.all_data.all_num;
         this.all_sum = res.data.all_data.all_sum;
         this.userList = res.data.data;

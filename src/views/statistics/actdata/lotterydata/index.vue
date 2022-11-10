@@ -163,9 +163,7 @@ export default {
         time2: this.time[1],
       };
       luckAll(params).then((res) => {
-        console.log(res);
         this.list = res.data.data;
-        console.log(this.list);
       });
     },
     admin1() {
@@ -175,9 +173,7 @@ export default {
         lucktime2: this.timee[1],
       };
       luckAll(params).then((res) => {
-        console.log(res);
         this.tableData = res.data.data.luckinfo;
-        console.log(this.tableData);
       });
     },
   },

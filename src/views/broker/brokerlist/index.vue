@@ -18,6 +18,14 @@
             placeholder="请输入推荐人id"
           ></el-input>
         </el-form-item>
+        <el-form-item label="租赁人id" prop="use_pid">
+          <el-input
+            style="width: 180px"
+            v-model="uid"
+            clearable
+            placeholder="请输入租赁人id"
+          ></el-input>
+        </el-form-item>
         <el-form-item label="推荐人租赁号" prop="pid">
           <el-input
             style="width: 180px"
@@ -123,12 +131,24 @@
           <span v-if="scope.row.box_type == 3">终身</span>
         </template>
       </el-table-column>
-      <el-table-column label="购买区域" align="ce nter" :resizable="false">
+      <el-table-column label="所属团队" align="center" :resizable="false">
+        <template slot-scope="scope">
+          <el-link v-if="scope.row.user_team == 1">全国</el-link>
+          <el-link v-if="scope.row.user_team == 2">大连</el-link>
+          <el-link v-if="scope.row.user_team == 3">大庆</el-link>
+          <el-link v-if="scope.row.user_team == 5">本溪</el-link>
+          <el-link type="danger" v-if="scope.row.user_team == null"
+            >暂无</el-link
+          >
+        </template></el-table-column
+      >
+      <el-table-column label="购买区域" align="center" :resizable="false">
         <template slot-scope="scope">
           <el-link v-if="scope.row.box_team == 1">全国</el-link>
           <el-link v-if="scope.row.box_team == 2">大连</el-link>
           <el-link v-if="scope.row.box_team == 3">大庆</el-link>
           <el-link v-if="scope.row.box_team == 4">北京</el-link>
+          <el-link v-if="scope.row.box_team == 5">本溪</el-link>
           <el-link type="danger" v-if="scope.row.box_team == null"
             >暂无</el-link
           >
@@ -136,7 +156,8 @@
       >
       <el-table-column prop="queue" label="队列编号" align="center">
       </el-table-column>
-
+      <el-table-column prop="remark" label="备注" align="center">
+      </el-table-column>
       <el-table-column label="审核状态" align="center">
         <template slot-scope="scope">
           <el-link type="success" v-if="scope.row.ex_status == 2"
@@ -299,6 +320,7 @@ export default {
       uid: "",
       pid: "",
       use_pid: "",
+      uid: "",
       box_type: "",
       box_name: "",
       status: "",
@@ -348,7 +370,7 @@ export default {
   methods: {
     dao() {
       window.location.href =
-        "https://y4.wjw.cool/admin/box/exportList" +
+        "https://yujian02.xyz/admin/box/exportList" +
         "?token=" +
         this.token +
         "&name=" +
@@ -394,10 +416,8 @@ export default {
       this.Form.share = "";
       this.Visible = false;
       this.dialogVisible = true;
-      // this.getUserList();
     },
     edit(row) {
-      console.log(row);
       this.Form.id = row.id;
       this.Form.uid = row.uid;
       this.Form.phone = row.phone;
@@ -405,7 +425,6 @@ export default {
       this.Visible = true;
     },
     handleClick(row) {
-      console.log(row);
       this.box_name = row.name;
       this.getList();
     },
@@ -415,9 +434,7 @@ export default {
         box_name: this.box_name,
       };
       shareInfo(params).then((res) => {
-        console.log(res);
         this.List = res.data.data;
-        console.log(this.List);
       });
       this.dialogVisible = true;
     },
@@ -436,7 +453,6 @@ export default {
       this.$refs.upSet.show(1, JSON.parse(JSON.stringify(rowData)));
     },
     setup(type, row) {
-      // console.log(type);
       let rowData = row;
       this.$refs.upSet.show(2, JSON.parse(JSON.stringify(rowData)));
     },
@@ -469,7 +485,7 @@ export default {
         name: this.name,
         pid: this.pid,
         box_type: this.box_type,
-
+        uid: this.uid,
         use_pid: this.use_pid,
         status: this.status,
         ex_status: this.ex_status,
@@ -494,15 +510,13 @@ export default {
         name: this.name,
         pid: this.pid,
         box_type: this.box_type,
-
+        uid: this.uid,
         use_pid: this.use_pid,
         status: this.status,
         ex_status: this.ex_status,
-
         device_type: this.device_type,
       };
       doctorlist(params).then((res) => {
-        console.log(res.data.data);
         this.page.total = res.data.count;
         this.userList = res.data.data;
         this.$refs.dataTable.setPageInfo({

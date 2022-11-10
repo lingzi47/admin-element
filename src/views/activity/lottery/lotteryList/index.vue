@@ -33,7 +33,7 @@
   </div>
 </template>
 <script>
-import { lucklist } from "@/requestw/api";
+import { lucklist } from "@/request/api";
 export default {
   data() {
     return {
@@ -46,12 +46,10 @@ export default {
       token: sessionStorage.getItem("token"),
     };
     lucklist(params).then((res) => {
-      //console.log(res.data.data);
       this.state = res.data.data.sta;
       var jsonStr = res.data.data.luckjson;
       var jsonObj = JSON.parse(jsonStr);
       this.list = jsonObj;
-      //console.log(this.list);
     });
   },
   computed: {},

@@ -42,7 +42,7 @@
             <el-form-item label="图标" prop="description">
               <el-upload
                 class="avatar-uploader"
-                action="https://y4.wjw.cool/command/ossUpload?filename=file"
+                action="https://yujian02.xyz/command/ossUpload?filename=file"
                 :show-file-list="false"
                 :on-success="handleAvatarSuccess"
                 :before-upload="beforeAvatarUpload"
@@ -85,7 +85,6 @@ export default {
   mounted: function () {},
   methods: {
     show(type, row) {
-      //console.log(row.id);
       this.id = row.id;
       this.type = type;
       this.dialogVisible = true;
@@ -103,8 +102,6 @@ export default {
       });
     },
     handleAvatarSuccess(res, file) {
-      //console.log("file", file);
-      //console.log("res", res);
       let imgurl = res.data;
       this.imageUrl = imgurl;
       this.ruleForm.icon = imgurl;

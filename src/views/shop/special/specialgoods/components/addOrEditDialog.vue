@@ -122,7 +122,7 @@
           <el-form-item label="封面图" prop="goods_img">
             <el-upload
               class="avatar-uploader"
-              action="https://y4.wjw.cool/command/ossUpload?filename=file"
+              action="https://yujian02.xyz/command/ossUpload?filename=file"
               :show-file-list="false"
               :on-success="handleAvatarSuccess"
               :before-upload="beforeAvatarUpload"
@@ -138,7 +138,7 @@
         <el-col :span="24">
           <el-form-item label="商品图">
             <el-upload
-              action="https://y4.wjw.cool/command/ossUpload?filename=file"
+              action="https://yujian02.xyz/command/ossUpload?filename=file"
               list-type="picture-card"
               class="upload"
               :file-list="fileList"
@@ -344,12 +344,9 @@ export default {
       console.log(this.banners);
     },
     banneradd(res, file, fileList) {
-      // console.log(fileList);
       console.log(res);
       let imgurl = res.data;
       this.banners.push(imgurl);
-      console.log(this.banners);
-      console.log(fileList);
     },
     beforeAvatarUpload(file) {
       const isLt2M = file.size / 1024 / 1024 < 2;

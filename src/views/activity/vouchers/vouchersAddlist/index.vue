@@ -30,7 +30,7 @@
 </template>
 <script>
 import editData from "./components/editData.vue";
-import { coupontaskindex, couponlist } from "@/requestw/api";
+import { coupontaskindex, couponlist } from "@/request/api";
 
 export default {
   components: {
@@ -71,16 +71,13 @@ export default {
         token: sessionStorage.getItem("token"),
       };
       coupontaskindex(params).then((res) => {
-        //console.log(res.data.data);
         this.num = res.data.data.num;
         this.coupon_name = res.data.data.coupon_name;
       });
       let params1 = {
         coupon_id: this.coupon_id,
       };
-      couponlist(params1).then((res) => {
-        //console.log(res.data);
-      });
+      couponlist(params1).then((res) => {});
     },
   },
 };

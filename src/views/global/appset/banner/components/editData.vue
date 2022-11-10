@@ -14,13 +14,14 @@
         ref="ruleForm"
         :rules="rules"
         label-width="auto"
+        class="d"
       >
         <el-row :gutter="15">
           <el-col :span="24">
             <el-form-item label="封面图" prop="img">
               <el-upload
                 class="avatar-uploader"
-                action="https://y4.wjw.cool/command/ossUpload?filename=file"
+                action="https://yujian02.xyz/command/ossUpload?filename=file"
                 :show-file-list="false"
                 :on-success="handleAvatarSuccess"
                 :before-upload="beforeAvatarUpload"
@@ -80,7 +81,21 @@
           </el-col>
         </el-row>
       </el-form>
-
+      <!--  style="margin-left: 370px; margin-top: -100px" -->
+      <div class="d1">
+        商城首页&nbsp;: &nbsp;&nbsp;shop_type = 99; goodstype = 0;
+        <br />
+        APP首页&nbsp;:&nbsp;&nbsp; shop_type = 5; goodstype = 0 ;
+        <br />
+        预见专区&nbsp;:&nbsp;&nbsp; shop_type = 1; goodstype = 0 ;<br />
+        预见小分区&nbsp;:shop_type = 1 ;goodstype =分类id ;<br /><br /><br /><br /><br /><br />
+        totype <br />
+        1.钻石雨，2.抽奖，3.webview，4.浏览器<br />
+        5.普通商品详情（toinfo传指定商品id）;<br />6.爆款商品详情（toinfo传指定商品id）;<br />
+        7.推广专区商品详情（toinfo传指定商品id）;<br />
+        8.预见专区 9.推广专区 10.爆款专区 11.全部分类<br />
+        12.全部商品 13.小预专区
+      </div>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible = false">取 消</el-button>
         <el-button type="primary" @click="submitForm">确 定</el-button>
@@ -109,6 +124,7 @@ export default {
         totype: "",
         toinfo: "",
       },
+      content: "",
       rules: {
         shop_type: [
           { required: true, message: "请输入商品类型", trigger: "blur" },
@@ -244,7 +260,7 @@ export default {
 
 <style lang="scss" scoped>
 .avatar-uploader .el-upload {
-  border: 1px dashed #d9d9d9;
+  border: 1px dashed #352e2e;
   border-radius: 6px;
   cursor: pointer;
   position: relative;
@@ -268,5 +284,13 @@ export default {
   width: 178px;
   height: 178px;
   display: block;
+}
+.d {
+  position: relative;
+}
+.d1 {
+  position: absolute;
+  top: 280px;
+  left: 380px;
 }
 </style>

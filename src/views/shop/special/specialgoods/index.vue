@@ -200,6 +200,12 @@
             @click="pkset(scope.row)"
             >PK值设置</el-link
           >
+          <el-link
+            style="margin-right: 10px"
+            type="primary"
+            @click="pin(scope.row)"
+            >评论</el-link
+          >
         </template>
       </el-table-column>
     </page-table>
@@ -209,6 +215,7 @@
     <!-- sku规格弹窗 -->
     <sku-index ref="skulist" />
     <set-pk ref="pkSet" />
+    <set-pin ref="pinSet" />
     <set-sku ref="skuSet" />
   </div>
 </template>
@@ -221,6 +228,7 @@ import pageTable from "@/components/pageTable.vue";
 import addDialog from "./components/addOrEditDialog.vue";
 import skuIndex from "./components/skulist.vue";
 import setPk from "./components/pkSet.vue";
+import setPin from "./components/pinSet.vue";
 import setSku from "./components/skuSet.vue";
 
 export default {
@@ -230,6 +238,7 @@ export default {
     addDialog,
     skuIndex,
     setPk,
+    setPin,
     setSku,
   },
   data() {
@@ -387,7 +396,6 @@ export default {
       // 1:新增，2:编辑
       this.$refs.addData.show(3, JSON.parse(JSON.stringify(row)));
     },
-
     //sku规格
     sku(type, row) {
       this.$refs.skulist.show(1, JSON.parse(JSON.stringify(row)));
@@ -395,6 +403,9 @@ export default {
     //pk
     pkset(row) {
       this.$refs.pkSet.show(JSON.parse(JSON.stringify(row)));
+    },
+    pin(row) {
+      this.$refs.pinSet.show(JSON.parse(JSON.stringify(row)));
     },
     skuset(row) {
       this.$refs.skuSet.show(JSON.parse(JSON.stringify(row)));

@@ -46,12 +46,24 @@
         label="联系方式"
         :resizable="false"
       ></el-table-column>
+      <el-table-column fixed label="所属团队" align="center" :resizable="false">
+        <template slot-scope="scope">
+          <el-link v-if="scope.row.user_team == 1">全国</el-link>
+          <el-link v-if="scope.row.user_team == 2">大连</el-link>
+          <el-link v-if="scope.row.user_team == 3">大庆</el-link>
+          <el-link v-if="scope.row.user_team == 5">本溪</el-link>
+          <el-link type="danger" v-if="scope.row.user_team == null"
+            >暂无</el-link
+          >
+        </template></el-table-column
+      >
       <el-table-column fixed label="购买区域" align="center" :resizable="false">
         <template slot-scope="scope">
           <el-link v-if="scope.row.box_team == 1">全国</el-link>
           <el-link v-if="scope.row.box_team == 2">大连</el-link>
           <el-link v-if="scope.row.box_team == 3">大庆</el-link>
           <el-link v-if="scope.row.box_team == 4">北京</el-link>
+          <el-link v-if="scope.row.box_team == 5">本溪</el-link>
           <el-link type="danger" v-if="scope.row.box_team == null"
             >暂无</el-link
           >
@@ -71,7 +83,6 @@
         align="center"
         :resizable="false"
       ></el-table-column>
-
       <el-table-column label="审核状态" align="center">
         <template slot-scope="scope">
           <el-link type="success" v-if="scope.row.sta == 20">已通过</el-link>
@@ -79,7 +90,6 @@
           <el-link type="primary" v-if="scope.row.sta == 10">待审核</el-link>
         </template>
       </el-table-column>
-
       <el-table-column label="操作" align="center" width="360">
         <template slot-scope="scope">
           <el-link
@@ -112,6 +122,7 @@
         <el-button type="primary" @click="submitForm">通过</el-button>
       </div>
     </el-dialog>
+    <p></p>
   </div>
 </template>
 

@@ -51,7 +51,9 @@
       <el-table-column label="点位来源" align="center">
         <template slot-scope="scope">
           <el-link v-if="scope.row.type == 1">汇置物业</el-link>
-          <el-link v-else>宋氏集团</el-link>
+          <el-link v-if="scope.row.type == 3">三盛</el-link>
+          <el-link v-if="scope.row.type == 2">宋氏集团</el-link>
+          <el-link v-if="scope.row.type == 4">银河城</el-link>
         </template>
       </el-table-column>
       <el-table-column prop="start_time" label="投放开始" align="center">

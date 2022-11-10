@@ -44,12 +44,12 @@
             @click="editup(scope.row)"
             >编辑</el-link
           >
-          <el-link
+          <!-- <el-link
             type="danger"
             style="margin-left: 10px"
             @click="deleteData(scope.row)"
             >删除</el-link
-          >
+          > -->
         </template>
       </el-table-column>
     </page-table>

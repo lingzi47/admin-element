@@ -103,7 +103,6 @@ export default {
         type: 2,
       };
       paylist(params).then((res) => {
-        //console.log(res.data.data.data);
         this.userList = res.data.data.data;
         this.page.total = res.data.data.total;
         this.$refs.dataTable.setPageInfo({

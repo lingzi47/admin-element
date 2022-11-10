@@ -119,7 +119,6 @@ export default {
         e_time: this.time[1],
       };
       memCount(params).then((res) => {
-        console.log(res);
         this.tableData = res.data.data;
       });
     },

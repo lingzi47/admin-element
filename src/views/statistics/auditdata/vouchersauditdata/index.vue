@@ -126,7 +126,6 @@ export default {
       if (this.time === null) {
         let time = "";
         this.form.time == time;
-        //console.log(this.time);
       }
 
       let token = sessionStorage.getItem("token");
@@ -151,7 +150,6 @@ export default {
     },
 
     deleteData(row) {
-      //console.log(row);
       this.$confirm("是否删除此信息？", "提示", {
         type: "warning",
       })

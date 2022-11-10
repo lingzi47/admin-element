@@ -128,7 +128,6 @@ export default {
 
     //获取用户列表
     getUserList() {
-      //console.log(sessionStorage);
       let token = sessionStorage.getItem("token");
       this.token = token;
       let params = {
@@ -137,17 +136,9 @@ export default {
         token: sessionStorage.getItem("token"),
       };
       menuList(params).then((res) => {
-        //console.log(res.data.data);
         this.page.total = res.data.total;
-        //console.log(res.data.data.total);
-        //console.log("总条数", this.page.total);
         this.page.currentPage = res.data.current_page;
-        //console.log(res.data.data.current_page);
         this.userList = res.data.data;
-        //console.log(this.userList);
-        // this.$refs.dataTable.setPageInfo({
-        //   total: this.page.total,
-        // });
       });
     },
     addData() {
@@ -176,12 +167,11 @@ export default {
       })
         .then(async () => {
           let id = row.id;
-          //console.log(id);
+
           let params = {
             token: sessionStorage.getItem("token"),
           };
           delMenu(params, id).then((res) => {
-            //console.log(res.data);
             if (res.data.code == 200) {
               this.getUserList();
               this.$message.success("删除成功");

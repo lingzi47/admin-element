@@ -233,9 +233,7 @@ export default {
   // computed: {
   //   timeDefault() {},
   // },
-  mounted() {
-    console.log("处理结果", this.printFn(1.1 * 100));
-  },
+  mounted() {},
   watch: {
     time(newVal) {
       if (newVal == null) {
@@ -245,21 +243,18 @@ export default {
   },
   created() {
     var date = new Date();
-    // console.log(date);
     var y = date.getFullYear();
     var m = date.getMonth() + 1;
     m = m < 10 ? "0" + m : m;
     var d = date.getDate();
     d = d < 10 ? "0" + d : d;
     var s1 = y + "-" + m + "-" + d;
-    // console.log(s1, "s1");
     var y1 = date.getFullYear();
     var m1 = date.getMonth() + 1;
     m1 = m1 < 10 ? "0" + m1 : m1;
     var d1 = date.getDate() - 1;
     d1 = d1 < 10 ? "0" + d1 : d1;
     var e1 = y1 + "-" + m1 + "-" + d1;
-    // console.log(e1, "e1");
     let arr = [];
     arr.push(e1);
     arr.push(s1);
@@ -272,9 +267,7 @@ export default {
       const precision = 14;
       return Number(math.format(value, precision));
     },
-    handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
-    },
+    handleSizeChange(val) {},
     handleCurrentChange(val) {
       this.page = val;
       this.limit = size;
@@ -313,9 +306,7 @@ export default {
         orderPayType: this.orderPayType,
       };
       readinfo(params).then((res) => {
-        console.log(res.data.data.data);
         this.count = res.data.data.data.total;
-        console.log(this.count);
         this.shoporder = res.data.data.data.dataList;
         this.allprice = res.data.allprice;
       });
@@ -336,9 +327,7 @@ export default {
         orderPayType: this.orderPayType,
       };
       readinfo(params).then((res) => {
-        console.log(res.data.data.data);
         this.count = res.data.data.data.total;
-        console.log(this.count);
         this.shoporder = res.data.data.data.dataList;
         this.allprice = res.data.allprice;
       });
@@ -346,7 +335,6 @@ export default {
 
     show(row) {
       this.dialogVisible = true;
-      console.log(row);
       this.userId = row.userId;
       this.deviceCode = row.box_number;
       this.getUserList();

@@ -20,7 +20,18 @@
               placeholder="请输入商品名称"
             ></el-input>
           </el-form-item>
-
+          <el-form-item label="退款时间" prop="title">
+            <el-date-picker
+              v-model="time"
+              value-format="yyyy-MM-dd HH:mm:ss"
+              type="datetimerange"
+              range-separator="至"
+              start-placeholder="开始日期"
+              end-placeholder="结束日期"
+              align="right"
+            >
+            </el-date-picker>
+          </el-form-item>
           <el-form-item style="float: right">
             <el-button
               v-if="checkPermission('operationsearch')"
@@ -29,6 +40,7 @@
               @click="searchinfo"
               >搜索</el-button
             >
+            <el-button @click="dao">导出</el-button>
           </el-form-item>
         </el-form>
       </div>
@@ -48,7 +60,13 @@
             <span>{{ (page.page - 1) * page.limit + scope.$index + 1 }}</span>
           </template>
         </el-table-column>
-
+        <el-table-column
+          prop="uid"
+          fixed
+          label="用户ID"
+          align="center"
+          :resizable="false"
+        ></el-table-column>
         <el-table-column
           prop="order_no"
           fixed
@@ -117,20 +135,20 @@
           <template slot-scope="scope">
             <el-link
               v-if="scope.row.ex_status == 1"
-              type="danger"
+              type="success"
               style="margin-left: 10px"
               >已通过</el-link
             >
+
             <el-link
               v-if="scope.row.ex_status == 2"
               type="danger"
               style="margin-left: 10px"
-              >拒绝</el-link
+              >已拒绝</el-link
             >
             <el-link
-              v-else
+              v-if="scope.row.ex_status == 0"
               @click="open(scope.row)"
-              type="danger"
               style="margin-left: 10px"
               >退款</el-link
             >
@@ -178,6 +196,7 @@ export default {
       order_no: "",
       goods_name: "",
       id: "",
+      time: "",
       dialogVisible: false,
       page: {
         //分页信息
@@ -187,11 +206,53 @@ export default {
       },
     };
   },
+  watch: {
+    time(newVal) {
+      if (newVal == null) {
+        this.time = [];
+      }
+    },
+  },
   created() {
     this.shoporderlist();
   },
   mounted() {},
   methods: {
+    dao() {
+      if (this.time[1] == undefined) {
+        this.token = sessionStorage.getItem("token");
+        window.location.href =
+          "https://yujian02.xyz/shopadmin/receRefundExp" +
+          "?token=" +
+          this.token +
+          "&shop_type=" +
+          1 +
+          "&type=" +
+          1 +
+          "&goods_name=" +
+          this.goods_name +
+          "&order_no=" +
+          this.order_no;
+      } else {
+        this.token = sessionStorage.getItem("token");
+        window.location.href =
+          "https://yujian02.xyz/shopadmin/receRefundExp" +
+          "?token=" +
+          this.token +
+          "&shop_type=" +
+          1 +
+          "&type=" +
+          1 +
+          "&goods_name=" +
+          this.goods_name +
+          "&order_no=" +
+          this.order_no +
+          "&time1=" +
+          this.time[0] +
+          "&time2=" +
+          this.time[1];
+      }
+    },
     async shoporderlist() {
       let res = await receRefund({
         token: sessionStorage.getItem("token"),
@@ -201,6 +262,8 @@ export default {
         order_no: this.order_no,
         page: this.page.page,
         limit: this.page.limit,
+        time1: this.time[0],
+        time2: this.time[1],
       });
       //console.log(res.data.data.data);
       if (res.data.code == 200) {
@@ -219,6 +282,8 @@ export default {
         order_no: this.order_no,
         page: 1,
         limit: this.page.limit,
+        time1: this.time[0],
+        time2: this.time[1],
       });
       //console.log(res.data.data.data);
       if (res.data.code == 200) {

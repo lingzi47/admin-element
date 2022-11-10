@@ -63,7 +63,7 @@
 </template>
 
 <script>
-import { couponlist, couponsta, userStart, userBlm } from "@/requestw/api";
+import { couponlist, couponsta, userStart, userBlm } from "@/request/api";
 import { checkPermission } from "@/utils/permissions";
 
 import pageTable from "@/components/pageTable.vue";

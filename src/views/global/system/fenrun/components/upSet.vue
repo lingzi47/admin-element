@@ -25,7 +25,6 @@
               ></el-input>
             </el-form-item>
           </el-col>
-
           <el-col :span="24">
             <el-form-item label="是否为特殊分润模式:" prop="is_special">
               <el-select
@@ -72,7 +71,6 @@
           </el-col>
         </el-row>
       </el-form>
-
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible = false">取 消</el-button>
         <el-button type="primary" @click="submitForm">确 定</el-button>

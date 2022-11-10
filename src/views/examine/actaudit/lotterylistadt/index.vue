@@ -20,7 +20,7 @@
   </div>
 </template>
 <script>
-import { luckstalist, lucksta } from "@/requestw/api";
+import { luckstalist, lucksta } from "@/request/api";
 
 export default {
   data() {

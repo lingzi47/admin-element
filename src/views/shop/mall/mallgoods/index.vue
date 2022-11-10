@@ -200,6 +200,12 @@
             @click="pkset(scope.row)"
             >PK值设置</el-link
           >
+          <el-link
+            style="margin-right: 10px"
+            type="primary"
+            @click="pin(scope.row)"
+            >评论</el-link
+          >
         </template>
       </el-table-column>
     </page-table>
@@ -210,6 +216,7 @@
     <sku-index ref="skulist" />
     <set-pk ref="pkSet" />
     <set-sku ref="skuSet" />
+    <set-pin ref="pinSet" />
   </div>
 </template>
 
@@ -222,7 +229,7 @@ import addDialog from "./components/addOrEditDialog.vue";
 import skuIndex from "./components/skulist.vue";
 import setPk from "./components/pkSet.vue";
 import setSku from "./components/skuSet.vue";
-
+import setPin from "./components/pinSet.vue";
 export default {
   name: "user",
   components: {
@@ -230,6 +237,7 @@ export default {
     addDialog,
     skuIndex,
     setPk,
+    setPin,
     setSku,
   },
   data() {
@@ -378,7 +386,9 @@ export default {
         this.typelist = res.data.data;
       }
     },
-
+    pin(row) {
+      this.$refs.pinSet.show(JSON.parse(JSON.stringify(row)));
+    },
     //新增
     addData() {
       // 1:新增，2:编辑

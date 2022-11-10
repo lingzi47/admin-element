@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import { coupontaskadd, couponlist } from "@/requestw/api";
+import { coupontaskadd, couponlist } from "@/request/api";
 export default {
   name: "AddDialog",
   components: {},
@@ -74,8 +74,6 @@ export default {
       sta: 20,
     };
     couponlist(params).then((res) => {
-      //console.log(res.data.data);
-
       this.List = res.data.data;
     });
   },
@@ -88,8 +86,6 @@ export default {
       this.dialogVisible = false;
     },
     submitForm() {
-      //console.log(this.ruleForm.time);
-
       this.$refs.ruleForm.validate(async (valid) => {
         if (valid) {
           let params = {

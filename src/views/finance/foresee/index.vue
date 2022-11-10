@@ -245,7 +245,7 @@
 
 <script>
 import { checkPermission } from "@/utils/permissions";
-import { financeInfo, financeindex } from "@/requestw/api";
+import { financeInfo, financeindex } from "@/request/api";
 import pageTable from "@/components/pageTable.vue";
 
 export default {

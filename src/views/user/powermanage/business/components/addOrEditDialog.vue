@@ -61,7 +61,6 @@ export default {
       this.dialogVisible = true;
       this.ruleForm = row;
       this.id = row.id;
-      //console.log(this.id);
     },
     close() {
       this.dialogVisible = false;
@@ -91,7 +90,6 @@ export default {
             });
           } else {
             let id = this.id;
-            //console.log(id);
             let params = {
               u_type: 3,
               token: sessionStorage.getItem("token"),

@@ -2,7 +2,7 @@
   <div>
     <el-dialog
       class="AddDialog"
-      title="库存"
+      title="详情"
       :visible.sync="dialogVisible"
       width="1200px"
       hegiht="1000px"
@@ -22,31 +22,18 @@
             }}</span>
           </template>
         </el-table-column>
-
-        <el-table-column prop="productName" label="商品名称" align="center">
+        <!-- 返回字段：
+序号id，商品名称，品类，药品成本,出入库数量，总成本
+id   |   goods_name  |  type  |  price  |  num  |  sum_price  |  name -->
+        <el-table-column prop="goods_name" label="商品名称" align="center">
         </el-table-column>
-        <el-table-column label="商品图片" width="160" align="center"
-          ><template slot-scope="scope">
-            <img :src="scope.row.imagesPath" min-width="70" height="70" />
-          </template>
+        <el-table-column prop="type" label="品类" align="center">
         </el-table-column>
-        <el-table-column
-          prop="productSalePrice"
-          label="商品价格"
-          align="center"
-        >
+        <el-table-column prop="price" label="药品成本" align="center">
         </el-table-column>
-        <el-table-column prop="aisleCode" label="货道号" align="center">
+        <el-table-column prop="num" label="数量" align="center">
         </el-table-column>
-        <el-table-column prop="aisleStockMax" label="货道容量" align="center">
-        </el-table-column>
-        <el-table-column prop="aisleStock" label="库存量" align="center">
-          <template slot-scope="scope">
-            <el-link type="danger" v-if="scope.row.aisleStock == 0">
-              缺货</el-link
-            >
-            <el-link type="primary" v-else>{{ scope.row.aisleStock }}</el-link>
-          </template>
+        <el-table-column prop="sum_price" label="总成本" align="center">
         </el-table-column>
       </el-table>
     </el-dialog>
@@ -54,7 +41,7 @@
 </template>
 
 <script>
-import { havegoods } from "@/request/api";
+import { stockInfo } from "@/request/api";
 import pageTable from "@/components/pageTable.vue";
 export default {
   name: "AddDialog",
@@ -78,7 +65,7 @@ export default {
       console.log(row.id);
       this.dialogVisible = true;
       console.log(row);
-      this.id = row.number;
+      this.id = row.id;
       this.getUserList();
     },
     close() {
@@ -95,11 +82,11 @@ export default {
       this.token = token;
       let params = {
         token: sessionStorage.getItem("token"),
-        number: this.id,
+        oid: this.id,
       };
-      havegoods(params).then((res) => {
-        this.page.total = res.data.count;
-        this.userList = res.data.data;
+      stockInfo(params).then((res) => {
+        this.page.total = res.data.data.total;
+        this.userList = res.data.data.data;
       });
     },
     showtable() {},

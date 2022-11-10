@@ -77,8 +77,6 @@ export default {
     };
   },
   created: function () {
-    //console.log(this.type);
-
     this.getUserEdit();
   },
   mounted: function () {},
@@ -102,9 +100,7 @@ export default {
           id: id,
         };
         goodseditshow(params).then((res) => {
-          //console.log(res.data);
           this.ruleForm = res.data.data;
-          //console.log(this.ruleForm);
         });
       }
     },

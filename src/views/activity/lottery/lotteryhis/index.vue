@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import { luckhislist } from "@/requestw/api";
+import { luckhislist } from "@/request/api";
 import { checkPermission } from "@/utils/permissions";
 
 import pageTable from "@/components/pageTable.vue";
@@ -93,19 +93,14 @@ export default {
       this.$router.back();
     },
     getUserList() {
-      //console.log(this.form.time);
-
       let params = {
         page: this.page.currentPage,
         limit: this.page.pageSize,
         token: sessionStorage.getItem("token"),
       };
       luckhislist(params).then((res) => {
-        //console.log(res.data.data);
         this.userList = res.data.data;
-        //console.log(this.userList);
         this.page.total = res.data.count;
-        //console.log(res.data.count);
         this.$refs.dataTable.setPageInfo({
           total: this.page.total,
         });
@@ -113,7 +108,6 @@ export default {
     },
 
     handleClick(row) {
-      console.log(row);
       this.$router.push({
         path: "/lotteryhisshow",
         query: {

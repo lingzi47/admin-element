@@ -48,15 +48,12 @@ export default {
       treeCheckedKeys: [],
     };
   },
-  created() {
-    //console.log(this.treeMenu);
-  },
+  created() {},
   mounted() {},
   methods: {
     show(row) {
       this.roleInfo = row;
-      console.log("row", this.roleInfo);
-      //console.log(row.id);
+
       this.id = row.id;
       this.getMenuOperate();
       this.Usermenushow();
@@ -71,11 +68,8 @@ export default {
         token: sessionStorage.getItem("token"),
       };
       Usermenushow(params, id).then((res) => {
-        //console.log(res.data.data.m_id);
         this.mid = res.data.data.m_id;
         this.treeCheckedKeys = this.mid.split(",");
-        console.log("id组 字符串", this.mid);
-        console.log("id组 数组", this.treeCheckedKeys);
       });
     },
 
@@ -101,18 +95,13 @@ export default {
       };
       menuList(params).then((res) => {
         this.treeMenu = res.data.data;
-        //console.log(this.treeMenu);
+
         this.drawer = true;
       });
     },
 
     // 节点被点击
     checkChange(data, checked) {
-      console.log(
-        this.$refs.menuTree
-          .getCheckedNodes()
-          .concat(this.$refs.menuTree.getHalfCheckedNodes())
-      );
       let treedata = this.$refs.menuTree
         .getCheckedNodes()
         .concat(this.$refs.menuTree.getHalfCheckedNodes());
@@ -120,26 +109,22 @@ export default {
         .map((obj, index) => {
           return obj.id;
         })
-        .join(",")
-        .split(",");
-      console.log(arrnew);
+        .join(",");
+
       var m_id = arrnew.toString();
-      console.log("mid", m_id);
+
       this.m_id = m_id;
       // let checkedKey = this.$refs.menuTree.getCheckedKeys();
-      // //console.log(checkedKey);
       // if (checked) {
-      //   console.log("全选所得", data.id);
       //   let searchId = data.id;
       //   if (checkedKey.indexOf(searchId) == -1) {
       //     checkedKey.push(searchId);
       //     this.$refs.menuTree.setCheckedKeys(checkedKey);
-      //     console.log("获取", this.$refs.menuTree.setCheckedKeys(checkedKey));
+
       //   }
       // }
       // else {
       //   let searchParId = data.id;
-      //   console.log("半选所得", searchParId);
       //   // checkedKey.map((item) => {
       //   //   if (item.substring(0, 5) == searchParId) searchParFlag = true;
       //   // });

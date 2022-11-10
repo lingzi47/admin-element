@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import { coupontasklist, userZisu, userStart, userBlm } from "@/requestw/api";
+import { coupontasklist, userZisu, userStart, userBlm } from "@/request/api";
 import { checkPermission } from "@/utils/permissions";
 
 import pageTable from "@/components/pageTable.vue";
@@ -102,7 +102,6 @@ export default {
       this.tableSelectList = select;
     },
     getUserList() {
-      //console.log(this.form.time);
       let token = sessionStorage.getItem("token");
       this.token = token;
       let params = {
@@ -111,10 +110,7 @@ export default {
         token: sessionStorage.getItem("token"),
       };
       coupontasklist(params).then((res) => {
-        //console.log(res.data.data);
         this.page.total = res.data.count;
-
-        //console.log(res.data.data.current_page);
         this.userList = res.data.data;
         this.$refs.dataTable.setPageInfo({
           total: this.page.total,
@@ -126,7 +122,6 @@ export default {
       this.$refs.addData.show(1, {});
     },
     userShow(row) {
-      //console.log(row);
       this.$router.push({
         path: "/userShow",
         query: {
@@ -135,7 +130,6 @@ export default {
       });
     },
     nextUser(row) {
-      //console.log(row);
       this.$router.push({
         path: "/nextUser",
         query: {
@@ -144,7 +138,6 @@ export default {
       });
     },
     editData(row) {
-      //console.log(row);
       let rowData = row;
       this.$refs.editData.show(JSON.parse(JSON.stringify(rowData)));
     },

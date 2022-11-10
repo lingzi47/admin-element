@@ -46,9 +46,7 @@ export default {
       treeCheckedKeys: [],
     };
   },
-  created() {
-    //console.log(this.treeMenu);
-  },
+  created() {},
   mounted() {},
   methods: {
     show(row) {
@@ -60,7 +58,6 @@ export default {
     },
     changeRole() {
       let checkedKey = this.$refs.menuTree.getCheckedKeys();
-      //console.log(checkedKey);
       this.setRolePermissions(this.roleInfo.name, checkedKey);
     },
 
@@ -69,9 +66,7 @@ export default {
 
       if (res.status == 200) {
         this.treeMenu = res.data.menuPerList;
-        //console.log(this.treeMenu);
         this.treeCheckedKeys = res.data.checkedKeys;
-        //console.log(this.treeCheckedKeys);
         this.drawer = true;
       }
     },
@@ -89,8 +84,6 @@ export default {
     checkChange(data, checked, indeterminate) {
       let checkedKey = this.$refs.menuTree.getCheckedKeys();
       if (checked) {
-        //console.log(checked);
-        //console.log(data);
         let searchId = data.id.substring(0, 5) + "001";
         if (checkedKey.indexOf(searchId) == -1) {
           checkedKey.push(searchId);

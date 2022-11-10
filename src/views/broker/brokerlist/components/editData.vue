@@ -39,6 +39,7 @@
                 <el-option label="大连" value="2"></el-option>
                 <el-option label="大庆" value="3"></el-option>
                 <el-option label="北京" value="4"></el-option>
+                <el-option label="本溪" value="5"></el-option>
               </el-select>
             </el-form-item>
           </el-col>
@@ -56,7 +57,7 @@
             <el-form-item class="xian">
               <el-checkbox v-model="check" @change="checked"
                 >无推荐人</el-checkbox
-              >
+              >（外埠市场请选择无推荐人)
             </el-form-item></el-col
           >
           <el-col :span="24" v-if="ruleForm.pid !== 0">
@@ -165,7 +166,7 @@
               >
             </el-form-item>
           </el-col>
-          <el-col :span="20">
+          <el-col :span="10">
             <el-form-item label="购买服务" prop="box_type">
               <el-select
                 v-model="ruleForm.box_type"
@@ -179,7 +180,7 @@
             </el-form-item>
           </el-col>
 
-          <el-col :span="20">
+          <el-col :span="10">
             <el-form-item label="是否真实购买" prop="device_type">
               <el-select
                 v-model="ruleForm.device_type"
@@ -189,6 +190,15 @@
                 <el-option label="是" value="10"></el-option>
                 <el-option label="否" value="20"></el-option>
               </el-select>
+            </el-form-item>
+          </el-col>
+          <el-col :span="20">
+            <el-form-item label="备注">
+              <el-input
+                v-model="ruleForm.remark"
+                style="width: 180px"
+                placeholder="请输入备注"
+              ></el-input>
             </el-form-item>
           </el-col>
         </el-row>
@@ -236,7 +246,7 @@ export default {
         tel: "",
         use_pid: "",
         type: "",
-
+        remark: "",
         box_type: "",
         device_type: "",
         pid: "",
@@ -247,6 +257,7 @@ export default {
         use_pid: [
           { required: true, message: "请选择推荐人id", trigger: "blur" },
         ],
+        remark: [{ required: true, message: "请输入备注", trigger: "blur" }],
         box_team: [{ required: true, message: "请选择地区", trigger: "blur" }],
         uid: [
           { required: true, message: "请输入租赁人用户id", trigger: "blur" },
@@ -271,7 +282,6 @@ export default {
   },
   watch: {
     "ruleForm.pid"(newVal) {
-      console.log(newVal);
       this.huoopin();
     },
   },
@@ -279,10 +289,8 @@ export default {
   mounted() {},
   methods: {
     checkRight(v) {
-      console.log(v);
       const tel = v.tel;
       var reg = /^1[3456789]\d{9}$/;
-      console.log(reg.test(tel));
       if (reg.test(tel) == false) {
         this.$message.error("手机号错误");
       }
@@ -300,7 +308,6 @@ export default {
         name: this.ruleForm.pid,
       };
       chooseboxuid(params).then((res) => {
-        console.log(res.data.data);
         this.arr = res.data.data;
       });
     },
@@ -311,6 +318,7 @@ export default {
       this.dialogVisible = false;
       this.ruleForm.pid = "";
       this.ruleForm.use_pid = "";
+      this.ruleForm.remark = "";
       this.ruleForm.tel = "";
       this.ruleForm.box_team = "";
       this.ruleForm.box_type = "";
@@ -325,7 +333,6 @@ export default {
       this.check = false;
     },
     checked(events) {
-      // console.log(events);
       this.events = events;
       if (events == true) {
         this.isDisable = true;
@@ -334,9 +341,6 @@ export default {
         this.isDisable = false;
         this.ruleForm.pid = "";
       }
-      //
-      // console.log("被禁言");
-      // this.ruleForm.uid = 0;
     },
     go() {
       this.$router.back();
@@ -350,6 +354,7 @@ export default {
             let params = {
               token: sessionStorage.getItem("token"),
               uid: this.ruleForm.uid,
+              remark: this.ruleForm.remark,
               tel: this.ruleForm.tel,
               box_type: this.ruleForm.box_type,
               pid: this.ruleForm.pid,
@@ -380,7 +385,6 @@ export default {
             });
           } else {
             //多人
-            console.log(this.list);
             var that = this;
             let flag = that.list.every((item) => !!item.uid);
             let flag1 = that.list.every((item) => !!item.tel);
@@ -406,7 +410,6 @@ export default {
             });
             //返回
 
-            console.log(sum);
             if (sum === 100) {
               let res = "";
               for (let i = 0; i < this.list.length; i++) {
@@ -418,15 +421,14 @@ export default {
                   this.list[i].bl +
                   "&&";
               }
-              console.log(res);
               const str = res.substring(0, res.length - 2);
-              console.log("结果是---->", str);
               let params = {
                 token: sessionStorage.getItem("token"),
                 uid: this.list[0].uid,
                 tel: this.list[0].tel,
                 box_type: this.ruleForm.box_type,
                 pid: this.ruleForm.pid,
+                remark: this.ruleForm.remark,
                 use_pid: this.ruleForm.use_pid,
                 device_type: this.ruleForm.device_type,
                 box_team: this.ruleForm.box_team,

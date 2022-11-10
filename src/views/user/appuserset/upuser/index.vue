@@ -103,6 +103,7 @@
           <el-link v-if="scope.row.team == 2">大连</el-link>
           <el-link v-if="scope.row.team == 3">大庆</el-link>
           <el-link v-if="scope.row.team == 4">北京</el-link>
+          <el-link v-if="scope.row.team == 5">本溪</el-link>
           <el-link type="danger" v-if="scope.row.team == null">暂无</el-link>
         </template></el-table-column
       >
@@ -280,9 +281,6 @@ export default {
   methods: {
     // row是我从上边函数传下来的数据，可以拿到当前选中的状态值，下边的请求是因为我要传给后端调的接口
     changeSwitch(row) {
-      //console.log(row.status);
-      //console.log(row.id);
-      //console.log(sessionStorage.getItem("token"));
       let params = {
         token: sessionStorage.getItem("token"),
         status: row.status,
@@ -298,7 +296,6 @@ export default {
       });
     },
     usertext(row) {
-      //console.log(row);
       this.$router.push({
         path: "/usertext",
         query: {
@@ -316,25 +313,18 @@ export default {
     },
     go() {
       if (this.arr1.length < 1) {
-        //console.log("我不显示");
         history.go(-1);
       } else {
-        // console.log("我要的", this.arr.slice(-1));
         let a = this.arr1[this.arr1.length - 1];
         this.pid = a.toString();
-        console.log(this.pid);
         this.getUserList();
         var m = this.arr1.slice(0);
         m.splice(m.length - 1, 1);
-        //console.log(m);
       }
       this.arr1 = m;
       return m;
     },
     changeZisu(row) {
-      //console.log(row.zisu_fl);
-      //console.log(row.id);
-      //console.log(sessionStorage.getItem("token"));
       let params = {
         token: sessionStorage.getItem("token"),
         is_zisu: row.zisu_fl,
@@ -352,20 +342,14 @@ export default {
     upuser(row) {
       this.cid = row.id;
       let idarr = [];
-      console.log(this.arr1 instanceof Array);
       idarr.push(this.cid);
-      console.log(idarr);
       this.arr1.push(idarr);
-      console.log(this.arr1);
 
       this.pid = row.pid;
 
       this.getUserList();
     },
     changeBlm(row) {
-      //console.log(row.is_blm);
-      //console.log(row.id);
-      //console.log(sessionStorage.getItem("token"));
       let params = {
         token: sessionStorage.getItem("token"),
         is_blm: row.is_blm,
@@ -404,7 +388,6 @@ export default {
         username: this.form.username,
       };
       appuserList(params).then((res) => {
-        //console.log(res.data.data.member_count);
         this.arr = res.data.data.member_count;
         this.page.total = res.data.data.total;
         this.userList = res.data.data.data;
@@ -418,7 +401,6 @@ export default {
       this.$refs.addData.show(1, {});
     },
     userShow(row) {
-      //console.log(row);
       this.$router.push({
         path: "/userShow",
         query: {
@@ -427,7 +409,6 @@ export default {
       });
     },
     nextUser(row) {
-      //console.log(row);
       this.$router.push({
         path: "/nextUser",
         query: {
@@ -436,7 +417,6 @@ export default {
       });
     },
     editData(row) {
-      //console.log(row);
       let rowData = row;
       this.$refs.editData.show(JSON.parse(JSON.stringify(rowData)));
     },

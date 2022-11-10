@@ -485,7 +485,6 @@ export default {
             oid: row.id,
           };
           conGoods(params).then((res) => {
-            console.log(res.data);
             if (res.data.code == 200) {
               this.shoporderlist();
               this.$message.success("操作成功");
@@ -499,7 +498,7 @@ export default {
     dao() {
       if (this.form.time[1] == undefined) {
         window.location.href =
-          "https://y4.wjw.cool/shopadmin/exportOrder" +
+          "https://yujian02.xyz/shopadmin/exportOrder" +
           "?token=" +
           this.token +
           "&shop_type=" +
@@ -518,7 +517,7 @@ export default {
           this.form.order_status;
       } else {
         window.location.href =
-          "https://y4.wjw.cool/shopadmin/exportOrder" +
+          "https://yujian02.xyz/shopadmin/exportOrder" +
           "?token=" +
           this.token +
           "&shop_type=" +
@@ -560,7 +559,6 @@ export default {
         order_id: this.order_id,
       };
       refund(params).then((res) => {
-        //console.log(res.data.msg);
         let msg = res.data.msg;
         if (res.data.code == 200) {
           this.$message.success("退款成功，等待审核");
@@ -572,24 +570,17 @@ export default {
       });
     },
     refund(row) {
-      //console.log(row);
       this.order_id = row.id;
       this.Visible = true;
     },
-    onInputChange(row) {
-      //console.log(row.express);
-    },
-    display(value) {
-      //console.log(value);
-    },
+    onInputChange(row) {},
+    display(value) {},
     delivery(row) {
-      //console.log(row.id);
       let params = {
         token: sessionStorage.getItem("token"),
         id: row.id,
       };
       express(params).then((res) => {
-        //console.log(res);
         this.userList = res.data.data;
       });
       this.dialogVisible = true;
@@ -600,7 +591,6 @@ export default {
       };
 
       merchant(params).then((res) => {
-        //console.log(res.data.data);
         this.arr = res.data.data;
       });
     },
@@ -614,7 +604,6 @@ export default {
       });
       if (res.status == 200) {
         this.census = res.data.data;
-        //console.log(this.census);
         this.shoporderlist();
       }
     },
@@ -691,8 +680,6 @@ export default {
           }
         });
       }
-      //console.log(row.express);
-      //console.log(row.delivery);
       this.shoporderlist();
     },
   },

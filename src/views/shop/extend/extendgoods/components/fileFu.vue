@@ -55,7 +55,7 @@ export default {
       this.editor = new E(this.$refs.editor);
       this.editor.config.uploadImgShowBase64 = false; // base 64 存储图片
       this.editor.config.uploadImgServer =
-        "https://y4.wjw.cool/command/ossUpload?filename=img_e"; // 填写配置服务器端地址
+        "https://yujian02.xyz/command/ossUpload?filename=img_e"; // 填写配置服务器端地址
       // this.editor.config.uploadImgHeaders = { 'Authorization': this.token }// 自定义 header
       this.editor.config.uploadFileName = "img_e"; // 后端接受上传文件的参数名
       this.editor.config.uploadImgMaxSize = 8 * 1024 * 1024; // 将图片大小限制为 2M

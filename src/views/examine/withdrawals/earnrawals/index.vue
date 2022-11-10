@@ -268,7 +268,7 @@ export default {
       this.token = sessionStorage.getItem("token");
       if (this.time[1] == undefined) {
         window.location.href =
-          "https://y4.wjw.cool/adminApi/box/boxWith/listexport" +
+          "https://yujian02.xyz/adminApi/box/boxWith/listexport" +
           "?token=" +
           this.token +
           "&uid=" +
@@ -281,7 +281,7 @@ export default {
           this.position;
       } else {
         console.log(
-          "https://y4.wjw.cool/adminApi/box/boxWith/listexport" +
+          "https://yujian02.xyz/adminApi/box/boxWith/listexport" +
             "?token=" +
             this.token +
             "&uid=" +
@@ -298,7 +298,7 @@ export default {
             this.time[1]
         );
         window.location.href =
-          "https://y4.wjw.cool/adminApi/box/boxWith/listexport" +
+          "https://yujian02.xyz/adminApi/box/boxWith/listexport" +
           "?token=" +
           this.token +
           "&uid=" +

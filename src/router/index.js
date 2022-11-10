@@ -804,9 +804,6 @@ export const asyncRoutes = [
 					}
 				]
 			},
-
-
-
 			{
 				path: "explosives",
 				name: "explosives",
@@ -1820,6 +1817,16 @@ export const asyncRoutes = [
 				keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
 				isBack: false
 			},
+		}, {
+			path: "bonuslist",
+			name: "bonuslist",
+			component: () => import("@/views/broker/bonuslist"),
+			meta: {
+				title: "绩效列表",
+				permissions: "bonuslist",
+				keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+				isBack: false
+			},
 		}, ],
 	},
 	{
@@ -1834,11 +1841,21 @@ export const asyncRoutes = [
 			isBack: false
 		},
 		children: [{
+				path: "polist",
+				name: "polist",
+				component: () => import("@/views/points/polist"),
+				meta: {
+					title: "点位列表",
+					permissions: "polist",
+					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+					isBack: false
+				},
+			}, {
 				path: "pointslist",
 				name: "pointslist",
 				component: () => import("@/views/points/pointslist"),
 				meta: {
-					title: "点位列表",
+					title: "点位绑定列表",
 					permissions: "pointslist",
 					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
 					isBack: false

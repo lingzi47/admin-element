@@ -44,7 +44,7 @@
   </div>
 </template>
 <script>
-import { luckadd } from "@/requestw/api";
+import { luckadd } from "@/request/api";
 export default {
   data() {
     return {
@@ -98,10 +98,8 @@ export default {
   computed: {},
   methods: {
     admin() {
-      //console.log(this.list);
       var formdata = this.list;
       let json = JSON.stringify(formdata);
-      console.log(json);
       var that = this;
       let flag = that.list.every((item) => !!item.pk);
       let flag1 = that.list.every((item) => !!item.gl);
@@ -117,8 +115,6 @@ export default {
         token: sessionStorage.getItem("token"),
       };
       luckadd(params).then((res) => {
-        //console.log(res);
-
         if (res.status == 200) {
           this.$message.success("提交成功！");
           this.list = [

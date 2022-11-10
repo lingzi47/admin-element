@@ -107,7 +107,7 @@
           >
         </template>
       </el-table-column>
-      <el-table-column prop="create_time" label="释放时间" align="center">
+      <el-table-column prop="release_time" label="释放时间" align="center">
       </el-table-column>
       <el-table-column prop="sta_time" label="审核时间" align="center">
       </el-table-column>
@@ -197,9 +197,6 @@ export default {
       this.tableSelectList = select;
     },
     searchinfo() {
-      console.log(this.time);
-
-      //console.log(this.form.time);
       let token = sessionStorage.getItem("token");
       this.token = token;
       let params = {
@@ -249,7 +246,6 @@ export default {
     },
 
     handleClick(row) {
-      //console.log(row);
       this.$router.push({
         path: "/diamondListshow",
         query: {
@@ -263,3 +259,4 @@ export default {
 
 <style lang="scss" scoped>
 </style>
+ 

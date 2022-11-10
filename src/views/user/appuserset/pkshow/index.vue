@@ -138,7 +138,6 @@ export default {
   },
   created() {
     this.id = this.$route.query.id;
-    console.log(this.id);
     this.getUserList(); //获取用户列表
   },
   mounted() {},

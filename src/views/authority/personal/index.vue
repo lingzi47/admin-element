@@ -79,7 +79,6 @@ export default {
       // 获取用户信息
       let res = await getUserInfo({ token: this.$store.getters.token });
       if (res.status == 200) {
-        //console.log(JSON.parse(JSON.stringify(res.data)));
         res.data.sex = res.data.sex + "";
         this.userInfo = res.data;
       }

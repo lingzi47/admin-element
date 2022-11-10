@@ -32,6 +32,7 @@
             <el-input
               v-model="scope.row.num"
               @change="onInputChange(scope.row)"
+              @input="blurQueueExceedingNumber(scope.row)"
             >
             </el-input>
           </template>
@@ -172,6 +173,18 @@ export default {
   created() {},
   mounted() {},
   methods: {
+    blurQueueExceedingNumber(e) {
+      let value = e.num;
+      if (value <= 0 || value <= "0") {
+        this.$message.error("入库数不能为0");
+      }
+      const reg = /^[+-]?(0|([1-9]\d*))(\.\d+)?$/g;
+      if (!reg.test(e.num)) {
+        this.$message.error("只能输入数字");
+        e.num = "";
+        return false;
+      }
+    },
     searchinfo() {
       let token = sessionStorage.getItem("token");
       this.token = token;
@@ -245,21 +258,26 @@ export default {
     },
     onInputChange(row) {
       console.log(row.num);
-
-      let params = {
-        token: sessionStorage.getItem("token"),
-        type: 1,
-        id: row.i_id,
-        num: row.num,
-      };
-      saveNum(params).then((res) => {
-        if (res.data.code == 200) {
-          this.$message.success("修改成功");
-        } else {
-          this.$message.dannger(res.data.msg);
-        }
-        this.getUserList();
-      });
+      if (row.num == 0) {
+        this.$message.error("入库数不能为0");
+        row.num = "";
+        return;
+      } else {
+        let params = {
+          token: sessionStorage.getItem("token"),
+          type: 1,
+          id: row.i_id,
+          num: row.num,
+        };
+        saveNum(params).then((res) => {
+          if (res.data.code == 200) {
+            this.$message.success("修改成功");
+          } else {
+            this.$message.dannger(res.data.msg);
+          }
+          this.getUserList();
+        });
+      }
     },
     show(type, row) {
       this.dialogVisible = true;

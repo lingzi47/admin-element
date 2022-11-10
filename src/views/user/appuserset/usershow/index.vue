@@ -262,7 +262,6 @@ export default {
         token: sessionStorage.getItem("token"),
       };
       userinfo(params, id).then((res) => {
-        console.log(res.data.data);
         this.coup_sum = res.data.data.coup_sum;
         this.diamonds = res.data.data.diamonds;
         this.diamonds_sum = res.data.data.diamonds_sum;

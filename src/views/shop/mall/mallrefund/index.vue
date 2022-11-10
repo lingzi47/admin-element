@@ -25,6 +25,7 @@
             <el-button type="primary" icon="el-icon-search" @click="searchinfo"
               >搜索</el-button
             >
+            <el-button @click="dao">导出</el-button>
           </el-form-item>
         </el-form>
       </div>
@@ -44,7 +45,13 @@
             <span>{{ (page.page - 1) * page.limit + scope.$index + 1 }}</span>
           </template>
         </el-table-column>
-
+        <el-table-column
+          prop="uid"
+          fixed
+          label="用户ID"
+          align="center"
+          :resizable="false"
+        ></el-table-column>
         <el-table-column
           prop="order_no"
           fixed
@@ -113,20 +120,20 @@
           <template slot-scope="scope">
             <el-link
               v-if="scope.row.ex_status == 1"
-              type="danger"
+              type="success"
               style="margin-left: 10px"
               >已通过</el-link
             >
+
             <el-link
               v-if="scope.row.ex_status == 2"
               type="danger"
               style="margin-left: 10px"
-              >拒绝</el-link
+              >已拒绝</el-link
             >
             <el-link
-              v-else
+              v-if="scope.row.ex_status == 0"
               @click="open(scope.row)"
-              type="danger"
               style="margin-left: 10px"
               >退款</el-link
             >
@@ -188,6 +195,21 @@ export default {
   },
   mounted() {},
   methods: {
+    dao() {
+      this.token = sessionStorage.getItem("token");
+      window.location.href =
+        "https://yujian02.xyz/shopadmin/receRefundExp" +
+        "?token=" +
+        this.token +
+        "&shop_type=" +
+        2 +
+        "&type=" +
+        1 +
+        "&goods_name=" +
+        this.goods_name +
+        "&order_no=" +
+        this.order_no;
+    },
     async shoporderlist() {
       let res = await receRefund({
         token: sessionStorage.getItem("token"),

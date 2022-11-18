@@ -202,7 +202,7 @@ export default {
     dao() {
       this.token = sessionStorage.getItem("token");
       window.location.href =
-        "https://yujian02.xyz/shopadmin/receRefundExp" +
+        "https://y4.wjw.cool/shopadmin/receRefundExp" +
         "?token=" +
         this.token +
         "&shop_type=" +
@@ -215,6 +215,7 @@ export default {
         this.order_no;
     },
     async searchinfo() {
+      this.page.page = 1;
       let res = await receRefund({
         token: sessionStorage.getItem("token"),
         shop_type: 1,

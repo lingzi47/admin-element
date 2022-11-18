@@ -32,8 +32,10 @@
           >{{ number }}
         </el-form-item>
         <el-form-item style="float: right">
-          <el-button type="primary" @click="search">搜索</el-button>
+          <el-button type="primary" @click="search">搜索</el-button
+          ><el-button type="primary" @click="addData">组合添加</el-button>
           <el-button type="primary" @click="editData">添加</el-button>
+
           <el-button @click="dao">导出</el-button>
         </el-form-item>
       </el-form>
@@ -68,6 +70,7 @@
     </page-table>
     <!-- 新增编辑弹窗 -->
     <edit-data ref="editData" />
+    <add-data ref="addData" />
   </div>
 </template>
 
@@ -77,12 +80,14 @@ import { checkPermission } from "@/utils/permissions";
 import pageTable from "@/components/pageTable.vue";
 import { areaListData } from "@/utils/area";
 import editData from "./components/editData.vue";
+import addData from "./components/addData.vue";
 
 export default {
   name: "user",
   components: {
     pageTable,
     editData,
+    addData,
   },
   data() {
     return {
@@ -116,17 +121,20 @@ export default {
     editData() {
       this.$refs.editData.show();
     },
+    addData() {
+      this.$refs.addData.show();
+    },
     dao() {
       if (this.time[1] == undefined) {
         window.location.href =
-          "https://yujian02.xyz/manybox/unrealOrderExp" +
+          "https://y4.wjw.cool/manybox/unrealOrderExp" +
           "?token=" +
           this.token +
           "&orderDeviceCode=" +
           this.orderDeviceCode;
       } else {
         window.location.href =
-          "https://yujian02.xyz/manybox/unrealOrderExp" +
+          "https://y4.wjw.cool/manybox/unrealOrderExp" +
           "?token=" +
           this.token +
           "&orderDeviceCode=" +

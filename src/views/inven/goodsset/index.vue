@@ -139,7 +139,7 @@ export default {
       console.log(this.num);
 
       window.location.href =
-        "https://yujian02.xyz/adminApi/box/boxStock/goodsExp" +
+        "https://y4.wjw.cool/adminApi/box/boxStock/goodsExp" +
         "?token=" +
         this.token +
         "&goods_name=" +
@@ -186,6 +186,8 @@ export default {
       this.getUserList();
     },
     searchinfo() {
+      this.page.currentPage = 1;
+
       let token = sessionStorage.getItem("token");
       this.token = token;
       let params = {

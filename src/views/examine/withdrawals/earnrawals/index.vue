@@ -103,7 +103,15 @@
       </el-table-column>
       <el-table-column prop="name" label="姓名" align="center">
       </el-table-column>
+      <el-table-column prop="position" label="提现类型" align="center">
+        <template slot-scope="scope">
+          <el-link v-if="scope.row.is_ad == 1">药品提现</el-link>
+          <el-link v-if="scope.row.is_ad == 2">广告提现</el-link>
+        </template>
+      </el-table-column>
       <el-table-column prop="price" label="提现金额" align="center">
+      </el-table-column>
+      <el-table-column prop="real_price" label="到账金额" align="center">
       </el-table-column>
       <el-table-column prop="created_at" label="提现发起时间" align="center">
       </el-table-column>
@@ -268,7 +276,7 @@ export default {
       this.token = sessionStorage.getItem("token");
       if (this.time[1] == undefined) {
         window.location.href =
-          "https://yujian02.xyz/adminApi/box/boxWith/listexport" +
+          "https://y4.wjw.cool/adminApi/box/boxWith/listexport" +
           "?token=" +
           this.token +
           "&uid=" +
@@ -281,7 +289,7 @@ export default {
           this.position;
       } else {
         console.log(
-          "https://yujian02.xyz/adminApi/box/boxWith/listexport" +
+          "https://y4.wjw.cool/adminApi/box/boxWith/listexport" +
             "?token=" +
             this.token +
             "&uid=" +
@@ -298,7 +306,7 @@ export default {
             this.time[1]
         );
         window.location.href =
-          "https://yujian02.xyz/adminApi/box/boxWith/listexport" +
+          "https://y4.wjw.cool/adminApi/box/boxWith/listexport" +
           "?token=" +
           this.token +
           "&uid=" +

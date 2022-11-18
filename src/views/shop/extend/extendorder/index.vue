@@ -499,7 +499,7 @@ export default {
     dao() {
       if (this.form.time[1] == undefined) {
         window.location.href =
-          "https://yujian02.xyz/shopadmin/exportOrder" +
+          "https://y4.wjw.cool/shopadmin/exportOrder" +
           "?token=" +
           this.token +
           "&shop_type=" +
@@ -518,7 +518,7 @@ export default {
           this.form.order_status;
       } else {
         window.location.href =
-          "https://yujian02.xyz/shopadmin/exportOrder" +
+          "https://y4.wjw.cool/shopadmin/exportOrder" +
           "?token=" +
           this.token +
           "&shop_type=" +
@@ -626,6 +626,7 @@ export default {
       this.shoporderlist();
     },
     async searchinfo() {
+      this.page.page = 1;
       let res = await shoporderindex({
         token: sessionStorage.getItem("token"),
         shop_type: 4,

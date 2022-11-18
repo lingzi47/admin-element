@@ -21,7 +21,7 @@
               <el-select
                 v-model="ruleForm.price"
                 placeholder="请选择"
-                style="width: 150px"
+                style="width: 180px"
               >
                 <el-option label="3750" value="3750"></el-option>
                 <el-option label="2950" value="2950"></el-option>
@@ -32,28 +32,33 @@
               </el-select>
             </el-form-item>
           </el-col>
+
           <el-col :span="15">
-            <el-form-item label="区域选择" prop="box_team">
-              <el-select
-                v-model="ruleForm.box_team"
-                placeholder="请选择"
-                style="width: 150px"
-              >
-                <el-option label="全国" value="1"></el-option>
-                <el-option label="大连" value="2"></el-option>
-                <el-option label="大庆" value="3"></el-option>
-                <el-option label="北京" value="4"></el-option>
-                <el-option label="本溪" value="5"></el-option>
-              </el-select>
-            </el-form-item>
-          </el-col>
-          <el-col :span="15">
-            <el-form-item label="用户id" prop="uid">
+            <el-form-item label="用户ID" prop="uid">
               <el-input
                 v-model="ruleForm.uid"
                 style="width: 180px"
                 placeholder="请输入用户id"
               ></el-input>
+            </el-form-item>
+          </el-col>
+
+          <el-col :span="15">
+            <!-- {{ ruleForm.box_team }} -->
+
+            <el-form-item label="区域选择" prop="box_team">
+              <el-select
+                v-model="ruleForm.box_team"
+                placeholder="请选择"
+                style="width: 180px"
+              >
+                <el-option
+                  v-for="(v, k) in list[0]"
+                  :value="k"
+                  :key="k"
+                  :label="v"
+                ></el-option>
+              </el-select>
             </el-form-item>
           </el-col>
 
@@ -80,6 +85,7 @@
 <script>
 import {
   addtuilist,
+  teamchoose,
   doctoradd,
   goodseditshow,
   goodsedit,
@@ -98,6 +104,7 @@ export default {
         price: "",
         box_team: "",
       },
+      list: [],
       rules: {
         price: [{ required: true, message: "请选择购买价格", trigger: "blur" }],
         box_team: [{ required: true, message: "请选择地区", trigger: "blur" }],
@@ -114,7 +121,11 @@ export default {
       },
     };
   },
-  watch: {},
+  watch: {
+    "ruleForm.uid"(vaulue) {
+      this.team();
+    },
+  },
   created() {},
   mounted() {},
   methods: {
@@ -128,7 +139,16 @@ export default {
       this.ruleForm.price = "";
       this.ruleForm.box_team = "";
     },
-
+    team() {
+      let params = {
+        token: sessionStorage.getItem("token"),
+        uid: this.ruleForm.uid,
+      };
+      teamchoose(params).then((res) => {
+        console.log(res.data.data);
+        this.list = res.data.data;
+      });
+    },
     submitForm() {
       this.$refs.ruleForm.validate(async (valid) => {
         if (valid) {
@@ -163,7 +183,5 @@ export default {
 </script>
 
 <style>
-.xian {
-  margin-left: -75px !important;
-}
 </style>
+

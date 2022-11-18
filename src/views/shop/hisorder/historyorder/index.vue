@@ -129,6 +129,7 @@ export default {
       this.shoporderlist();
     },
     searchinfo() {
+      this.page.page = 1;
       this.token = sessionStorage.getItem("token");
       let params = {
         page: 1,

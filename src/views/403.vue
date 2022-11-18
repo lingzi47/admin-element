@@ -1,108 +1,122 @@
 <template>
-  <div class="error-content">
-    <div class="pic-error">
-      <img class="pic-error-child" src="../assets/img/404.png" />
-    </div>
-    <div class="bullshit">
-      <div class="bullshit-oops">抱歉！</div>
-      <div class="bullshit-headline">当前页面不存在...</div>
-      <div class="bullshit-info">
-        请检查您输入的网址是否正确，或点击下面的按钮返回首页。
+  <div>
+    <div class="app">
+      <div
+        id="container"
+        :style="'width: ' + width + 'px;height: ' + height + 'px;'"
+      ></div>
+      <div class="popup-box">
+        <div class="popup">
+          <div class="title-box">
+            <div class="title">设备名称：</div>
+            <div class="text">9000100044851651561</div>
+          </div>
+          <div class="title-box">
+            <div class="title">设备IMEI号：</div>
+            <div class="text">9000100044851651561</div>
+          </div>
+          <div class="title-box">
+            <div class="title">设控制装填：</div>
+            <div class="text">9000100044851651561</div>
+          </div>
+          <div class="title-box">
+            <div class="title">设控制装填：</div>
+            <div class="text">通电</div>
+          </div>
+          <div class="title-box">
+            <div class="title">设备名称：</div>
+            <div class="text">-0.0100km</div>
+          </div>
+          <div class="title-box">
+            <div class="title">设备名称：</div>
+            <div class="text">-0.0100km</div>
+          </div>
+          <div class="title-box">
+            <div class="title">设备名称：</div>
+            <div class="text">-0.0100km</div>
+          </div>
+          <div class="title-box">
+            <div class="title">电压：</div>
+            <div class="text">2032-23-23 15：45：48</div>
+          </div>
+        </div>
       </div>
-      <el-button
-        class="bullshit-return-home"
-        type="primary"
-        size="medium"
-        round
-        @click="goMainPage"
-        >返回首页</el-button
-      >
     </div>
   </div>
 </template>
 <script>
 export default {
   name: "NotFound",
-  methods: {
-    goMainPage() {
-      this.$router.push({
-        path: "/index",
-      });
-    },
+  data() {
+    return {
+      overlay: null,
+      infoWindow: null,
+      isInfo: true,
+    };
+  },
+
+  mounted() {
+    let center = new TMap.LatLng(39.984104, 116.307503);
+    // 初始化地图
+    let map = new TMap.Map("container", {
+      zoom: 15,
+      center: center,
+    });
+    //初始化marker
+    let marker = new TMap.MultiMarker({
+      id: "marker-layer",
+      map: map,
+      styles: {
+        marker: new TMap.MarkerStyle({
+          width: 25,
+          height: 35,
+          anchor: {
+            x: 16,
+            y: 32,
+          },
+          src: "https://mapapi.qq.com/web/lbs/javascriptGL/demo/img/markerDefault.png",
+        }),
+      },
+      geometries: [
+        {
+          id: "battery",
+          styleId: "marker",
+          position: new TMap.LatLng(39.984104, 116.307503),
+          properties: {
+            title: "marker",
+          },
+        },
+      ],
+    });
   },
 };
 </script>
 <style lang="scss" scoped>
-.error-content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: calc(100% - 100px);
-
-  .pic-error .pic-error-child {
-    opacity: 0;
-    animation: imgShow 1.5s ease-out forwards;
-  }
-
-  .bullshit {
-    margin-left: 100px;
-    width: 380px;
-
-    .bullshit-oops {
-      margin-bottom: 20px;
-      font-size: 32px;
-      font-weight: bold;
-      line-height: 40px;
-      color: #1890ff;
-      opacity: 0;
-      animation: slideUp 1s ease-out 0s forwards;
+.popup-box {
+  width: 403px;
+  height: 220px;
+  border-radius: 8px;
+  background: #ffffff;
+  border: 2px solid #c4c4c499;
+  box-shadow: 2px 2px 6px 0px #3a3a3a26;
+  .popup {
+    width: 100%;
+    height: 100%;
+    padding: 26px 0 0 24px;
+    .title-box {
+      display: flex;
+      height: 14px;
+      margin-bottom: 8px;
+      font-size: 12px;
+      color: #141222;
+      .title {
+        line-height: 14px;
+        width: 80px;
+      }
+      .text {
+        line-height: 14px;
+      }
     }
-
-    .bullshit-headline {
-      margin-bottom: 10px;
-      font-size: 20px;
-      font-weight: bold;
-      line-height: 24px;
-      color: #222;
-      opacity: 0;
-      animation: slideUp 1s ease-out 0.15s forwards;
-    }
-
-    .bullshit-info {
-      margin-bottom: 30px;
-      font-size: 13px;
-      line-height: 21px;
-      color: rgba(0, 0, 0, 0.65);
-      opacity: 0;
-      animation: slideUp 1s ease-out 0.3s forwards;
-    }
-
-    .bullshit-return-home {
-      opacity: 0;
-      animation: slideUp 1s ease-out 0.45s forwards;
-    }
-  }
-}
-
-@keyframes imgShow {
-  0% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes slideUp {
-  0% {
-    opacity: 0;
-    transform: translateY(60px);
-  }
-
-  100% {
-    opacity: 1;
-    transform: translateY(0);
   }
 }
 </style>

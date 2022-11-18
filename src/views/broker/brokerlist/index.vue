@@ -370,7 +370,7 @@ export default {
   methods: {
     dao() {
       window.location.href =
-        "https://yujian02.xyz/admin/box/exportList" +
+        "https://y4.wjw.cool/admin/box/exportList" +
         "?token=" +
         this.token +
         "&name=" +

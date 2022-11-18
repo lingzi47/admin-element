@@ -72,6 +72,7 @@
               >
             </el-form-item></el-col
           >
+          
           <el-col :span="24" v-if="this.ruleForm.type == 20">
             <el-form-item v-for="(v, k) in list" :key="k">
               <span> 渠道商{{ k + 1 }}id:</span>

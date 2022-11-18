@@ -315,7 +315,7 @@ export default {
       this.token = sessionStorage.getItem("token");
       if (this.time[1] == undefined) {
         window.location.href =
-          "https://yujian02.xyz/manybox/tuilistexport" +
+          "https://y4.wjw.cool/manybox/tuilistexport" +
           "?token=" +
           this.token +
           "&price=" +
@@ -332,7 +332,7 @@ export default {
           this.box_team;
       } else {
         window.location.href =
-          "https://yujian02.xyz/manybox/tuilistexport" +
+          "https://y4.wjw.cool/manybox/tuilistexport" +
           "?token=" +
           this.token +
           "&price=" +
@@ -376,6 +376,7 @@ export default {
       });
     },
     searchinfo() {
+      this.page.page = 1;
       let params = {
         token: sessionStorage.getItem("token"),
         uid: this.id,

@@ -379,6 +379,16 @@ export const asyncRoutes = [
 						keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
 						isBack: false
 					}
+				}, {
+					path: "bustype",
+					name: "bustype",
+					component: () => import("@/views/user/appuserset/bustype"),
+					meta: {
+						title: "公司区域",
+						permissions: "bustype",
+						keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+						isBack: false
+					}
 				}, ]
 			},
 		],
@@ -2075,6 +2085,16 @@ export const asyncRoutes = [
 			meta: {
 				title: "药箱订单",
 				permissions: "dingdanx",
+				keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+				isBack: false
+			},
+		}, {
+			path: "dingdanz",
+			name: "dingdanz",
+			component: () => import("@/views/dingdan/dingdanz"),
+			meta: {
+				title: "订单组合",
+				permissions: "dingdanz",
 				keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
 				isBack: false
 			},

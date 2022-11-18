@@ -12,10 +12,10 @@
       <el-form label-width="auto">
         <el-row :gutter="24">
           <el-col :span="24">
-            <el-form-item label="设备编号">{{ device_num }} </el-form-item>
+            <el-form-item label="设备租赁号：">{{ device_num }} </el-form-item>
           </el-col>
           <el-col :span="24">
-            <el-form-item label="机器位置">{{ address }} </el-form-item>
+            <el-form-item label="机器位置：">{{ address }} </el-form-item>
           </el-col>
         </el-row>
       </el-form>

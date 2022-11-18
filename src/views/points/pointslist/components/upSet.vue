@@ -148,7 +148,7 @@
               <el-button
                 type="danger"
                 size="mini"
-                v-if="k !== 0 && typeid == 1"
+                v-if="k !== 0 && k == position.length - 1"
                 @click="remove(k)"
                 >-</el-button
               >

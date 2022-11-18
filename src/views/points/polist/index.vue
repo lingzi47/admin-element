@@ -126,7 +126,7 @@ export default {
   methods: {
     dao() {
       window.location.href =
-        "https://yujian02.xyz/admin/box/posExport" +
+        "https://y4.wjw.cool/admin/box/posExport" +
         "?token=" +
         this.token +
         "&box_name=" +
@@ -199,6 +199,7 @@ export default {
       this.getUserList();
     },
     searchinfo() {
+      this.page.currentPage = 1;
       this.token = token;
       let params = {
         page: 1,

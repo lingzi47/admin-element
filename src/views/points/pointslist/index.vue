@@ -119,7 +119,7 @@
       </el-table-column>
       <el-table-column prop="id" label="点位编号" align="center">
       </el-table-column>
-      <el-table-column label="点位位置" align="center">
+      <el-table-column label="点位位置" align="center" width="250">
         <template slot-scope="scope">
           <span
             >{{ scope.row.province }}-{{ scope.row.city }}-{{
@@ -134,7 +134,7 @@
           <el-link type="primary" v-if="scope.row.type == 10">公司</el-link>
         </template>
       </el-table-column>
-      <el-table-column label="点位使用截止日期" align="center">
+      <el-table-column label="点位使用截止日期" align="center" width="150">
         <template slot-scope="scope">
           <el-link type="danger" v-if="formatStr(scope.row.due_time) == '2038'"
             >永久</el-link
@@ -149,7 +149,12 @@
           <el-link v-if="scope.row.bind == 30">废弃</el-link>
         </template>
       </el-table-column>
-      <el-table-column prop="create_time" label="点位创建时间" align="center">
+      <el-table-column
+        prop="create_time"
+        label="点位创建时间"
+        align="center"
+        width="150"
+      >
       </el-table-column>
       <el-table-column prop="box_number" label="机器编号" align="center">
       </el-table-column>
@@ -164,7 +169,12 @@
       </el-table-column>
       <el-table-column prop="box_name" label="设备租赁号" align="center">
       </el-table-column>
-      <el-table-column prop="bind_time" label="点位绑定时间" align="center">
+      <el-table-column
+        prop="bind_time"
+        label="点位绑定时间"
+        align="center"
+        width="150"
+      >
       </el-table-column>
       <el-table-column label="点位审核状态" align="center">
         <template slot-scope="scope">
@@ -185,7 +195,7 @@
           >
         </template>
       </el-table-column>
-      <el-table-column label="操作" align="center" width="350">
+      <el-table-column label="操作" align="center">
         <template slot-scope="scope">
           <el-link
             type="primary"
@@ -334,7 +344,7 @@ export default {
     dao() {
       if (this.time[1] == undefined) {
         window.location.href =
-          "https://yujian02.xyz/admin/box/posExport" +
+          "https://y4.wjw.cool/admin/box/posExport" +
           "?token=" +
           this.token +
           "&box_name=" +
@@ -355,7 +365,7 @@ export default {
           this.area;
       } else {
         window.location.href =
-          "https://yujian02.xyz/admin/box/posExport" +
+          "https://y4.wjw.cool/admin/box/posExport" +
           "?token=" +
           this.token +
           "&box_name=" +
@@ -478,6 +488,8 @@ export default {
       this.getUserList();
     },
     searchinfo() {
+      this.page.currentPage = 1;
+
       let token = sessionStorage.getItem("token");
       this.token = token;
       let params = {

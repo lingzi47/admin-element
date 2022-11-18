@@ -104,7 +104,7 @@
 
       <el-table-column prop="lease_phone" label="租赁商手机号" align="center">
       </el-table-column>
-      <el-table-column prop="device_num" label="设备编号" align="center">
+      <el-table-column prop="device_num" label="设备租赁号" align="center">
       </el-table-column>
       <el-table-column prop="pharmacy_id" label="供货药房" align="center">
       </el-table-column>

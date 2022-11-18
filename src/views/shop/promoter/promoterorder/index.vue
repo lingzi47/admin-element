@@ -217,7 +217,7 @@ export default {
     dao() {
       console.log(this.token);
       console.log(
-        "https://yujian02.xyz/adminApi/order/export" +
+        "https://y4.wjw.cool/adminApi/order/export" +
           "?token=" +
           this.token +
           "&uid=" +
@@ -226,7 +226,7 @@ export default {
           this.form.nickname
       );
       window.location.href =
-        "https://yujian02.xyz/adminApi/order/export" +
+        "https://y4.wjw.cool/adminApi/order/export" +
         "?token=" +
         this.token +
         "&uid=" +
@@ -298,6 +298,7 @@ export default {
       this.shoporderlist();
     },
     searchinfo() {
+      this.page.page = 1;
       this.token = sessionStorage.getItem("token");
       let params = {
         page: 1,

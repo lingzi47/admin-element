@@ -176,6 +176,7 @@ export default {
       });
     },
     searchinfo() {
+      this.page.currentPage = 1;
       let params = {
         u_type: 1,
         page: 1,

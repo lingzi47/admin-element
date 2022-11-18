@@ -324,6 +324,7 @@ export default {
     },
     //商品列表
     async searchinfo() {
+      this.page.page = 1;
       //console.log(this.form.type_id);
       //console.log(this.token);
       this.form.shop_type = 2;

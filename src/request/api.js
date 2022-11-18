@@ -961,3 +961,59 @@ export const disdel = (params) => request.post('/shopadmin/disdel',
 export const disupdate = (params) => request.post('/shopadmin/disupdate',
     params
 )
+//公司区域
+export const placeindex = (params) => request.post('/activity/placeindex',
+    params
+)
+//新增/activity/placeadd
+export const placeadd = (params) => request.post('/activity/placeadd',
+    params
+)
+//修改placeedit
+export const placeedit = (params) => request.post('/activity/placeedit',
+    params
+)
+//查看列表/activity/teamindex
+export const teamindex = (params) => request.post('/activity/teamindex',
+    params
+)
+///activity/teamadd
+export const teamadd = (params) => request.post('/activity/teamadd',
+    params
+)
+///activity/teamedit
+export const teamedit = (params) => request.post('/activity/teamedit',
+    params
+)
+//药品组合box/planlist
+export const planlist = (params) => request.post('/admin/box/planlist',
+    params
+)
+//组合新增/admin/box/planadd
+export const planadd = (params) => request.post('/admin/box/planadd',
+    params
+)
+//组合删除/admin/box/plandel
+export const plandel = (params) => request.post('/admin/box/plandel',
+    params
+)
+//二级组合
+export const plangoodslist = (params) => request.post('/admin/box/goodslist',
+    params
+)
+//删除/admin/box/goodsdel
+export const plangoodsdel = (params) => request.post('/admin/box/goodsdel',
+    params
+)
+//添加/admin/box/goodsadd
+export const plangoodsadd = (params) => request.post('/admin/box/goodsadd',
+    params
+)
+//组合添加/admin/box/choosePlan
+export const choosePlan = (params) => request.post('/admin/box/choosePlan',
+    params
+)
+//tianja/admin/box/unrealOrderAdd
+export const unrealOrderAdd = (params) => request.post('/admin/box/unrealOrderAdd',
+    params
+)

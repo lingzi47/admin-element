@@ -209,6 +209,8 @@ export default {
       this.getUserList();
     },
     searchinfo() {
+      this.page.currentPage = 1;
+
       let token = sessionStorage.getItem("token");
       this.token = token;
       let params = {

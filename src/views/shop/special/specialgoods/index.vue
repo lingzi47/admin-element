@@ -301,7 +301,7 @@ export default {
     async searchinfo() {
       //console.log(this.form.type_id);
       //console.log(this.token);
-
+      this.page.page = 1;
       let res = await shopGoods({
         page: 1,
         limit: this.page.limit,

@@ -1,258 +1,181 @@
 <template>
-  <div>
-    <img src="../../assets/应急箱.png" height="800px" width="100%" />
+  <div id="index" ref="appRef">
+    <div class="bg">
+      <dv-loading v-if="loading">Loading...</dv-loading>
+      <div v-else class="host-body">
+        <div class="d-flex jc-center">
+          <dv-decoration-10 class="dv-dec-10" />
+          <div class="d-flex jc-center">
+            <dv-decoration-8 class="dv-dec-8" :color="decorationColor" />
+            <div class="title">
+              <span class="title-text"
+                >社区智能便民应急箱 (共享医药箱) 数据中心</span
+              >
+              <dv-decoration-6
+                class="dv-dec-6"
+                :reverse="true"
+                :color="['#50e3c2', '#67a1e5']"
+              />
+            </div>
+            <dv-decoration-8
+              class="dv-dec-8"
+              :reverse="true"
+              :color="decorationColor"
+            />
+          </div>
+          <dv-decoration-10 class="dv-dec-10-s" />
+        </div>
+
+        <!-- 第二行 -->
+        <div class="d-flex jc-between px-2">
+          <div class="d-flex aside-width">
+            <div class="react-left ml-4 react-l-s">
+              <span class="react-left"></span>
+              <span class="text"
+                ><img src="./../../assets/logo.png" height="50px"
+              /></span>
+            </div>
+          </div>
+          <div class="d-flex aside-width">
+            <div class="react-right mr-4 react-l-s" style="margin-left: 225px">
+              <span class="react-after"></span>
+              <span class="text"
+                >{{ dateYear }} {{ dateWeek }} {{ dateDay }}</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="body-box">
+          <div class="content-box">
+            <!-- 左上 -->
+            <div>
+              <dv-border-box-12 style="width: 350px; height: 300px">
+                <centerLeft1 />
+              </dv-border-box-12>
+            </div>
+            <!-- 左下 -->
+            <div>
+              <dv-border-box-12
+                style="
+                  width: 350px;
+                  height: 300px;
+                  margin-top: 300px;
+                  margin-left: -350px;
+                "
+              >
+                <centerLeft2 />
+              </dv-border-box-12>
+            </div>
+            <!-- 中间 -->
+            <div>
+              <dv-border-box-12
+                style="width: 1165px; height: 600px; margin-left: -5px"
+              >
+                <center />
+              </dv-border-box-12>
+            </div>
+            <!-- 右上 -->
+            <div>
+              <dv-border-box-12 style="width: 350px; height: 300px">
+                <centerRight2 />
+              </dv-border-box-12>
+            </div>
+            <!-- 右下 -->
+            <div>
+              <dv-border-box-12
+                style="
+                  width: 350px;
+                  height: 300px;
+                  margin-top: 300px;
+                  margin-left: -350px;
+                "
+              >
+                <centerRight1 />
+              </dv-border-box-12>
+            </div>
+          </div>
+
+          <!-- 第四行数据 -->
+          <div class="bottom-box">
+            <dv-border-box-13>
+              <bottomLeft />
+            </dv-border-box-13>
+            <dv-border-box-12 style="margin-left: -5px">
+              <bottomRight />
+            </dv-border-box-12>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <!--    <el-row :gutter="40" class="base-con">
-      <el-col :lg="6" :md="12">
-        <div class="base-data">
-          <div class="data-icon"><i class="el-icon-s-custom"></i></div>
-          <div class="data-con">
-            <h5>今日访问量</h5>
-            <p>23</p>
-          </div>
-        </div>
-      </el-col>
-      <el-col :lg="6" :md="12">
-        <div class="base-data">
-          <div class="data-icon"><i class="el-icon-message-solid"></i></div>
-          <div class="data-con">
-            <h5>未读消息</h5>
-            <p>6</p>
-          </div>
-        </div>
-      </el-col>
-      <el-col :lg="6" :md="12">
-        <div class="base-data">
-          <div class="data-icon"><i class="el-icon-phone"></i></div>
-          <div class="data-con">
-            <h5>通讯录</h5>
-            <p>368</p>
-          </div>
-        </div>
-      </el-col>
-      <el-col :lg="6" :md="12">
-        <div class="base-data">
-          <div class="data-icon"><i class="el-icon-picture"></i></div>
-          <div class="data-con">
-            <h5>上传数量</h5>
-            <p>63</p>
-          </div>
-        </div>
-      </el-col>
-    </el-row>
-    <el-row :gutter="40">
-      <el-col :lg="10" :md="24">
-       系统公告通知 
-        <div class="announcement">
-          <el-table
-            :data="tableData"
-            height="350px"
-            style="width: 100%"
-            @row-click="clickRow"
-            class="announcement"
-          >
-            <el-table-column label="公告主题">
-              <template slot-scope="scope">
-                <el-link type="primary" :underline="false">{{
-                  scope.row.title
-                }}</el-link>
-              </template>
-            </el-table-column>
-            <el-table-column
-              prop="name"
-              label="创建人"
-              width="77"
-            ></el-table-column>
-            <el-table-column
-              prop="startDate"
-              label="创建日期"
-              width="93"
-            ></el-table-column>
-            <el-table-column
-              prop="endDate"
-              label="结束日期"
-              width="93"
-            ></el-table-column>
-            <el-table-column label="状态" width="57">
-              <template slot-scope="scope">
-                <el-tag v-if="scope.row.type == 0" type="danger" size="mini"
-                  >未读</el-tag
-                >
-                <el-tag v-else type="success" size="mini">已读</el-tag>
-              </template>
-            </el-table-column>
-          </el-table>
-        </div>
-      </el-col>
-      <el-col :lg="14" :md="24">
-        <div class="chart" style="background-color: #fff; height: 350px"></div>
-      </el-col>
-    </el-row>
-    <el-row :gutter="40">
-      <el-col :lg="8" :md="24">
-        <div class="chart" style="background-color: #fff; height: 350px"></div>
-      </el-col>
-      <el-col :lg="8" :md="24">
-        <div class="chart" style="background-color: #fff; height: 350px"></div>
-      </el-col>
-      <el-col :lg="8" :md="24">
-        <div class="chart" style="background-color: #fff; height: 350px"></div>
-      </el-col>
-    </el-row>    <el-row :gutter="40" class="base-con">
-      <el-col :lg="6" :md="12">
-        <div class="base-data">
-          <div class="data-icon"><i class="el-icon-s-custom"></i></div>
-          <div class="data-con">
-            <h5>今日访问量</h5>
-            <p>23</p>
-          </div>
-        </div>
-      </el-col>
-      <el-col :lg="6" :md="12">
-        <div class="base-data">
-          <div class="data-icon"><i class="el-icon-message-solid"></i></div>
-          <div class="data-con">
-            <h5>未读消息</h5>
-            <p>6</p>
-          </div>
-        </div>
-      </el-col>
-      <el-col :lg="6" :md="12">
-        <div class="base-data">
-          <div class="data-icon"><i class="el-icon-phone"></i></div>
-          <div class="data-con">
-            <h5>通讯录</h5>
-            <p>368</p>
-          </div>
-        </div>
-      </el-col>
-      <el-col :lg="6" :md="12">
-        <div class="base-data">
-          <div class="data-icon"><i class="el-icon-picture"></i></div>
-          <div class="data-con">
-            <h5>上传数量</h5>
-            <p>63</p>
-          </div>
-        </div>
-      </el-col>
-    </el-row>
-    <el-row :gutter="40">
-      <el-col :lg="10" :md="24">
-      
-        <div class="announcement">
-          <el-table
-            :data="tableData"
-            height="350px"
-            style="width: 100%"
-            @row-click="clickRow"
-            class="announcement"
-          >
-            <el-table-column label="公告主题">
-              <template slot-scope="scope">
-                <el-link type="primary" :underline="false">{{
-                  scope.row.title
-                }}</el-link>
-              </template>
-            </el-table-column>
-            <el-table-column
-              prop="name"
-              label="创建人"
-              width="77"
-            ></el-table-column>
-            <el-table-column
-              prop="startDate"
-              label="创建日期"
-              width="93"
-            ></el-table-column>
-            <el-table-column
-              prop="endDate"
-              label="结束日期"
-              width="93"
-            ></el-table-column>
-            <el-table-column label="状态" width="57">
-              <template slot-scope="scope">
-                <el-tag v-if="scope.row.type == 0" type="danger" size="mini"
-                  >未读</el-tag
-                >
-                <el-tag v-else type="success" size="mini">已读</el-tag>
-              </template>
-            </el-table-column>
-          </el-table>
-        </div>
-      </el-col>
-      <el-col :lg="14" :md="24">
-        <div class="chart" style="background-color: #fff; height: 350px"></div>
-      </el-col>
-    </el-row>
-    <el-row :gutter="40">
-      <el-col :lg="8" :md="24">
-        <div class="chart" style="background-color: #fff; height: 350px"></div>
-      </el-col>
-      <el-col :lg="8" :md="24">
-        <div class="chart" style="background-color: #fff; height: 350px"></div>
-      </el-col>
-      <el-col :lg="8" :md="24">
-        <div class="chart" style="background-color: #fff; height: 350px"></div>
-      </el-col>
-    </el-row>-->
 </template>
 
 <script>
+import drawMixin from "./../../utils/drawMixin.js";
+import { formatTime } from "./../../utils/index.js";
+import centerLeft1 from "./centerLeft1";
+import centerLeft2 from "./centerLeft2";
+import centerRight1 from "./centerRight1";
+import centerRight2 from "./centerRight2";
+import center from "./center";
+import bottomLeft from "./bottomLeft";
+import bottomRight from "./bottomRight";
+
 export default {
-  name: "index",
-  components: {},
+  mixins: [drawMixin],
   data() {
     return {
-      tableData: [
-        {
-          id: "1",
-          startDate: "2021-08-16",
-          endDate: "2021-11-16",
-          name: "王小虎",
-          title: "3.2.210816版本更新说明",
-          content:
-            "新版本更新说明：<br>1. 修改了大量的XXX，并添加了XXX模块；<br>2. 将某个菜单更换到某个下面了；<br>3. 新增了XXX报表，具体详见XXX菜单下；",
-          type: 0,
-        },
-        {
-          id: "2",
-          startDate: "2021-08-10",
-          endDate: "2021-08-17",
-          name: "王小虎",
-          title: "停服更新通知",
-          content:
-            "计划将于 8月16日8:00 对系统服务器进行停服更新，预计停服3小时，开服时间有可能提前或者延后。届时将无法登录操作系统。",
-          type: 1,
-        },
-        {
-          id: "3",
-          startDate: "2021-06-21",
-          endDate: "2022-06-21",
-          name: "王小虎",
-          title: "数据修改通知",
-          content: "本次修改部分错误数据，详细前往XXX菜单下见信息修改的内容；",
-          type: 1,
-        },
-      ],
+      timing: null,
+      loading: true,
+      dateDay: null,
+      dateYear: null,
+      dateWeek: null,
+      weekday: ["周日", "周一", "周二", "周三", "周四", "周五", "周六"],
+      decorationColor: ["#568aea", "#000000"],
     };
   },
-  created() {},
-  mounted() {},
+  components: {
+    centerLeft1,
+    centerLeft2,
+    centerRight1,
+    centerRight2,
+    center,
+    bottomLeft,
+    bottomRight,
+  },
+  mounted() {
+    this.timeFn();
+    this.cancelLoading();
+  },
+  beforeDestroy() {
+    clearInterval(this.timing);
+  },
   methods: {
-    clickRow(row) {
-      let btnText = row.type ? "确定" : "已读";
-      this.$alert(row.content, row.title, {
-        confirmButtonText: btnText,
-        showClose: false,
-        dangerouslyUseHTMLString: true,
-        callback: () => {
-          if (!row.type) row.type = 1;
-        },
-      });
+    timeFn() {
+      this.timing = setInterval(() => {
+        this.dateDay = formatTime(new Date(), "HH: mm: ss");
+        this.dateYear = formatTime(new Date(), "yyyy-MM-dd");
+        this.dateWeek = this.weekday[new Date().getDay()];
+      }, 1000);
+    },
+    cancelLoading() {
+      setTimeout(() => {
+        this.loading = false;
+      }, 500);
     },
   },
 };
 </script>
 
-<style  scoped>
+<style lang="scss" scoped>
+// @import "../assets/scss/index.scss";
+@import "./../../assets/scss/index.scss";
+* {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  outline: none;
+  box-sizing: border-box;
+}
 </style>

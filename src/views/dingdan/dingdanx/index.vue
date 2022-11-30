@@ -127,14 +127,14 @@ export default {
     dao() {
       if (this.time[1] == undefined) {
         window.location.href =
-          "https://y4.wjw.cool/manybox/unrealOrderExp" +
+          "https://yujian02.xyz/manybox/unrealOrderExp" +
           "?token=" +
           this.token +
           "&orderDeviceCode=" +
           this.orderDeviceCode;
       } else {
         window.location.href =
-          "https://y4.wjw.cool/manybox/unrealOrderExp" +
+          "https://yujian02.xyz/manybox/unrealOrderExp" +
           "?token=" +
           this.token +
           "&orderDeviceCode=" +

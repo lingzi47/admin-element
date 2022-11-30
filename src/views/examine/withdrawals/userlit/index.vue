@@ -2,7 +2,7 @@
   <div class="user">
     <div style="margin-left: 200px">
       <el-form :inline="true">
-        <el-form-item style="margin-left: 150px">
+        <el-form-item style="margin-left: 50px">
           <span style="font-size: 15px">应急箱数量:</span>
           {{ allbox }}台</el-form-item
         >
@@ -26,6 +26,18 @@
         <el-form-item style="margin-left: 50px"
           ><span style="font-size: 15px">已提现收益:</span>
           {{ with1 }}元</el-form-item
+        >
+        <el-form-item style="margin-left: 50px"
+          ><span style="font-size: 15px">广告总收益 :</span>
+          {{ ad_sum }}元</el-form-item
+        >
+        <el-form-item style="margin-left: 50px"
+          ><span style="font-size: 15px">广告可提现收益:</span>
+          {{ ad_canWith }}元</el-form-item
+        >
+        <el-form-item style="margin-left: 50px"
+          ><span style="font-size: 15px">已提现广告:</span>
+          {{ ad_with }}元</el-form-item
         >
       </el-form>
     </div>
@@ -130,6 +142,9 @@ export default {
       position: "",
       canWith: "",
       with1: "",
+      ad_canwith: "",
+      ad_with: "",
+      ad_sum: "",
       page: {
         //分页信息
         currentPage: 1, //当前页
@@ -174,6 +189,11 @@ export default {
         this.noprice = res.data.data.data.noprice;
         this.noserve = res.data.data.data.noserve;
         this.with1 = res.data.data.with;
+        this.ad_canwith = res.data.data.ad_canwith;
+
+        this.ad_with = res.data.data.ad_with;
+        this.ad_sum = res.data.data.ad_sum;
+
         this.canWith = res.data.data.canWith;
         this.position = res.data.data.position;
         this.page.total = res.data.data.total;

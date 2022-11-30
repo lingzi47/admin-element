@@ -13,13 +13,16 @@
 		"build-prod": "vue-cli-service build --mode production"
 	},
 	"dependencies": {
+		"@jiaminghi/data-view": "^2.10.0",
 		"axios": "^0.24.0",
 		"core-js": "^3.6.5",
-		"echarts": "^5.2.2",
+		"echarts": "^4.6.0",
 		"element-ui": "^2.15.6",
 		"mockjs": "^1.1.0",
 		"nprogress": "^0.2.0",
 		"vue": "^2.6.11",
+		"vue-awesome": "^4.5.0",
+		"vue-baidu-map": "^0.21.22",
 		"vue-router": "^3.2.0",
 		"vuex": "^3.4.0",
 		"wangeditor": "^4.7.9"

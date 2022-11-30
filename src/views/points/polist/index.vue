@@ -126,7 +126,7 @@ export default {
   methods: {
     dao() {
       window.location.href =
-        "https://y4.wjw.cool/admin/box/posExport" +
+        "https://yujian02.xyz/admin/box/posExport" +
         "?token=" +
         this.token +
         "&box_name=" +

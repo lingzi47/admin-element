@@ -1017,3 +1017,80 @@ export const choosePlan = (params) => request.post('/admin/box/choosePlan',
 export const unrealOrderAdd = (params) => request.post('/admin/box/unrealOrderAdd',
     params
 )
+
+
+//广告详情
+export const fakeInfoList = (params) => request.post('/adminApi/box/fake/fakeInfoList',
+    params
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/// // // // // // // // // // // // // // // // // // // // // // // // 数据大屏
+
+//品类销售
+export const pinlei = (params) => request.post('/screen/pinlei',
+    params
+)
+//物业合作
+export const wuye = (params) => request.post('/screen/wuye',
+    params
+)
+//点位部署
+export const dianwei = (params) => request.post('/screen/dianwei',
+    params
+)
+//广告投放
+export const ads = (params) => request.post('/screen/ads',
+    params
+)
+//商品销售
+export const shop = (params) => request.post('/screen/shop',
+    params
+)
+//安装进度
+export const anzhuang = (params) => request.post('/screen/anzhuang',
+    params
+)
+//地图
+export const property = (params) => request.post('/screen/property',
+    params
+)
+//点位物业管理
+//列表
+export const propertylist = (params) => request.post('/admin/box/propertylist',
+    params
+)
+//新增
+export const propertyadd = (params) => request.post('/admin/box/propertyadd',
+    params
+)
+//编辑
+export const propertyedit = (params) => request.post('/admin/box/propertyedit',
+    params
+)
+//删除
+export const propertydel = (params) => request.post('/admin/box/propertydel',
+    params
+)

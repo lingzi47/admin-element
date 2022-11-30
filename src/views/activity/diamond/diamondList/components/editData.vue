@@ -50,7 +50,7 @@
             <el-form-item label="封面图:" prop="image">
               <el-upload
                 class="avatar-uploader"
-                action="https://y4.wjw.cool/command/ossUpload?filename=file"
+                action="https://yujian02.xyz/command/ossUpload?filename=file"
                 :show-file-list="false"
                 :on-success="handleAvatarSuccess"
                 :before-upload="beforeAvatarUpload"

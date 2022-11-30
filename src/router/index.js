@@ -2042,6 +2042,16 @@ export const asyncRoutes = [
 				keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
 				isBack: false
 			},
+		}, {
+			path: "adsdetail",
+			name: "adsdetail",
+			component: () => import("@/views/guangao/adsdetail"),
+			meta: {
+				title: "广告详情",
+				permissions: "adsdetail",
+				keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+				isBack: false
+			},
 		}, ],
 	},
 	{
@@ -2095,6 +2105,28 @@ export const asyncRoutes = [
 			meta: {
 				title: "订单组合",
 				permissions: "dingdanz",
+				keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+				isBack: false
+			},
+		}, ],
+	}, {
+		path: "/screen",
+		name: "screen",
+		component: Layout,
+		meta: {
+			title: "数据大屏幕",
+			icon: "el-icon-s-finance",
+			permissions: "screen",
+			keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+			isBack: false
+		},
+		children: [{
+			path: "propertylist",
+			name: "propertylist",
+			component: () => import("@/views/screen/propertylist"),
+			meta: {
+				title: "点位物业管理",
+				permissions: "propertylist",
 				keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
 				isBack: false
 			},

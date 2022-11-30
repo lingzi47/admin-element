@@ -289,7 +289,8 @@ export default {
 };
 </script>
 
-<style>
+
+<style lang="scss" scoped>
 .login-content {
   width: 100%;
   height: 100%;

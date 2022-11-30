@@ -315,7 +315,7 @@ export default {
       this.token = sessionStorage.getItem("token");
       if (this.time[1] == undefined) {
         window.location.href =
-          "https://y4.wjw.cool/manybox/tuilistexport" +
+          "https://yujian02.xyz/manybox/tuilistexport" +
           "?token=" +
           this.token +
           "&price=" +
@@ -332,7 +332,7 @@ export default {
           this.box_team;
       } else {
         window.location.href =
-          "https://y4.wjw.cool/manybox/tuilistexport" +
+          "https://yujian02.xyz/manybox/tuilistexport" +
           "?token=" +
           this.token +
           "&price=" +

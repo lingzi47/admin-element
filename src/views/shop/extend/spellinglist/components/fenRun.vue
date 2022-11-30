@@ -24,7 +24,7 @@
             >
               <el-upload
                 class="avatar-uploader1"
-                action="https://y4.wjw.cool/command/ossUpload?filename=file"
+                action="https://yujian02.xyz/command/ossUpload?filename=file"
                 :show-file-list="false"
                 :on-success="handleAvatarSuccess"
                 :before-upload="beforeAvatarUpload"

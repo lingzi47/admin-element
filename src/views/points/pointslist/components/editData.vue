@@ -72,38 +72,50 @@
               >
             </el-form-item></el-col
           >
-          
           <el-col :span="24" v-if="this.ruleForm.type == 20">
-            <el-form-item v-for="(v, k) in list" :key="k">
-              <span> 渠道商{{ k + 1 }}id:</span>
-
+            <el-form-item v-for="(v, k) in position" :key="k" prop="tel">
+              <span>账号{{ k + 1 }}</span>
+              绑定身份:
               <el-input
-                v-model="v.position_user"
-                style="width: 150px"
+                v-model="v.name"
+                style="width: 80px"
+                placeholder="请输入"
+              ></el-input>
+              绑定id:
+              <el-input
+                v-model="v.uid"
+                style="width: 80px"
                 placeholder="请输入"
               ></el-input>
 
+              分润占比:
+              <el-input
+                v-model="v.value"
+                style="width: 80px"
+                placeholder="请输入"
+              ></el-input
+              >%
               <el-button
                 type="primary"
                 style="margin-left: 10px"
                 size="mini"
-                v-if="k == list.length - 1"
+                v-if="k == position.length - 1"
                 @click="insert"
                 >+</el-button
               >
               <el-button
                 type="danger"
                 size="mini"
-                v-if="k !== 0"
+                v-if="k !== 0 && k == position.length - 1"
                 @click="remove(k)"
                 >-</el-button
               >
             </el-form-item>
           </el-col>
           <el-col :span="15">
-            <el-form-item label="物业名称">
+            <el-form-item label="物业名称" prop="property">
               <el-input
-                v-model="property"
+                v-model="ruleForm.property"
                 style="width: 180px"
                 placeholder="请输入物业名称"
               ></el-input>
@@ -247,7 +259,6 @@ export default {
   components: {},
   data() {
     return {
-      property: "",
       exclude: "",
       house: "",
       medical: "",
@@ -260,7 +271,8 @@ export default {
       peopleall: "",
       house_price: "",
       remarks: "",
-      list: [{ position_user: "" }],
+      position: [{ id: "", name: "", uid: "", value: "" }],
+      user: { id: "", uid: "", name: "", value: "" },
       check: false,
       token: "",
       isDisable: false,
@@ -272,7 +284,7 @@ export default {
         value3: "",
       },
       province: "",
-      type: "",
+      year: "",
       city: "",
       id: "",
       area: "",
@@ -284,6 +296,7 @@ export default {
         year: "",
         position_user: "",
         details: "",
+        property: "",
       },
       rules: {
         year: [
@@ -294,6 +307,8 @@ export default {
         details: [
           { required: true, message: "请输入详情信息", trigger: "blur" },
         ],
+
+        property: [{ required: true, message: "请输入物业", trigger: "blur" }],
         position_user: [
           { required: true, message: "请输入渠道商id", trigger: "blur" },
         ],
@@ -308,11 +323,11 @@ export default {
   mounted() {},
   methods: {
     insert() {
-      this.user = { position_user: "" };
-      this.list.push(this.user);
+      this.user = { id: "", name: "", uid: "", value: "" };
+      this.position.push(this.user);
     },
     remove(index) {
-      this.list.splice(index, 1);
+      this.position.splice(index, 1);
     },
     setData(data) {
       data.map((item) => {
@@ -327,12 +342,15 @@ export default {
       console.log(val);
       if (val == 10) {
         this.isDisable = true;
+        this.check = true;
+
         this.ruleForm.year = "2099-01-01 00:00:00";
         console.log(this.ruleForm.year);
       } else {
         console.log(this.ruleForm.year);
         this.isDisable = false;
-        this.ruleForm.year = "";
+        this.check = false;
+        this.ruleForm.year = this.year;
       }
     },
     checked(events) {
@@ -352,7 +370,7 @@ export default {
           this.ruleForm.year = "2099-01-01 00:00:00";
         } else {
           this.isDisable = false;
-          this.ruleForm.year = "";
+          this.ruleForm.year = this.year;
         }
       }
       //
@@ -373,7 +391,7 @@ export default {
         this.tittle = "编辑";
         console.log(row);
         this.id = row.id;
-        this.property = row.property;
+        this.ruleForm.property = row.property;
         this.exclude = row.exclude;
         this.house = row.house;
         this.medical = row.medical;
@@ -388,22 +406,25 @@ export default {
         this.remarks = row.remarks;
 
         this.ruleForm.type = row.type;
+        console.log(this.ruleForm.type);
         this.ruleForm.year = row.due_time;
+        this.year = row.due_time;
         this.ruleForm.details = row.details;
         this.ruleForm.position_user = row.position_user;
+        this.position = row.position;
 
-        let arr = this.ruleForm.position_user.split(",");
-        console.log(arr);
-        var obj = {};
-        // 将数组转化为对象
-        for (let key in arr) {
-          obj[key] = arr[key];
-        }
-        let newObj = Object.keys(obj).map((val) => ({
-          position_user: obj[val],
-        }));
-        console.log(newObj);
-        this.list = newObj;
+        // let arr = this.ruleForm.position_user.split(",");
+        // console.log(arr);
+        // var obj = {};
+        // // 将数组转化为对象
+        // for (let key in arr) {
+        //   obj[key] = arr[key];
+        // }
+        // let newObj = Object.keys(obj).map((val) => ({
+        //   position_user: obj[val],
+        // }));
+        // console.log(newObj);
+        // this.list = newObj;
         if (row.due_time == "2099-01-01 00:00:00") {
           this.isDisable = true;
           this.ruleForm.year = row.due_time;
@@ -432,18 +453,19 @@ export default {
     close() {
       this.dialogVisible = false;
       this.ruleForm.type = "";
-      this.list = [{ position_user: "" }];
+      this.position = [{ id: "", uid: "", name: "", value: "" }];
       this.ruleForm.year = "";
       this.ruleForm.details = "";
       this.isDisable = false;
       this.check = false;
       this.ruleForm.value1 = "";
-      this.property = "";
+      this.ruleForm.property = "";
       this.exclude = "";
       this.house = "";
       this.medical = "";
       this.shop = "";
       this.shop_name = "";
+      this.year = "";
       this.school = "";
       this.build = "";
       this.house_num = "";
@@ -461,22 +483,28 @@ export default {
             let token = sessionStorage.getItem("token");
             this.token = token;
             var that = this;
-            let flag = that.list.every((item) => !!item.position_user);
+            let flag = that.position.every((item) => !!item.uid);
+            console.log(flag);
+            let flag1 = that.position.every((item) => !!item.name);
+
             if (!flag) {
-              this.$message.error("渠道商id不能为空");
+              this.$message.error("绑定id不能为空");
               return;
             }
-            let res = "";
-            for (let i = 0; i < this.list.length; i++) {
-              res += this.list[i].position_user + ",";
-            }
-            if (res.length > 0) {
-              res = res.substr(0, res.length - 1);
+            if (!flag1) {
+              this.$message.error("绑定身份不能为空");
+              return;
             }
 
-            console.log(res);
+            let new_arr = this.position.map((obj) => {
+              return obj.uid;
+            });
+
+            this.ruleForm.position_user = new_arr.toString();
+            console.log(this.ruleForm.position_user);
             let params = {
-              position_user: res,
+              position: this.position,
+              position_user: this.ruleForm.position_user,
               type: this.ruleForm.type,
               due_time: this.ruleForm.year,
               token: sessionStorage.getItem("token"),
@@ -484,7 +512,7 @@ export default {
               province: this.province,
               city: this.city,
               area: this.area,
-              property: this.property,
+              property: this.ruleForm.property,
               exclude: this.exclude,
               house: this.house,
               medical: this.medical,
@@ -501,6 +529,7 @@ export default {
             positionadd(params).then((res) => {
               if (res.data.code == 200) {
                 this.$message.success("新增成功");
+
                 this.$parent.getUserList();
                 this.close();
                 this.isDisable = false;
@@ -519,25 +548,29 @@ export default {
         this.$refs.ruleForm.validate(async (valid) => {
           if (valid) {
             var that = this;
-            let flag = that.list.every((item) => !!item.position_user);
+            let flag = that.position.every((item) => !!item.uid);
+            let flag1 = that.position.every((item) => !!item.name);
+
             if (!flag) {
-              this.$message.error("渠道商id不能为空");
+              this.$message.error("绑定id不能为空");
               return;
             }
-            let res = "";
-            for (let i = 0; i < this.list.length; i++) {
-              res += this.list[i].position_user + ",";
+            if (!flag1) {
+              this.$message.error("绑定身份不能为空");
+              return;
             }
-            if (res.length > 0) {
-              res = res.substr(0, res.length - 1);
-            }
+            let new_arr = this.position.map((obj) => {
+              return obj.uid;
+            });
 
-            console.log(res);
+            this.ruleForm.position_user = new_arr.toString();
+            console.log(this.ruleForm.position_user);
             let token = sessionStorage.getItem("token");
             this.token = token;
             let params = {
-              position_user: res,
+              position: this.position,
               type: this.ruleForm.type,
+              position_user: this.ruleForm.position_user,
               due_time: this.ruleForm.year,
               token: sessionStorage.getItem("token"),
               details: this.ruleForm.details,
@@ -545,7 +578,7 @@ export default {
               city: this.city,
               area: this.area,
               id: this.id,
-              property: this.property,
+              property: this.ruleForm.property,
               exclude: this.exclude,
               house: this.house,
               medical: this.medical,

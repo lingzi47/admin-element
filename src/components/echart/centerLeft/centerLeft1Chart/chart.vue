@@ -31,13 +31,15 @@ export default {
       handler(newData) {
         this.options = {
           color: [
-            "#37a2da",
-            "#32c5e9",
-            "#9fe6b8",
-            "#ffdb5c",
-            "#ff9f7f",
-            "#fb7293",
-            "#e7bcf3",
+            "#ffb11c",
+            "#da54ff",
+            "#ff718f",
+            "#00ffd8",
+            "#ff7022",
+            "#00d2f8",
+            "#81f16b",
+            "#f5735f",
+            "#f4fb0b",
             "#8378ea",
           ],
           tooltip: {

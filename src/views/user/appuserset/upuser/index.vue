@@ -93,7 +93,7 @@
         :resizable="false"
       ></el-table-column>
       <el-table-column
-        label="所属团队"
+        label="所属市场"
         align="center"
         width="100"
         :resizable="false"

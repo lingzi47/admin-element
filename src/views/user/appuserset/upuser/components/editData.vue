@@ -54,12 +54,12 @@
           ></el-col>
           <el-col :span="12"
             ><div class="grid-content bg-purple">
-              <el-form-item label="所属团队" prop="team">
+              <el-form-item label="所属市场" prop="team">
                 <el-select
                   style="width: 180px"
                   v-model="team"
                   clearable
-                  placeholder="请选择所属团队"
+                  placeholder="请选择所属市场"
                 >
                   <el-option label="全国" :value="1"></el-option>
                   <el-option label="大连" :value="2"></el-option>
@@ -179,7 +179,7 @@ export default {
         team: [
           {
             required: true,
-            message: "请选择所属团队",
+            message: "请选择所属市场",
             trigger: "blur",
           },
         ],

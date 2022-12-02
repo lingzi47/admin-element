@@ -63,8 +63,10 @@ export default {
             },
             data: res.data.data, //图例上显示的饼图各模块上的名字
           },
+
           //饼图中各模块的颜色
-          color: ["#32dadd", "#b6a2de", "#5ab1ef", "#6495ED", "#00BFFF"],
+          // #f9d216     #d95203   #00fe87       #8357e7      #ffb11c
+          color: ["#f9d216", "#d95203", "#00fe87", "#8357e7", "#ffb11c"],
           // 饼图数据
           series: {
             type: "pie", //echarts图的类型   pie代表饼图

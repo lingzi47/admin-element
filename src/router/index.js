@@ -908,6 +908,28 @@ export const asyncRoutes = [
 					}
 				}, ]
 			},
+			{
+				path: "activity",
+				name: "activity",
+				component: () => import("@/views/shop/activity"),
+				meta: {
+					title: "活动专区",
+					permissions: "activity",
+					keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+					isBack: false
+				},
+				children: [{
+					path: "activitylist",
+					name: "activitylist",
+					component: () => import("@/views/shop/activity/activitylist"),
+					meta: {
+						title: "活动专区",
+						permissions: "activitylist",
+						keepAlive: true, // 不需要缓存	keepAlive: true, //此组件需要被缓存
+						isBack: false
+					}
+				}, ]
+			},
 
 		],
 	},

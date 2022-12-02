@@ -828,6 +828,10 @@ export const fakeedit = (params) => request.post('adminApi/box/fake/edit',
 export const xunilist = (params) => request.post('/manybox/unrealOrder',
     params
 )
+//删除
+export const unrealOrderDel = (params) => request.post('/admin/box/unrealOrderDel',
+    params
+)
 
 //dummy获取商品
 export const xunnigoods = (params) => request.post('manybox/unrealOrdergoods ',
@@ -1092,5 +1096,17 @@ export const propertyedit = (params) => request.post('/admin/box/propertyedit',
 )
 //删除
 export const propertydel = (params) => request.post('/admin/box/propertydel',
+    params
+)
+//活动专区/shopadmin/goodschooseindex
+export const goodschooseindex = (params) => request.post('/shopadmin/goodschooseindex',
+    params
+)
+//添加
+export const goodschooseadd = (params) => request.post('/shopadmin/goodschooseadd',
+    params
+)
+//删除
+export const goodschoosedel = (params) => request.post('/shopadmin/goodschoosedel',
     params
 )

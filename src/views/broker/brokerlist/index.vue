@@ -131,7 +131,7 @@
           <span v-if="scope.row.box_type == 3">终身</span>
         </template>
       </el-table-column>
-      <el-table-column label="所属团队" align="center" :resizable="false">
+      <el-table-column label="所属市场" align="center" :resizable="false">
         <template slot-scope="scope">
           <el-link v-if="scope.row.user_team == 1">全国</el-link>
           <el-link v-if="scope.row.user_team == 2">大连</el-link>

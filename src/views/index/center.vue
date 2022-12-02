@@ -8,10 +8,10 @@
         <el-col :span="6">辐射人口</el-col>
       </el-row>
       <el-row>
-        <el-col :span="6">500</el-col>
+        <el-col :span="6">320</el-col>
         <el-col :span="6">630</el-col>
-        <el-col :span="6">4</el-col>
-        <el-col :span="6">110587</el-col>
+        <el-col :span="6">7</el-col>
+        <el-col :span="6">62587</el-col>
       </el-row>
     </div>
     <div id="map" style="height: 610px; width: 100%" ref="myEchart"></div>

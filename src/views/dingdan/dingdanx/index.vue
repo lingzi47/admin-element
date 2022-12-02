@@ -64,8 +64,20 @@
       </el-table-column>
       <el-table-column prop="orderDeviceCode" label="设备编号" align="center">
       </el-table-column>
-
+      <el-table-column prop="property" label="物业" align="center">
+      </el-table-column>
       <el-table-column prop="orderCreateTime" label="交易时间" align="center">
+      </el-table-column>
+      <el-table-column label="操作" align="center" width="350">
+        <template slot-scope="scope">
+          <el-link
+            v-if="checkPermission('userdelete')"
+            type="danger"
+            style="margin-left: 10px"
+            @click="deleteData(scope.row)"
+            >删除</el-link
+          >
+        </template>
       </el-table-column>
     </page-table>
     <!-- 新增编辑弹窗 -->
@@ -75,7 +87,7 @@
 </template>
 
 <script>
-import { xunilist } from "@/request/api";
+import { xunilist, unrealOrderDel } from "@/request/api";
 import { checkPermission } from "@/utils/permissions";
 import pageTable from "@/components/pageTable.vue";
 import { areaListData } from "@/utils/area";
@@ -155,7 +167,7 @@ export default {
             id: row.id,
             token: sessionStorage.getItem("token"),
           };
-          xunnidel(params).then((res) => {
+          unrealOrderDel(params).then((res) => {
             if (res.status == 200) {
               this.getUserList();
               this.$message.success("删除成功");

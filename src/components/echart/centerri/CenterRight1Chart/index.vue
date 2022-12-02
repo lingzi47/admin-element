@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div id="myChart" ref="myChart" style="width: 300px; height: 240px"></div>
+    <div id="myChart" ref="myChart" style="width: 305px; height: 240px"></div>
   </div>
 </template>
 <script>
@@ -47,15 +47,39 @@ export default {
           textStyle: {
             //图例中文字的样式
             color: "#F8F8FF",
-            fontSize: 11,
+            fontSize: 10,
           },
-          yAxis: {
-            type: "value",
-            splitLine: false,
-          },
+          yAxis: [
+            {
+              splitLine: { show: false },
+              axisLine: {
+                lineStyle: {
+                  color: "#B4B4B4",
+                },
+              },
+              grid: {
+                top: 0,
+                left: 80, // 调整这个属性
+                right: 0,
+                bottom: 0,
+              },
+              axisLabel: {
+                formatter: function (value) {
+                  console.log(value, "value");
+                  // value大于1000时除以1000并拼接k，小于1000按原格式显示
+                  if (value >= 10000) {
+                    value = value / 10000 + "w";
+                  } else if (value < 10000) {
+                    value;
+                  }
+                  return value;
+                },
+              },
+            },
+          ],
           series: [
             {
-              name: "广告收益", //系列名称，用于tooltip的显示，legend 的图例筛选，在 setOption 更新数据和配置项时用于指定对应的系列。
+              // name: "echarts表格", //系列名称，用于tooltip的显示，legend 的图例筛选，在 setOption 更新数据和配置项时用于指定对应的系列。
               type: "bar",
               itemStyle: {
                 //
@@ -77,7 +101,7 @@ export default {
                 textStyle: {
                   //图例中文字的样式
                   color: "#F8F8FF",
-                  fontSize: 11,
+                  fontSize: 12,
                 },
               },
               //图例
@@ -88,7 +112,7 @@ export default {
                 fontSize: 11,
               },
 
-              barWidth: "30%",
+              barWidth: "40%",
               data: res.data.dataInfo,
             },
           ],

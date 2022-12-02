@@ -280,7 +280,6 @@
         >
           <template slot-scope="scope">
             <el-select
-              v-if="scope.row.express == null"
               size="mini"
               v-model="scope.row.delivery"
               @change="display"
@@ -293,7 +292,7 @@
               >
               </el-option>
             </el-select>
-            <el-select
+            <!-- <el-select
               v-else
               :disabled="true"
               size="mini"
@@ -307,7 +306,7 @@
                 :value="item.code"
               >
               </el-option>
-            </el-select>
+            </el-select> -->
           </template>
         </el-table-column>
         <el-table-column
@@ -318,12 +317,10 @@
         >
           <template slot-scope="scope">
             <el-input
-              v-if="scope.row.deliver_status == '未发货'"
               v-model="scope.row.express"
               @change="onInputChange(scope.row)"
             >
             </el-input>
-            <span v-else> {{ scope.row.express }}</span>
           </template>
         </el-table-column>
         <el-table-column
@@ -336,14 +333,20 @@
         >
           <template slot-scope="scope">
             <el-link
-              v-if="scope.row.deliver_status == '未发货'"
               type="primary"
+              v-if="scope.row.deliver_status == '未发货'"
               @click="open(scope.row)"
               >发货</el-link
             >
             <el-link
-              v-else
+              type="primary"
+              v-if="scope.row.deliver_status == '已发货'"
+              @click="open(scope.row)"
+              >修改物流</el-link
+            >
+            <el-link
               style="margin-left: 10px"
+              v-if="scope.row.deliver_status == '已发货'"
               @click="delivery(scope.row)"
               >查看物流</el-link
             >
@@ -357,6 +360,7 @@
             >
             <el-link
               type="primary"
+              v-if="scope.row.deliver_status == '已发货'"
               style="margin-left: 10px"
               @click="queren(scope.row)"
               >确认收货</el-link

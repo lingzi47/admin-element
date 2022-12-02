@@ -128,6 +128,8 @@
           >
         </template>
       </el-table-column>
+      <el-table-column prop="property" label="物业" align="center">
+      </el-table-column>
       <el-table-column label="点位来源" align="center">
         <template slot-scope="scope">
           <el-link type="success" v-if="scope.row.type == 20">渠道商</el-link>

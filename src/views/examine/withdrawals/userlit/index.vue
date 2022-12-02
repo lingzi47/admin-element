@@ -142,7 +142,7 @@ export default {
       position: "",
       canWith: "",
       with1: "",
-      ad_canwith: "",
+      ad_canWith: "",
       ad_with: "",
       ad_sum: "",
       page: {
@@ -189,10 +189,10 @@ export default {
         this.noprice = res.data.data.data.noprice;
         this.noserve = res.data.data.data.noserve;
         this.with1 = res.data.data.with;
-        this.ad_canwith = res.data.data.ad_canwith;
 
         this.ad_with = res.data.data.ad_with;
         this.ad_sum = res.data.data.ad_sum;
+        this.ad_canWith = res.data.data.ad_canWith;
 
         this.canWith = res.data.data.canWith;
         this.position = res.data.data.position;

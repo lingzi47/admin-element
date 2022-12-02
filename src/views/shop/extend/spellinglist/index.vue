@@ -135,7 +135,7 @@
         ></el-table-column>
         <el-table-column
           fixed
-          label="所属团队"
+          label="所属市场"
           align="center"
           :resizable="false"
         >

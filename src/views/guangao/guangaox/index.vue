@@ -46,7 +46,7 @@
           <span>{{ scope.row.device }}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="price" label="每日分润" align="center">
+      <el-table-column prop="price" label="每日收入" align="center">
       </el-table-column>
       <el-table-column label="点位来源" align="center">
         <template slot-scope="scope">

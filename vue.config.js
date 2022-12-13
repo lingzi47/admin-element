@@ -6,7 +6,7 @@ module.exports = {
 			// 本地备份  
 			// 和上面自定义的 baseURL 保持一致
 			'/api': {
-				target: 'https://yujian02.xyz/',
+				target: 'https://testapi.yujian02.xyz/',
 
 				changeOrigin: true, // 是否跨域
 				pathRewrite: {

@@ -1,9 +1,9 @@
 import axios from "axios";
-let baseURL = '/api';
-// console.log(baseURL);
+let baseURL = window.PLATFROM_CONFIG
+console.log(baseURL);
 // 配置axios
 const instance = axios.create({
-    baseURL: 'https://yujian02.xyz/',
+    baseURL: 'https://testapi.yujian02.xyz/',
     timeout: 5000
 })
 

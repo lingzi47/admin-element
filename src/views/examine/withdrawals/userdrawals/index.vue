@@ -10,6 +10,14 @@
             placeholder="请输入用户名称"
           ></el-input>
         </el-form-item>
+        <el-form-item label="姓名" prop="member">
+          <el-input
+            style="width: 180px"
+            v-model="name"
+            clearable
+            placeholder="请输入姓名"
+          ></el-input>
+        </el-form-item>
         <el-form-item label="处理状态" prop="member">
           <el-select v-model="status" placeholder="请选择" style="width: 150px">
             <el-option label="全部状态" value=""></el-option>
@@ -40,9 +48,9 @@
         </el-form-item>
       </el-form>
     </div>
-    <el-button type="primary" @click="open()" style="margin-bottom: 10px"
+    <!-- <el-button type="primary" @click="open()" style="margin-bottom: 10px"
       >导出</el-button
-    >
+    > -->
     <page-table
       ref="dataTable"
       :data="userList"
@@ -190,6 +198,8 @@ export default {
       ex_remark: "",
       ex_remark1: "",
       username: "",
+      name: "",
+
       status: "",
       dialogVisible: false,
       dialogVisible1: false,
@@ -301,6 +311,7 @@ export default {
         limit: this.page.pageSize,
         token: sessionStorage.getItem("token"),
         uname: this.username,
+        name: this.name,
         status: this.status,
         s_time: this.time[0],
         e_time: this.time[1],
@@ -320,22 +331,20 @@ export default {
       });
     },
     getUserList() {
-      //console.log(this.form.time);
       let token = sessionStorage.getItem("token");
       this.token = token;
-      //console.log(this.token);
       let params = {
         page: this.page.currentPage,
         limit: this.page.pageSize,
         token: sessionStorage.getItem("token"),
         uname: this.username,
+        name: this.name,
         status: this.status,
         s_time: this.time[0],
         e_time: this.time[1],
       };
       diamondsWith(params).then((res) => {
         //console.log(res.data.data.data);
-
         this.page.total = res.data.data.total;
         //console.log(res.data.data.total);
         //console.log("总条数", this.page.total);

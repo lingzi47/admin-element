@@ -25,6 +25,10 @@
               <el-option label="1875" value="1875"></el-option>
               <el-option label="1700" value="1700"></el-option>
               <el-option label="1580" value="1580"></el-option>
+              <el-option label="2600" value="2600"></el-option>
+              <el-option label="1800" value="1800"></el-option>
+              <el-option label="1975" value="1975"></el-option>
+              <el-option label="1680" value="1680"></el-option>
             </el-select>
           </el-form-item>
           <el-form-item label="购买方式" prop="box_type">
@@ -315,7 +319,7 @@ export default {
       this.token = sessionStorage.getItem("token");
       if (this.time[1] == undefined) {
         window.location.href =
-          "https://yujian02.xyz/manybox/tuilistexport" +
+          "https://testapi.yujian02.xyz/manybox/tuilistexport" +
           "?token=" +
           this.token +
           "&price=" +
@@ -332,7 +336,7 @@ export default {
           this.box_team;
       } else {
         window.location.href =
-          "https://yujian02.xyz/manybox/tuilistexport" +
+          "https://testapi.yujian02.xyz/manybox/tuilistexport" +
           "?token=" +
           this.token +
           "&price=" +

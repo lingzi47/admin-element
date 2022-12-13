@@ -114,7 +114,7 @@ export default {
       console.log(this.num);
 
       window.location.href =
-        "https://yujian02.xyz/adminApi/box/boxStock/goodsExp" +
+        "https://testapi.yujian02.xyz/adminApi/box/boxStock/goodsExp" +
         "?token=" +
         this.token +
         "&goods_name=" +

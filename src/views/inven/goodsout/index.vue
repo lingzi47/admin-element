@@ -228,7 +228,7 @@ export default {
       console.log(this.num);
 
       window.location.href =
-        "https://yujian02.xyz/admin/box/expOfficina" +
+        "https://testapi.yujian02.xyz/admin/box/expOfficina" +
         "?token=" +
         this.token +
         "&number=" +

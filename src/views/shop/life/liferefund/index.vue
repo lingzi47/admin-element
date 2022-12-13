@@ -202,7 +202,7 @@ export default {
     dao() {
       this.token = sessionStorage.getItem("token");
       window.location.href =
-        "https://yujian02.xyz/shopadmin/receRefundExp" +
+        "https://testapi.yujian02.xyz/shopadmin/receRefundExp" +
         "?token=" +
         this.token +
         "&shop_type=" +

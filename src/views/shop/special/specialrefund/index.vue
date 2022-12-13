@@ -20,7 +20,18 @@
               placeholder="请输入商品名称"
             ></el-input>
           </el-form-item>
-
+          <el-form-item label="时间" prop="title">
+            <el-date-picker
+              v-model="time"
+              value-format="yyyy-MM-dd HH:mm:ss"
+              type="datetimerange"
+              range-separator="至"
+              start-placeholder="开始日期"
+              end-placeholder="结束日期"
+              align="right"
+            >
+            </el-date-picker>
+          </el-form-item>
           <el-form-item style="float: right">
             <el-button
               v-if="checkPermission('operationsearch')"
@@ -185,6 +196,7 @@ export default {
       order_no: "",
       goods_name: "",
       id: "",
+      time: "",
       dialogVisible: false,
       page: {
         //分页信息
@@ -197,12 +209,19 @@ export default {
   created() {
     this.shoporderlist();
   },
+  watch: {
+    time(newVal) {
+      if (newVal == null) {
+        this.time = [];
+      }
+    },
+  },
   mounted() {},
   methods: {
     dao() {
       this.token = sessionStorage.getItem("token");
       window.location.href =
-        "https://yujian02.xyz/shopadmin/receRefundExp" +
+        "https://testapi.yujian02.xyz/shopadmin/receRefundExp" +
         "?token=" +
         this.token +
         "&shop_type=" +
@@ -212,7 +231,11 @@ export default {
         "&goods_name=" +
         this.goods_name +
         "&order_no=" +
-        this.order_no;
+        this.order_no +
+        "&time1=" +
+        this.time[0] +
+        "&time2=" +
+        this.time[1];
     },
     async searchinfo() {
       this.page.page = 1;
@@ -224,6 +247,8 @@ export default {
         order_no: this.order_no,
         page: this.page.page,
         limit: this.page.limit,
+        time1: this.time[0],
+        time2: this.time[1],
       });
       if (res.data.code == 200) {
         this.shoporder = res.data.data.data;
@@ -241,6 +266,8 @@ export default {
         order_no: this.order_no,
         page: this.page.page,
         limit: this.page.limit,
+        time1: this.time[0],
+        time2: this.time[1],
       });
       if (res.data.code == 200) {
         this.shoporder = res.data.data.data;

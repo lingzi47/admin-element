@@ -14,7 +14,7 @@
               <el-form-item label="封面图" prop="goods_img">
                 <el-upload
                   class="avatar-uploader"
-                  action="https://yujian02.xyz/command/ossUpload?filename=file"
+                  action="https://testapi.yujian02.xyz/command/ossUpload?filename=file"
                   :show-file-list="false"
                   :on-success="handleAvatarSuccess"
                   :before-upload="beforeAvatarUpload"

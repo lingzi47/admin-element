@@ -13,9 +13,11 @@ export default {
 	// 获取用户详情
 	getUserInfo: config => {
 		let data = JSON.parse(config.body);
+		console.log(userList);
 		let userInfo = userList.filter(item => (item.username + "-accessToken") == data.token)[0];
+		console.log(userInfo);
 		// 根据用户的角色获取操作
-		let roles = userInfo.roles; //角色数组
+		let roles = ['admin']; //角色数组
 		console.log(roles);
 		let roleMenu = {};
 		for (let i = 0; i < roles.length; i++) {

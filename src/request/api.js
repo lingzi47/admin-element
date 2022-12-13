@@ -3,6 +3,19 @@ import request from '@/request/request'
 export const userlog = (params) => request.get('/adminApi/log/list', {
     params
 })
+
+//验证码adminApi/sendsms
+export const sendsms = (params) => request.get('adminApi/sendsms', {
+    params
+})
+//登录
+export const oksms = (params) => request.get('adminApi/oksms', {
+    params
+})
+//验证码adminApi/phoneCode
+export const phoneCode = (params) => request.get('adminApi/phoneCode', {
+    params
+})
 //导出
 export const exportOrder = (params) => request.get('shopadmin/exportOrder', {
     params

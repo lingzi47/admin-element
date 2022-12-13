@@ -65,7 +65,7 @@
               </el-date-picker>
             </el-form-item>
           </el-col>
-          <el-col :span="2">
+          <el-col :span="8">
             <el-form-item class="xian1">
               <el-checkbox v-model="check" @change="checked"
                 >无期限</el-checkbox
@@ -112,12 +112,22 @@
               >
             </el-form-item>
           </el-col>
-          <el-col :span="15">
+
+          <el-col :span="10">
             <el-form-item label="物业名称" prop="property">
               <el-input
                 v-model="ruleForm.property"
                 style="width: 180px"
                 placeholder="请输入物业名称"
+              ></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="小区名称" prop="xiaoqu">
+              <el-input
+                v-model="ruleForm.xiaoqu"
+                style="width: 180px"
+                placeholder="请输入小区名称"
               ></el-input>
             </el-form-item>
           </el-col>
@@ -297,6 +307,7 @@ export default {
         position_user: "",
         details: "",
         property: "",
+        xiaoqu: "",
       },
       rules: {
         year: [
@@ -307,7 +318,7 @@ export default {
         details: [
           { required: true, message: "请输入详情信息", trigger: "blur" },
         ],
-
+        xiaoqu: [{ required: true, message: "请输入小区", trigger: "blur" }],
         property: [{ required: true, message: "请输入物业", trigger: "blur" }],
         position_user: [
           { required: true, message: "请输入渠道商id", trigger: "blur" },
@@ -392,6 +403,7 @@ export default {
         console.log(row);
         this.id = row.id;
         this.ruleForm.property = row.property;
+        this.ruleForm.xiaoqu = row.xiaoqu;
         this.exclude = row.exclude;
         this.house = row.house;
         this.medical = row.medical;
@@ -460,6 +472,7 @@ export default {
       this.check = false;
       this.ruleForm.value1 = "";
       this.ruleForm.property = "";
+      this.ruleForm.xiaoqu = "";
       this.exclude = "";
       this.house = "";
       this.medical = "";
@@ -513,6 +526,7 @@ export default {
               city: this.city,
               area: this.area,
               property: this.ruleForm.property,
+              xiaoqu: this.ruleForm.xiaoqu,
               exclude: this.exclude,
               house: this.house,
               medical: this.medical,
@@ -579,6 +593,7 @@ export default {
               area: this.area,
               id: this.id,
               property: this.ruleForm.property,
+              xiaoqu: this.ruleForm.xiaoqu,
               exclude: this.exclude,
               house: this.house,
               medical: this.medical,

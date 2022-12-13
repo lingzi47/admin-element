@@ -33,10 +33,15 @@
         </el-form-item>
         <el-form-item style="float: right">
           <el-button type="primary" @click="search">搜索</el-button
-          ><el-button type="primary" @click="addData">组合添加</el-button>
-          <el-button type="primary" @click="editData">添加</el-button>
+          ><el-button type="primary" @click="addData" v-if="show == 2"
+            >组合添加</el-button
+          >
+          <el-button type="primary" @click="editData" v-if="show == 2"
+            >添加</el-button
+          >
 
           <el-button @click="dao">导出</el-button>
+          <el-button @click="xian" style="border: 0"></el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -57,7 +62,18 @@
           <span>{{ scope.row.productName }}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="productCostPrice" label="成本价" align="center">
+      <el-table-column label="成本价" align="center">
+        <template slot-scope="scope">
+          <span v-if="show == 2">{{ scope.row.productCostPrice }}</span>
+          <span v-if="show == 1"
+            >{{
+              (
+                Number(scope.row.productCostPrice) +
+                (Number(scope.row.orderMoneyPaid) * 5) / 100
+              ).toFixed(2)
+            }}
+          </span>
+        </template>
       </el-table-column>
 
       <el-table-column prop="orderMoneyPaid" label="销售价" align="center">
@@ -108,6 +124,7 @@ export default {
       price: "",
       cost_price: "",
       number: "",
+      show: 1,
       orderDeviceCode: "",
       page: {
         //分页信息
@@ -130,6 +147,13 @@ export default {
   mounted() {},
   computed: {},
   methods: {
+    xian() {
+      if (this.show == 1) {
+        this.show = 2;
+      } else {
+        this.show = 1;
+      }
+    },
     editData() {
       this.$refs.editData.show();
     },
@@ -139,14 +163,14 @@ export default {
     dao() {
       if (this.time[1] == undefined) {
         window.location.href =
-          "https://yujian02.xyz/manybox/unrealOrderExp" +
+          "https://testapi.yujian02.xyz/manybox/unrealOrderExp" +
           "?token=" +
           this.token +
           "&orderDeviceCode=" +
           this.orderDeviceCode;
       } else {
         window.location.href =
-          "https://yujian02.xyz/manybox/unrealOrderExp" +
+          "https://testapi.yujian02.xyz/manybox/unrealOrderExp" +
           "?token=" +
           this.token +
           "&orderDeviceCode=" +

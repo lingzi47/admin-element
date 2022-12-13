@@ -2,17 +2,9 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-// import axios from "axios";
-import dataV from '@jiaminghi/data-view';
-// 引入全局css
-import './assets/scss/style.scss';
-// 按需引入vue-awesome图标
-import Icon from 'vue-awesome/components/Icon';
-import 'vue-awesome/icons/chart-bar.js';
-import 'vue-awesome/icons/chart-area.js';
-import 'vue-awesome/icons/chart-pie.js';
-import 'vue-awesome/icons/chart-line.js';
-import 'vue-awesome/icons/align-left.js';
+import axios from "axios";
+
+
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(ElementUI);
@@ -32,26 +24,22 @@ Vue.prototype.$echarts = echarts
 Vue.config.productionTip = false;
 
 // 全局注册
-Vue.component('icon', Icon);
-Vue.use(dataV);
-import BaiduMap from 'vue-baidu-map'
-Vue.use(BaiduMap, {
-	ak: '0swKBKGxiOPDYxnGrUbSOONGQPX13iHt'
-})
 
-// Vue.config.productionTip = false
-// // 添加请求拦截器
-// axios.interceptors.request.use(function (config) {
-// 	// 在发送请求之前做些什么
-// 	// 判断是否存在token,如果存在将每个页面header添加token
-// 	if (sessionStorage.getItem("token")) {
-// 		config.headers.common['Authorization'] = sessionStorage.getItem("token");
-// 	}
-// 	return config
-// }, function (error) {
-// 	router.push('/login')
-// 	return Promise.reject(error)
-// })
+
+
+Vue.config.productionTip = false
+// 添加请求拦截器
+axios.interceptors.request.use(function (config) {
+	// 在发送请求之前做些什么
+	// 判断是否存在token,如果存在将每个页面header添加tok
+	if (sessionStorage.getItem("token")) {
+		config.headers.common['Authorization'] = sessionStorage.getItem("token");
+	}
+	return config
+}, function (error) {
+	router.push('/login')
+	return Promise.reject(error)
+})
 //全局防抖
 const on = Vue.prototype.$on
 Vue.prototype.$on = function (event, func) {
@@ -85,7 +73,9 @@ Vue.prototype.$on = function (event, func) {
 	}
 	on.call(this, event, newFunc)
 }
+
 new Vue({
+	el: '#app',
 	router,
 	store,
 	render: h => h(App)

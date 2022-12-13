@@ -36,7 +36,7 @@
               ></el-option>
             </el-select>
             <el-select
-              v-model="officina_id"
+              v-model="officina"
               placeholder="请选择药房"
               style="width: 180px"
               clearable
@@ -51,24 +51,35 @@
           </el-form-item>
         </el-form-item>
 
-        <el-form-item label="设备编号:" prop="number">
+        <el-form-item label="设备编号:">
           <el-input
             style="width: 200px"
-            v-model="number"
+            v-model="dev_num"
             clearable
             placeholder="请输入设备编号:"
           ></el-input>
         </el-form-item>
-        <el-form-item label="设备租赁号:" prop="number">
+        <el-form-item label="物业:">
           <el-input
             style="width: 200px"
-            v-model="box_name"
+            v-model="property"
             clearable
-            placeholder="请输入设备租赁号"
+            placeholder="物业"
           ></el-input>
         </el-form-item>
-        <el-form-item label="金额总计：">{{ all }} </el-form-item>
-        <el-form-item label="利润总计：">{{ profit }} </el-form-item>
+        <el-form-item label="支付时间:">
+          <el-date-picker
+            v-model="time"
+            type="datetimerange"
+            value-format="yyyy-MM-dd HH:mm:ss"
+            range-separator="至"
+            start-placeholder="开始日期"
+            end-placeholder="结束日期"
+          >
+          </el-date-picker>
+        </el-form-item>
+        <!-- <el-form-item label="金额总计：">{{ all }} </el-form-item>
+        <el-form-item label="利润总计：">{{ profit }} </el-form-item> -->
         <el-form-item style="float: right">
           <el-button type="primary" icon="el-icon-search" @click="searchinfo"
             >搜索</el-button
@@ -88,54 +99,54 @@
           }}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="box_number" label="设备编号" align="center">
+      <el-table-column prop="orderCode" label="订单编号" align="center">
       </el-table-column>
-      <el-table-column prop="box_name" label="设备租赁号" align="center">
+      <el-table-column prop="orderDeviceCode" label="设备编号" align="center">
       </el-table-column>
-      <el-table-column label="点位位置" align="center">
-        <template slot-scope="scope">
-          <span
-            >{{ scope.row.eprovince }}-{{ scope.row.ecity }}-{{
-              scope.row.earea
-            }}--{{ scope.row.edetails }}</span
-          >
-        </template>
+      <el-table-column prop="productName" label="商品名称" align="center">
       </el-table-column>
-      <el-table-column label="设备供货药房" align="center">
+      <el-table-column prop="productSalePrice" label="销售价格" align="center">
+      </el-table-column>
+      <el-table-column prop="orderMoneyPaid" label="支付价格" align="center">
+      </el-table-column>
+      <el-table-column prop="productCostPrice" label="成本" align="center">
+      </el-table-column>
+      <el-table-column prop="orderCreateTime" label="支付时间" align="center">
+      </el-table-column>
+      <el-table-column prop="property" label="物业" align="center">
+      </el-table-column>
+      <el-table-column prop="orderStatus" label="订单状态" align="center">
+      </el-table-column>
+      <el-table-column prop="zl_num" label="设备租赁号" align="center">
+      </el-table-column>
+      <el-table-column prop="devAds" label="设备位置" align="center">
+      </el-table-column>
+      <el-table-column prop="officina" label="药房" align="center">
+      </el-table-column>
+      <el-table-column prop="cost_price" label="渠道商分润明细" align="center">
+      </el-table-column>
+      <el-table-column prop="user_price" label="租赁商分润明细" align="center">
         <template slot-scope="scope">
-          <span
-            >{{ scope.row.dprovince }}-{{ scope.row.dcity }}-{{
-              scope.row.darea
-            }}--{{ scope.row.ddetails }}--{{ scope.row.dbigname }}--{{
-              scope.row.dname
-            }}</span
-          >
-        </template></el-table-column
-      >
-
-      <el-table-column label="操作" align="center" width="350">
-        <template slot-scope="scope">
-          <el-link
-            type="primary"
-            @click="showtable(scope.row)"
-            style="margin-left: 10px"
-            >查看</el-link
-          >
+          <el-link @click="handleClick(scope.row)">查看</el-link>
         </template>
       </el-table-column>
     </page-table>
+    <el-dialog
+      title="详情"
+      :visible.sync="dialogVisible"
+      width="600px"
+      :close-on-click-modal="false"
+      @close="close"
+    >
+      <p>{{ user_price }}</p>
+    </el-dialog>
     <!-- 新增编辑弹窗 -->
     <edit-data ref="editData" />
   </div>
 </template>
 
 <script>
-import {
-  officinalist,
-  goodsAll,
-  positiondeletet,
-  positiondelete,
-} from "@/request/api";
+import { officinalist, goodsAll } from "@/request/api";
 import { checkPermission } from "@/utils/permissions";
 import pageTable from "@/components/pageTable.vue";
 import { areaListData } from "@/utils/area";
@@ -149,10 +160,11 @@ export default {
   },
   data() {
     return {
-      box_uid: "",
-      box_name: "",
+      property: "",
       areaArr: [],
-      number: "",
+      dialogVisible: false,
+      user_price: "",
+      dev_num: "",
       value: "",
       value1: "",
       list: [],
@@ -160,7 +172,7 @@ export default {
       profit: "",
       all: "",
       name: "",
-      officina_id: "",
+      officina: "",
       province: "",
       city: "",
       area: "",
@@ -195,6 +207,14 @@ export default {
   mounted() {},
   computed: {},
   methods: {
+    handleClick(row) {
+      this.user_price = row.user_price;
+      this.dialogVisible = true;
+    },
+
+    close() {
+      this.dialogVisible = false;
+    },
     huolist1() {
       let params = {
         //big_name 改3
@@ -260,16 +280,19 @@ export default {
         page: 1,
         limit: this.page.pageSize,
         token: sessionStorage.getItem("token"),
-        box_number: this.number,
-        officina_name: this.officina_id,
-        position_area: this.earea,
-        box_name: this.box_name,
+
+        officina: this.officina,
+        property: this.property,
+        dev_num: this.dev_num,
+        province: this.eprovince,
+        city: this.ecity,
+        area: this.earea,
+        s_time: this.time[0],
+        e_time: this.time[1],
       };
       goodsAll(params).then((res) => {
-        this.page.total = res.data.count;
-        this.userList = res.data.data;
-        this.all = res.data.allprice.all;
-        this.profit = res.data.allprice.profit;
+        this.page.total = res.data.data.total;
+        this.userList = res.data.data.data;
         this.$refs.dataTable.setPageInfo({
           total: this.page.total,
         });
@@ -280,19 +303,20 @@ export default {
       this.token = token;
       let params = {
         page: this.page.currentPage,
-
         limit: this.page.pageSize,
         token: sessionStorage.getItem("token"),
-        box_number: this.number,
-        officina_name: this.officina_id,
-        position_area: this.earea,
-        box_name: this.box_name,
+        officina: this.officina,
+        property: this.property,
+        dev_num: this.dev_num,
+        province: this.province,
+        city: this.city,
+        area: this.area,
+        s_time: this.time[0],
+        e_time: this.time[1],
       };
       goodsAll(params).then((res) => {
-        this.page.total = res.data.count;
-        this.all = res.data.allprice.all;
-        this.profit = res.data.allprice.profit;
-        this.userList = res.data.data;
+        this.page.total = res.data.data.total;
+        this.userList = res.data.data.data;
         this.$refs.dataTable.setPageInfo({
           total: this.page.total,
         });

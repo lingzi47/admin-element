@@ -198,6 +198,7 @@
           label="购买数量"
           :resizable="false"
         ></el-table-column>
+
         <el-table-column
           prop="order_price"
           label="订单金额"
@@ -270,6 +271,12 @@
           prop="pay_time"
           align="center"
           label="支付时间"
+          :resizable="false"
+        ></el-table-column>
+        <el-table-column
+          prop="buy_remarks"
+          align="center"
+          label="备注"
           :resizable="false"
         ></el-table-column>
         <el-table-column
@@ -503,7 +510,7 @@ export default {
     dao() {
       if (this.form.time[1] == undefined) {
         window.location.href =
-          "https://yujian02.xyz/shopadmin/exportOrder" +
+          "https://testapi.yujian02.xyz/shopadmin/exportOrder" +
           "?token=" +
           this.token +
           "&shop_type=" +
@@ -522,7 +529,7 @@ export default {
           this.form.order_status;
       } else {
         window.location.href =
-          "https://yujian02.xyz/shopadmin/exportOrder" +
+          "https://testapi.yujian02.xyz/shopadmin/exportOrder" +
           "?token=" +
           this.token +
           "&shop_type=" +

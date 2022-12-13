@@ -273,13 +273,14 @@ export default {
   data() {
     return {
       box_uid: "",
-      box_name: "",
+
       areaArr: [],
       List: [], // 列表
       number: "",
       value: "",
       dialogVisible: false,
       box_name: "",
+      box_name1: "",
       value1: "",
       list: [],
       list1: [],
@@ -330,7 +331,7 @@ export default {
     getList() {
       let params = {
         token: sessionStorage.getItem("token"),
-        box_name: this.box_name,
+        box_name: this.box_name1,
       };
       shareInfo(params).then((res) => {
         console.log(res);
@@ -341,7 +342,7 @@ export default {
     },
     handleClick(row) {
       console.log(row);
-      this.box_name = row.box_name;
+      this.box_name1 = row.box_name;
       this.getList();
     },
     huolist1() {

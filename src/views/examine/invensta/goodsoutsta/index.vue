@@ -165,7 +165,6 @@ export default {
           this.dialogVisible = false;
           this.getUserList();
         } else {
-          console.log(res.data.msg);
           this.$message(res.data.msg);
           this.dialogVisible = false;
           this.getUserList();
@@ -174,7 +173,6 @@ export default {
     },
 
     showtable(row) {
-      console.log(row);
       let rowData = row;
       this.$refs.upSet.show(JSON.parse(JSON.stringify(rowData)));
     },
@@ -187,13 +185,11 @@ export default {
         type: 2,
       };
       exStatus(params).then((res) => {
-        console.log(res.data);
         if (res.data.code == 200) {
           this.$message.success("操作成功");
           this.dialogVisible = false;
           this.getUserList();
         } else {
-          console.log(res.data.msg);
           this.$message(res.data.msg);
           this.dialogVisible = false;
           this.getUserList();

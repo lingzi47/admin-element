@@ -176,7 +176,6 @@ export default {
   computed: {},
   methods: {
     onInputChange(row) {
-      console.log(row.remark);
       let params = {
         token: sessionStorage.getItem("token"),
         type: 1,
@@ -195,22 +194,19 @@ export default {
     getSelection(select) {
       this.tableSelectList = select;
       var ids = this.tableSelectList.map((i) => i.id).toString();
-      console.log(ids);
     },
     del() {
       var ids = this.tableSelectList.map((i) => i.id).toString();
-      console.log(ids);
+
       this.$confirm("是否删这些信息(多删)？", "提示", {
         type: "warning",
       })
         .then(async () => {
-          //console.log(id);
           let params = {
             token: sessionStorage.getItem("token"),
             id: ids,
           };
           orderDel(params).then((res) => {
-            //console.log(res.data);
             if (res.data.code == 200) {
               this.$message.success("删除成功");
             } else {
@@ -222,9 +218,7 @@ export default {
         .catch(() => {});
     },
     dao(row) {
-      console.log(row);
       this.num = row.number;
-      console.log(this.num);
 
       window.location.href =
         "https://testapi.yujian02.xyz/admin/box/expOfficina" +
@@ -246,18 +240,15 @@ export default {
       this.$refs.editData.show(1, {});
     },
     deleteData(row) {
-      console.log(row);
       this.$confirm("是否删除此信息？", "提示", {
         type: "warning",
       })
         .then(async () => {
-          //console.log(id);
           let params = {
             token: sessionStorage.getItem("token"),
             id: row.id,
           };
           orderDel(params).then((res) => {
-            //console.log(res.data);
             if (res.data.code == 200) {
               this.$message.success("删除成功");
             } else {

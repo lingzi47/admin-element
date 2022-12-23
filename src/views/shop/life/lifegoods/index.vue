@@ -273,8 +273,6 @@ export default {
     this.token = sessionStorage.getItem("token");
     this.shopList(); //获取列表
     this.gettypelist();
-
-    //console.log(this.token);
   },
   mounted() {},
   computed: {
@@ -287,7 +285,6 @@ export default {
   methods: {
     handleChange(val) {
       let nodesInfo = this.$refs["cascader"].getCheckedNodes();
-      //console.log(nodesInfo[0].value);
       this.form.type_id = nodesInfo[0].value;
     },
     pin(row) {
@@ -301,8 +298,6 @@ export default {
       this.shopList();
     },
     async searchinfo() {
-      //console.log(this.form.type_id);
-      //console.log(this.token);
       this.form.shop_type = 3;
       let res = await shopGoods({
         page: 1,
@@ -315,7 +310,6 @@ export default {
         goods_name: this.form.goods_name,
       });
       if (res.status == 200) {
-        //console.log(res);
         this.page.total = res.data.count;
         this.goodsList = res.data.data;
         this.$refs.dataTable.setPageInfo({
@@ -325,8 +319,6 @@ export default {
     },
     //商品列表
     async shopList() {
-      //console.log(this.form.type_id);
-      //console.log(this.token);
       this.form.shop_type = 3;
       let res = await shopGoods({
         page: this.page.page,
@@ -339,7 +331,6 @@ export default {
         goods_name: this.form.goods_name,
       });
       if (res.status == 200) {
-        //console.log(res);
         this.page.total = res.data.count;
         this.goodsList = res.data.data;
         this.$refs.dataTable.setPageInfo({
@@ -350,15 +341,11 @@ export default {
 
     //上下架
     async goodsup(row) {
-      //console.log(row.is_show);
-      //console.log(row.id);
-
       if (row.is_show == 20) {
         this.is_show = 10;
       } else {
         this.is_show = 20;
       }
-      //console.log(this.is_show);
       this.$confirm("是否上下架？", "提示", {
         type: "warning",
       })
@@ -383,7 +370,6 @@ export default {
         token: sessionStorage.getItem("token"),
       });
       if (res.status == 200) {
-        //console.log(res);
         this.typelist = res.data.data;
       }
     },
@@ -426,8 +412,6 @@ export default {
         type: "warning",
       })
         .then(async () => {
-          //console.log(row.id);
-          //console.log(sessionStorage.getItem("token"));
           let res = await shopGoodsdel({
             id: row.id,
             token: sessionStorage.getItem("token"),

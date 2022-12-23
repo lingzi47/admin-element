@@ -212,7 +212,6 @@ export default {
       this.dialogVisible = true;
 
       this.tittle = "查看";
-      console.log(row);
       this.deviceStatus = row.deviceStatus;
       this.id = row.id;
       this.huo();
@@ -223,7 +222,6 @@ export default {
         id: this.id,
       };
       priceedsinfo(params).then((res) => {
-        console.log(res.data.data);
         this.province = res.data.data.officina.province;
         this.city = res.data.data.officina.city;
         this.area = res.data.data.officina.area;

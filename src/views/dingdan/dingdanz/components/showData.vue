@@ -144,7 +144,6 @@ export default {
         token: sessionStorage.getItem("token"),
       };
       xunnigoods(params).then((res) => {
-        console.log(res.data.data);
         this.arr = res.data.data;
       });
     },
@@ -186,7 +185,6 @@ export default {
         plan_id: this.teamid,
       };
       plangoodslist(params).then((res) => {
-        console.log(res.data.data);
         this.page.total = res.data.count;
         this.userList = res.data.data;
         this.$refs.dataTable.setPageInfo({
@@ -197,7 +195,6 @@ export default {
     show(row) {
       this.dialogVisible = true;
       this.teamid = row.id;
-      console.log(row);
       this.getUserList();
     },
     close() {

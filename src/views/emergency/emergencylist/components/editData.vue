@@ -237,7 +237,6 @@ export default {
       this.type = type;
       if (this.type == 2) {
         this.tittle = "编辑";
-        // console.log(row);
         this.id = row.id;
         this.huo();
       } else {
@@ -250,7 +249,6 @@ export default {
         id: this.id,
       };
       priceedsinfo(params).then((res) => {
-        console.log(res.data.data);
         this.province = res.data.data.officina.province;
         this.city = res.data.data.officina.city;
         this.area = res.data.data.officina.area;
@@ -279,10 +277,8 @@ export default {
     submitForm() {
       var formdata = this.list;
       let json = JSON.stringify(formdata);
-      console.log(json);
       var that = this;
       let flag = that.list.every((item) => !!item.lease_profit);
-      // let flag1 = that.list.every((item) => !!item.channel_profit);
       let flag2 = that.list.every((item) => !!item.start_time);
       let flag3 = that.list.every((item) => !!item.end_time);
       if (!flag2) {

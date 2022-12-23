@@ -80,7 +80,6 @@ export default {
       this.$refs.ruleForm.validate(async (valid) => {
         if (valid) {
           if (this.title == "上传合同") {
-            console.log("上传");
             let params = {
               token: sessionStorage.getItem("token"),
               img: this.ruleForm.goods_img,
@@ -127,9 +126,8 @@ export default {
       });
     },
     show(type, row) {
-      console.log(type);
       this.dialogVisible = true;
-      console.log(row);
+
       this.id = row.id;
       if (type == 1) {
         this.title = "上传合同";
@@ -147,7 +145,6 @@ export default {
         list_id: this.id,
       };
       agreeRead(params).then((res) => {
-        console.log(res.data.data);
         this.ruleForm.goods_img = res.data.data.img;
         this.imageUrl = res.data.data.img;
       });

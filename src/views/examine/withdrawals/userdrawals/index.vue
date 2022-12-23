@@ -227,7 +227,6 @@ export default {
   computed: {},
   methods: {
     submitForm() {
-      //console.log("成功");
       let params = {
         token: sessionStorage.getItem("token"),
         status: 1,
@@ -245,8 +244,6 @@ export default {
       this.getUserList();
     },
     upuser(row) {
-      console.log(row);
-      console.log(row.uid);
       this.$router.push({
         path: "/upuser",
         query: {
@@ -305,7 +302,7 @@ export default {
     searchinfo() {
       let token = sessionStorage.getItem("token");
       this.token = token;
-      //console.log(this.token);
+
       let params = {
         page: 1,
         limit: this.page.pageSize,
@@ -317,13 +314,10 @@ export default {
         e_time: this.time[1],
       };
       diamondsWith(params).then((res) => {
-        //console.log(res.data.data.data);
-
         this.page.total = res.data.data.total;
-        //console.log(res.data.data.total);
-        //console.log("总条数", this.page.total);
+
         this.page.currentPage = res.data.data.current_page;
-        //console.log(res.data.data.current_page);
+
         this.userList = res.data.data.data;
         this.$refs.dataTable.setPageInfo({
           total: this.page.total,
@@ -344,12 +338,10 @@ export default {
         e_time: this.time[1],
       };
       diamondsWith(params).then((res) => {
-        //console.log(res.data.data.data);
         this.page.total = res.data.data.total;
-        //console.log(res.data.data.total);
-        //console.log("总条数", this.page.total);
+
         this.page.currentPage = res.data.data.current_page;
-        //console.log(res.data.data.current_page);
+
         this.userList = res.data.data.data;
         this.$refs.dataTable.setPageInfo({
           total: this.page.total,

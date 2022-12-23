@@ -110,9 +110,8 @@ export default {
         token: sessionStorage.getItem("token"),
       };
       shopGoodssta(params).then((res) => {
-        //console.log(res.data.msg);
         let msg = res.data.msg;
-        //console.log(res);
+
         if (res.data.code == 200) {
           this.$message.success("操作成功");
           this.getUserList();
@@ -131,9 +130,8 @@ export default {
         token: sessionStorage.getItem("token"),
       };
       shopGoodssta(params).then((res) => {
-        //console.log(res.data.msg);
         let msg = res.data.msg;
-        //console.log(res);
+
         if (res.data.code == 200) {
           this.$message.success("操作成功");
           this.getUserList();
@@ -145,8 +143,6 @@ export default {
       this.dialogVisible = false;
     },
     set(row) {
-      //console.log(row);
-      //console.log(row.id);
       this.id = row.id;
       this.dialogVisible = true;
     },
@@ -170,9 +166,6 @@ export default {
         shop_type: 2,
       };
       shopGoodsindex(params).then((res) => {
-        //console.log(res.data);
-        //console.log(res.data.data.member_count);
-
         this.page.total = res.data.count;
 
         this.userList = res.data.data;

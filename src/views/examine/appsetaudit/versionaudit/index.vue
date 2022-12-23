@@ -79,7 +79,6 @@ export default {
   computed: {},
   methods: {
     submitForm() {
-      //console.log("成功");
       let params = {
         token: sessionStorage.getItem("token"),
         ex_status: 1,
@@ -115,7 +114,6 @@ export default {
 
     set(row) {
       this.dialogVisible = true;
-      //console.log(row.id);
       this.id = row.id;
     },
     checkPermission,
@@ -135,7 +133,6 @@ export default {
         token: sessionStorage.getItem("token"),
       };
       versionexList(params).then((res) => {
-        //console.log(res.data.data.member_count);
         this.arr = res.data.data.member_count;
         this.page.total = res.data.data.total;
         this.page.currentPage = res.data.data.current_page;

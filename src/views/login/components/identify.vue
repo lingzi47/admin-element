@@ -156,7 +156,7 @@ export default {
       for (let i = 0; i < n; i++) {
         this.identifyCode += e[this.randomNum(0, e.length)];
       }
-      //console.log("code = ", this.identifyCode);
+
       this.$emit("update:changeCode", this.identifyCode);
     },
     /*切换验证码end*/

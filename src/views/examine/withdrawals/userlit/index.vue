@@ -156,7 +156,7 @@ export default {
 
   created() {
     this.id = this.$route.query.id;
-    console.log(this.id);
+
     this.getUserList(); //获取用户列表
   },
   mounted() {},
@@ -182,7 +182,6 @@ export default {
         uid: this.id,
       };
       boxWithInfo(params).then((res) => {
-        console.log(res);
         this.allbox = res.data.data.data.allbox;
         this.isprice = res.data.data.data.isprice;
         this.isserve = res.data.data.data.isserve;

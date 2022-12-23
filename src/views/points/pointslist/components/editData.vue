@@ -350,22 +350,18 @@ export default {
       });
     },
     change1(val) {
-      console.log(val);
       if (val == 10) {
         this.isDisable = true;
         this.check = true;
 
         this.ruleForm.year = "2099-01-01 00:00:00";
-        console.log(this.ruleForm.year);
       } else {
-        console.log(this.ruleForm.year);
         this.isDisable = false;
         this.check = false;
         this.ruleForm.year = this.year;
       }
     },
     checked(events) {
-      // console.log(events);
       this.events = events;
       if (events == true) {
         if (this.ruleForm.type == 10) {
@@ -385,22 +381,20 @@ export default {
         }
       }
       //
-      // console.log("被禁言");
       // this.ruleForm.uid = 0;
     },
     change(data) {
-      console.log(data);
       this.province = data[0];
       this.city = data[1];
       this.area = data[2];
     },
     show(type, row) {
       this.dialogVisible = true;
-      console.log(type);
+
       this.type = type;
       if (this.type == 2) {
         this.tittle = "编辑";
-        console.log(row);
+
         this.id = row.id;
         this.ruleForm.property = row.property;
         this.ruleForm.xiaoqu = row.xiaoqu;
@@ -418,7 +412,6 @@ export default {
         this.remarks = row.remarks;
 
         this.ruleForm.type = row.type;
-        console.log(this.ruleForm.type);
         this.ruleForm.year = row.due_time;
         this.year = row.due_time;
         this.ruleForm.details = row.details;
@@ -426,7 +419,6 @@ export default {
         this.position = row.position;
 
         // let arr = this.ruleForm.position_user.split(",");
-        // console.log(arr);
         // var obj = {};
         // // 将数组转化为对象
         // for (let key in arr) {
@@ -435,17 +427,13 @@ export default {
         // let newObj = Object.keys(obj).map((val) => ({
         //   position_user: obj[val],
         // }));
-        // console.log(newObj);
         // this.list = newObj;
         if (row.due_time == "2099-01-01 00:00:00") {
           this.isDisable = true;
           this.ruleForm.year = row.due_time;
 
           this.check = true;
-          console.log("被选中");
         } else {
-          console.log(111);
-
           this.ruleForm.year = row.due_time;
         }
         let arr1 = [];
@@ -455,7 +443,7 @@ export default {
         this.province = row.province;
         this.city = row.city;
         this.area = row.area;
-        console.log(arr1);
+
         this.ruleForm.value1 = arr1;
       } else {
         this.tittle = "添加";
@@ -489,7 +477,6 @@ export default {
     },
 
     submitForm() {
-      console.log(this.ruleForm.year);
       if (this.type == 1) {
         this.$refs.ruleForm.validate(async (valid) => {
           if (valid) {
@@ -497,7 +484,7 @@ export default {
             this.token = token;
             var that = this;
             let flag = that.position.every((item) => !!item.uid);
-            console.log(flag);
+
             let flag1 = that.position.every((item) => !!item.name);
 
             if (!flag) {
@@ -514,7 +501,6 @@ export default {
             });
 
             this.ruleForm.position_user = new_arr.toString();
-            console.log(this.ruleForm.position_user);
             let params = {
               position: this.position,
               position_user: this.ruleForm.position_user,
@@ -578,7 +564,6 @@ export default {
             });
 
             this.ruleForm.position_user = new_arr.toString();
-            console.log(this.ruleForm.position_user);
             let token = sessionStorage.getItem("token");
             this.token = token;
             let params = {

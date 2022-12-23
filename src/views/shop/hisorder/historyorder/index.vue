@@ -138,7 +138,6 @@ export default {
         id: this.form.uid,
       };
       hisOrder(params).then((res) => {
-        console.log(res.data.data.data);
         this.shoporder = res.data.data.data;
         this.$refs.dataTable.setPageInfo({
           total: res.data.data.total,
@@ -154,7 +153,6 @@ export default {
         id: this.form.uid,
       };
       hisOrder(params).then((res) => {
-        console.log(res.data.data.data);
         this.shoporder = res.data.data.data;
         this.$refs.dataTable.setPageInfo({
           total: res.data.data.total,

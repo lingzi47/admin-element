@@ -288,23 +288,6 @@ export default {
           "&position=" +
           this.position;
       } else {
-        console.log(
-          "https://testapi.yujian02.xyz/adminApi/box/boxWith/listexport" +
-            "?token=" +
-            this.token +
-            "&uid=" +
-            this.uid +
-            "&ex_status=" +
-            this.ex_status +
-            "&tel=" +
-            this.tel +
-            "&position=" +
-            this.position +
-            "&s_time=" +
-            this.time[0] +
-            "&e_time=" +
-            this.time[1]
-        );
         window.location.href =
           "https://testapi.yujian02.xyz/adminApi/box/boxWith/listexport" +
           "?token=" +
@@ -324,7 +307,6 @@ export default {
       }
     },
     submitForm() {
-      //console.log("成功");
       let params = {
         token: sessionStorage.getItem("token"),
         ex_status: 2,
@@ -346,8 +328,6 @@ export default {
       this.getUserList();
     },
     upuser(row) {
-      console.log(row);
-      // console.log(row.uid);
       this.$router.push({
         path: "/userlit",
         query: {
@@ -412,7 +392,7 @@ export default {
     searchinfo() {
       let token = sessionStorage.getItem("token");
       this.token = token;
-      //console.log(this.token);
+
       let params = {
         page: 1,
         limit: this.page.pageSize,
@@ -425,13 +405,10 @@ export default {
         e_time: this.time[1],
       };
       boxWithlist(params).then((res) => {
-        //console.log(res.data.data.data);
-
         this.page.total = res.data.data.total;
-        //console.log(res.data.data.total);
-        //console.log("总条数", this.page.total);
+
         this.page.currentPage = res.data.data.current_page;
-        //console.log(res.data.data.current_page);
+
         this.userList = res.data.data.data;
         this.$refs.dataTable.setPageInfo({
           total: this.page.total,
@@ -439,10 +416,9 @@ export default {
       });
     },
     getUserList() {
-      //console.log(this.form.time);
       let token = sessionStorage.getItem("token");
       this.token = token;
-      //console.log(this.token);
+
       let params = {
         page: this.page.currentPage,
         limit: this.page.pageSize,
@@ -455,13 +431,10 @@ export default {
         e_time: this.time[1],
       };
       boxWithlist(params).then((res) => {
-        //console.log(res.data.data.data);
-
         this.page.total = res.data.data.total;
-        //console.log(res.data.data.total);
-        //console.log("总条数", this.page.total);
+
         this.page.currentPage = res.data.data.current_page;
-        //console.log(res.data.data.current_page);
+
         this.userList = res.data.data.data;
         this.$refs.dataTable.setPageInfo({
           total: this.page.total,

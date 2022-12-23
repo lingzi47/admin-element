@@ -67,7 +67,6 @@ export default {
   mounted() {},
   methods: {
     show(row) {
-      console.log(row);
       this.dialogVisible = true;
       this.province = row.province;
       this.city = row.city;

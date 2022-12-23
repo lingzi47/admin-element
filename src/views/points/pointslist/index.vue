@@ -393,7 +393,6 @@ export default {
       }
     },
     handleClick(row) {
-      console.log(row);
       this.box_name = row.box_name;
       this.getList();
     },
@@ -403,9 +402,7 @@ export default {
         box_name: this.box_name,
       };
       shareInfo(params).then((res) => {
-        console.log(res);
         this.List = res.data.data;
-        console.log(this.List);
       });
       this.dialogVisible = true;
     },
@@ -426,7 +423,6 @@ export default {
       });
     },
     change(data) {
-      console.log(data);
       this.province = data[0];
       this.city = data[1];
       this.area = data[2];
@@ -448,13 +444,12 @@ export default {
       })
         .then(async () => {
           let id = row.id;
-          //console.log(id);
+
           let params = {
             token: sessionStorage.getItem("token"),
             id: row.id,
           };
           positiondelete(params).then((res) => {
-            //console.log(res.data);
             if (res.data.code == 200) {
               this.getUserList();
               this.$message.success("删除成功");
@@ -502,7 +497,7 @@ export default {
         uid: this.box_uid,
         id: this.id,
         province: this.province,
-        type: this.type,
+        type: thisy.tpe,
         city: this.city,
         bind: this.sta,
         area: this.area,

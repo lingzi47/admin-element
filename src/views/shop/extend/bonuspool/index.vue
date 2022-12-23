@@ -179,7 +179,6 @@ export default {
         limit: this.page.limit,
       };
       boxpool(params).then((res) => {
-        console.log(res);
         this.shoporder = res.data.data;
         this.page.total = res.data.count;
         this.$refs.dataTable.setPageInfo({

@@ -75,9 +75,8 @@ export default {
   mounted() {},
   methods: {
     show(row) {
-      console.log(row.id);
       this.dialogVisible = true;
-      console.log(row);
+
       this.id = row.number;
       this.getUserList();
     },

@@ -133,9 +133,6 @@ export default {
             Number(this.ruleForm.zls) +
             Number(this.ruleForm.qds) +
             Number(this.ruleForm.gl);
-          console.log("大于", a > b);
-          console.log(a);
-          console.log(b);
 
           if (a >= b) {
             let params = {

@@ -223,8 +223,6 @@ export default {
       }
     },
     name(value) {
-      console.log(value);
-
       this.xiaolist();
     },
   },
@@ -241,7 +239,6 @@ export default {
       };
       medList(params).then((res) => {
         if (res.data.code == 200) {
-          console.log(res.data.data);
           this.list = res.data.data;
         }
       });
@@ -257,7 +254,6 @@ export default {
       };
       medName(params).then((res) => {
         if (res.data.code == 200) {
-          console.log(res.data.data);
           this.list1 = res.data.data;
         }
       });
@@ -280,7 +276,7 @@ export default {
     },
     set(row) {
       this.dialogVisible = true;
-      //console.log(row.id);
+
       this.id = row.id;
     },
     refuse() {

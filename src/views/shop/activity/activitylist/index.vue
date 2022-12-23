@@ -95,7 +95,6 @@ export default {
       this.$refs.editData.show(1, {});
     },
     show(row, type) {
-      console.log(type);
       this.$refs.editData.show(2, {});
     },
     deleteData(row) {
@@ -110,7 +109,6 @@ export default {
             id: row.id,
           };
           goodschoosedel(params).then((res) => {
-            //console.log(res.data);
             if (res.data.code == 200) {
               this.getUserList();
               this.$message.success("删除成功");

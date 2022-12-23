@@ -223,13 +223,11 @@ export default {
       }
     },
     change(data) {
-      console.log(data);
       this.province = data[0];
       this.city = data[1];
       this.area = data[2];
     },
     submitForm() {
-      //console.log("成功");
       let params = {
         token: sessionStorage.getItem("token"),
         sta: 20,
@@ -265,7 +263,7 @@ export default {
 
     set(row) {
       this.dialogVisible = true;
-      //console.log(row.id);
+
       this.id = row.id;
     },
     checkPermission,

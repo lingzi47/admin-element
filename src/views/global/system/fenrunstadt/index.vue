@@ -116,7 +116,7 @@ export default {
   watch: {},
   created() {
     let row = this.$route.query.row;
-    console.log(row);
+
     this.id = row.id;
 
     this.tableshow();
@@ -151,18 +151,15 @@ export default {
       });
     },
     deleteData(row) {
-      console.log(row);
       this.$confirm("是否删除此信息？", "提示", {
         type: "warning",
       })
         .then(async () => {
-          //console.log(id);
           let params = {
             token: sessionStorage.getItem("token"),
             id: row.id,
           };
           delLevel(params).then((res) => {
-            //console.log(res.data);
             if (res.data.code == 200) {
               this.tableshow();
               this.$message.success("删除成功");
@@ -189,7 +186,6 @@ export default {
         id: this.id,
       };
       BoxProfitinfo(params).then((res) => {
-        console.log(res.data.data);
         this.five = res.data.data.five;
         this.third = res.data.data.third;
         this.name = res.data.data.res.name;

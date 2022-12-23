@@ -204,7 +204,6 @@ export default {
   },
   created() {
     let row = this.$route.query.row;
-    // console.log(row);
     this.name = row.name;
     this.getList();
     this.getUserList();
@@ -227,10 +226,8 @@ export default {
         token: sessionStorage.getItem("token"),
       };
       usehaveread(params).then((res) => {
-        // console.log(res.data.data);
         let arr = [];
         arr.push(res.data.data);
-        // console.log(arr);
         this.userList = arr;
       });
     },
@@ -313,7 +310,6 @@ export default {
         e_time: this.time1[1],
       };
       moneylog(params).then((res) => {
-        console.log(res.data.data);
         this.page1.total1 = res.data.data.total;
         this.list1 = res.data.data.data;
         this.$refs.dataTable1.setPageInfo({

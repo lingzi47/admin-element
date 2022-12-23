@@ -120,7 +120,6 @@ export default {
         id: this.form.uid,
       };
       listHisOrder(params).then((res) => {
-        console.log(res.data.data);
         this.shoporder = res.data.data;
       });
     },

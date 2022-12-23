@@ -84,7 +84,6 @@ export default {
   mounted() {},
   methods: {
     show(row) {
-      console.log(row.id);
       this.dialogVisible = true;
       this.id = row.id;
     },
@@ -118,9 +117,7 @@ export default {
       });
     },
     showtable() {},
-    go() {
-      console.log(11);
-    },
+    go() {},
   },
 };
 </script>

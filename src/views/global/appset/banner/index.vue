@@ -122,7 +122,6 @@ export default {
     //监听表格多选
 
     getUserList() {
-      //console.log(this.form.time);
       let token = sessionStorage.getItem("token");
       this.token = token;
       let params = {
@@ -153,13 +152,11 @@ export default {
         type: "warning",
       })
         .then(async () => {
-          //console.log(id);
           let params = {
             token: sessionStorage.getItem("token"),
             id: row.id,
           };
           bannerdel(params).then((res) => {
-            //console.log(res.data);
             if (res.data.code == 200) {
               this.getUserList();
               this.$message.success("删除成功");

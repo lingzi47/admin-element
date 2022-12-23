@@ -85,7 +85,6 @@ export default {
   mounted: function () {},
   methods: {
     show(type, row) {
-      //console.log(row.id);
       this.id = row.id;
       this.type = type;
       this.dialogVisible = true;
@@ -103,8 +102,6 @@ export default {
       });
     },
     handleAvatarSuccess(res, file) {
-      //console.log("file", file);
-      //console.log("res", res);
       let imgurl = res.data;
       this.imageUrl = imgurl;
       this.ruleForm.icon = imgurl;

@@ -131,26 +131,22 @@ export default {
   },
   mounted() {},
   methods: {
-    change(data) {
-      console.log(data);
-    },
+    change(data) {},
     getlist() {
       let params = {
         token: sessionStorage.getItem("token"),
       };
       tagList(params).then((res) => {
-        console.log(res);
         this.list = res.data.data;
-        console.log(this.list);
       });
     },
     show(type, row) {
       this.dialogVisible = true;
-      console.log(type);
+
       this.type = type;
       if (this.type == 2) {
         this.tittle = "编辑";
-        console.log(row);
+
         this.id = row.id;
         this.ruleForm.remark = row.remark;
         this.ruleForm.type = row.type;

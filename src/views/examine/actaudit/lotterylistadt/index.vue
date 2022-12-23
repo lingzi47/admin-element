@@ -47,11 +47,7 @@ export default {
         // sta: 10,
       };
       luckstalist(params).then((res) => {
-        //console.log(res);
-
-        //console.log(res.data.data.id);
         this.id = res.data.data.id;
-        console.log(res.data.data.luckjson);
         var jsonStr = res.data.data.luckjson;
         var jsonObj = JSON.parse(jsonStr);
         this.list = jsonObj;

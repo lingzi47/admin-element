@@ -121,11 +121,11 @@ export default {
   methods: {
     show(type, row) {
       this.dialogVisible = true;
-      console.log(type);
+
       this.type = type;
       if (this.type == 2) {
         this.tittle = "编辑";
-        console.log(row);
+
         this.id = row.id;
         this.ruleForm.phone = row.phone;
         this.ruleForm.address = row.address;

@@ -97,9 +97,7 @@ export default {
 
       this.goodsForm.deviceIemi = "";
     },
-    checked() {
-      console.log(11);
-    },
+    checked() {},
     go() {
       this.$router.back();
     },

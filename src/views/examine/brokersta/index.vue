@@ -195,7 +195,6 @@ export default {
   computed: {},
   methods: {
     submitForm() {
-      //console.log("成功");
       let params = {
         token: sessionStorage.getItem("token"),
         status: 2,
@@ -231,7 +230,6 @@ export default {
 
     set(row) {
       this.dialogVisible = true;
-      //console.log(row.id);
       this.id = row.id;
     },
     checkPermission,
@@ -272,7 +270,6 @@ export default {
         limit: 10,
       };
       getlist(params).then((res) => {
-        console.log(res.data.data); //数据
         this.page = this.page + 1;
         //合并数组
       });
@@ -284,7 +281,6 @@ export default {
         limit: this.limit + 10,
       };
       getlist(params).then((res) => {
-        console.log(res.data.data); //数据
         this.limit = this.limit + 10;
         //不用合并数组
       });

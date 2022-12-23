@@ -85,9 +85,8 @@ export default {
   mounted: function () {},
   methods: {
     show(row) {
-      //console.log(row.full_price);
       this.ruleForm.full_price = row.full_price;
-      //console.log(row.multiple);
+
       this.ruleForm.multiple = row.multiple;
       this.id = row.id;
 

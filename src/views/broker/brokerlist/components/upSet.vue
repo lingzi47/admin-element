@@ -63,9 +63,7 @@ export default {
   mounted() {},
   methods: {
     show(type, row) {
-      console.log(type);
       this.type = type;
-      console.log(row);
       this.id = row.id;
 
       this.dialogVisible = true;

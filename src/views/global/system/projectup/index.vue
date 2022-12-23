@@ -168,13 +168,11 @@ export default {
       });
     },
     change(data) {
-      console.log(data);
       this.eprovince = data[0];
       this.ecity = data[1];
       this.earea = data[2];
     },
     change1(data) {
-      console.log(data);
       this.province = data[0];
       this.city = data[1];
       this.area = data[2];
@@ -188,7 +186,6 @@ export default {
         area: this.area,
       };
       officinalist(params).then((res) => {
-        console.log(res.data.data);
         this.list = res.data.data;
       });
     },
@@ -229,7 +226,7 @@ export default {
     },
     showtable(type, row) {
       let rowData = row;
-      console.log(row);
+
       this.$refs.editData.show(3, JSON.parse(JSON.stringify(rowData)));
     },
     checkPermission,

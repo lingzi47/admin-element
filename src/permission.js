@@ -18,7 +18,8 @@ NProgress.configure({
 router.beforeEach((to, from, next) => {
 	NProgress.start() // 加载进度条
 	document.title = '预见未来后台'
-
+	const hasRoles = store.getters.userInfo.roles;
+	console.log(hasRoles);
 	const hasToken = store.getters.token;
 	if (hasToken) {
 		if (to.path === '/login') {
@@ -28,6 +29,7 @@ router.beforeEach((to, from, next) => {
 			NProgress.done()
 		} else {
 			const hasRoles = store.getters.userInfo.roles;
+			console.log(hasRoles);
 			if (!hasRoles || hasRoles.length == 0) {
 				store.dispatch('user/getUserInfo').then(res => {
 					const {

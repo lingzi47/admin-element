@@ -138,16 +138,13 @@ export default {
     //SKU列表
     async shopsku(goodid) {
       this.form.goods_id = goodid;
-      //console.log(goodid);
       let res = await shopskuindex({
         page: this.page.page,
         limit: this.page.limit,
         goods_id: this.form.goods_id,
         token: sessionStorage.getItem("token"),
       });
-      //console.log(res);
       if (res.status == 200) {
-        //console.log(res);
         this.page.total = res.data.count;
         this.skuList = res.data.data;
         this.$refs.dataTable.setPageInfo({
@@ -173,7 +170,6 @@ export default {
     },
 
     async submitForm() {
-      //console.log(this.type);
       if (this.type == 2) {
         let res = await skuedit({
           domains: this.skulist.domains,
@@ -188,8 +184,6 @@ export default {
         this.dialogVisible1 = false;
         this.shopsku(this.goodid);
       } else {
-        //console.log(this.skulist);
-        //console.log(this.goodid);
         this.$refs.skulist.validate(async (valid) => {
           if (valid) {
             this.skulist.goods_id = this.goodid;
@@ -212,22 +206,16 @@ export default {
     },
 
     show(type, row) {
-      //console.log(row);
       this.type = type;
       this.dialogVisible = true;
       this.shopsku(row.id);
       this.goodid = row.id;
-      //console.log(row);
-      //console.log(this.shopsku);
     },
     editsku(row) {
-      //console.log(row);
       this.type = 2;
       this.skulist.name = row.name;
       this.skulist.domains = row.skunamearr;
       this.id = row.id;
-      //console.log(this.id);
-      //console.log(this.skulist.domains);
       this.dialogVisible1 = true;
     },
     //sku新增

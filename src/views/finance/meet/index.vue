@@ -341,7 +341,6 @@ export default {
     },
 
     ordercensus() {
-      //console.log(this.form.time);
       let token = sessionStorage.getItem("token");
       this.token = token;
       let params = {
@@ -351,7 +350,6 @@ export default {
         time2: this.form.time[1],
       };
       financeInfo(params).then((res) => {
-        //console.log(res.data.data);
         this.deliver0 = res.data.data.deliver0;
         this.deliver0price = res.data.data.deliver0price;
         this.deliver1 = res.data.data.deliver1;
@@ -364,7 +362,6 @@ export default {
       });
     },
     getUserList() {
-      //console.log(this.form.time);
       let token = sessionStorage.getItem("token");
       this.token = token;
       let params = {
@@ -378,7 +375,6 @@ export default {
         time2: this.form1.time[1],
       };
       financeindex(params).then((res) => {
-        //console.log(res.data.data);
         this.page.total = res.data.count;
         this.shoporder = res.data.data;
         this.$refs.dataTable.setPageInfo({

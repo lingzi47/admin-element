@@ -159,11 +159,7 @@ export default {
       },
       form1: {
         username: "admin", //用户名
-        password: "lct001025", //密码
-        phone: "",
-        text: "",
-        smsCode: "", //短信验证码
-        identifyCode: "", //图形验证码
+        password: "", //密码
       },
       web_code: "",
       loading: false, //登录加载中
@@ -204,7 +200,6 @@ export default {
     // var ip = "";
     // var mac = "";
     // var networkInterfaces = os.networkInterfaces();
-    // console.log(networkInterfaces, "networkInterfaces");
     // for (var i in networkInterfaces) {
     //   for (var j in networkInterfaces[i]) {
     //     if (
@@ -219,7 +214,6 @@ export default {
     //     }
     //   }
     // }
-    // console.log(mac);
     // // 自定义环境变量全局使用
     // process.env.VUE_APP_MAC = mac;
     // process.env.VUE_APP_IP = ip;
@@ -262,7 +256,6 @@ export default {
         const murmur = Fingerprint2.x64hash128(values.join(""), 31); // 生成浏览器指纹
 
         sessionStorage.setItem("web_code", murmur); // 存储浏览器指纹，在项目中用于校验用户身份和埋点
-        console.log("浏览器指纹码：" + sessionStorage.getItem("web_code"));
       });
 
       // Fingerprint2.get(function (components) {
@@ -276,7 +269,7 @@ export default {
       //   // 生成最终id murmur
       //   const murmur = Fingerprint2.x64hash128(values.join(""), 31);
       //   sessionStorage.setItem("web_code", murmur);
-      //   console.log("浏览器指纹码：" + sessionStorage.getItem("web_code"));
+
       // });
       if (
         !/^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\d{8}$/.test(
@@ -377,7 +370,7 @@ export default {
             this.$refs["loginForm"].validate((valid) => {
               if (valid) {
                 this.$store
-                  .dispatch("user/login", this.form)
+                  .dispatch("user/login", this.form1)
                   .then(() => {
                     this.$router.push({
                       path: "/index",
@@ -437,13 +430,13 @@ export default {
                   .then(() => {
                     //登录前判断是否保存密码
                     //传入账号名，密码，和保存天数,是否选中4个参数
-                    if (this.savePwd)
-                      this.setCookie(
-                        this.form1.username,
-                        this.form1.password,
-                        7,
-                        1
-                      );
+                    // if (this.savePwd)
+                    //   this.setCookie(
+                    //     this.form1.username,
+                    //     this.form1.password,
+                    //     7,
+                    //     1
+                    //   );
                     this.$router.push({
                       path: "/index",
                     });

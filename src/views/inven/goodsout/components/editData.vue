@@ -234,7 +234,6 @@ export default {
         oid: this.zhuid,
       };
       choGoList(params).then((res) => {
-        console.log(res.data.data.data);
         this.page1.count = res.data.data.total;
         this.list = res.data.data.data;
         this.$refs.dataTable.setPageInfo({
@@ -243,12 +242,10 @@ export default {
       });
     },
     chu(row) {
-      console.log(row);
       this.$confirm("是否出库？", "提示", {
         type: "warning",
       })
         .then(async () => {
-          //console.log(id);
           let params = {
             token: sessionStorage.getItem("token"),
             gid: row.goods_id,
@@ -267,7 +264,6 @@ export default {
         .catch(() => {});
     },
     onInputChange(row) {
-      console.log(row.num);
       if (row.num == 0) {
         this.$message.error("出库数不能为0");
         row.num = "";
@@ -295,18 +291,15 @@ export default {
     },
     show(type, row) {
       this.dialogVisible = true;
-      console.log(type);
+
       this.type = type;
       if (this.type == 2) {
-        console.log(row);
         this.zhuid = row.id;
-        console.log(row.id, "外层主键id");
       } else {
       }
       this.getUserList();
     },
     // handleSizeChange(val) {
-    //   console.log(`每页 ${val} 条`);
     //   this.pageSize = val;
     //   this.getUserList();
     // },
@@ -323,25 +316,21 @@ export default {
         id: this.zhuid,
       };
       infoList(params).then((res) => {
-        // console.log(res.data.data.total);
         // this.total = res.data.data.total;
         this.userList = res.data.data;
       });
     },
     deleteData(row) {
-      console.log(row);
       this.$confirm("是否删除此信息？", "提示", {
         type: "warning",
       })
         .then(async () => {
-          //console.log(id);
           let params = {
             token: sessionStorage.getItem("token"),
             id: row.i_id,
             type: 2,
           };
           infoDel(params).then((res) => {
-            //console.log(res.data);
             if (res.data.code == 200) {
               this.$message.success("删除成功");
             } else {
@@ -368,8 +357,6 @@ export default {
       this.getUserList();
     },
     submitForm() {
-      console.log(11);
-      console.log(this.userList);
       if (this.userList == "") {
         this.$message.error("没有商品无法操作");
         return;
@@ -381,9 +368,7 @@ export default {
           return;
         } else {
           if (this.type == 1) {
-            console.log(this.userList);
             var ids = this.userList.map((i) => i.i_id).toString();
-            console.log(ids);
             let params = {
               token: sessionStorage.getItem("token"),
               id: ids,
@@ -403,10 +388,7 @@ export default {
               }
             });
           } else {
-            console.log(this.userList);
             var ids = this.userList.map((i) => i.i_id).toString();
-            console.log(ids);
-            console.log("修改id", this.zhuid);
             let params = {
               token: sessionStorage.getItem("token"),
               oid: this.zhuid,

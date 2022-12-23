@@ -138,16 +138,13 @@ export default {
 
       this.goodsForm.remark = "";
     },
-    checked() {
-      console.log(11);
-    },
+    checked() {},
     go() {
       this.$router.back();
     },
     submitForm() {
       this.$refs.goodsForm.validate(async (valid) => {
         if (valid) {
-          console.log(this.skulist.domains);
           const arrs = this.skulist.domains;
           function getNewArr(arrs) {
             let newArr = arrs.map((item) => {
@@ -157,9 +154,7 @@ export default {
             return newArr;
           }
           let newArr = getNewArr(arrs);
-          console.log(newArr); //[ 1, 1, 2 ]
           var device_num = newArr.toString();
-          console.log(device_num);
           let token = sessionStorage.getItem("token");
           this.token = token;
           let params = {

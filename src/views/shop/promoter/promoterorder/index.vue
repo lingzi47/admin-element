@@ -215,16 +215,6 @@ export default {
   mounted() {},
   methods: {
     dao() {
-      console.log(this.token);
-      console.log(
-        "https://testapi.yujian02.xyz/adminApi/order/export" +
-          "?token=" +
-          this.token +
-          "&uid=" +
-          this.form.uid +
-          "&nickname=" +
-          this.form.nickname
-      );
       window.location.href =
         "https://testapi.yujian02.xyz/adminApi/order/export" +
         "?token=" +
@@ -308,7 +298,6 @@ export default {
         nickname: this.form.nickname,
       };
       promoter(params).then((res) => {
-        console.log(res.data.data.data);
         this.shoporder = res.data.data.data;
         this.$refs.dataTable.setPageInfo({
           total: res.data.data.total,
@@ -325,7 +314,6 @@ export default {
         nickname: this.form.nickname,
       };
       promoter(params).then((res) => {
-        console.log(res.data.data.data);
         this.shoporder = res.data.data.data;
         this.$refs.dataTable.setPageInfo({
           total: res.data.data.total,

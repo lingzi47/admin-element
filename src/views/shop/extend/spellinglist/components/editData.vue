@@ -149,7 +149,6 @@ export default {
         uid: this.ruleForm.uid,
       };
       teamchoose(params).then((res) => {
-        console.log(res.data.data);
         this.list = res.data.data;
       });
     },

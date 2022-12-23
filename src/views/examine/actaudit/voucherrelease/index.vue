@@ -81,7 +81,6 @@ export default {
   computed: {},
   methods: {
     submitForm() {
-      //console.log("成功");
       let params = {
         token: sessionStorage.getItem("token"),
         sta: 20,
@@ -118,7 +117,6 @@ export default {
 
     set(row) {
       this.dialogVisible = true;
-      //console.log(row.id);
       this.id = row.id;
     },
 
@@ -131,7 +129,6 @@ export default {
     },
 
     getUserList() {
-      //console.log(this.form.time);
       let token = sessionStorage.getItem("token");
       this.token = token;
       let params = {
@@ -142,10 +139,7 @@ export default {
         sta: 10,
       };
       couponsetindex(params).then((res) => {
-        //console.log(res.data.data);
         this.page.total = res.data.count;
-
-        //console.log(res.data.data.current_page);
         this.userList = res.data.data;
         this.$refs.dataTable.setPageInfo({
           total: this.page.total,

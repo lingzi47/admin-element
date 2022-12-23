@@ -94,9 +94,8 @@ export default {
   mounted() {},
   methods: {
     show(row) {
-      console.log(row.id);
       this.dialogVisible = true;
-      console.log(row);
+
       this.name = row.name;
       this.big_name = row.big_name;
       this.id = row.id;

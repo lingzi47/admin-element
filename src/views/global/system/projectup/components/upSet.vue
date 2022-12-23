@@ -165,7 +165,6 @@ export default {
     },
 
     change(data) {
-      console.log(data);
       this.province = data[0];
       this.city = data[1];
       this.area = data[2];
@@ -179,12 +178,10 @@ export default {
         area: this.area,
       };
       officinalist(params).then((res) => {
-        console.log(res.data.data);
         this.list = res.data.data;
       });
     },
     show(type, row) {
-      console.log(type);
       this.typeid = type;
       if (row.type == 20) {
         this.type = "渠道商";
@@ -210,10 +207,8 @@ export default {
         this.goodsForm.bind_id = row.bind_id;
         this.goodsForm.box_number = row.box_number;
         this.id = row.id;
-        console.log(row.officina_id);
         this.goodsForm.officina_id = String(row.officina_id);
-        console.log(this.goodsForm.officina_id);
-        console.log(row);
+
         let arr1 = [];
         arr1.push(row.officinaprovince);
         arr1.push(row.officinacity);
@@ -221,7 +216,6 @@ export default {
         this.officinaprovince = row.officinaprovince;
         this.officinacity = row.officinacity;
         this.officinaarea = row.officinaarea;
-        console.log(arr1);
         this.value1 = arr1;
         let params = {
           token: sessionStorage.getItem("token"),
@@ -230,7 +224,6 @@ export default {
           area: this.officinaarea,
         };
         officinalist(params).then((res) => {
-          console.log(res.data.data);
           this.list = res.data.data;
         });
       }
@@ -242,9 +235,7 @@ export default {
       this.value1 = "";
       this.goodsForm.officina_id = "";
     },
-    checked() {
-      console.log(11);
-    },
+    checked() {},
     go() {
       this.$router.back();
     },

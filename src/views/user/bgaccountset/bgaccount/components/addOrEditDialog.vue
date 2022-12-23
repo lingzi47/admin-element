@@ -138,17 +138,10 @@ export default {
         role_name: "",
       },
       rules: {
-        uname: [
-          { required: true, message: "账号不能为空", trigger: "blur" },
-        
-        ],
-        pwd: [
-          { required: true, message: "密码不能为空", trigger: "blur" },
-        
-        ],
+        uname: [{ required: true, message: "账号不能为空", trigger: "blur" }],
+        pwd: [{ required: true, message: "密码不能为空", trigger: "blur" }],
         nickname: [
           { required: true, message: "姓名不能为空", trigger: "blur" },
-         
         ],
         tel: [
           { required: true, message: "手机号不能为空", trigger: "blur" },
@@ -214,7 +207,6 @@ export default {
       };
       phoneCode(params).then((res) => {
         if (res.data.code == 200) {
-          console.log(res.data.date);
           this.code = res.data.date;
           this.isSmsSend = true;
           // 开始倒计时，60s之后才能再次点击
@@ -261,7 +253,6 @@ export default {
       this.dialogVisible = true;
       if (type == 2) {
         this.ruleForm = row;
-        console.log(row);
         let id = this.ruleForm.id;
         this.id = id;
         let params = {
@@ -269,7 +260,6 @@ export default {
         };
         editShow(params, id).then((res) => {
           this.ruleForm = res.data.data;
-          console.log(this.ruleForm);
           this.ruleForm.role_name = res.data.data.rid;
         });
       } else {

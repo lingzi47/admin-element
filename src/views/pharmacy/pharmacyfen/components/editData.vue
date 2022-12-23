@@ -122,17 +122,14 @@ export default {
       this.dialogVisible1 = false;
     },
     checked(events) {
-      console.log(events);
       this.events = events;
       if (events == 10) {
         this.isDisable = true;
         this.isDisable1 = false;
-        console.log("1解开2不能用");
         this.inp1 = "";
       } else {
         this.isDisable = false;
         this.isDisable1 = true;
-        console.log("2解开1不能用");
 
         this.input1 = "";
       }
@@ -143,7 +140,7 @@ export default {
       this.type = type;
       if (this.type == 2) {
         this.tittle = "编辑";
-        console.log(row);
+
         this.big_name = row.big_name;
         this.total_profit = row.total_profit;
         this.id = row.id;
@@ -199,7 +196,7 @@ export default {
       if (this.radio == 10) {
         if (this.other_profit === "") {
           this.$message.error("药房分润不能为空");
-          console.log(this.other_profit);
+
           return;
         }
       } else {

@@ -7,25 +7,6 @@
       :data="userList"
       @changeCurrentPage="changeCurrent"
     >
-      <!--  
-      "uid": 9218,
-      "tid": null,
-      "box_name": null,
-      "price": "4500.00",
-      "is_give": 10,
-      "created_at": "2022-10-27 11:07:49",
-      "updated_at": "2022-10-27 11:07:49",
-      "deleted_at": 0
-      用户id
-购买者id
-租赁号
-钻石数
-是否发放：10=未发放，20=已发放
-创建时间
-发放时间
-无
-总条数
- -->
       <el-table-column label="序号" align="center">
         <template slot-scope="scope">
           <span>{{
@@ -112,9 +93,7 @@ export default {
 
       if (pid !== 0) {
         if (zid == x) {
-          console.log("不可绑定");
         } else {
-          console.log("zid=y", 可以绑定);
         }
       } else {
         return;

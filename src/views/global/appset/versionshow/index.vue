@@ -65,7 +65,6 @@ export default {
       token: sessionStorage.getItem("token"),
     };
     versiondetails(params).then((res) => {
-      //console.log(res.data.data);
       this.remarks = res.data.data.remarks;
       this.url = res.data.data.url;
       this.version = res.data.data.version;

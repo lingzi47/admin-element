@@ -106,7 +106,6 @@ export default {
           this.dialogVisible = false;
         }
       });
-      //console.log("成功");
     },
 
     refuse() {
@@ -128,7 +127,6 @@ export default {
     },
 
     set(row) {
-      //console.log(row.id);
       this.id = row.id;
       this.dialogVisible = true;
     },
@@ -151,7 +149,6 @@ export default {
         sta: 10,
       };
       releaselist(params).then((res) => {
-        //console.log(res.data.data.member_count);
         this.arr = res.data.data.member_count;
         this.page.total = res.data.data.total;
 

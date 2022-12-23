@@ -229,7 +229,6 @@ export default {
   },
   watch: {
     name(newVal) {
-      // console.log(newVal);
       this.huolist1();
     },
   },
@@ -252,7 +251,6 @@ export default {
         area: this.area1,
       };
       officinalist(params).then((res) => {
-        console.log(res.data.data);
         this.list1 = res.data.data;
       });
     },
@@ -266,21 +264,15 @@ export default {
       });
     },
     chan(id) {
-      console.log(id);
-      console.log(this.list1.findIndex((item) => item.id == id));
       let index = this.list1.findIndex((item) => item.id == id);
-      console.log(index);
-      console.log(this.list1[index]);
+
       let obj = this.list1[index];
       this.sum = String(obj.total_profit);
-      // console.log(this.sum);
     },
     change1(data) {
-      console.log(data);
       this.goodsForm.officina_id = "";
     },
     change(data) {
-      console.log(data);
       this.province1 = data[0];
       this.city1 = data[1];
       this.area1 = data[2];
@@ -296,15 +288,11 @@ export default {
         area: this.area1,
       };
       officinalist(params).then((res) => {
-        // console.log(res.data.data);
         this.list = res.data.data;
       });
     },
     show(type, row) {
-      console.log(type);
       this.typeid = type;
-      console.log(row);
-      console.log(row.total_profit);
 
       if (row.type == 20) {
         this.type = "渠道商";
@@ -344,7 +332,7 @@ export default {
         this.officinaprovince = row.yaoprovince;
         this.officinacity = row.yaocity;
         this.officinaarea = row.yaoarea;
-        console.log(arr1);
+
         this.value1 = arr1;
 
         let params = {
@@ -354,7 +342,6 @@ export default {
           area: this.officinaarea,
         };
         officinalist(params).then((res) => {
-          // console.log(res.data.data);
           this.list = res.data.data;
         });
       }
@@ -370,9 +357,7 @@ export default {
       this.name = "";
       this.position = [{ id: "", uid: "", name: "", value: "" }];
     },
-    checked() {
-      console.log(11);
-    },
+    checked() {},
     go() {
       this.$router.back();
     },
@@ -385,7 +370,7 @@ export default {
               //遍历prodAllPrice这个字段，并累加
               sum += Number(item.value);
             });
-            console.log(sum);
+
             if (sum > this.sum) {
               this.$message.error("分润占比超过最大");
               return;
@@ -408,7 +393,7 @@ export default {
             }
             // var formdata = this.position;
             // let json = JSON.stringify(formdata);
-            // console.log(json);
+
             let token = sessionStorage.getItem("token");
             this.token = token;
             let params = {
@@ -442,8 +427,7 @@ export default {
               //遍历prodAllPrice这个字段，并累加
               sum += Number(item.value);
             });
-            console.log(sum);
-            console.log(this.sum);
+
             if (sum > this.sum) {
               this.$message.error("分润占比超过最大");
               return;
@@ -466,7 +450,7 @@ export default {
             }
             // var formdata = this.position;
             // let json = JSON.stringify(formdata);
-            // console.log(json);
+
             let token = sessionStorage.getItem("token");
             this.token = token;
             let params = {

@@ -96,7 +96,7 @@ export default {
     },
     show(row) {
       this.dialogVisible = true;
-      console.log(row);
+
       this.id = row.number;
       this.address = row.address;
       this.device_num = row.device_num;

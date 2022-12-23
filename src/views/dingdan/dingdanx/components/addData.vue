@@ -109,7 +109,6 @@ export default {
   mounted() {},
   methods: {
     change(data) {
-      console.log(data);
       this.pid = data;
 
       this.geterlist();
@@ -120,7 +119,6 @@ export default {
         pid: this.pid,
       };
       choosePlan(params).then((res) => {
-        console.log(res.data.data);
         this.arr1 = res.data.data;
       });
     },
@@ -142,7 +140,6 @@ export default {
         pid: 0,
       };
       choosePlan(params).then((res) => {
-        console.log(res.data.data);
         this.arr = res.data.data;
       });
     },

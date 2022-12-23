@@ -16,7 +16,7 @@ export default {
 		if (parameter.menuId1) {
 			menuListAll.map(m => {
 				if (m.id == parameter.menuId1) {
-					console.log(m);
+
 					menuData.push(m)
 					if (parameter.menuId2 && m.children && m.children.length) {
 						m.children.map(mc => {

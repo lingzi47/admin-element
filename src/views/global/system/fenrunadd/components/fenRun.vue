@@ -150,8 +150,7 @@ export default {
   methods: {
     dataedit(row) {
       this.type = 2;
-      console.log(row);
-      console.log(row.id);
+
       this.cid = row.id;
       this.visable = true;
       this.goodsForm.number = row.level[1];
@@ -159,18 +158,15 @@ export default {
       this.goodsForm.bonus = row.bonus;
     },
     deleteData(row) {
-      console.log(row);
       this.$confirm("是否删除此信息？", "提示", {
         type: "warning",
       })
         .then(async () => {
-          //console.log(id);
           let params = {
             token: sessionStorage.getItem("token"),
             id: row.id,
           };
           delProfit(params).then((res) => {
-            //console.log(res.data);
             if (res.data.code == 200) {
               this.getUserList();
               this.$message.success("删除成功");
@@ -181,7 +177,6 @@ export default {
     },
     submitForm() {
       if (this.type == 2) {
-        console.log("现在是编辑");
         this.$refs.goodsForm.validate(async (valid) => {
           if (valid) {
             let params = {
@@ -207,7 +202,6 @@ export default {
           }
         });
       } else {
-        console.log("现在不是编辑");
         this.$refs.goodsForm.validate(async (valid) => {
           if (valid) {
             let params = {
@@ -235,7 +229,6 @@ export default {
       }
     },
     show(row) {
-      console.log(row);
       this.tittle = row.level;
       this.id = row.id;
       this.dialogVisible = true;

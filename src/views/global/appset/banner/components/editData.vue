@@ -145,11 +145,11 @@ export default {
   methods: {
     show(type, row) {
       this.dialogVisible = true;
-      console.log(type);
+
       this.type = type;
       if (this.type == 2) {
         this.tittle = "编辑";
-        console.log(row);
+
         this.id = row.id;
         this.imageUrl = row.img;
         this.ruleForm.img = row.img;
@@ -170,8 +170,6 @@ export default {
       return isLt2M;
     },
     handleAvatarSuccess(res, file) {
-      //console.log(file);
-      //console.log(res);
       let imgurl = res.data;
       this.imageUrl = imgurl;
       this.ruleForm.img = imgurl;
@@ -187,7 +185,6 @@ export default {
     },
 
     submitForm() {
-      console.log(this.ruleForm.year);
       if (this.type == 1) {
         this.$refs.ruleForm.validate(async (valid) => {
           if (valid) {

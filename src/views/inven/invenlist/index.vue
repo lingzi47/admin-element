@@ -165,7 +165,6 @@ export default {
   },
   watch: {
     name(newVal) {
-      console.log(newVal);
       this.huolist1();
     },
   },
@@ -197,22 +196,12 @@ export default {
         area: this.area,
       };
       officinalist(params).then((res) => {
-        console.log(res.data.data);
         this.list1 = res.data.data;
       });
     },
     dao(row) {
-      console.log(row);
       this.num = row.number;
-      console.log(this.num);
-      console.log(
-        (window.location.href =
-          "https://testapi.yujian02.xyz/admin/box/expOfficina" +
-          "?token=" +
-          this.token +
-          "&number=" +
-          this.num)
-      );
+
       window.location.href =
         "https://testapi.yujian02.xyz/admin/box/expOfficina" +
         "?token=" +
@@ -221,7 +210,6 @@ export default {
         this.num;
     },
     change1(data) {
-      console.log(data);
       this.province = data[0];
       this.city = data[1];
       this.area = data[2];
@@ -235,7 +223,6 @@ export default {
         area: this.area,
       };
       officinalist(params).then((res) => {
-        console.log(res.data.data);
         this.list = res.data.data;
       });
     },

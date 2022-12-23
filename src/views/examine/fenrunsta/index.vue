@@ -121,7 +121,6 @@ export default {
   computed: {},
   methods: {
     // submitForm() {
-    //   //console.log("成功");
     //   let params = {
     //     token: sessionStorage.getItem("token"),
     //     sta: 20,

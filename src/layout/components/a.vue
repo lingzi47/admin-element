@@ -101,7 +101,7 @@ export default {
         }
         this.activePathArr.pop();
       }
-      //console.log(this.activePathArr);
+
       return [];
     },
   },

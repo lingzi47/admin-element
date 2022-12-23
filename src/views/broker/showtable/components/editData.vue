@@ -86,7 +86,6 @@ export default {
   mounted() {},
   methods: {
     show(row) {
-      console.log(row.robotid);
       this.robotid = row.robotid;
       this.place = row.place;
       this.located = row.located;

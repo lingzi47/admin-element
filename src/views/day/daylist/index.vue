@@ -142,7 +142,6 @@ export default {
   computed: {},
   methods: {
     handleClick(row) {
-      //console.log(row.details);
       this.details = row.details;
       this.dialogVisible = true;
     },
@@ -156,7 +155,6 @@ export default {
 
     set(row) {
       this.dialogVisible = true;
-      //console.log(row.id);
       this.id = row.id;
     },
 
@@ -172,10 +170,8 @@ export default {
       this.tableSelectList = select;
     },
     searchinfo() {
-      //console.log(this.form.time);
       let token = sessionStorage.getItem("token");
       this.token = token;
-      //console.log(this.token);
       let params = {
         page: 1,
         limit: this.page.pageSize,
@@ -186,13 +182,8 @@ export default {
         // e_time: this.time[1],
       };
       userlog(params).then((res) => {
-        //console.log(res.data.data.data);
-
         this.page.total = res.data.data.total;
-        //console.log(res.data.data.total);
-        //console.log("总条数", this.page.total);
         this.page.currentPage = res.data.data.current_page;
-        //console.log(res.data.data.current_page);
         this.userList = res.data.data.data;
         this.$refs.dataTable.setPageInfo({
           total: this.page.total,
@@ -200,10 +191,8 @@ export default {
       });
     },
     getUserList() {
-      //console.log(this.form.time);
       let token = sessionStorage.getItem("token");
       this.token = token;
-      //console.log(this.token);
       let params = {
         page: this.page.currentPage,
         limit: this.page.pageSize,
@@ -214,13 +203,8 @@ export default {
         // e_time: this.time[1],
       };
       userlog(params).then((res) => {
-        //console.log(res.data.data.data);
-
         this.page.total = res.data.data.total;
-        //console.log(res.data.data.total);
-        //console.log("总条数", this.page.total);
         this.page.currentPage = res.data.data.current_page;
-        //console.log(res.data.data.current_page);
         this.userList = res.data.data.data;
         this.$refs.dataTable.setPageInfo({
           total: this.page.total,

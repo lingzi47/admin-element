@@ -68,7 +68,6 @@ export default {
         const regex = new RegExp("<img", "gi");
         this.info_ = html.replace(regex, `<img style="max-width:'';"`);
         this.$emit("change", this.info_); // 将内容同步到父组件中
-        //console.log(this.info_);
       };
       // 创建富文本编辑器
       this.editor.create();
@@ -87,12 +86,10 @@ export default {
           // 图片上传错误的回调
         },
         customInsert: (insertImg, result, editor) => {
-          console.log(result);
           //循环插入图片
           // for (var i = 0; i < result.data.length; i++) {
           //   insertImg(result.data[i]);
           // }
-          //console.log(result.data);
           const imgUrl = result.data;
 
           insertImg(imgUrl);

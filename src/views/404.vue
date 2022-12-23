@@ -1,13 +1,22 @@
 <template>
   <div class="error-content">
     <div class="pic-error">
-      <img class="pic-error-child" src="../assets/img/404.png">
+      <img class="pic-error-child" src="../assets/img/404.png" />
     </div>
     <div class="bullshit">
       <div class="bullshit-oops">抱歉！</div>
       <div class="bullshit-headline">当前页面不存在...</div>
-      <div class="bullshit-info">请检查您输入的网址是否正确，或点击下面的按钮返回首页。</div>
-      <el-button class="bullshit-return-home" type="primary" size="medium" round @click="goMainPage">返回首页</el-button>
+      <div class="bullshit-info">
+        请检查您输入的网址是否正确，或点击下面的按钮返回首页。
+      </div>
+      <el-button
+        class="bullshit-return-home"
+        type="primary"
+        size="medium"
+        round
+        @click="goMainPage"
+        >返回首页</el-button
+      >
     </div>
   </div>
 </template>
@@ -17,11 +26,11 @@ export default {
   methods: {
     goMainPage() {
       this.$router.push({
-        path: "/index"
-      })
-    }
-  }
-}
+        path: "/index",
+      });
+    },
+  },
+};
 </script>
 <style lang="scss" scoped>
 .error-content {

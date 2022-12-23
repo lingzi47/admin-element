@@ -6,8 +6,9 @@
  * S=毫秒；Q=季度
  * 例如：yyyy年MM月dd日 dddd HH:mm:ss S
  * 
- *console.log(new Date().format("yyyy年MM月dd日 dddd HH:mm:ss"));
  */
+
+
 Date.prototype.format = function (format) {
 	var weekArr = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
 	var o = {

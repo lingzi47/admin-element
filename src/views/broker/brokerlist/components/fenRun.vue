@@ -84,7 +84,6 @@ export default {
   mounted() {},
   methods: {
     nextUser(v, row) {
-      console.log(v);
       this.box_pid_uid = v;
       this.box_pid = row.box_id;
       let idarr = [];
@@ -93,23 +92,19 @@ export default {
       idarr1.push(row.box_pid);
       this.arr.push(idarr);
       this.arr1.push(idarr1);
-      console.log(this.arr);
-      console.log(this.arr1);
+
       this.getUserList();
     },
     go() {
       if (this.arr.length < 1) {
-        console.log("我不显示");
         this.dialogVisible = false;
       } else {
         //取box_pid_uid
         let a = this.arr[this.arr.length - 1];
         this.box_pid_uid = a.toString();
-        console.log(this.box_pid_uid);
         //取box_pid
         let b = this.arr1[this.arr1.length - 1];
         this.box_pid = b.toString();
-        console.log(this.box_pid);
         //请求
         this.getUserList();
         //  删除最后box_pid_uid
@@ -123,9 +118,7 @@ export default {
       this.arr1 = n;
     },
     show(row) {
-      console.log(row);
       this.dialogVisible = true;
-      // this.box_pid_uid = row.uid;
       this.box_pid = row.name;
       this.getUserList();
     },

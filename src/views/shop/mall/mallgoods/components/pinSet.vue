@@ -157,7 +157,6 @@ export default {
       this.shoplist();
     },
     show(row) {
-      console.log(row);
       this.id = row.id;
       this.dialogVisible = true;
       this.shoplist();
@@ -177,7 +176,6 @@ export default {
         goods_id: this.id,
       };
       dislist(params).then((res) => {
-        console.log(res.data.data);
         this.userList = res.data.data;
         this.page.total = res.data.count;
         this.$refs.dataTable.setPageInfo({
@@ -193,7 +191,6 @@ export default {
       this.type = 1;
     },
     edit(row) {
-      console.log(row);
       this.visable = true;
       this.type = 2;
       this.gid = row.id;
@@ -205,7 +202,6 @@ export default {
       this.$refs.ruleForm.validate(async (valid) => {
         if (valid) {
           if (this.type == 1) {
-            console.log("添加");
             let params = {
               token: sessionStorage.getItem("token"),
               goods_id: this.id,
@@ -246,18 +242,15 @@ export default {
       });
     },
     deleteData(row) {
-      console.log(row);
       this.$confirm("是否删除此信息？", "提示", {
         type: "warning",
       })
         .then(async () => {
-          //console.log(id);
           let params = {
             token: sessionStorage.getItem("token"),
             id: row.id,
           };
           disdel(params).then((res) => {
-            //console.log(res.data);
             if (res.data.status == 200) {
               this.$message.success("删除成功");
             } else {

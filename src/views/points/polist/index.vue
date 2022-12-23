@@ -160,7 +160,6 @@ export default {
       });
     },
     change(data) {
-      console.log(data);
       this.province = data[0];
       this.city = data[1];
       this.area = data[2];

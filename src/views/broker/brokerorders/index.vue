@@ -108,9 +108,7 @@ export default {
 
       if (pid !== 0) {
         if (zid == x) {
-          console.log("不可绑定");
         } else {
-          console.log("zid=y", 可以绑定);
         }
       } else {
         return;

@@ -72,7 +72,6 @@ export default {
       };
       Usermenushow(params, id).then((res) => {
         this.treeCheckedKeys = res.data.data.q_id.split(",");
-        console.log(this.treeCheckedKeys, "treeCheckedKeys");
         // let mid = res.data.data.m_id;
         // this.midarr.push(mid);
         // //后端返回的所有id
@@ -116,9 +115,7 @@ export default {
       let treedata = this.$refs.menuTree
         .getCheckedNodes()
         .concat(this.$refs.menuTree.getHalfCheckedNodes());
-      console.log(treedata, "全部数据");
       let treedata1 = this.$refs.menuTree.getCheckedNodes();
-      console.log(treedata1, "全选中");
       let arrnew = treedata
         .map((obj, index) => {
           return obj.id;
@@ -127,7 +124,6 @@ export default {
         .split(",");
       var m_id = arrnew.toString();
       this.m_id = m_id;
-      console.log(this.m_id, "全部id");
       // 全选中
       let arrnew1 = treedata1
         .map((obj, index) => {
@@ -137,7 +133,6 @@ export default {
         .split(",");
       var q_id = arrnew1.toString();
       this.q_id = q_id;
-      console.log(this.q_id, "全选中id");
       // let checkedKey = this.$refs.menuTree.getCheckedKeys();
       // if (checked) {
       //   let searchId = data.id;

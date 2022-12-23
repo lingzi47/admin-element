@@ -56,21 +56,16 @@ export default {
   created() {
     let name = sessionStorage.getItem("role_name");
     this.name = name;
-    //console.log(this.name);
   },
   computed: {
     ...mapGetters(["userInfo"]),
   },
   methods: {
     loginout() {
-      //console.log(sessionStorage);
-      //console.log("当前退出");
       let uid = sessionStorage.getItem("uid");
       this.uid = uid;
-      //console.log(this.uid);
       userOut({ id: this.uid, token: sessionStorage.getItem("token") }).then(
         (res) => {
-          //console.log(res.data.code);
           if (res.data.code == 200) {
             this.$message({
               message: "退出成功",

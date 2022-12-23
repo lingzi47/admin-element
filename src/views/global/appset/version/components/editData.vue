@@ -83,9 +83,7 @@ export default {
       dialogVisible: false,
     };
   },
-  created: function () {
-    //console.log(this.type);
-  },
+  created: function () {},
   mounted: function () {},
   methods: {
     show() {

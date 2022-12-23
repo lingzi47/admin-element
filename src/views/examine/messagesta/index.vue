@@ -131,7 +131,6 @@ export default {
   computed: {},
   methods: {
     submitForm() {
-      //console.log("成功");
       let params = {
         token: sessionStorage.getItem("token"),
         sta: 20,
@@ -173,7 +172,7 @@ export default {
     },
     set(row) {
       this.dialogVisible = true;
-      //console.log(row.id);
+
       this.id = row.id;
     },
     checkPermission,

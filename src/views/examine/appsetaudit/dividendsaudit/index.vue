@@ -81,12 +81,10 @@ export default {
   computed: {},
   methods: {
     submitForm() {
-      //console.log("成功");
       this.dialogVisible = false;
     },
 
     refuse() {
-      //console.log("拒绝");
       this.dialogVisible = false;
     },
     close() {
@@ -114,7 +112,6 @@ export default {
         token: sessionStorage.getItem("token"),
       };
       appuserList(params).then((res) => {
-        //console.log(res.data.data.member_count);
         this.arr = res.data.data.member_count;
         this.page.total = res.data.data.total;
 

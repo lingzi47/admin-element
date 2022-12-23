@@ -309,7 +309,6 @@ export default {
       }
     },
     name(newVal) {
-      console.log(newVal);
       this.huolist1();
     },
   },
@@ -334,14 +333,11 @@ export default {
         box_name: this.box_name1,
       };
       shareInfo(params).then((res) => {
-        console.log(res);
         this.List = res.data.data;
-        console.log(this.List);
       });
       this.dialogVisible = true;
     },
     handleClick(row) {
-      console.log(row);
       this.box_name1 = row.box_name;
       this.getList();
     },
@@ -355,7 +351,6 @@ export default {
         area: this.area,
       };
       officinalist(params).then((res) => {
-        console.log(res.data.data);
         this.list1 = res.data.data;
       });
     },
@@ -370,13 +365,11 @@ export default {
       });
     },
     change(data) {
-      console.log(data);
       this.eprovince = data[0];
       this.ecity = data[1];
       this.earea = data[2];
     },
     change1(data) {
-      console.log(data);
       this.province = data[0];
       this.city = data[1];
       this.area = data[2];
@@ -390,7 +383,6 @@ export default {
         area: this.area,
       };
       officinalist(params).then((res) => {
-        console.log(res.data.data);
         this.list = res.data.data;
       });
     },
@@ -411,13 +403,11 @@ export default {
       })
         .then(async () => {
           let id = row.id;
-          //console.log(id);
           let params = {
             token: sessionStorage.getItem("token"),
             id: row.id,
           };
           positiondelete(params).then((res) => {
-            //console.log(res.data);
             if (res.data.code == 200) {
               this.getUserList();
               this.$message.success("删除成功");

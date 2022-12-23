@@ -67,7 +67,7 @@ export function userListData() {
 			})
 		)
 	}
-	// console.log(JSON.parse(JSON.stringify(userList)));
+	console.log(JSON.parse(JSON.stringify(userList)));
 	return userList
 }
 

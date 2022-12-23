@@ -22,9 +22,7 @@
             }}</span>
           </template>
         </el-table-column>
-        <!-- 返回字段：
-序号id，商品名称，品类，药品成本,出入库数量，总成本
-id   |   goods_name  |  type  |  price  |  num  |  sum_price  |  name -->
+
         <el-table-column prop="goods_name" label="商品名称" align="center">
         </el-table-column>
         <el-table-column prop="type" label="品类" align="center">
@@ -62,9 +60,7 @@ export default {
   mounted() {},
   methods: {
     show(row) {
-      console.log(row.id);
       this.dialogVisible = true;
-      console.log(row);
       this.id = row.id;
       this.getUserList();
     },

@@ -170,7 +170,6 @@ export default {
       this.Visible = true;
     },
     editData(row) {
-      console.log(row);
       this.id = row.id;
       this.ruleForm.uid = row.uid;
       this.ruleForm.bank = row.bank;

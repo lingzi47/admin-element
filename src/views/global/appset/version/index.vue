@@ -168,9 +168,8 @@ export default {
       if (this.form.time === null) {
         let time = "";
         this.form.time == time;
-        //console.log(this.form.time);
       }
-      //console.log(this.form.time);
+
       let token = sessionStorage.getItem("token");
       this.token = token;
       let params = {
@@ -184,8 +183,6 @@ export default {
         end_time: this.form.time[1],
       };
       versionlist(params).then((res) => {
-        //console.log(res.data.data.member_count);
-
         this.page.total = res.data.data.total;
         this.page.currentPage = res.data.data.current_page;
         this.userList = res.data.data.data;
@@ -199,7 +196,6 @@ export default {
       this.$refs.addData.show(1, {});
     },
     userShow(row) {
-      //console.log(row);
       this.$router.push({
         path: "/userShow",
         query: {
@@ -208,7 +204,6 @@ export default {
       });
     },
     nextUser(row) {
-      //console.log(row);
       this.$router.push({
         path: "/nextUser",
         query: {
@@ -217,7 +212,6 @@ export default {
       });
     },
     editData(row) {
-      //console.log(row);
       let rowData = row;
       this.$refs.editData.show(JSON.parse(JSON.stringify(rowData)));
     },

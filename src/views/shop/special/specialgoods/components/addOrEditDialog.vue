@@ -255,18 +255,14 @@ export default {
   mounted: function () {},
   methods: {
     handleChange(val) {
-      //console.log(val);
       let nodesInfo = this.$refs["cascader"].getCheckedNodes();
-      //console.log(nodesInfo[0].value);
       this.goodsForm.type_id = nodesInfo[0].value;
     },
     change(val) {
       this.goodsForm.content = val;
-      //console.log(this.goodsForm.content);
     },
     handleEdit() {
       let oldProcedure = this.$refs["fileFu"].getVal();
-      //console.log(oldProcedure);
     },
     async getRolesList() {
       let res = await getRoles({ token: sessionStorage.getItem("token") });
@@ -283,9 +279,7 @@ export default {
         token: sessionStorage.getItem("token"),
       });
       if (res.status == 200) {
-        //console.log(res);
         this.typelist = res.data.data;
-        //console.log(this.typelist);
       }
     },
 
@@ -294,14 +288,12 @@ export default {
       this.type = type;
       this.dialogVisible = true;
       if (type == 1) {
-        //console.log(row);
         this.goodsForm = {};
         this.imageUrl = "";
         this.goodsForm.type_id = "";
         this.banners = [];
         this.fileList = [];
       } else {
-        console.log(row);
         this.goodsForm = row;
         this.id = row.id;
         this.imageUrl = this.goodsForm.goods_img;
@@ -330,10 +322,7 @@ export default {
       this.goodsForm.goods_img = imgurl;
     },
     handleRemove(res, file, fileList) {
-      console.log(res);
-      console.log(res.name);
       let outimg = res.name;
-      console.log(outimg);
 
       let index = this.banners.findIndex((item) => {
         if (item == "outimg") {
@@ -341,10 +330,8 @@ export default {
         }
       });
       this.banners.splice(index, 1);
-      console.log(this.banners);
     },
     banneradd(res, file, fileList) {
-      console.log(res);
       let imgurl = res.data;
       this.banners.push(imgurl);
     },

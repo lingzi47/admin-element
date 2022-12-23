@@ -100,11 +100,11 @@ export default {
 
     show(type, row) {
       this.dialogVisible = true;
-      console.log(type);
+
       this.type = type;
       if (this.type == 2) {
         this.tittle = "编辑";
-        console.log(row);
+
         this.ruleForm.imageUrl = row.img;
         this.imageUrl = row.img;
         this.isDisable = false;
@@ -115,7 +115,6 @@ export default {
         this.tittle = "添加";
         this.isDisable = false;
       } else {
-        console.log(row);
         this.tittle = "查看";
         this.isDisable = true;
         this.ruleForm.imageUrl = row.img;

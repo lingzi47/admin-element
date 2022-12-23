@@ -84,9 +84,7 @@ export default {
     getActiveMenu() {
       this.activePathArr = [];
       let tabActive = this.$store.getters.tabActive;
-      //console.log("tabActive", tabActive);
       let activeUrl = this.getActiveArr(this.routersList, tabActive);
-      //console.log(this.routersList);
       let activePath = "";
       if (activeUrl && activeUrl.length) {
         for (let i = 0; i < activeUrl.length; i++) {

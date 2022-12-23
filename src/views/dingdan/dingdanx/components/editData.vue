@@ -100,11 +100,9 @@ export default {
   mounted() {},
   methods: {
     change(data) {
-      console.log(data);
       this.buy_price = data.buy_price;
       this.price = data.price;
       this.ruleForm.name = data.goods_name;
-      console.log(this.ruleForm.name);
     },
     show() {
       this.dialogVisible = true;
@@ -123,7 +121,6 @@ export default {
         token: sessionStorage.getItem("token"),
       };
       xunnigoods(params).then((res) => {
-        console.log(res.data.data);
         this.arr = res.data.data;
       });
     },

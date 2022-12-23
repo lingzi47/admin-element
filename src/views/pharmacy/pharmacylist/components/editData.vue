@@ -168,18 +168,17 @@ export default {
       });
     },
     change(data) {
-      console.log(data);
       this.province = data[0];
       this.city = data[1];
       this.area = data[2];
     },
     show(type, row) {
       this.dialogVisible = true;
-      console.log(type);
+
       this.type = type;
       if (this.type == 2) {
         this.tittle = "编辑";
-        console.log(row);
+
         this.id = row.id;
         this.ruleForm.phone = row.phone;
         this.ruleForm.bank = row.bank;
@@ -193,9 +192,7 @@ export default {
         arr1.push(row.city);
         arr1.push(row.area);
 
-        console.log(arr1);
         this.ruleForm.value1 = arr1;
-        console.log(this.ruleForm.value1);
       } else {
         this.tittle = "添加";
       }

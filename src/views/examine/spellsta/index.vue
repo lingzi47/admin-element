@@ -208,7 +208,7 @@ export default {
 
     set(row) {
       this.dialogVisible = true;
-      //console.log(row.id);
+
       this.id = row.id;
     },
     checkPermission,

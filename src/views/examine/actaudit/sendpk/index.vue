@@ -95,7 +95,6 @@ export default {
   computed: {},
   methods: {
     submitForm() {
-      //console.log("成功");
       let params = {
         token: sessionStorage.getItem("token"),
         ex_status: 1,
@@ -131,7 +130,6 @@ export default {
 
     set(row) {
       this.dialogVisible = true;
-      //console.log(row.id);
       this.id = row.id;
     },
 
@@ -153,10 +151,7 @@ export default {
       };
       goodsListPkEx(params).then((res) => {
         this.page.total = res.data.data.total;
-        //console.log(res.data.data.total);
-        //console.log("总条数", this.page.total);
         this.page.currentPage = res.data.data.current_page;
-        //console.log(res.data.data.current_page);
         this.userList = res.data.data.data;
         this.$refs.dataTable.setPageInfo({
           total: this.page.total,

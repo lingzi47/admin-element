@@ -215,7 +215,6 @@ export default {
       });
     },
     change(data) {
-      console.log(data);
       this.province = data[0];
       this.city = data[1];
       this.area = data[2];
@@ -246,7 +245,7 @@ export default {
 
     set(row) {
       this.dialogVisible = true;
-      //console.log(row.id);
+
       this.id = row.id;
     },
     checkPermission,
@@ -292,8 +291,6 @@ export default {
       };
 
       feedbacklist(params).then((res) => {
-        console.log(res.data.data);
-        console.log(res.data.count);
         this.page.total = res.data.count;
         this.userList = res.data.data;
         this.$refs.dataTable.setPageInfo({

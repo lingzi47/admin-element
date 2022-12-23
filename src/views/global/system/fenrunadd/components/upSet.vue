@@ -61,7 +61,6 @@ export default {
   mounted() {},
   methods: {
     show(type, id) {
-      console.log(type);
       this.id = id;
       this.box_type = type;
       this.dialogVisible = true;

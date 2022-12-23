@@ -103,7 +103,6 @@ export default {
           this.dialogVisible = false;
         }
       });
-      //console.log("成功");
     },
 
     refuse() {

@@ -4,8 +4,8 @@ import {
 } from "element-ui";
 import store from '@/store'
 
-// console.log(process.env.NODE_ENV)
-// console.log(process.env.VUE_APP_BASE_URL)
+console.log(process.env.NODE_ENV)
+console.log(process.env.VUE_APP_BASE_URL)
 
 /* if(process.env.NODE_ENV == "development"){
 	//开发环境
@@ -16,7 +16,7 @@ import store from '@/store'
 } */
 // let baseURL = process.env.VUE_APP_BASE_URL
 let baseURL = '/api';
-// console.log(baseURL);
+
 
 const service = axios.create({
 	baseURL: 'baseURL',

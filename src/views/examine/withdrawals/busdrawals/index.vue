@@ -232,7 +232,6 @@ export default {
           this.dialogVisible = false;
           this.getUserList();
         } else {
-          console.log(res.data.msg);
           this.$message(res.data.msg);
           this.dialogVisible = false;
           this.getUserList();
@@ -248,13 +247,11 @@ export default {
         ex_remark: this.ex_remark,
       };
       businessadit(params).then((res) => {
-        console.log(res.data);
         if (res.data.code == 200) {
           this.$message.success("操作成功");
           this.dialogVisible = false;
           this.getUserList();
         } else {
-          console.log(res.data.msg);
           this.$message(res.data.msg);
           this.dialogVisible = false;
           this.getUserList();
@@ -276,20 +273,18 @@ export default {
     },
     set1(row) {
       this.dialogVisible1 = true;
-      //console.log(row.id);
+
       this.id = row.id;
       this.types = row.type;
     },
     set(row) {
       this.dialogVisible = true;
-      //console.log(row.id);
+
       this.id = row.id;
       this.types = row.type;
     },
 
-    open() {
-      //console.log("正在导出");
-    },
+    open() {},
     checkPermission,
     // 切换分页
     changeCurrent(page, size) {
@@ -324,7 +319,6 @@ export default {
       });
     },
     getUserList() {
-      //console.log(this.form.time);
       let token = sessionStorage.getItem("token");
       this.token = token;
       let params = {

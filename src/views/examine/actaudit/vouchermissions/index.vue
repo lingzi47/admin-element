@@ -88,7 +88,6 @@ export default {
         token: sessionStorage.getItem("token"),
       };
       coupontaskstalist(params).then((res) => {
-        //console.log(res);
         this.num = res.data.data.num;
         this.coupon_name = res.data.data.coupon_name;
         this.id = res.data.data.id;

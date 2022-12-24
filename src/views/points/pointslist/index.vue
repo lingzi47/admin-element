@@ -346,7 +346,7 @@ export default {
     dao() {
       if (this.time[1] == undefined) {
         window.location.href =
-          "https://testapi.yujian02.xyz/admin/box/posExport" +
+          "https://yujian02.xyz/admin/box/posExport" +
           "?token=" +
           this.token +
           "&box_name=" +
@@ -367,7 +367,7 @@ export default {
           this.area;
       } else {
         window.location.href =
-          "https://testapi.yujian02.xyz/admin/box/posExport" +
+          "https://yujian02.xyz/admin/box/posExport" +
           "?token=" +
           this.token +
           "&box_name=" +

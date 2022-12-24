@@ -20,7 +20,7 @@
             <el-form-item label="项目说明" prop="imageUrl">
               <el-upload
                 class="avatar-uploader"
-                action="https://testapi.yujian02.xyz/command/ossUpload?filename=file"
+                action="https://yujian02.xyz/command/ossUpload?filename=file"
                 :show-file-list="false"
                 :disabled="isDisable"
                 :on-success="handleAvatarSuccess"
@@ -36,7 +36,7 @@
             <el-form-item label="推广分润逻辑" prop="imageUrl2">
               <el-upload
                 class="avatar-uploader"
-                action="https://testapi.yujian02.xyz/command/ossUpload?filename=file"
+                action="https://yujian02.xyz/command/ossUpload?filename=file"
                 :show-file-list="false"
                 :on-success="handleAvatar"
               >

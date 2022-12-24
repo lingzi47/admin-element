@@ -75,6 +75,18 @@
           :resizable="false"
         ></el-table-column>
         <el-table-column
+          prop="delivery"
+          fixed
+          label="快递单号"
+          align="center"
+          :resizable="false"
+        >
+          <template slot-scope="scope">
+            <el-link v-if="scope.row.delivery == null">暂无</el-link>
+            <el-link v-else>{{ scope.row.delivery }}</el-link>
+          </template>
+        </el-table-column>
+        <el-table-column
           prop="goods_name"
           fixed
           label="商品名称"
@@ -222,7 +234,7 @@ export default {
       if (this.time[1] == undefined) {
         this.token = sessionStorage.getItem("token");
         window.location.href =
-          "https://testapi.yujian02.xyz/shopadmin/receRefundExp" +
+          "https://yujian02.xyz/shopadmin/receRefundExp" +
           "?token=" +
           this.token +
           "&shop_type=" +
@@ -236,7 +248,7 @@ export default {
       } else {
         this.token = sessionStorage.getItem("token");
         window.location.href =
-          "https://testapi.yujian02.xyz/shopadmin/receRefundExp" +
+          "https://yujian02.xyz/shopadmin/receRefundExp" +
           "?token=" +
           this.token +
           "&shop_type=" +

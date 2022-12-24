@@ -121,7 +121,7 @@ export default {
   methods: {
     dao() {
       window.location.href =
-        "https://testapi.yujian02.xyz/admin/box/exportList" +
+        "https://yujian02.xyz/admin/box/exportList" +
         "?token=" +
         this.token +
         "&type=" +

@@ -200,7 +200,7 @@ export default {
     dao() {
       if (this.time[1] == undefined) {
         window.location.href =
-          "https://testapi.yujian02.xyz/adminApi/box/boxFinance/repExport" +
+          "https://yujian02.xyz/adminApi/box/boxFinance/repExport" +
           "?token=" +
           this.token +
           "&goods_name=" +
@@ -209,7 +209,7 @@ export default {
           this.number;
       } else {
         window.location.href =
-          "https://testapi.yujian02.xyz/adminApi/box/boxFinance/repExport" +
+          "https://yujian02.xyz/adminApi/box/boxFinance/repExport" +
           "?token=" +
           this.token +
           "&goods_name=" +

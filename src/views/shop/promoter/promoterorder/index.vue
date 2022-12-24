@@ -216,7 +216,7 @@ export default {
   methods: {
     dao() {
       window.location.href =
-        "https://testapi.yujian02.xyz/adminApi/order/export" +
+        "https://yujian02.xyz/adminApi/order/export" +
         "?token=" +
         this.token +
         "&uid=" +

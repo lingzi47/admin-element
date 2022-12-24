@@ -203,7 +203,7 @@ export default {
       this.num = row.number;
 
       window.location.href =
-        "https://testapi.yujian02.xyz/admin/box/expOfficina" +
+        "https://yujian02.xyz/admin/box/expOfficina" +
         "?token=" +
         this.token +
         "&number=" +

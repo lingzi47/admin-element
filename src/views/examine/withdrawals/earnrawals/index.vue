@@ -276,7 +276,7 @@ export default {
       this.token = sessionStorage.getItem("token");
       if (this.time[1] == undefined) {
         window.location.href =
-          "https://testapi.yujian02.xyz/adminApi/box/boxWith/listexport" +
+          "https://yujian02.xyz/adminApi/box/boxWith/listexport" +
           "?token=" +
           this.token +
           "&uid=" +
@@ -289,7 +289,7 @@ export default {
           this.position;
       } else {
         window.location.href =
-          "https://testapi.yujian02.xyz/adminApi/box/boxWith/listexport" +
+          "https://yujian02.xyz/adminApi/box/boxWith/listexport" +
           "?token=" +
           this.token +
           "&uid=" +

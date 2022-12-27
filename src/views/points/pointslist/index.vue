@@ -497,7 +497,7 @@ export default {
         uid: this.box_uid,
         id: this.id,
         province: this.province,
-        type: thisy.tpe,
+        type: this.tpe,
         city: this.city,
         bind: this.sta,
         area: this.area,

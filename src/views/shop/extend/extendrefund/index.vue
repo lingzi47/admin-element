@@ -56,6 +56,13 @@
           :resizable="false"
         ></el-table-column>
         <el-table-column
+          prop="buy_user"
+          fixed
+          label="用户名"
+          align="center"
+          :resizable="false"
+        ></el-table-column>
+        <el-table-column
           prop="order_no"
           fixed
           label="订单号"
